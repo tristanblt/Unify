@@ -1,3 +1,4 @@
-a.out
-a.so
-liba.so
+core/arcade
+*.out
+*.o
+*.so

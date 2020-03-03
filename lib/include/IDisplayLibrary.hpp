@@ -8,13 +8,15 @@
 #ifndef IDISPLAYLIBRARY_HPP_
 #define IDISPLAYLIBRARY_HPP_
 
-#include "Graphical/Window.hpp"
+#include "Graphical/IWindow.hpp"
+#include "Graphical/IRectangle.hpp"
 
 class IDisplayLibrary {
     public:
         ~IDisplayLibrary() = default;
 
-        virtual Window *newWindow() = 0;
+        virtual IWindow *newWindow() = 0;
+        virtual IRectangle *newRectangle() = 0;
     protected:
     private:
 };

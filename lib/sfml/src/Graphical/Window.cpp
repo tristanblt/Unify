@@ -5,14 +5,12 @@
 ** Window
 */
 
-#include "Graphical/Window.hpp"
+#include "lib/sfml/include/Graphical/Window.hpp"
 
-
-#include <iostream>
 Window::Window()
 {
-    std::cout << "sdjchkj" << std::endl;
-    _window = new sf::RenderWindow(sf::VideoMode(800, 600), "test");
+    _window = new sf::RenderWindow(sf::VideoMode(1600, 900), "test", sf::Style::Close);
+    _window->setFramerateLimit(60);
 }
 
 Window::~Window()
@@ -20,3 +18,29 @@ Window::~Window()
     delete _window;
 }
 
+bool Window::isOpen()
+{
+    return (_window->isOpen());
+}
+
+void Window::clear()
+{
+    // TODO
+    sf::Event event;
+    while (_window->pollEvent(event))
+    {
+        if (event.type == sf::Event::Closed)
+            _window->close();
+    }
+    _window->clear();
+}
+
+void Window::display()
+{
+    _window->display();
+}
+
+sf::RenderWindow *Window::getWindow() const
+{
+    return (_window);
+}

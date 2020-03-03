@@ -16,7 +16,12 @@ SFMLLibrary::~SFMLLibrary()
 {
 }
 
-Window *SFMLLibrary::newWindow()
+IWindow *SFMLLibrary::newWindow()
 {
     return (new Window());
+}
+
+IRectangle *SFMLLibrary::newRectangle()
+{
+    return (new Rectangle());
 }

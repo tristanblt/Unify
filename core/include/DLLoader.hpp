@@ -6,11 +6,12 @@
 */
 
 #include <dlfcn.h>
+#include <string>
 
 template <typename T>
 class DLLoader {
     public:
-        DLLoader(const std::string &path) { _handler = dlopen(path.c_str(), RTLD_LAZY); }
+        DLLoader(const std::string &path) { _handler = dlopen(path.c_str(), RTLD_GLOBAL); }
         ~DLLoader() { dlclose(_handler); }
 
         T *getInstance() {

@@ -9,12 +9,18 @@
 #define WINDOW_HPP_
 
 #include "SFML/Graphics.hpp"
+#include "lib/include/Graphical/IWindow.hpp"
 
-class Window {
+class Window : public IWindow {
     public:
         Window();
         ~Window();
 
+        bool isOpen();
+        void clear();
+        void display();
+        
+        sf::RenderWindow *getWindow() const;
     protected:
     private:
         sf::RenderWindow *_window;
