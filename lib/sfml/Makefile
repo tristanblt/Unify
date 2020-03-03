@@ -5,12 +5,14 @@
 ## Makefile for
 ##
 
-NAME	=	lib_arcade_sfml.so
+NAME	=	../lib_arcade_sfml.so
 
 SRCPATH	=	src/
 SRCS_FILES=	Graphical/Rectangle.cpp					\
 			Graphical/Window.cpp					\
 			SFMLLibrary.cpp							\
+			Entry.cpp								\
+			../../src/Graphical/ERectangle.cpp		\
 
 SRC	=	$(addprefix $(SRCPATH), $(SRCS_FILES))
 

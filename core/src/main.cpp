@@ -10,9 +10,11 @@
 #include "lib/include/Graphical/IRectangle.hpp"
 #include "core/include/DLLoader.hpp"
 #include "core/include/ArcadeMenu/ArcadeMenu.hpp"
+#include <iostream>
 
 int main(int argc, char const *argv[])
 {
+    std::cout << argv[1] << std::endl;
     (void) argc;
     DLLoader<IDisplayLibrary> loader(argv[1]);
     IDisplayLibrary *lib = loader.getInstance();

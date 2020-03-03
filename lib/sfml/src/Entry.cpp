@@ -5,7 +5,7 @@
 ** Entry
 */
 
-#include "Entry.hpp"
+#include "lib/include/Entry.hpp"
 
 extern "C" IDisplayLibrary *entryPoint()
 {

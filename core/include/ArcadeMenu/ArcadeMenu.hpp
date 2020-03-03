@@ -10,7 +10,7 @@
 
 #include "lib/include/IDisplayLibrary.hpp"
 #include "lib/include/Graphical/IWindow.hpp"
-#include "lib/include/Graphical/IRectangle.hpp"
+#include "lib/include/Graphical/ERectangle.hpp"
 
 class ArcadeMenu {
     public:

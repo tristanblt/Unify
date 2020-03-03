@@ -21,7 +21,7 @@ IWindow *SFMLLibrary::newWindow()
     return (new Window());
 }
 
-IRectangle *SFMLLibrary::newRectangle()
+ERectangle *SFMLLibrary::newRectangle()
 {
-    return (new Rectangle());
+    return (new ERectangle(new Rectangle()));
 }

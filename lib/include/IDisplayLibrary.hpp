@@ -9,14 +9,14 @@
 #define IDISPLAYLIBRARY_HPP_
 
 #include "Graphical/IWindow.hpp"
-#include "Graphical/IRectangle.hpp"
+#include "Graphical/ERectangle.hpp"
 
 class IDisplayLibrary {
     public:
         ~IDisplayLibrary() = default;
 
         virtual IWindow *newWindow() = 0;
-        virtual IRectangle *newRectangle() = 0;
+        virtual ERectangle *newRectangle() = 0;
     protected:
     private:
 };

@@ -18,11 +18,11 @@ ArcadeMenu::~ArcadeMenu()
 void ArcadeMenu::launchMenu(IDisplayLibrary *lib)
 {
     IWindow *w = lib->newWindow();
-    IRectangle *r = lib->newRectangle();
+    ERectangle *r = lib->newRectangle();
 
     while (w->isOpen()) {
         w->clear();
-        r->draw(w);
+        r->getRectangle()->draw(w);
         w->display();
     }
 }

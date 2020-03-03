@@ -18,7 +18,7 @@ class SFMLLibrary : public IDisplayLibrary {
         ~SFMLLibrary();
 
         IWindow *newWindow();
-        IRectangle *newRectangle();
+        ERectangle *newRectangle();
     protected:
     private:
 
