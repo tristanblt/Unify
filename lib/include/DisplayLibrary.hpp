@@ -19,7 +19,6 @@ class DisplayLibrary {
         IWindow *_window;
     protected:
     private:
-
 };
 
 #endif /* !DisplayLibrary_HPP_ */

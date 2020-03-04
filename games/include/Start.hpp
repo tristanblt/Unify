@@ -8,11 +8,13 @@
 #ifndef START_HPP_
 #define START_HPP_
 
+#include "lib/include/DisplayLibrary.hpp"
+
 class Start {
     public:
-        Start();
-        ~Start();
+        ~Start() = default;
 
+        virtual void update(DisplayLibrary *) = 0;
     protected:
     private:
 };

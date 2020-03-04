@@ -23,7 +23,6 @@ bool Window::isOpen()
     return (_window->isOpen());
 }
 
-#include <iostream>
 void Window::clear()
 {
     // TODO :remove

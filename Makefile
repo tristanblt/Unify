@@ -8,19 +8,19 @@
 all:
 	make -C core/
 	make -C lib/
-	#make -C games/
+	make -C games/
 
 re:
 	make re -C core/
 	make re -C lib/
-	#make re -C games/
+	make re -C games/
 
 clean:
 	make clean -C core/
 	make clean -C lib/
-	#make clean -C games/
+	make clean -C games/
 
 fclean:
 	make fclean -C core/
 	make fclean -C lib/
-	#make fclean -C games/
+	make fclean -C games/

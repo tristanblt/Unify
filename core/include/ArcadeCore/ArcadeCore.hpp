@@ -2,24 +2,25 @@
 ** EPITECH PROJECT, 2020
 ** OOP_arcade_2019
 ** File description:
-** ArcadeMenu
+** ArcadeCore
 */
 
-#ifndef ARCADEMENU_HPP_
-#define ARCADEMENU_HPP_
+#ifndef ArcadeCore_HPP_
+#define ArcadeCore_HPP_
 
 #include "lib/include/DisplayLibrary.hpp"
 #include "lib/include/Graphical/IWindow.hpp"
 #include "lib/include/Graphical/IRectangle.hpp"
+#include "games/include/Start.hpp"
 
-class ArcadeMenu {
+class ArcadeCore {
     public:
-        ArcadeMenu();
-        ~ArcadeMenu();
+        ArcadeCore();
+        ~ArcadeCore();
 
-        void launchMenu(DisplayLibrary *);
+        void launchCore(DisplayLibrary *);
     protected:
     private:
 };
 
-#endif /* !ARCADEMENU_HPP_ */
+#endif /* !ArcadeCore_HPP_ */

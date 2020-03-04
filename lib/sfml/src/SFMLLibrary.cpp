@@ -10,7 +10,7 @@
 SFMLLibrary::SFMLLibrary()
 {
     _rect = new Rectangle(); 
-    _window = new Window(); 
+    _window = new Window();
 }
 
 SFMLLibrary::~SFMLLibrary()

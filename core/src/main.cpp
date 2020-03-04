@@ -9,7 +9,7 @@
 #include "lib/include/Graphical/IWindow.hpp"
 #include "lib/include/Graphical/IRectangle.hpp"
 #include "core/include/DLLoader.hpp"
-#include "core/include/ArcadeMenu/ArcadeMenu.hpp"
+#include "core/include/ArcadeCore/ArcadeCore.hpp"
 #include <iostream>
 
 int main(int argc, char const *argv[])
@@ -19,8 +19,8 @@ int main(int argc, char const *argv[])
     DLLoader<DisplayLibrary> loader(argv[1]);
     DisplayLibrary *lib = loader.getInstance();
     
-    ArcadeMenu arcadeMenu;
+    ArcadeCore ArcadeCore;
 
-    arcadeMenu.launchMenu(lib);
+    ArcadeCore.launchCore(lib);
     return 0;
 }
