@@ -9,19 +9,10 @@
 
 SFMLLibrary::SFMLLibrary()
 {
-
+    _rect = new Rectangle(); 
+    _window = new Window(); 
 }
 
 SFMLLibrary::~SFMLLibrary()
 {
-}
-
-IWindow *SFMLLibrary::newWindow()
-{
-    return (new Window());
-}
-
-ERectangle *SFMLLibrary::newRectangle()
-{
-    return (new ERectangle(new Rectangle()));
 }

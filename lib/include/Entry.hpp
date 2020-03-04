@@ -10,6 +10,6 @@
 
 #include "../sfml/include/SFMLLibrary.hpp"
 
-extern "C" IDisplayLibrary *entryPoint();
+extern "C" DisplayLibrary *entryPoint();
 
 #endif /* !ENTRY_HPP_ */

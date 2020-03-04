@@ -5,7 +5,7 @@
 ** main
 */
 
-#include "lib/include/IDisplayLibrary.hpp"
+#include "lib/include/DisplayLibrary.hpp"
 #include "lib/include/Graphical/IWindow.hpp"
 #include "lib/include/Graphical/IRectangle.hpp"
 #include "core/include/DLLoader.hpp"
@@ -16,8 +16,8 @@ int main(int argc, char const *argv[])
 {
     std::cout << argv[1] << std::endl;
     (void) argc;
-    DLLoader<IDisplayLibrary> loader(argv[1]);
-    IDisplayLibrary *lib = loader.getInstance();
+    DLLoader<DisplayLibrary> loader(argv[1]);
+    DisplayLibrary *lib = loader.getInstance();
     
     ArcadeMenu arcadeMenu;
 

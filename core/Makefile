@@ -10,7 +10,6 @@ NAME	=	arcade
 SRCPATH	=	src/
 SRCS_FILES=	main.cpp										\
 			ArcadeMenu/ArcadeMenu.cpp						\
-			../../lib/src/Graphical/ERectangle.cpp			\
 
 SRC	=	$(addprefix $(SRCPATH), $(SRCS_FILES))
 

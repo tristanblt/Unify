@@ -8,17 +8,14 @@
 #ifndef SFMLLIBRARY_HPP_
 #define SFMLLIBRARY_HPP_
 
-#include "lib/include/IDisplayLibrary.hpp"
+#include "lib/include/DisplayLibrary.hpp"
 #include "lib/sfml/include/Graphical/Window.hpp"
 #include "lib/sfml/include/Graphical/Rectangle.hpp"
 
-class SFMLLibrary : public IDisplayLibrary {
+class SFMLLibrary : public DisplayLibrary {
     public:
         SFMLLibrary();
         ~SFMLLibrary();
-
-        IWindow *newWindow();
-        ERectangle *newRectangle();
     protected:
     private:
 

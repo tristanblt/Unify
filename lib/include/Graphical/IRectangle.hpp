@@ -15,8 +15,8 @@ class IRectangle {
         virtual ~IRectangle() = default;
 
         virtual void draw(IWindow *w) = 0;
-        // virtual void setPosition(int size) = 0; // todo
-        // virtual void setSize(int size) = 0; // todo
+        virtual void setPosition(int size) = 0; // todo
+        virtual void setSize(int size) = 0; // todo
 
     protected:
     private:

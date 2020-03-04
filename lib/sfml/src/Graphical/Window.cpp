@@ -31,7 +31,7 @@ void Window::clear()
     while (_window->pollEvent(event))
         if (event.type == sf::Event::Closed)
             _window->close();
-    _window->clear();
+    _window->clear(sf::Color::Black);
 }
 
 void Window::display()

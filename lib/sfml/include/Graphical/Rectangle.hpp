@@ -19,6 +19,8 @@ class Rectangle : public IRectangle {
         ~Rectangle();
 
         void draw(IWindow *w);
+        void setPosition(int size); // todo
+        void setSize(int size); // todo
     protected:
     private:
         sf::RectangleShape *_rect;

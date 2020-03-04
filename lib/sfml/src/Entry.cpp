@@ -7,7 +7,7 @@
 
 #include "lib/include/Entry.hpp"
 
-extern "C" IDisplayLibrary *entryPoint()
+extern "C" DisplayLibrary *entryPoint()
 {
     return (new SFMLLibrary());
 }

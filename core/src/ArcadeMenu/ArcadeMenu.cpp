@@ -15,14 +15,12 @@ ArcadeMenu::~ArcadeMenu()
 {
 }
 
-void ArcadeMenu::launchMenu(IDisplayLibrary *lib)
+void ArcadeMenu::launchMenu(DisplayLibrary *l)
 {
-    IWindow *w = lib->newWindow();
-    ERectangle *r = lib->newRectangle();
-
-    while (w->isOpen()) {
-        w->clear();
-        r->getRectangle()->draw(w);
-        w->display();
+    while (l->_window->isOpen()) {
+        l->_rect->setSize(100);
+        l->_window->clear();
+        l->_rect->draw(l->_window);
+        l->_window->display();
     }
 }
