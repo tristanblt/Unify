@@ -17,6 +17,8 @@ class SFMLLibrary : public DisplayLibrary {
     public:
         SFMLLibrary();
         ~SFMLLibrary();
+
+        int toUnit(int);
     protected:
     private:
 

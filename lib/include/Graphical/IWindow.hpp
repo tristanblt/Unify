@@ -7,12 +7,14 @@
 
 #ifndef IWINDOW_HPP_
 #define IWINDOW_HPP_
-
+#include "core/include/ArcadeCore/Structs.hpp"
 class IWindow {
     public:
         virtual ~IWindow() = default;
 
         virtual bool isOpen() = 0;
+        virtual unsigned int height() = 0;
+        virtual unsigned int width() = 0;
         virtual void clear() = 0;
         virtual void display() = 0;
     protected:

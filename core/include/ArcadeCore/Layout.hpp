@@ -13,7 +13,7 @@
 
 class Layout {
     public:
-        Layout();
+        Layout(DisplayLibrary *l);
         ~Layout();
 
         void update (IBuilder *);

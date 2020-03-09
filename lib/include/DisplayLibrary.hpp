@@ -15,7 +15,9 @@
 class DisplayLibrary {
     public:
         ~DisplayLibrary() = default;
-        
+
+        virtual int toUnit(int) = 0;
+
         IRectangle *_rect;
         ICircle *_circle;
         IWindow *_window;

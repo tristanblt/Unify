@@ -17,3 +17,8 @@ SFMLLibrary::SFMLLibrary()
 SFMLLibrary::~SFMLLibrary()
 {
 }
+
+int SFMLLibrary::toUnit(int value)
+{
+    return (value);
+}
