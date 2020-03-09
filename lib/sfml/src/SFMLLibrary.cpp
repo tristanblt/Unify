@@ -11,6 +11,7 @@ SFMLLibrary::SFMLLibrary()
 {
     _rect = new Rectangle();
     _window = new Window();
+    _circle = new Circle();
 }
 
 SFMLLibrary::~SFMLLibrary()

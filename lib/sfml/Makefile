@@ -10,6 +10,7 @@ NAME	=	../lib_arcade_sfml.so
 SRCPATH	=	src/
 SRCS_FILES=	Graphical/Rectangle.cpp					\
 			Graphical/Window.cpp					\
+			Graphical/Circle.cpp					\
 			SFMLLibrary.cpp							\
 			Entry.cpp								\
 

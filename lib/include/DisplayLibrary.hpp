@@ -10,12 +10,14 @@
 
 #include "Graphical/IWindow.hpp"
 #include "Graphical/IRectangle.hpp"
+#include "Graphical/ICircle.hpp"
 
 class DisplayLibrary {
     public:
         ~DisplayLibrary() = default;
         
         IRectangle *_rect;
+        ICircle *_circle;
         IWindow *_window;
     protected:
     private:
