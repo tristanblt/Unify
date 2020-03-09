@@ -19,7 +19,7 @@ OBJ			= 	$(SRC:%.cpp=%.o)
 CXXFLAGS	=	-W -Wall -Wextra -Wshadow	\
 			-I../	-std=c++11
 
-LDFLAGS		=	-Wl,-no-as-needed -ldl
+LDFLAGS		=	-ldl
 
 CXX		=	g++
 
