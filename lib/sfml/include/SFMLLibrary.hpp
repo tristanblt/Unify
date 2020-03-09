@@ -12,6 +12,8 @@
 #include "lib/sfml/include/Graphical/Window.hpp"
 #include "lib/sfml/include/Graphical/Rectangle.hpp"
 #include "lib/sfml/include/Graphical/Circle.hpp"
+#include "lib/sfml/include/Graphical/Text.hpp"
+#include "core/include/ArcadeCore/Enums.hpp"
 
 class SFMLLibrary : public DisplayLibrary {
     public:
@@ -19,6 +21,7 @@ class SFMLLibrary : public DisplayLibrary {
         ~SFMLLibrary();
 
         int toUnit(int);
+        void loadAsset(const std::string &, AssetType);
     protected:
     private:
 

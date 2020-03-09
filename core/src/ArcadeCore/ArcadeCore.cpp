@@ -25,6 +25,7 @@ void ArcadeCore::launchCore(DisplayLibrary *l)
 
     if (!game)
         return;
+    game->start(&b);
     while (b.windowIsOpen()) {
         b.windowClear();
         b.rectDraw({12, 35, 20, 21}, {200, 200, 200, 200});

@@ -14,6 +14,7 @@ class Start {
     public:
         ~Start() = default;
 
+        virtual void start(IBuilder *) = 0;
         virtual void update(IBuilder *) = 0;
     protected:
     private:

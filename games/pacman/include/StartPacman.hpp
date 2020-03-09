@@ -15,6 +15,7 @@ class StartPacman : public Start {
         StartPacman();
         ~StartPacman();
 
+        void start(IBuilder *b);
         void update(IBuilder *b);
     protected:
     private:

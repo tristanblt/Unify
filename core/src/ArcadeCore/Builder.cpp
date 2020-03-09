@@ -69,6 +69,17 @@ void Builder::radiusRectDraw(Box box, float radius, Color color)
     _library->_circle->draw(_library->_window);
 }
 
+Color Builder::hexToColor(int color)
+{
+    Color ret;
+
+    ret.r = ((color >> 24) & 0xff);
+    ret.g = ((color >> 16) & 0xff);
+    ret.b = ((color >> 8) & 0xff);
+    ret.a = ((color) & 0xff);
+    return (ret);
+}
+
 void Builder::circleDraw(CircleModel circle, Color color)
 {
     _library->_circle->setPosition({circle.x, circle.y});
@@ -77,7 +88,22 @@ void Builder::circleDraw(CircleModel circle, Color color)
     _library->_circle->draw(_library->_window);
 }
 
+void Builder::loadAsset(const std::string &name, AssetType type)
+{
+    _library->loadAsset(name, type);
+}
+
 bool Builder::isInBox(Box box)
 {
     return (false);
+}
+
+void Builder::textDraw(TextModel text, Color color)
+{
+    _library->_text->setPosition(text.p);
+    _library->_text->setFontSize(text.fontSize);
+    _library->_text->setFont(text.assetIdx);
+    _library->_text->setText(text.str);
+    _library->_text->setColor(color);
+    _library->_text->draw(_library->_window);
 }

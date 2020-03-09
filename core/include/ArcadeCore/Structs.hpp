@@ -35,9 +35,11 @@ struct CircleModel {
     float r;
 };
 
-struct Text {
+struct TextModel {
     std::string str;
     Vector2 p;
+    int fontSize;
+    int assetIdx;
 };
 
 #endif /* !STRUCTS_HPP_ */
