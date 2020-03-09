@@ -16,9 +16,11 @@ int main(int argc, char const *argv[])
 {
     std::cout << argv[1] << std::endl;
     (void) argc;
+    std::cout << "a" << std::endl;
     DLLoader<DisplayLibrary> loader(argv[1]);
+    std::cout << "a" << std::endl;
     DisplayLibrary *lib = loader.getInstance();
-    
+    std::cout << "a" << std::endl;
     ArcadeCore ArcadeCore;
 
     ArcadeCore.launchCore(lib);
