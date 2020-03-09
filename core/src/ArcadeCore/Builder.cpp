@@ -37,6 +37,15 @@ void Builder::windowDisplay()
     _library->_window->display();
 }
 
+float Builder::windowHeight()
+{
+    return (_library->_window->height());
+}
+
+float Builder::windowWidth()
+{
+    return (_library->_window->width());
+}
 
 void Builder::rectDraw(Box box, Color color)
 {
@@ -78,6 +87,11 @@ Color Builder::hexToColor(int color) const
     ret.b = ((color >> 8) & 0xff);
     ret.a = ((color) & 0xff);
     return (ret);
+}
+
+float Builder::toUnit(float value)
+{
+    return (_library->toUnit(value));
 }
 
 void Builder::circleDraw(CircleModel circle, Color color)

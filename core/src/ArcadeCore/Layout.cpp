@@ -7,8 +7,7 @@
 
 #include "core/include/ArcadeCore/Layout.hpp"
 
-Layout::Layout(DisplayLibrary *l):
-_backgroundBody({0, ((float)(l->_window->height() - l->toUnit(70))), (float)(l->_window->width()), (float)(l->toUnit(70))})
+Layout::Layout()
 {
 }
 
@@ -18,5 +17,5 @@ Layout::~Layout()
 
 void Layout::update(IBuilder *b)
 {
-    b->rectDraw(_backgroundBody, b->hexToColor(0x555555FF));
+    b->rectDraw({0, ((float)(b->windowHeight() - b->toUnit(70))), (float)(b->windowWidth()), (float)(b->toUnit(70))}, b->hexToColor(0x555555FF));
 }

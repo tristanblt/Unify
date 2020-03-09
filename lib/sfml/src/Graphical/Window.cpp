@@ -7,7 +7,6 @@
 
 #include "lib/sfml/include/Graphical/Window.hpp"
 
-#include <iostream>
 Window::Window()
 {
     sf::VideoMode m = sf::VideoMode::getFullscreenModes()[0];
@@ -25,14 +24,14 @@ bool Window::isOpen()
     return (_window->isOpen());
 }
 
-unsigned int Window::height()
+float Window::height()
 {
-    return (_window->getSize().y);
+    return ((float)_window->getSize().y);
 }
 
-unsigned int Window::width()
+float Window::width()
 {
-    return (_window->getSize().x);
+    return ((float)_window->getSize().x);
 }
 
 void Window::clear()

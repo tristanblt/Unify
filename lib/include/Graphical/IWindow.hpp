@@ -13,8 +13,8 @@ class IWindow {
         virtual ~IWindow() = default;
 
         virtual bool isOpen() = 0;
-        virtual unsigned int height() = 0;
-        virtual unsigned int width() = 0;
+        virtual float height() = 0;
+        virtual float width() = 0;
         virtual void clear() = 0;
         virtual void display() = 0;
     protected:

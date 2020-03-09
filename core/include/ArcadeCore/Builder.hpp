@@ -19,6 +19,8 @@ class Builder: public IBuilder {
         bool windowIsOpen();
         void windowClear();
         void windowDisplay();
+        float windowHeight();
+        float windowWidth();
 
         void rectDraw(Box, Color);
         void circleDraw(CircleModel, Color);
@@ -26,6 +28,8 @@ class Builder: public IBuilder {
         void textDraw(TextModel text, Color color);
 
         Color hexToColor(int) const;
+
+        float toUnit(float);
 
         bool isInBox(Box);
 

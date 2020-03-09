@@ -20,7 +20,7 @@ class DisplayLibrary {
     public:
         ~DisplayLibrary() = default;
 
-        virtual int toUnit(int) = 0;
+        virtual float toUnit(float) = 0;
 
         IRectangle *_rect;
         ICircle *_circle;

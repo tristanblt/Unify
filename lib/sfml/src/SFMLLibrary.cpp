@@ -19,7 +19,7 @@ SFMLLibrary::~SFMLLibrary()
 {
 }
 
-int SFMLLibrary::toUnit(int value)
+float SFMLLibrary::toUnit(float value)
 {
     return (value);
 }

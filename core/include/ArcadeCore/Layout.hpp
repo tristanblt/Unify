@@ -13,20 +13,12 @@
 
 class Layout {
     public:
-        Layout(DisplayLibrary *l);
+        Layout();
         ~Layout();
 
         void update (IBuilder *);
     protected:
     private:
-        Box _backgroundBody;
-        std::string _UsedLibraryName;
-
-        Box _homeButtonBody;
-        std::string _homeButtonText;
-
-        Box _leftButtonBody;
-        Box _rightButtonBody;
 };
 
 #endif /* !LAYOUT_HPP_ */
