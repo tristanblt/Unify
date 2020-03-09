@@ -20,6 +20,7 @@ void ArcadeCore::launchCore(DisplayLibrary *l)
 {
     DLLoader<Start> loader("games/lib_arcade_pacman.so");
     Start *game = loader.getInstance();
+    Layout layout(l);
     Builder b(l);
     Menu m;
     bool isMenu = true;
@@ -36,7 +37,7 @@ void ArcadeCore::launchCore(DisplayLibrary *l)
             m.update(&b);
         else {
             game->update(&b);
-            // layout
+            layout.update(&b);
         }
         b.windowDisplay();
     }

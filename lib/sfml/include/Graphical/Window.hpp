@@ -17,6 +17,8 @@ class Window : public IWindow {
         ~Window();
 
         bool isOpen();
+        unsigned int height();
+        unsigned int width();
         void clear();
         void display();
         

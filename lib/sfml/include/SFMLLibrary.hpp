@@ -20,6 +20,7 @@ class SFMLLibrary : public DisplayLibrary {
         SFMLLibrary();
         ~SFMLLibrary();
 
+        int toUnit(int);
         void loadAsset(const std::string &, AssetType);
     protected:
     private:

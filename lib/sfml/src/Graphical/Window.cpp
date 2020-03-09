@@ -9,7 +9,7 @@
 
 Window::Window()
 {
-    _window = new sf::RenderWindow(sf::VideoMode(1600, 900), "test", sf::Style::Close);
+    _window = new sf::RenderWindow(sf::VideoMode(), "test", sf::Style::Fullscreen);
     _window->setFramerateLimit(60);
 }
 
@@ -23,6 +23,16 @@ bool Window::isOpen()
     return (_window->isOpen());
 }
 
+unsigned int Window::height()
+{
+    return (_window->getSize().y);
+}
+
+unsigned int Window::width()
+{
+    return (_window->getSize().x);
+}
+
 void Window::clear()
 {
     // TODO :remove
@@ -30,7 +40,7 @@ void Window::clear()
     while (_window->pollEvent(event))
         if (event.type == sf::Event::Closed)
             _window->close();
-    _window->clear(sf::Color::Black);
+    _window->clear(sf::Color::White);
 }
 
 void Window::display()

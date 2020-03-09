@@ -14,6 +14,7 @@
 #include "games/include/Start.hpp"
 #include "core/include/ArcadeCore/Builder.hpp"
 #include "core/include/ArcadeCore/Menu.hpp"
+#include "core/include/ArcadeCore/Layout.hpp"
 
 class ArcadeCore {
     public:
