@@ -27,7 +27,7 @@ CXX		=	g++
 RM		=	rm -f
 
 $(NAME):$(OBJ)
-		$(CXX) -o $(NAME) $(OBJ) $(LDFLAGS) -shared
+		$(CXX) -o $(NAME) $(OBJ) $(CXXFLAGS) $(LDFLAGS) -shared
 
 all:	$(NAME)
 
