@@ -29,7 +29,15 @@ void Menu::update(IBuilder *b)
         tmp -= 0.5;
         tmp = tmp < 0 ? -tmp : tmp;
         tmp = (((tmp * 40) / 100) + 0.6) * (b->windowHeight() / 2);
-        b->radiusRectDraw({((float) i) * (500 + a) + offset + tmp / 2 - 250, (b->windowHeight()/5) + tmp / 2 - 250, (b->windowHeight() / 2 + 200) - tmp, (b->windowHeight() / 2 + 200) - tmp}, 40, b->hexToColor(0x111111FF));
+        b->radiusRectDraw({
+                            ((float) i) * (500 + a) + offset + tmp / 2 - 250,
+                            (b->windowHeight() / 2) - ((b->windowHeight() / 2 + 200) - tmp) / 2 - 250,
+                            (b->windowHeight() / 2 + 200) - tmp,
+                            (b->windowHeight() / 2 + 200) - tmp
+                        },
+                        40,
+                        b->hexToColor(0x111111FF)
+                    );
     }
     offset -= 10;
 }
