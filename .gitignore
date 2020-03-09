@@ -2,3 +2,4 @@ core/arcade
 *.out
 *.o
 *.so
+.vscode

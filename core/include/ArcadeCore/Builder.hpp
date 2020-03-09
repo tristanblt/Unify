@@ -21,7 +21,9 @@ class Builder: public IBuilder {
         void windowDisplay();
 
         void rectDraw(Box, Color);
-        void circleDraw(Circle, Color);
+        void circleDraw(CircleModel, Color);
+
+        bool isInBox(Box);
     protected:
     private:
         DisplayLibrary *_library;

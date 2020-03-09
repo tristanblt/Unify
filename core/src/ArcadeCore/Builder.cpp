@@ -46,10 +46,15 @@ void Builder::rectDraw(Box box, Color color)
     _library->_rect->draw(_library->_window);
 }
 
-void Builder::circleDraw(Circle circle, Color color)
+void Builder::circleDraw(CircleModel circle, Color color)
 {
     //_library->_circle->setPosition({circle.x, circle.y});
     //_library->_circle->setRadius(circle.r);
     //_library->_circle->setColor(color);
     //_library->_circle->draw(_library->_window);
+}
+
+bool Builder::isInBox(Box box)
+{
+    return (false);
 }

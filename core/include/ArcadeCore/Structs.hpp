@@ -8,6 +8,8 @@
 #ifndef STRUCTS_HPP_
 #define STRUCTS_HPP_
 
+#include <string>
+
 struct Color {
     char a;
     char r;
@@ -27,10 +29,15 @@ struct Box {
     float w;
 };
 
-struct Circle {
+struct CircleModel {
     float x;
     float y;
     float r;
+};
+
+struct Text {
+    std::string str;
+    Vector2 p;
 };
 
 #endif /* !STRUCTS_HPP_ */

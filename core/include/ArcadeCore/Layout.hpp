@@ -17,8 +17,14 @@ class Layout {
 
     protected:
     private:
-        Box footage;
-        Box l
+        Box backgroundBody;
+        std::string UsedLibraryName;
+
+        Box homeButtonBody;
+        std::string homeButtonText;
+
+        Box leftButtonBody;
+        Box rightButtonBody;
 };
 
 #endif /* !LAYOUT_HPP_ */

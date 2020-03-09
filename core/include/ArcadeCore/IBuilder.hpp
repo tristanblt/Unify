@@ -8,6 +8,8 @@
 #ifndef IBUILDER_HPP_
 #define IBUILDER_HPP_
 
+#include <string>
+
 #include "lib/include/DisplayLibrary.hpp"
 #include "core/include/ArcadeCore/Structs.hpp"
 
@@ -21,7 +23,9 @@ class IBuilder {
         virtual void windowDisplay() = 0;
 
         virtual void rectDraw(Box, Color) = 0;
-        virtual void circleDraw(Circle, Color) = 0;
+        virtual void circleDraw(CircleModel, Color) = 0;
+
+        virtual bool isInBox(Box) = 0;
     protected:
     private:
 };
