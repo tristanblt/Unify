@@ -10,6 +10,5 @@
 
 extern "C" DisplayLibrary *entryPoint()
 {
-    std::cout << "GET" << std::endl;
     return (new SFMLLibrary());
 }

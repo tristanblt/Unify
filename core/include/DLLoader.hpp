@@ -12,7 +12,7 @@
 template <typename T>
 class DLLoader {
     public:
-        DLLoader(const char *path) { std::cout << path << std::endl; _handler = dlopen(path, RTLD_GLOBAL);std::cout << path << std::endl; }
+        DLLoader(const char *path) { _handler = dlopen(path, RTLD_LAZY); }
         ~DLLoader() { dlclose(_handler); }
 
         T *getInstance() {

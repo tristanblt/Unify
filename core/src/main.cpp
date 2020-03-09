@@ -14,18 +14,16 @@
 
 int main(int argc, char const *argv[])
 {
-    std::cout << argv[1] << std::endl;
-    (void) argc;
     DLLoader<DisplayLibrary> *loader = new DLLoader<DisplayLibrary>(argv[1]);
-    if (loader == nullptr)
-        return (84);
-    std::cout << loader << std::endl;
-    DisplayLibrary *lib = loader->getInstance();
+    DisplayLibrary *lib;
     ArcadeCore ArcadeCore;
 
+    if (loader == nullptr)
+        return (84);
+    lib = loader->getInstance();
     if (!lib)
         return (84);
-    std::cout << "dcs" << std::endl;
     ArcadeCore.launchCore(lib);
+    (void) argc;
     return 0;
 }

@@ -22,7 +22,6 @@ void ArcadeCore::launchCore(DisplayLibrary *l)
     Start *game = loader.getInstance();
     Builder b(l);
 
-    std::cout << game << std::endl;
     if (!game)
         return;
     while (b.windowIsOpen()) {
