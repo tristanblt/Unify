@@ -7,9 +7,11 @@
 
 #include "lib/sfml/include/Graphical/Window.hpp"
 
+#include <iostream>
 Window::Window()
 {
-    _window = new sf::RenderWindow(sf::VideoMode(), "test", sf::Style::Fullscreen);
+    sf::VideoMode m = sf::VideoMode::getFullscreenModes()[0];
+    _window = new sf::RenderWindow(sf::VideoMode(m.width, m.height), "test", sf::Style::Fullscreen | sf::Style::Close);
     _window->setFramerateLimit(60);
 }
 
