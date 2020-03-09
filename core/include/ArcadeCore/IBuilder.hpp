@@ -24,6 +24,7 @@ class IBuilder {
 
         virtual void rectDraw(Box, Color) = 0;
         virtual void circleDraw(CircleModel, Color) = 0;
+        virtual void radiusRectDraw(Box, float, Color) = 0;
 
         virtual bool isInBox(Box) = 0;
     protected:

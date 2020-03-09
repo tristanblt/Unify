@@ -26,7 +26,9 @@ void ArcadeCore::launchCore(DisplayLibrary *l)
         return;
     while (b.windowIsOpen()) {
         b.windowClear();
-        b.rectDraw({12, 35, 20, 21}, { 20, 20, 20, 20});
+        b.rectDraw({12, 35, 20, 21}, {200, 200, 200, 200});
+        b.radiusRectDraw({300, 300, 100, 100}, 10, (Color){200, 200, 200, 255});
+        b.circleDraw({100.0f, 100.0f, 20.0f}, {200, 200, 200, 200});
         game->update(&b);
         b.windowDisplay();
     }

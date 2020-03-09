@@ -11,6 +11,7 @@
 #include "lib/include/DisplayLibrary.hpp"
 #include "lib/sfml/include/Graphical/Window.hpp"
 #include "lib/sfml/include/Graphical/Rectangle.hpp"
+#include "lib/sfml/include/Graphical/Circle.hpp"
 
 class SFMLLibrary : public DisplayLibrary {
     public:

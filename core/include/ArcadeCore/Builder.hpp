@@ -22,6 +22,7 @@ class Builder: public IBuilder {
 
         void rectDraw(Box, Color);
         void circleDraw(CircleModel, Color);
+        void radiusRectDraw(Box, float, Color);
 
         bool isInBox(Box);
     protected:

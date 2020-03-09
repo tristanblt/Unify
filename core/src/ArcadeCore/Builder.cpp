@@ -42,16 +42,39 @@ void Builder::rectDraw(Box box, Color color)
 {
     _library->_rect->setPosition({box.x, box.y});
     _library->_rect->setSize({box.h, box.w});
-    // _library->_rect->setColor(color);
+    _library->_rect->setColor(color);
     _library->_rect->draw(_library->_window);
+}
+
+void Builder::radiusRectDraw(Box box, float radius, Color color)
+{
+    if (radius * 2 > box.h)
+        radius = box.h;
+    _library->_rect->setColor(color);
+    _library->_circle->setColor(color);
+    _library->_rect->setPosition({box.x + radius, box.y});
+    _library->_rect->setSize({box.h - radius * 2, box.w});
+    _library->_rect->draw(_library->_window);
+    _library->_rect->setPosition({box.x, box.y + radius});
+    _library->_rect->setSize({box.h, box.w - radius * 2});
+    _library->_rect->draw(_library->_window);
+    _library->_circle->setPosition({box.x, box.y});
+    _library->_circle->setRadius(radius);
+    _library->_circle->draw(_library->_window);
+    _library->_circle->setPosition({box.x, box.y + box.h - radius * 2});
+    _library->_circle->draw(_library->_window);
+    _library->_circle->setPosition({box.x + box.w - radius * 2, box.y});
+    _library->_circle->draw(_library->_window);
+    _library->_circle->setPosition({box.x + box.w - radius * 2, box.y + box.h - radius * 2});
+    _library->_circle->draw(_library->_window);
 }
 
 void Builder::circleDraw(CircleModel circle, Color color)
 {
-    //_library->_circle->setPosition({circle.x, circle.y});
-    //_library->_circle->setRadius(circle.r);
-    //_library->_circle->setColor(color);
-    //_library->_circle->draw(_library->_window);
+    _library->_circle->setPosition({circle.x, circle.y});
+    _library->_circle->setRadius(circle.r);
+    _library->_circle->setColor(color);
+    _library->_circle->draw(_library->_window);
 }
 
 bool Builder::isInBox(Box box)
