@@ -69,6 +69,17 @@ void Builder::radiusRectDraw(Box box, float radius, Color color)
     _library->_circle->draw(_library->_window);
 }
 
+Color Builder::hexToColor(int color) const
+{
+    Color ret;
+
+    ret.r = ((color >> 24) & 0xff);
+    ret.g = ((color >> 16) & 0xff);
+    ret.b = ((color >> 8) & 0xff);
+    ret.a = ((color) & 0xff);
+    return (ret);
+}
+
 void Builder::circleDraw(CircleModel circle, Color color)
 {
     _library->_circle->setPosition({circle.x, circle.y});
