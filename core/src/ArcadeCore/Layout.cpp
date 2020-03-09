@@ -8,7 +8,7 @@
 #include "core/include/ArcadeCore/Layout.hpp"
 
 Layout::Layout(DisplayLibrary *l):
-_backgroundBody({0, (l->_window->height() - 70), l->_window->width(), 70})
+_backgroundBody({0, (l->_window->height() - l->toUnit(70)), l->_window->width(), l->toUnit(70)})
 {
 }
 
@@ -18,5 +18,5 @@ Layout::~Layout()
 
 void Layout::update(IBuilder *b)
 {
-    b->rectDraw(_backgroundBody, {55, 55, 55, 255});
+    b->rectDraw(_backgroundBody, b->hexToColor(0x555555FF));
 }
