@@ -22,6 +22,8 @@ SFMLLibrary::~SFMLLibrary()
 int SFMLLibrary::toUnit(int value)
 {
     return (value);
+}
+
 void SFMLLibrary::loadAsset(const std::string &name, AssetType type)
 {
     if (type == AssetType::FONT) {
