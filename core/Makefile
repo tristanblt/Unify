@@ -19,13 +19,14 @@ OBJ			= 	$(SRC:%.cpp=%.o)
 CXXFLAGS	=	-W -Wall -Wextra -Wshadow	\
 			-I../	-std=c++11
 
+LDFLAGS		=	-Wl,-no-as-needed -ldl
+
 CXX		=	g++
 
 RM		=	rm -f
 
 $(NAME):$(OBJ)
-		$(CXX) -o $(NAME) $(OBJ)
-
+		$(CXX) -o $(NAME) $(OBJ) $(CXXFLAGS) $(LDFLAGS)
 all:	$(NAME)
 
 clean:
