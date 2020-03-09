@@ -8,6 +8,7 @@
 #ifndef LAYOUT_HPP_
 #define LAYOUT_HPP_
 
+#include "core/include/ArcadeCore/IBuilder.hpp"
 #include "core/include/ArcadeCore/Structs.hpp"
 
 class Layout {
@@ -15,16 +16,17 @@ class Layout {
         Layout();
         ~Layout();
 
+        void update (IBuilder *);
     protected:
     private:
-        Box backgroundBody;
-        std::string UsedLibraryName;
+        Box _backgroundBody;
+        std::string _UsedLibraryName;
 
-        Box homeButtonBody;
-        std::string homeButtonText;
+        Box _homeButtonBody;
+        std::string _homeButtonText;
 
-        Box leftButtonBody;
-        Box rightButtonBody;
+        Box _leftButtonBody;
+        Box _rightButtonBody;
 };
 
 #endif /* !LAYOUT_HPP_ */

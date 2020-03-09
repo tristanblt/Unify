@@ -5,7 +5,7 @@
 ** Menu
 */
 
-#include "Menu.hpp"
+#include "core/include/ArcadeCore/Menu.hpp"
 
 Menu::Menu()
 {
