@@ -22,6 +22,9 @@ void ArcadeCore::launchCore(DisplayLibrary *l)
     Start *game = loader.getInstance();
     Builder b(l);
 
+    std::cout << game << std::endl;
+    if (!game)
+        return;
     while (b.windowIsOpen()) {
         b.windowClear();
         b.rectDraw({12, 35, 20, 21}, { 20, 20, 20, 20});
