@@ -12,8 +12,19 @@ SFMLLibrary::SFMLLibrary()
     _rect = new Rectangle(); 
     _window = new Window();
     _circle = new Circle();
+    _text = new Text(&_assets);
 }
 
 SFMLLibrary::~SFMLLibrary()
 {
+}
+
+void SFMLLibrary::loadAsset(const std::string &name, AssetType type)
+{
+    if (type == AssetType::FONT) {
+        sf::Font *f = new sf::Font();
+        if (!f->loadFromFile(name))
+            throw std::invalid_argument("FONT NOT FOUND"); // TODO
+        _assets.push_back((void *)f);
+    }
 }

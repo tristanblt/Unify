@@ -11,6 +11,10 @@
 #include "Graphical/IWindow.hpp"
 #include "Graphical/IRectangle.hpp"
 #include "Graphical/ICircle.hpp"
+#include "Graphical/IText.hpp"
+#include "core/include/ArcadeCore/Enums.hpp"
+#include <vector>
+#include <memory>
 
 class DisplayLibrary {
     public:
@@ -19,7 +23,11 @@ class DisplayLibrary {
         IRectangle *_rect;
         ICircle *_circle;
         IWindow *_window;
+        IText *_text;
+
+        virtual void loadAsset(const std::string &, AssetType) = 0;
     protected:
+        std::vector<void *> _assets;
     private:
 };
 

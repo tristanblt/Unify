@@ -12,11 +12,15 @@
 #include "lib/sfml/include/Graphical/Window.hpp"
 #include "lib/sfml/include/Graphical/Rectangle.hpp"
 #include "lib/sfml/include/Graphical/Circle.hpp"
+#include "lib/sfml/include/Graphical/Text.hpp"
+#include "core/include/ArcadeCore/Enums.hpp"
 
 class SFMLLibrary : public DisplayLibrary {
     public:
         SFMLLibrary();
         ~SFMLLibrary();
+
+        void loadAsset(const std::string &, AssetType);
     protected:
     private:
 

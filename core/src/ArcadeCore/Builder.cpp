@@ -77,7 +77,22 @@ void Builder::circleDraw(CircleModel circle, Color color)
     _library->_circle->draw(_library->_window);
 }
 
+void Builder::loadAsset(const std::string &name, AssetType type)
+{
+    _library->loadAsset(name, type);
+}
+
 bool Builder::isInBox(Box box)
 {
     return (false);
+}
+
+void Builder::textDraw(TextModel text, Color color)
+{
+    _library->_text->setPosition(text.p);
+    _library->_text->setFontSize(text.fontSize);
+    _library->_text->setFont(text.assetIdx);
+    _library->_text->setText(text.str);
+    _library->_text->setColor(color);
+    _library->_text->draw(_library->_window);
 }

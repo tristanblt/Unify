@@ -23,8 +23,11 @@ class Builder: public IBuilder {
         void rectDraw(Box, Color);
         void circleDraw(CircleModel, Color);
         void radiusRectDraw(Box, float, Color);
+        void textDraw(TextModel text, Color color);
 
         bool isInBox(Box);
+
+        void loadAsset(const std::string &, AssetType);
     protected:
     private:
         DisplayLibrary *_library;

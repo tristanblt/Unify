@@ -11,6 +11,7 @@ SRCPATH	=	src/
 SRCS_FILES=	Graphical/Rectangle.cpp					\
 			Graphical/Window.cpp					\
 			Graphical/Circle.cpp					\
+			Graphical/Text.cpp						\
 			SFMLLibrary.cpp							\
 			Entry.cpp								\
 
