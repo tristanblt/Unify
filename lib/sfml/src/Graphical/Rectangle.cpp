@@ -25,13 +25,18 @@ void Rectangle::draw(IWindow *w)
     dynamic_cast<Window *>(w)->getWindow()->draw(*_rect);
 }
 
-void Rectangle::setPosition(int size)
+void Rectangle::setPosition(Vector2 position)
 {
-    _rect->setPosition(size, size);
+    _rect->setPosition(position.x, position.y);
 }
 
-void Rectangle::setSize(int size)
+void Rectangle::setSize(Vector2 size)
 {
-    _rect->setSize(sf::Vector2f(size, size));
+    _rect->setSize(sf::Vector2f(size.x, size.y));
 
+}
+
+void Rectangle::setColor(Color color)
+{
+    _rect->setFillColor(sf::Color(color.r, color.b, color.g, color.a));
 }

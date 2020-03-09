@@ -12,6 +12,8 @@
 #include "lib/include/Graphical/IRectangle.hpp"
 #include "lib/include/Graphical/IWindow.hpp"
 #include "lib/sfml/include/Graphical/Window.hpp"
+#include "core/include/ArcadeCore/IBuilder.hpp"
+#include "core/include/ArcadeCore/Structs.hpp"
 
 class Rectangle : public IRectangle {
     public:
@@ -19,8 +21,9 @@ class Rectangle : public IRectangle {
         ~Rectangle();
 
         void draw(IWindow *w);
-        void setPosition(int size); // todo
-        void setSize(int size); // todo
+        void setPosition(Vector2);
+        void setSize(Vector2);
+        void setColor(Color);
     protected:
     private:
         sf::RectangleShape *_rect;

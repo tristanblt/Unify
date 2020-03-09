@@ -8,13 +8,13 @@
 #ifndef START_HPP_
 #define START_HPP_
 
-#include "lib/include/DisplayLibrary.hpp"
+#include "core/include/ArcadeCore/IBuilder.hpp"
 
 class Start {
     public:
         ~Start() = default;
 
-        virtual void update(DisplayLibrary *) = 0;
+        virtual void update(IBuilder *) = 0;
     protected:
     private:
 };

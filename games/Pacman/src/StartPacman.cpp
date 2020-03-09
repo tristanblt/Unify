@@ -15,8 +15,7 @@ StartPacman::~StartPacman()
 {
 }
 
-void StartPacman::update(DisplayLibrary *l)
+void StartPacman::update(IBuilder *b)
 {
-    l->_rect->setPosition(500);
-    l->_rect->draw(l->_window);
+    b->rectDraw({45, 65, 500, 30}, {1, 1, 1, 1});
 }

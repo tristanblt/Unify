@@ -10,6 +10,7 @@ NAME	=	arcade
 SRCPATH	=	src/
 SRCS_FILES=	main.cpp										\
 			ArcadeCore/ArcadeCore.cpp						\
+			ArcadeCore/Builder.cpp							\
 
 SRC	=	$(addprefix $(SRCPATH), $(SRCS_FILES))
 
