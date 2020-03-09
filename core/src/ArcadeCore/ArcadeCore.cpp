@@ -21,16 +21,23 @@ void ArcadeCore::launchCore(DisplayLibrary *l)
     DLLoader<Start> loader("games/lib_arcade_pacman.so");
     Start *game = loader.getInstance();
     Builder b(l);
+    Menu m;
+    bool isMenu = true;
 
+    b.loadAsset("assets/fonts/Montserrat-Light.otf", AssetType::FONT);
+    b.loadAsset("assets/fonts/Montserrat-Regular.otf", AssetType::FONT);
+    b.loadAsset("assets/fonts/Montserrat-Bold.otf", AssetType::FONT);
     if (!game)
         return;
     game->start(&b);
     while (b.windowIsOpen()) {
         b.windowClear();
-        b.rectDraw({12, 35, 20, 21}, {200, 200, 200, 200});
-        b.radiusRectDraw({300, 300, 100, 100}, 10, (Color){200, 200, 200, 255});
-        b.circleDraw({100.0f, 100.0f, 20.0f}, {200, 200, 200, 200});
-        game->update(&b);
+        if (isMenu)
+            m.update(&b);
+        else {
+            game->update(&b);
+            // layout
+        }
         b.windowDisplay();
     }
 }

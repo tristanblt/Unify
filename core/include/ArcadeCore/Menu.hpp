@@ -8,11 +8,14 @@
 #ifndef MENU_HPP_
 #define MENU_HPP_
 
+#include "core/include/ArcadeCore/IBuilder.hpp"
+
 class Menu {
     public:
         Menu();
         ~Menu();
 
+        void update(IBuilder *);
     protected:
     private:
 };

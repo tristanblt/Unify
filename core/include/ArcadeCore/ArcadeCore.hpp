@@ -13,6 +13,7 @@
 #include "lib/include/Graphical/IRectangle.hpp"
 #include "games/include/Start.hpp"
 #include "core/include/ArcadeCore/Builder.hpp"
+#include "core/include/ArcadeCore/Menu.hpp"
 
 class ArcadeCore {
     public:

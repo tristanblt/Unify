@@ -27,6 +27,8 @@ class IBuilder {
         virtual void radiusRectDraw(Box, float, Color) = 0;
         virtual void textDraw(TextModel text, Color color) = 0;
 
+        virtual Color hexToColor(int) const = 0;
+
         virtual bool isInBox(Box) = 0;
 
         virtual void loadAsset(const std::string &, AssetType) = 0;
