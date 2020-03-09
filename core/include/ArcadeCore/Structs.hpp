@@ -11,10 +11,10 @@
 #include <string>
 
 struct Color {
-    char a;
-    char r;
-    char g;
-    char b;
+    unsigned char a;
+    unsigned char r;
+    unsigned char g;
+    unsigned char b;
 };
 
 struct Vector2 {
