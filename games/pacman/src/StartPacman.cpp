@@ -17,9 +17,7 @@ StartPacman::~StartPacman()
 
 void StartPacman::start(IBuilder *b)
 {
-    b->loadAsset("assets/fonts/Montserrat-Regular.otf", AssetType::FONT);
-    b->loadAsset("assets/fonts/Montserrat-Light.otf", AssetType::FONT);
-    b->loadAsset("assets/fonts/Montserrat-Bold.otf", AssetType::FONT);
+
 }
 
 void StartPacman::update(IBuilder *b)

@@ -69,7 +69,7 @@ void Builder::radiusRectDraw(Box box, float radius, Color color)
     _library->_circle->draw(_library->_window);
 }
 
-Color Builder::hexToColor(int color)
+Color Builder::hexToColor(int color) const
 {
     Color ret;
 
