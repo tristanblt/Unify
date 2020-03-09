@@ -20,10 +20,10 @@ void ArcadeCore::launchCore(DisplayLibrary *l)
 {
     DLLoader<Start> loader("games/lib_arcade_pacman.so");
     Start *game = loader.getInstance();
-    Layout layout(l);
+    Layout layout;
     Builder b(l);
     Menu m;
-    bool isMenu = false;
+    bool isMenu = true;
 
     b.loadAsset("assets/fonts/Montserrat-Light.otf", AssetType::FONT);
     b.loadAsset("assets/fonts/Montserrat-Regular.otf", AssetType::FONT);

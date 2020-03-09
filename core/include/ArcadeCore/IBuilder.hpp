@@ -21,6 +21,8 @@ class IBuilder {
         virtual bool windowIsOpen() = 0;
         virtual void windowClear() = 0;
         virtual void windowDisplay() = 0;
+        virtual int windowHeight() = 0;
+        virtual int windowWidth() = 0;
 
         virtual void rectDraw(Box, Color) = 0;
         virtual void circleDraw(CircleModel, Color) = 0;
@@ -28,6 +30,7 @@ class IBuilder {
         virtual void textDraw(TextModel text, Color color) = 0;
 
         virtual Color hexToColor(int) const = 0;
+        virtual int toUnit(int) = 0;
 
         virtual bool isInBox(Box) = 0;
 
