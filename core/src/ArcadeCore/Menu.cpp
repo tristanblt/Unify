@@ -14,6 +14,8 @@ Menu::Menu()
 Menu::~Menu()
 {
 }
+
+#include <iostream>
 void Menu::update(IBuilder *b)
 {
     static float offset = 0;
@@ -23,21 +25,26 @@ void Menu::update(IBuilder *b)
     b->textDraw({"Unify", {b->windowWidth()/32, b->windowHeight() / 18.0f}, static_cast<int>(b->windowHeight() / 12.0f), 2}, b->hexToColor(0xFFFFFFFF));
     b->rectDraw({0, b->windowHeight()/5, b->windowWidth(), (b->windowWidth() * 0.3f)}, b->hexToColor(0x1A1A1AFF));
     for (int i = 0; i < 20; i++) {
-        float tmp = (((float)i * (500 + a) + offset + 250) / b->windowWidth());
-        if (tmp > 1.2 || tmp < -0.2)
+        float color = (((b->windowHeight() / 3 + 30) * i + offset + (b->windowHeight() / 3 + 30)) / b->windowWidth());
+        if (color < 0 || color > 1)
             continue;
-        tmp -= 0.5;
-        tmp = tmp < 0 ? -tmp : tmp;
-        tmp = (((tmp * 40) / 100) + 0.6) * (b->windowHeight() / 2);
+        color -= 0.5f;
+        if (color < 0)
+            color *= -1;
+        if (i == 5)
+        std::cout << color << std::endl;
+        color = 255 - (color * 2 * 255);
+        if (color < 26)
+            color = 26;
         b->radiusRectDraw({
-                            ((float) i) * (500 + a) + offset + tmp / 2 - 250,
-                            (b->windowHeight() / 2) - ((b->windowHeight() / 2 + 200) - tmp) / 2 - 250,
-                            (b->windowHeight() / 2 + 200) - tmp,
-                            (b->windowHeight() / 2 + 200) - tmp
-                        },
-                        40,
-                        b->hexToColor(0x111111FF)
-                    );
+                (b->windowHeight() / 3 + 30) * i + offset + b->windowHeight() / 6,
+                b->windowHeight() / 5 + 70,
+                b->windowHeight() / 3,
+                b->windowHeight() / 3
+            },
+            50,
+            {static_cast<unsigned char>(color), static_cast<unsigned char>(color), static_cast<unsigned char>(color), 255}
+        );
     }
     offset -= 10;
 }
