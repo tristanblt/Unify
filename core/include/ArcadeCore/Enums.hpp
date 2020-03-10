@@ -13,6 +13,7 @@ enum AssetType {
     FONT,
     AUDIO
 };
+
 enum MouseButton {
     RIGHT_CLICK,
     LEFT_CLICK,
@@ -128,6 +129,12 @@ enum Key {
     F14,
     F15,
     PAUSE
+};
+
+enum CoreState {
+    CORE_MENU,
+    CORE_GAME,
+    CORE_PAUSE
 };
 
 #endif /* !ENUMS_HPP_ */

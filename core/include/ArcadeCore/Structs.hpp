@@ -27,8 +27,8 @@ struct Vector2 {
 struct Box {
     float x;
     float y;
-    float h;
     float w;
+    float h;
 };
 
 struct CircleModel {

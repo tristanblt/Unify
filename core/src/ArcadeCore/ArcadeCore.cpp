@@ -10,7 +10,7 @@
 
 ArcadeCore::ArcadeCore()
 {
-    _coreState = CoreState::MENU;
+    _coreState = CoreState::CORE_GAME;
 }
 
 ArcadeCore::~ArcadeCore()
@@ -38,16 +38,13 @@ void ArcadeCore::launchCore(DisplayLibrary *library)
     _menu.start(&builder);
     while (builder.windowIsOpen()) {
         builder.updateEvents();
-        std::cout << "leftClick: " << builder._events.mouseEvents.mouseStates[MouseButton::LEFT_CLICK] << std::endl;
-        std::cout << "x:" << builder._events.mouseEvents.pos.x << " y:" << builder._events.mouseEvents.pos.y << std::endl;
-        std::cout << "TAB:" << builder._events.keyboardState[Key::TAB] << std::endl;
-        std::cout << "A:" << builder._events.keyboardState[Key::A] << std::endl;
         builder.windowClear();
-        if (_coreState == CoreState::MENU)
+        if (_coreState == CoreState::CORE_MENU)
             _menu.update(&builder);
         else {
-            game->update(&builder);
-            _layout.update(&builder);
+            if (_coreState != CoreState::CORE_PAUSE)
+                game->update(&builder);
+            _layout.update(&builder, _coreState);
         }
         builder.windowDisplay();
     }

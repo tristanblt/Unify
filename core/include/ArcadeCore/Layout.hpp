@@ -10,13 +10,14 @@
 
 #include "core/include/ArcadeCore/IBuilder.hpp"
 #include "core/include/ArcadeCore/Structs.hpp"
+#include "core/include/ArcadeCore/Enums.hpp"
 
 class Layout {
     public:
         Layout();
         ~Layout();
 
-        void update (IBuilder *);
+        void update (IBuilder *, CoreState &);
     protected:
     private:
 };

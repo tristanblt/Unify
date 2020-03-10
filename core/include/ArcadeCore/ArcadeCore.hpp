@@ -15,14 +15,10 @@
 #include "core/include/ArcadeCore/Builder.hpp"
 #include "core/include/ArcadeCore/Menu.hpp"
 #include "core/include/ArcadeCore/Layout.hpp"
+#include "core/include/ArcadeCore/Enums.hpp"
 
 class ArcadeCore {
     public:
-        enum CoreState {
-            MENU,
-            GAME,
-            PAUSE
-        };
 
         ArcadeCore();
         ~ArcadeCore();
