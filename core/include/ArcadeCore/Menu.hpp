@@ -27,10 +27,11 @@ class Menu {
         void start(IBuilder *);
         void drawBackgrounds(IBuilder *);
         void drawHeader(IBuilder *);
-        void drawCarousel(IBuilder *, int);
+        void drawCarousel(IBuilder *);
     protected:
     private:
         std::vector<GameCover> _covers;
+        float _coversOffset;
 };
 
 #endif /* !MENU_HPP_ */

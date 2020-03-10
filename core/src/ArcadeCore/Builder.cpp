@@ -10,6 +10,7 @@
 Builder::Builder(DisplayLibrary *library):
 _library(library)
 {
+    _events.mouseEvents.scrollVelocity = 0;
 }
 
 Builder::~Builder()
