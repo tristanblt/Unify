@@ -67,7 +67,7 @@ void SFMLLibrary::updateMousseEvents(Events *e)
 void SFMLLibrary::updateKeyboardEvents(Events *e)
 {
     for (int i = 0; i < 100; i++) {
-        if (sf::Keyboard::isKeyPressed(_SFMLKeys[i]))
+        if (sf::Keyboard::isKeyPressed(static_cast<sf::Keyboard::Key>(i)))
             e->keyboardState[_CoreKeys[i]] = (e->keyboardState[_CoreKeys[i]] != InputState::CLICK && e->keyboardState[_CoreKeys[i]] != InputState::HOLD) ?
             InputState::CLICK : InputState::HOLD;
         else
