@@ -28,9 +28,10 @@ class SFMLLibrary : public DisplayLibrary {
         int getLastAssetIdx() const;
     protected:
     private:
-        void updateMousseEvents(Events *);
+        void updateMouseEvents(Events *, Window *);
         void updateKeyboardEvents(Events *);
         sf::Event _event;
+        sf::Mouse _mouse;
 };
 
 #endif /* !SFMLLIBRARY_HPP_ */
