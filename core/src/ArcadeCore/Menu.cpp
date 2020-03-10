@@ -31,7 +31,7 @@ void Menu::drawBackgrounds(IBuilder *b)
             0,
             b->windowHeight()/5,
             b->windowWidth(),
-            (b->windowWidth() * 0.3f)
+            (b->windowHeight() * 0.55f)
         },
         b->hexToColor(0x1A1A1AFF)
     );
