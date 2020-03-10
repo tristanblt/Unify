@@ -125,7 +125,7 @@ void Menu::drawCarousel(IBuilder *b)
                     _covers[i].gameName,
                     {
                         (b->windowWidth() - (0.5f * _covers[i].gameName.length() * (b->windowHeight() / 24.0f))) * 0.49f,
-                        b->windowWidth() * 0.36f
+                        b->windowHeight()/5 * 3.2f
                     },
                     static_cast<int>(b->windowHeight() / 24.0f),
                     2
