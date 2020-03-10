@@ -64,10 +64,23 @@ void Menu::drawHeader(IBuilder *b)
     );
 }
 
-void Menu::drawCarousel(IBuilder *b, int offset)
+void Menu::drawCarousel(IBuilder *b)
 {
+    if (b->isInBox(
+            {
+                0,
+                b->windowHeight()/5,
+                b->windowWidth(),
+                (b->windowWidth() * 0.3f)
+            }
+        )) {
+        _coversOffset -= b->getEvents().mouseEvents.scrollVelocity * 10;
+        if (_coversOffset > b->windowWidth() / 2 - (b->windowWidth() / 5))
+            _coversOffset = b->windowWidth() / 2 - (b->windowWidth() / 5);
+    }
+    
     for (size_t i = 0; i < 10; i++) {
-        float color = (((b->windowHeight() / 3 + 30) * i + offset + (b->windowHeight() / 3 + 30)) / b->windowWidth());
+        float color = (((b->windowHeight() / 3 + 30) * i + _coversOffset + (b->windowHeight() / 3 + 30)) / b->windowWidth());
         if (color < 0 || color > 1)
             continue;
         color -= 0.5f;
@@ -75,7 +88,7 @@ void Menu::drawCarousel(IBuilder *b, int offset)
         color = (color = (255 - (color * 2 * 255))) >= 26 ? color : 26;
         b->radiusRectDraw(
             {
-                (b->windowHeight() / 3 + 30) * i + offset + b->windowHeight() / 6,
+                (b->windowHeight() / 3 + 30) * i + _coversOffset + b->windowHeight() / 6,
                 b->windowHeight() / 5 + 70,
                 b->windowHeight() / 3,
                 b->windowHeight() / 3
@@ -92,7 +105,7 @@ void Menu::drawCarousel(IBuilder *b, int offset)
             b->spriteDraw(
                 {
                     {
-                        (b->windowHeight() / 3 + 30) * i + offset + b->windowHeight() / 6,
+                        (b->windowHeight() / 3 + 30) * i + _coversOffset + b->windowHeight() / 6,
                         b->windowHeight() / 5 + 70,
                         b->windowHeight() / 3,
                         b->windowHeight() / 3,
@@ -132,14 +145,12 @@ void Menu::start(IBuilder *b)
         b->loadAsset(file[i + 1], AssetType::SPRITE);
         _covers.push_back({file[i], file[i + 2], b->getLastAssetIdx()});
     }
+    _coversOffset = b->windowWidth() / 2 - (b->windowWidth() / 5);
 }
 
 void Menu::update(IBuilder *b)
 {
-    static float offset = 1000; // temp
-
     drawBackgrounds(b);
     drawHeader(b);
-    drawCarousel(b, offset);
-    offset -= 4; // temp
+    drawCarousel(b);
 }

@@ -9,6 +9,7 @@
 #define IBUILDER_HPP_
 
 #include <string>
+#include <iostream>
 
 #include "lib/include/DisplayLibrary.hpp"
 #include "core/include/ArcadeCore/Structs.hpp"
