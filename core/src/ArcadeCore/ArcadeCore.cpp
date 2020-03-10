@@ -10,7 +10,7 @@
 
 ArcadeCore::ArcadeCore()
 {
-    _coreState = CoreState::CORE_GAME;
+    _coreState = CoreState::CORE_MENU;
 }
 
 ArcadeCore::~ArcadeCore()

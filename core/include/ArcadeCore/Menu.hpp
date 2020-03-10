@@ -23,7 +23,7 @@ class Menu {
             int spriteIdx;
         };
 
-        void update(IBuilder *);
+        bool update(IBuilder *);
         void start(IBuilder *);
         void drawBackgrounds(IBuilder *);
         void drawHeader(IBuilder *);

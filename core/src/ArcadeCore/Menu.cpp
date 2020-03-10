@@ -164,7 +164,7 @@ void Menu::start(IBuilder *b)
     _coversOffset = b->windowWidth() / 2 - (b->windowWidth() / 5);
 }
 
-void Menu::update(IBuilder *b)
+bool Menu::update(IBuilder *b)
 {
     drawBackgrounds(b);
     drawHeader(b);
