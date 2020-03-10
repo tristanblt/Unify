@@ -54,10 +54,10 @@ void Menu::drawHeader(IBuilder *b)
     b->spriteDraw(
         {
             {
-                b->windowWidth() - 300,
-                b->windowHeight() / 16.0f,
-                100,
-                100
+                b->windowWidth() * (18.5f / 20.0f),
+                b->windowHeight() / 15.0f,
+                 b->windowWidth() / 38.0f,
+                 b->windowWidth() / 38.0f
             },
             3
         }
