@@ -31,12 +31,10 @@ void SFMLLibrary::updateMouseEvents(Events *e, Window *w)
 {
     e->mouseEvents.pos.x = sf::Mouse::getPosition(*w->getWindow()).x;
     e->mouseEvents.pos.y = sf::Mouse::getPosition(*w->getWindow()).y;
-    if (_event.type == sf::Event::MouseWheelMoved) {
-        std::cout << "IN WHEEL" << std::endl;
+    if (_event.type == sf::Event::MouseWheelMoved)
         e->mouseEvents.scrollVelocity = _event.mouseWheel.delta;
-    } else
+    else
         e->mouseEvents.scrollVelocity = 0;
-    std::cout <<  e->mouseEvents.scrollVelocity << std::endl;
     for (int i = 0; i < 3; i++) {
         if (sf::Mouse::isButtonPressed(static_cast<sf::Mouse::Button>(i)))
             e->mouseEvents.mouseStates[static_cast<MouseButton>(i)] = (e->mouseEvents.mouseStates[static_cast<MouseButton>(i)] != InputState::CLICK && e->mouseEvents.mouseStates[static_cast<MouseButton>(i)] != InputState::HOLD) ?
@@ -61,10 +59,12 @@ void SFMLLibrary::updateKeyboardEvents(Events *e)
 
 Events SFMLLibrary::updateEvents(Events *e)
 {
-    dynamic_cast<Window *>(_window)->getWindow()->pollEvent(_event);
+    sf::Event event;
+
+    dynamic_cast<Window *>(_window)->getWindow()->pollEvent(event);
+    _event = event;
     updateMouseEvents(e, dynamic_cast<Window *>(_window));
     updateKeyboardEvents(e);
-    while (dynamic_cast<Window *>(_window)->getWindow()->pollEvent(_event));
     return (*e);
 }
 
