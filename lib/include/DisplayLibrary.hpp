@@ -12,6 +12,7 @@
 #include "Graphical/IRectangle.hpp"
 #include "Graphical/ICircle.hpp"
 #include "Graphical/IText.hpp"
+#include "Graphical/ISprite.hpp"
 #include "core/include/ArcadeCore/Enums.hpp"
 #include <vector>
 #include <memory>
@@ -26,6 +27,7 @@ class DisplayLibrary {
         ICircle *_circle;
         IWindow *_window;
         IText *_text;
+        ISprite *_sprite;
 
         virtual void loadAsset(const std::string &, AssetType) = 0;
     protected:

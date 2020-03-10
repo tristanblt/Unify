@@ -12,6 +12,7 @@ SRCS_FILES=	Graphical/Rectangle.cpp					\
 			Graphical/Window.cpp					\
 			Graphical/Circle.cpp					\
 			Graphical/Text.cpp						\
+			Graphical/Sprite.cpp						\
 			SFMLLibrary.cpp							\
 			Entry.cpp								\
 

@@ -42,4 +42,10 @@ struct TextModel {
     int assetIdx;
 };
 
+struct SpriteModel {
+    Box b;
+    int assetIdx;
+};
+
+
 #endif /* !STRUCTS_HPP_ */

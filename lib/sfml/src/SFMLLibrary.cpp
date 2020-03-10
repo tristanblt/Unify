@@ -13,6 +13,7 @@ SFMLLibrary::SFMLLibrary()
     _window = new Window();
     _circle = new Circle();
     _text = new Text(&_assets);
+    _sprite = new Sprite(&_assets);
 }
 
 SFMLLibrary::~SFMLLibrary()
@@ -32,4 +33,10 @@ void SFMLLibrary::loadAsset(const std::string &name, AssetType type)
             throw std::invalid_argument("FONT NOT FOUND"); // TODO
         _assets.push_back((void *)f);
     }
+    else if (type == AssetType::SPRITE) {
+        sf::Texture *f = new sf::Texture();
+        if (!f->loadFromFile(name))
+            throw std::invalid_argument("SPRITE NOT FOUND"); // TODO
+        _assets.push_back((void *)f);
+    } 
 }
