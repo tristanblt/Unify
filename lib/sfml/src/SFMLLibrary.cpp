@@ -68,10 +68,10 @@ void SFMLLibrary::updateKeyboardEvents(Events *e)
 {
     for (int i = 0; i < 100; i++) {
         if (sf::Keyboard::isKeyPressed(static_cast<sf::Keyboard::Key>(i)))
-            e->keyboardState[_CoreKeys[i]] = (e->keyboardState[_CoreKeys[i]] != InputState::CLICK && e->keyboardState[_CoreKeys[i]] != InputState::HOLD) ?
+            e->keyboardState[static_cast<Key>(i)] = (e->keyboardState[static_cast<Key>(i)] != InputState::CLICK && e->keyboardState[static_cast<Key>(i)] != InputState::HOLD) ?
             InputState::CLICK : InputState::HOLD;
         else
-            e->keyboardState[_CoreKeys[i]] = (e->keyboardState[_CoreKeys[i]] != InputState::RELEASED && e->keyboardState[_CoreKeys[i]] != InputState::NONE) ?
+            e->keyboardState[static_cast<Key>(i)] = (e->keyboardState[static_cast<Key>(i)] != InputState::RELEASED && e->keyboardState[static_cast<Key>(i)] != InputState::NONE) ?
             InputState::RELEASED : InputState::NONE;
     }
 }
