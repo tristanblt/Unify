@@ -94,6 +94,11 @@ float Builder::toUnit(float value)
     return (_library->toUnit(value));
 }
 
+void Builder::updateEvents()
+{
+    _library->updateEvents(&_events);
+}
+
 void Builder::circleDraw(CircleModel circle, Color color)
 {
     _library->_circle->setPosition({circle.x, circle.y});

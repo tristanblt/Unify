@@ -32,6 +32,11 @@ void ArcadeCore::launchCore(DisplayLibrary *l)
         return;
     game->start(&b);
     while (b.windowIsOpen()) {
+        b.updateEvents();
+        // std::cout << b._events.mouseEvents.mouseStates[MouseButton::LEFT_CLICK] << std::endl;
+        // std::cout << "x:" << b._events.mouseEvents.pos.x << " y:" << b._events.mouseEvents.pos.y << std::endl;
+        // std::cout << "TAB:" << b._events.keyboardState[Key::TAB] << std::endl;
+        // std::cout << "A:" << b._events.keyboardState[Key::A] << std::endl;
         b.windowClear();
         if (isMenu)
             m.update(&b);

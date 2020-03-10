@@ -28,6 +28,7 @@ class DisplayLibrary {
         IText *_text;
 
         virtual void loadAsset(const std::string &, AssetType) = 0;
+        virtual Events updateEvents(Events *) = 0;
     protected:
         std::vector<void *> _assets;
     private:

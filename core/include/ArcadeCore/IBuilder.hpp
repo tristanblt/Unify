@@ -36,6 +36,8 @@ class IBuilder {
 
         virtual void loadAsset(const std::string &, AssetType) = 0;
 
+        virtual void updateEvents() = 0;
+
     protected:
     private:
 };
