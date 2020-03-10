@@ -55,6 +55,10 @@ struct Events {
     std::map<Key, InputState> keyboardState;
     bool close;
 };
+struct SpriteModel {
+    Box b;
+    int assetIdx;
+};
 
 
 #endif /* !STRUCTS_HPP_ */

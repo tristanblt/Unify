@@ -13,6 +13,7 @@
 #include "lib/sfml/include/Graphical/Rectangle.hpp"
 #include "lib/sfml/include/Graphical/Circle.hpp"
 #include "lib/sfml/include/Graphical/Text.hpp"
+#include "lib/sfml/include/Graphical/Sprite.hpp"
 #include "core/include/ArcadeCore/Enums.hpp"
 
 class SFMLLibrary : public DisplayLibrary {
@@ -24,6 +25,7 @@ class SFMLLibrary : public DisplayLibrary {
         void loadAsset(const std::string &, AssetType);
 
         Events updateEvents(Events *);
+        int getLastAssetIdx() const;
     protected:
     private:
         void updateMousseEvents(Events *);

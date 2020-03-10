@@ -25,7 +25,8 @@ class Builder: public IBuilder {
         void rectDraw(Box, Color);
         void circleDraw(CircleModel, Color);
         void radiusRectDraw(Box, float, Color);
-        void textDraw(TextModel text, Color color);
+        void textDraw(TextModel, Color);
+        void spriteDraw(SpriteModel);
 
         Color hexToColor(int) const;
 
@@ -38,6 +39,7 @@ class Builder: public IBuilder {
         void updateEvents();
 
         Events _events;
+        int getLastAssetIdx() const;
     protected:
     private:
         DisplayLibrary *_library;

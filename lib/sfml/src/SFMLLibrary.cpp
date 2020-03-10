@@ -15,7 +15,7 @@ SFMLLibrary::SFMLLibrary()
     _window = new Window();
     _circle = new Circle();
     _text = new Text(&_assets);
-
+    _sprite = new Sprite(&_assets);
 }
 
 SFMLLibrary::~SFMLLibrary()
@@ -41,10 +41,6 @@ void SFMLLibrary::updateMousseEvents(Events *e)
         e->mouseEvents.mouseStates[MouseButton::LEFT_CLICK] = InputState::HOLD;
     if (e->mouseEvents.mouseStates[MouseButton::MID_CLICK] == InputState::CLICK)
         e->mouseEvents.mouseStates[MouseButton::MID_CLICK] = InputState::HOLD;
-    if (_event.type == sf::Event::MouseMoved) {
-        e->mouseEvents.pos.x = _event.mouseMove.x;
-        e->mouseEvents.pos.y = _event.mouseMove.y;
-    }
     if (_event.type == sf::Event::MouseWheelMoved)
         e->mouseEvents.scrollVelocity = _event.mouseWheel.delta;
     if (_event.type == sf::Event::MouseButtonPressed) {
@@ -61,6 +57,10 @@ void SFMLLibrary::updateMousseEvents(Events *e)
             e->mouseEvents.mouseStates[MouseButton::LEFT_CLICK] = InputState::RELEASED;
         if (_event.mouseButton.button == sf::Mouse::Middle)
             e->mouseEvents.mouseStates[MouseButton::MID_CLICK] = InputState::RELEASED;
+    }
+    if (_event.type == sf::Event::MouseMoved) {
+        e->mouseEvents.pos.x = _event.mouseMove.x;
+        e->mouseEvents.pos.y = _event.mouseMove.y;
     }
 }
 
@@ -92,4 +92,15 @@ void SFMLLibrary::loadAsset(const std::string &name, AssetType type)
             throw std::invalid_argument("FONT NOT FOUND"); // TODO
         _assets.push_back((void *)f);
     }
+    else if (type == AssetType::SPRITE) {
+        sf::Texture *f = new sf::Texture();
+        if (!f->loadFromFile(name))
+            throw std::invalid_argument("SPRITE NOT FOUND"); // TODO
+        _assets.push_back((void *)f);
+    } 
+}
+
+int SFMLLibrary::getLastAssetIdx() const
+{
+    return (_assets.size() - 1);
 }

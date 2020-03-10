@@ -27,7 +27,8 @@ class IBuilder {
         virtual void rectDraw(Box, Color) = 0;
         virtual void circleDraw(CircleModel, Color) = 0;
         virtual void radiusRectDraw(Box, float, Color) = 0;
-        virtual void textDraw(TextModel text, Color color) = 0;
+        virtual void textDraw(TextModel, Color) = 0;
+        virtual void spriteDraw(SpriteModel) = 0;
 
         virtual Color hexToColor(int) const = 0;
         virtual float toUnit(float) = 0;
@@ -38,6 +39,7 @@ class IBuilder {
 
         virtual void updateEvents() = 0;
 
+        virtual int getLastAssetIdx() const = 0;
     protected:
     private:
 };

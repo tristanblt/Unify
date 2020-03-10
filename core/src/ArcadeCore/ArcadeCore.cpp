@@ -10,40 +10,45 @@
 
 ArcadeCore::ArcadeCore()
 {
+    _coreState = CoreState::MENU;
 }
 
 ArcadeCore::~ArcadeCore()
 {
 }
 
-void ArcadeCore::launchCore(DisplayLibrary *l)
+void ArcadeCore::loadCoreAssets(Builder &builder)
+{
+    builder.loadAsset("assets/fonts/Montserrat-Light.otf", AssetType::FONT);
+    builder.loadAsset("assets/fonts/Montserrat-Regular.otf", AssetType::FONT);
+    builder.loadAsset("assets/fonts/Montserrat-Bold.otf", AssetType::FONT);
+    builder.loadAsset("assets/imgs/gear.png", AssetType::SPRITE);
+}
+
+void ArcadeCore::launchCore(DisplayLibrary *library)
 {
     DLLoader<Start> loader("games/lib_arcade_pacman.so");
     Start *game = loader.getInstance();
-    Layout layout;
-    Builder b(l);
-    Menu m;
-    bool isMenu = false;
+    Builder builder(library);
 
-    b.loadAsset("assets/fonts/Montserrat-Light.otf", AssetType::FONT);
-    b.loadAsset("assets/fonts/Montserrat-Regular.otf", AssetType::FONT);
-    b.loadAsset("assets/fonts/Montserrat-Bold.otf", AssetType::FONT);
     if (!game)
         return;
-    game->start(&b);
-    while (b.windowIsOpen()) {
-        b.updateEvents();
-        // std::cout << b._events.mouseEvents.mouseStates[MouseButton::LEFT_CLICK] << std::endl;
-        // std::cout << "x:" << b._events.mouseEvents.pos.x << " y:" << b._events.mouseEvents.pos.y << std::endl;
-        // std::cout << "TAB:" << b._events.keyboardState[Key::TAB] << std::endl;
-        // std::cout << "A:" << b._events.keyboardState[Key::A] << std::endl;
-        b.windowClear();
-        if (isMenu)
-            m.update(&b);
+    loadCoreAssets(builder);
+    game->start(&builder);
+    _menu.start(&builder);
+    while (builder.windowIsOpen()) {
+        builder.updateEvents();
+        std::cout << "leftClick: " << builder._events.mouseEvents.mouseStates[MouseButton::LEFT_CLICK] << std::endl;
+        std::cout << "x:" << builder._events.mouseEvents.pos.x << " y:" << builder._events.mouseEvents.pos.y << std::endl;
+        std::cout << "TAB:" << builder._events.keyboardState[Key::TAB] << std::endl;
+        std::cout << "A:" << builder._events.keyboardState[Key::A] << std::endl;
+        builder.windowClear();
+        if (_coreState == CoreState::MENU)
+            _menu.update(&builder);
         else {
-            game->update(&b);
-            layout.update(&b);
+            game->update(&builder);
+            _layout.update(&builder);
         }
-        b.windowDisplay();
+        builder.windowDisplay();
     }
 }
