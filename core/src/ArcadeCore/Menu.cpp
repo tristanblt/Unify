@@ -119,7 +119,7 @@ void Menu::drawCarousel(IBuilder *b)
                 }
             );
         }
-        if (color > 200 && i < _covers.size())
+        if (color > 200 && i < _covers.size()) {
             b->textDraw(
                 {
                     _covers[i].gameName,
@@ -132,6 +132,16 @@ void Menu::drawCarousel(IBuilder *b)
                 },
                 b->hexToColor(0xFFFFFFFF)
             );
+            if (b->isInBox(
+                    {
+                        (b->windowHeight() / 3 + 30) * i + _coversOffset + b->windowHeight() / 6,
+                        b->windowHeight() / 5 + 70,
+                        b->windowHeight() / 3,
+                        b->windowHeight() / 3,
+                    }
+                ) && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
+                std::cout << "launch: " << _covers[i].libPath << std::endl;
+        }
     }
 }
 
