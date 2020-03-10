@@ -30,6 +30,7 @@ class DisplayLibrary {
         ISprite *_sprite;
 
         virtual void loadAsset(const std::string &, AssetType) = 0;
+        virtual int getLastAssetIdx() const = 0;
     protected:
         std::vector<void *> _assets;
     private:

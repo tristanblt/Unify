@@ -107,6 +107,11 @@ void Builder::loadAsset(const std::string &name, AssetType type)
     _library->loadAsset(name, type);
 }
 
+int Builder::getLastAssetIdx() const
+{
+    return (_library->getLastAssetIdx());
+}
+
 bool Builder::isInBox(Box box)
 {
     return (false);

@@ -15,12 +15,8 @@ Menu::~Menu()
 {
 }
 
-#include <iostream>
-void Menu::update(IBuilder *b)
+void Menu::drawBackgrounds(IBuilder *b)
 {
-    static float offset = 0;
-    float a = 100;
-
     b->rectDraw(
         {
             0,
@@ -30,6 +26,19 @@ void Menu::update(IBuilder *b)
         },
         b->hexToColor(0x212121FF)
     );
+    b->rectDraw(
+        {
+            0,
+            b->windowHeight()/5,
+            b->windowWidth(),
+            (b->windowWidth() * 0.3f)
+        },
+        b->hexToColor(0x1A1A1AFF)
+    );
+}
+
+void Menu::drawHeader(IBuilder *b)
+{
     b->textDraw(
         {
             "Unify",
@@ -42,15 +51,6 @@ void Menu::update(IBuilder *b)
         },
         b->hexToColor(0xFFFFFFFF)
     );
-    b->rectDraw(
-        {
-            0,
-            b->windowHeight()/5,
-            b->windowWidth(),
-            (b->windowWidth() * 0.3f)
-        },
-        b->hexToColor(0x1A1A1AFF)
-    );
     b->spriteDraw(
         {
             {
@@ -62,7 +62,11 @@ void Menu::update(IBuilder *b)
             3
         }
     );
-    for (int i = 0; i < 20; i++) {
+}
+
+void Menu::drawCarousel(IBuilder *b, int offset)
+{
+    for (size_t i = 0; i < 10; i++) {
         float color = (((b->windowHeight() / 3 + 30) * i + offset + (b->windowHeight() / 3 + 30)) / b->windowWidth());
         if (color < 0 || color > 1)
             continue;
@@ -72,7 +76,9 @@ void Menu::update(IBuilder *b)
         b->radiusRectDraw(
             {
                 (b->windowHeight() / 3 + 30) * i + offset + b->windowHeight() / 6,
-                b->windowHeight() / 5 + 70, b->windowHeight() / 3, b->windowHeight() / 3
+                b->windowHeight() / 5 + 70,
+                b->windowHeight() / 3,
+                b->windowHeight() / 3
             },
             50,
             {
@@ -82,10 +88,22 @@ void Menu::update(IBuilder *b)
                 255
             }
         );
-        if (color > 200)
+        if (i < _covers.size())
+            b->spriteDraw(
+                {
+                    {
+                        (b->windowHeight() / 3 + 30) * i + offset + b->windowHeight() / 6,
+                        b->windowHeight() / 5 + 70,
+                        b->windowHeight() / 3,
+                        b->windowHeight() / 3,
+                    },
+                    _covers[i].spriteIdx
+                }
+            );
+        if (color > 200 && i < _covers.size())
             b->textDraw(
                 {
-                    std::to_string(i),
+                    _covers[i].gameName,
                     {
                         b->windowWidth() / 2 - 10,
                         b->windowWidth() * 0.3f + b->windowHeight()/5 - 180
@@ -96,5 +114,32 @@ void Menu::update(IBuilder *b)
                 b->hexToColor(0xFFFFFFFF)
             );
     }
-    offset -= 10;
+}
+
+void Menu::start(IBuilder *b)
+{
+    std::ifstream f("assets/files/games.config");
+    std::string buffer;
+    std::vector<std::string> file;
+
+    if (!f)
+        throw std::invalid_argument("Could not open file games.config");
+    while (std::getline(f, buffer))
+        if(buffer.size() > 0)
+            file.push_back(buffer);
+    f.close();
+    for (size_t i = 0; i < file.size() / 3 * 3; i += 3) {
+        b->loadAsset(file[i + 1], AssetType::SPRITE);
+        _covers.push_back({file[i], file[i + 2], b->getLastAssetIdx()});
+    }
+}
+
+void Menu::update(IBuilder *b)
+{
+    static float offset = 1000; // temp
+
+    drawBackgrounds(b);
+    drawHeader(b);
+    drawCarousel(b, offset);
+    offset -= 4; // temp
 }

@@ -40,3 +40,8 @@ void SFMLLibrary::loadAsset(const std::string &name, AssetType type)
         _assets.push_back((void *)f);
     } 
 }
+
+int SFMLLibrary::getLastAssetIdx() const
+{
+    return (_assets.size() - 1);
+}

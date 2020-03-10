@@ -18,12 +18,22 @@
 
 class ArcadeCore {
     public:
+        enum CoreState {
+            MENU,
+            GAME,
+            PAUSE
+        };
+
         ArcadeCore();
         ~ArcadeCore();
 
         void launchCore(DisplayLibrary *);
+        void loadCoreAssets(Builder &b);
     protected:
     private:
+        CoreState _coreState;
+        Menu _menu;
+        Layout _layout;
 };
 
 #endif /* !ArcadeCore_HPP_ */

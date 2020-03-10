@@ -23,6 +23,7 @@ class SFMLLibrary : public DisplayLibrary {
 
         float toUnit(float);
         void loadAsset(const std::string &, AssetType);
+        int getLastAssetIdx() const;
     protected:
     private:
 

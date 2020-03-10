@@ -31,7 +31,7 @@ void Sprite::setPosition(Vector2 position)
 
 void Sprite::setSize(Vector2 position)
 {
-    //_sprite->setScale(sf::Vector2f());
+    _sprite->setTextureRect(sf::IntRect(0, 0, position.x, position.y));
 }
 
 void Sprite::setSprite(int idx)

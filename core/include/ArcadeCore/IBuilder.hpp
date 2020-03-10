@@ -36,7 +36,7 @@ class IBuilder {
         virtual bool isInBox(Box) = 0;
 
         virtual void loadAsset(const std::string &, AssetType) = 0;
-
+        virtual int getLastAssetIdx() const = 0;
     protected:
     private:
 };

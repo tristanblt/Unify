@@ -35,6 +35,7 @@ class Builder: public IBuilder {
         bool isInBox(Box);
 
         void loadAsset(const std::string &, AssetType);
+        int getLastAssetIdx() const;
     protected:
     private:
         DisplayLibrary *_library;
