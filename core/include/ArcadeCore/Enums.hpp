@@ -15,8 +15,8 @@ enum AssetType {
 };
 
 enum MouseButton {
-    RIGHT_CLICK,
     LEFT_CLICK,
+    RIGHT_CLICK,
     MID_CLICK
 };
 

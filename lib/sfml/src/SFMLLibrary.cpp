@@ -27,36 +27,19 @@ float SFMLLibrary::toUnit(float value)
     return (value);
 }
 
-void SFMLLibrary::updateMousseEvents(Events *e)
+void SFMLLibrary::updateMouseEvents(Events *e, Window *w)
 {
-    if (e->mouseEvents.mouseStates[MouseButton::RIGHT_CLICK] == InputState::RELEASED)
-        e->mouseEvents.mouseStates[MouseButton::RIGHT_CLICK] = InputState::NONE;
-    if (e->mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
-        e->mouseEvents.mouseStates[MouseButton::LEFT_CLICK] = InputState::NONE;
-    if (e->mouseEvents.mouseStates[MouseButton::MID_CLICK] == InputState::RELEASED)
-        e->mouseEvents.mouseStates[MouseButton::MID_CLICK] = InputState::NONE;
-    if (e->mouseEvents.mouseStates[MouseButton::RIGHT_CLICK] == InputState::CLICK)
-        e->mouseEvents.mouseStates[MouseButton::RIGHT_CLICK] = InputState::HOLD;
-    if (e->mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::CLICK)
-        e->mouseEvents.mouseStates[MouseButton::LEFT_CLICK] = InputState::HOLD;
-    if (e->mouseEvents.mouseStates[MouseButton::MID_CLICK] == InputState::CLICK)
-        e->mouseEvents.mouseStates[MouseButton::MID_CLICK] = InputState::HOLD;
+    e->mouseEvents.pos.x = sf::Mouse::getPosition(*w->getWindow()).x;
+    e->mouseEvents.pos.y = sf::Mouse::getPosition(*w->getWindow()).y;
     if (_event.type == sf::Event::MouseWheelMoved)
         e->mouseEvents.scrollVelocity = _event.mouseWheel.delta;
-    if (_event.type == sf::Event::MouseButtonPressed) {
-        if (_event.mouseButton.button == sf::Mouse::Right)
-            e->mouseEvents.mouseStates[MouseButton::RIGHT_CLICK] = InputState::CLICK;
-        if (_event.mouseButton.button == sf::Mouse::Left)
-            e->mouseEvents.mouseStates[MouseButton::LEFT_CLICK] = InputState::CLICK;
-        if (_event.mouseButton.button == sf::Mouse::Middle)
-        e->mouseEvents.mouseStates[MouseButton::MID_CLICK] = InputState::CLICK;
-    } else if (_event.type == sf::Event::MouseButtonReleased) {
-        if (_event.mouseButton.button == sf::Mouse::Right)
-            e->mouseEvents.mouseStates[MouseButton::RIGHT_CLICK] = InputState::RELEASED;
-        if (_event.mouseButton.button == sf::Mouse::Left)
-            e->mouseEvents.mouseStates[MouseButton::LEFT_CLICK] = InputState::RELEASED;
-        if (_event.mouseButton.button == sf::Mouse::Middle)
-            e->mouseEvents.mouseStates[MouseButton::MID_CLICK] = InputState::RELEASED;
+    for (int i = 0; i < 3; i++) {
+        if (sf::Mouse::isButtonPressed(static_cast<sf::Mouse::Button>(i)))
+            e->mouseEvents.mouseStates[static_cast<MouseButton>(i)] = (e->mouseEvents.mouseStates[static_cast<MouseButton>(i)] != InputState::CLICK && e->mouseEvents.mouseStates[static_cast<MouseButton>(i)] != InputState::HOLD) ?
+            InputState::CLICK : InputState::HOLD;
+        else
+            e->mouseEvents.mouseStates[static_cast<MouseButton>(i)] = (e->mouseEvents.mouseStates[static_cast<MouseButton>(i)] != InputState::RELEASED && e->mouseEvents.mouseStates[static_cast<MouseButton>(i)] != InputState::NONE) ?
+            InputState::RELEASED : InputState::NONE;
     }
     if (_event.type == sf::Event::MouseMoved) {
         e->mouseEvents.pos.x = _event.mouseMove.x;
@@ -79,7 +62,7 @@ void SFMLLibrary::updateKeyboardEvents(Events *e)
 Events SFMLLibrary::updateEvents(Events *e)
 {
     dynamic_cast<Window *>(_window)->getWindow()->pollEvent(_event);
-    updateMousseEvents(e);
+    updateMouseEvents(e, dynamic_cast<Window *>(_window));
     updateKeyboardEvents(e);
     return (*e);
 }
@@ -97,7 +80,7 @@ void SFMLLibrary::loadAsset(const std::string &name, AssetType type)
         if (!f->loadFromFile(name))
             throw std::invalid_argument("SPRITE NOT FOUND"); // TODO
         _assets.push_back((void *)f);
-    } 
+    }
 }
 
 int SFMLLibrary::getLastAssetIdx() const
