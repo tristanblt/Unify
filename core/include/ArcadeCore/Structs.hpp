@@ -58,6 +58,7 @@ struct Events {
 struct SpriteModel {
     Box b;
     int assetIdx;
+    unsigned char opacity;
 };
 
 
