@@ -23,7 +23,7 @@ void ArcadeCore::launchCore(DisplayLibrary *library)
     Layout layout;
     Builder b(library);
     Menu m;
-    bool isMenu = true;
+    bool isMenu = false;
 
     b.loadAsset("assets/fonts/Montserrat-Light.otf", AssetType::FONT);
     b.loadAsset("assets/fonts/Montserrat-Regular.otf", AssetType::FONT);
