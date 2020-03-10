@@ -59,7 +59,8 @@ void Menu::drawHeader(IBuilder *b)
                  b->windowWidth() / 38.0f,
                  b->windowWidth() / 38.0f
             },
-            3
+            3,
+            255
         }
     );
 }
@@ -85,23 +86,8 @@ void Menu::drawCarousel(IBuilder *b)
             continue;
         color -= 0.5f;
         color = color < 0 ? color * -1 : color;
-        color = (color = (255 - (color * 2 * 255))) >= 26 ? color : 26;
-        b->radiusRectDraw(
-            {
-                (b->windowHeight() / 3 + 30) * i + _coversOffset + b->windowHeight() / 6,
-                b->windowHeight() / 5 + 70,
-                b->windowHeight() / 3,
-                b->windowHeight() / 3
-            },
-            50,
-            {
-                static_cast<unsigned char>(color),
-                static_cast<unsigned char>(color),
-                static_cast<unsigned char>(color),
-                255
-            }
-        );
-        if (i < _covers.size())
+        if (i < _covers.size()) {
+            color = (255 - (color * 2 * 255));
             b->spriteDraw(
                 {
                     {
@@ -110,9 +96,29 @@ void Menu::drawCarousel(IBuilder *b)
                         b->windowHeight() / 3,
                         b->windowHeight() / 3,
                     },
-                    _covers[i].spriteIdx
+                    _covers[i].spriteIdx,
+                    static_cast<unsigned char>(color)
                 }
             );
+        }
+        else {
+            color = (color = (255 - (color * 2 * 255))) >= 26 ? color : 26;
+            b->radiusRectDraw(
+                {
+                    (b->windowHeight() / 3 + 30) * i + _coversOffset + b->windowHeight() / 6,
+                    b->windowHeight() / 5 + 70,
+                    b->windowHeight() / 3,
+                    b->windowHeight() / 3
+                },
+                50,
+                {
+                    static_cast<unsigned char>(color),
+                    static_cast<unsigned char>(color),
+                    static_cast<unsigned char>(color),
+                    255
+                }
+            );
+        }
         if (color > 200 && i < _covers.size())
             b->textDraw(
                 {

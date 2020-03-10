@@ -18,7 +18,8 @@ class ISprite {
         virtual void draw(IWindow *w) = 0;
         virtual void setPosition(Vector2) = 0;
         virtual void setSize(Vector2) = 0;
-        virtual void setSprite(int idx) = 0;
+        virtual void setSprite(int) = 0;
+        virtual void setOpacity(unsigned char) = 0;
     protected:
     private:
 };

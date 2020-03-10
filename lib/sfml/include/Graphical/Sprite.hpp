@@ -20,10 +20,11 @@ class Sprite : public ISprite {
         Sprite(std::vector<void *> *);
         ~Sprite();
 
-        void draw(IWindow *w);
+        void draw(IWindow *);
         void setPosition(Vector2);
         void setSize(Vector2);
-        void setSprite(int idx);
+        void setSprite(int);
+        void setOpacity(unsigned char);
     protected:
     private:
         sf::Sprite *_sprite;

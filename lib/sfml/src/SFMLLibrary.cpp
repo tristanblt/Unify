@@ -31,7 +31,7 @@ void SFMLLibrary::updateMouseEvents(Events *e, Window *w)
 {
     e->mouseEvents.pos.x = sf::Mouse::getPosition(*w->getWindow()).x;
     e->mouseEvents.pos.y = sf::Mouse::getPosition(*w->getWindow()).y;
-    if (_event.type == sf::Event::MouseWheelMoved)
+    if (_event.type == sf::Event::MouseWheelMoved) {
         e->mouseEvents.scrollVelocity = _event.mouseWheel.delta;
     else
         e->mouseEvents.scrollVelocity = 0;

@@ -146,8 +146,9 @@ void Builder::textDraw(TextModel text, Color color)
 void Builder::spriteDraw(SpriteModel sprite)
 {
     _library->_sprite->setPosition({sprite.b.x, sprite.b.y});
-    _library->_sprite->setSize({sprite.b.w, sprite.b.h});
     _library->_sprite->setSprite(sprite.assetIdx);
+    _library->_sprite->setOpacity(sprite.opacity);
+    _library->_sprite->setSize({sprite.b.w, sprite.b.h});
     _library->_sprite->draw(_library->_window);
 }
 
