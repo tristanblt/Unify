@@ -9,6 +9,11 @@
 
 Window::Window()
 {
+
+}
+
+void Window::create()
+{
     sf::VideoMode m = sf::VideoMode::getFullscreenModes()[0];
     _window = new sf::RenderWindow(sf::VideoMode(m.width, m.height), "test", sf::Style::Fullscreen | sf::Style::Close);
     _window->setFramerateLimit(60);
@@ -47,6 +52,11 @@ void Window::clear()
 void Window::display()
 {
     _window->display();
+}
+
+void Window::close()
+{
+    _window->close();
 }
 
 sf::RenderWindow *Window::getWindow() const

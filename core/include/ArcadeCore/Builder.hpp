@@ -18,6 +18,8 @@ class Builder: public IBuilder {
         void reloadLibrary(DisplayLibrary *);
         bool windowIsOpen();
         void windowClear();
+        void windowClose();
+        void windowCreate();
         void windowDisplay();
         float windowHeight();
         float windowWidth();

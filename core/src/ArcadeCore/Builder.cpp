@@ -10,6 +10,7 @@
 Builder::Builder(DisplayLibrary *library):
 _library(library)
 {
+    windowCreate();
     _events.mouseEvents.scrollVelocity = 0;
 }
 
@@ -19,7 +20,9 @@ Builder::~Builder()
 
 void Builder::reloadLibrary(DisplayLibrary *newLibrary)
 {
+    windowClose();
     _library = newLibrary;
+    windowCreate();
 }
 
 
@@ -36,6 +39,16 @@ void Builder::windowClear()
 void Builder::windowDisplay()
 {
     _library->_window->display();
+}
+
+void Builder::windowClose()
+{
+    _library->_window->close();
+}
+
+void Builder::windowCreate()
+{
+    _library->_window->create();
 }
 
 float Builder::windowHeight()

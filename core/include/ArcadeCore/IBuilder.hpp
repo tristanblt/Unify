@@ -21,6 +21,8 @@ class IBuilder {
         virtual void reloadLibrary(DisplayLibrary *) = 0;
         virtual bool windowIsOpen() = 0;
         virtual void windowClear() = 0;
+        virtual void windowClose() = 0;
+        virtual void windowCreate() = 0;
         virtual void windowDisplay() = 0;
         virtual float windowHeight() = 0;
         virtual float windowWidth() = 0;

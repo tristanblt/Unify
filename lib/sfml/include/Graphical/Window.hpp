@@ -21,6 +21,8 @@ class Window : public IWindow {
         float width();
         void clear();
         void display();
+        void close();
+        void create();
         
         sf::RenderWindow *getWindow() const;
     protected:

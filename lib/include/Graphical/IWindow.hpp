@@ -17,6 +17,8 @@ class IWindow {
         virtual float width() = 0;
         virtual void clear() = 0;
         virtual void display() = 0;
+        virtual void close() = 0;
+        virtual void create() = 0;
     protected:
     private:
 };
