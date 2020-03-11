@@ -5,10 +5,10 @@
 ** Entry
 */
 
-#include "games/pacman/include/StartPacman.hpp"
+#include "games/nibbler/include/StartNibbler.hpp"
 
 extern "C" Start *entryPoint()
 {
-    return (new StartPacman());
+    return (new StartNibbler());
 }
 

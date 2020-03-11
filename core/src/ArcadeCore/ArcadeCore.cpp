@@ -27,20 +27,22 @@ void ArcadeCore::loadCoreAssets(Builder &builder)
 
 void ArcadeCore::launchCore(DisplayLibrary *library)
 {
-    DLLoader<Start> loader("games/lib_arcade_pacman.so");
-    Start *game = loader.getInstance();
+    Start *game = NULL;
+    DLLoader<Start> *gameLib;
     Builder builder(library);
 
-    if (!game)
-        return;
     loadCoreAssets(builder);
-    game->start(&builder);
     _menu.start(&builder);
     while (builder.windowIsOpen()) {
         builder.updateEvents();
         builder.windowClear();
-        if (_coreState == CoreState::CORE_MENU)
-            _menu.update(&builder);
+        if (_coreState == CoreState::CORE_MENU) {
+            if ((gameLib = _menu.update(&builder)) != NULL) {
+                game = gameLib->getInstance();
+                game->start(&builder);
+                _coreState = CoreState::CORE_GAME;
+            }
+        }
         else {
             if (_coreState != CoreState::CORE_PAUSE)
                 game->update(&builder);

@@ -9,6 +9,8 @@
 #define MENU_HPP_
 
 #include "core/include/ArcadeCore/IBuilder.hpp"
+#include "games/include/Start.hpp"
+#include "core/include/DLLoader.hpp"
 #include <vector>
 #include <fstream>
 
@@ -19,11 +21,11 @@ class Menu {
 
         struct GameCover {
             std::string gameName;
-            std::string libPath;
+            DLLoader<Start> *gameLib;
             int spriteIdx;
         };
 
-        bool update(IBuilder *);
+        DLLoader<Start> *update(IBuilder *);
         void start(IBuilder *);
         void drawBackgrounds(IBuilder *);
         void drawHeader(IBuilder *);
@@ -31,6 +33,7 @@ class Menu {
     protected:
     private:
         std::vector<GameCover> _covers;
+        DLLoader<Start> *_currentGame;
         float _coversOffset;
 };
 

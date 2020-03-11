@@ -82,7 +82,7 @@ void Builder::radiusRectDraw(Box box, float radius, Color color)
 bool Builder::buttonDraw(Box box, float radius, Color color, std::string text, int fontIdx)
 {
     radiusRectDraw(box, radius, color);
-    textDraw({text, {(box.x + box.w  - (text.size() * box.h ) / 2.95f), box.y + box.h / 6.0f}, box.h / 2, fontIdx}, hexToColor(0xFFFFFFFF));
+    textDraw({text, {(box.x + box.w  - (text.size() * box.h ) / 2.95f), box.y + box.h / 6.0f}, static_cast<int>(box.h / 2), fontIdx}, hexToColor(0xFFFFFFFF));
     return (isInBox(box));
 }
 

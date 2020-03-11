@@ -5,6 +5,9 @@
 ** DLLoader template class
 */
 
+#ifndef DLLOADER_HPP_
+#define DLLOADER_HPP_
+
 #include <dlfcn.h>
 #include <string>
 #include <iostream>
@@ -23,3 +26,4 @@ class DLLoader {
         void *_handler;
 };
 
+#endif

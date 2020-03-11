@@ -2,18 +2,18 @@
 ** EPITECH PROJECT, 2020
 ** OOP_arcade_2019
 ** File description:
-** StartPacman
+** StartNibbler
 */
 
-#ifndef StartPacman_HPP_
-#define StartPacman_HPP_
+#ifndef StartNibbler_HPP_
+#define StartNibbler_HPP_
 
 #include "games/include/Start.hpp"
 
-class StartPacman : public Start {
+class StartNibbler : public Start {
     public:
-        StartPacman();
-        ~StartPacman();
+        StartNibbler();
+        ~StartNibbler();
 
         void start(IBuilder *b);
         void update(IBuilder *b);
@@ -22,4 +22,4 @@ class StartPacman : public Start {
 
 };
 
-#endif /* !StartPacman_HPP_ */
+#endif /* !StartNibbler_HPP_ */

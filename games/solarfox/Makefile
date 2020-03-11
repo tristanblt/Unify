@@ -5,11 +5,11 @@
 ## Makefile
 ##
 
-NAME	=	../lib_arcade_pacman.so
+NAME	=	../lib_arcade_solarfox.so
 
 SRCPATH	=	src/
 SRCS_FILES=	Entry.cpp							\
-			StartPacman.cpp							\
+			StartSolarfox.cpp					\
 
 SRC	=	$(addprefix $(SRCPATH), $(SRCS_FILES))
 

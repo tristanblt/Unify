@@ -9,6 +9,7 @@
 
 Menu::Menu()
 {
+    _currentGame = NULL;
 }
 
 Menu::~Menu()
@@ -79,7 +80,6 @@ void Menu::drawCarousel(IBuilder *b)
         if (_coversOffset > b->windowWidth() / 2 - (b->windowWidth() / 5))
             _coversOffset = b->windowWidth() / 2 - (b->windowWidth() / 5);
     }
-    
     for (size_t i = 0; i < 10; i++) {
         float color = (((b->windowHeight() / 3 + 30) * i + _coversOffset + (b->windowHeight() / 3 + 30)) / b->windowWidth());
         if (color < 0 || color > 1)
@@ -125,7 +125,7 @@ void Menu::drawCarousel(IBuilder *b)
                     _covers[i].gameName,
                     {
                         (b->windowWidth() - (0.5f * _covers[i].gameName.length() * (b->windowHeight() / 24.0f))) * 0.49f,
-                        b->windowHeight()/5 * 3.2f
+                        b->windowHeight()/5 * 3.12f
                     },
                     static_cast<int>(b->windowHeight() / 24.0f),
                     2
@@ -133,14 +133,14 @@ void Menu::drawCarousel(IBuilder *b)
                 b->hexToColor(0xFFFFFFFF)
             );
             if (b->isInBox(
-                    {
-                        (b->windowHeight() / 3 + 30) * i + _coversOffset + b->windowHeight() / 6,
-                        b->windowHeight() / 5 + 70,
-                        b->windowHeight() / 3,
-                        b->windowHeight() / 3,
-                    }
-                ) && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
-                std::cout << "launch: " << _covers[i].libPath << std::endl;
+                {
+                    (b->windowHeight() / 3 + 30) * i + _coversOffset + b->windowHeight() / 6,
+                    b->windowHeight() / 5 + 70,
+                    b->windowHeight() / 3,
+                    b->windowHeight() / 3,
+                }
+            ) && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
+                _currentGame = _covers[i].gameLib;
         }
     }
 }
@@ -159,14 +159,19 @@ void Menu::start(IBuilder *b)
     f.close();
     for (size_t i = 0; i < file.size() / 3 * 3; i += 3) {
         b->loadAsset(file[i + 1], AssetType::SPRITE);
-        _covers.push_back({file[i], file[i + 2], b->getLastAssetIdx()});
+        DLLoader<Start> *loader = new DLLoader<Start>(file[i + 2].c_str());
+        _covers.push_back({file[i], loader, b->getLastAssetIdx()});
     }
     _coversOffset = b->windowWidth() / 2 - (b->windowWidth() / 5);
 }
 
-bool Menu::update(IBuilder *b)
+DLLoader<Start> *Menu::update(IBuilder *b)
 {
+    DLLoader<Start> *tmp = _currentGame;
+
+    _currentGame = NULL;
     drawBackgrounds(b);
     drawHeader(b);
     drawCarousel(b);
+    return (tmp);
 }

@@ -6,13 +6,17 @@
 ##
 
 all:
-	make -C pacman/
+	make -C solarfox/
+	make -C nibbler/
 
 re:
-	make re -C pacman/
+	make re -C solarfox/
+	make re -C nibbler/
 
 clean:
-	make clean -C pacman/
+	make clean -C solarfox/
+	make clean -C nibbler/
 
 fclean:
-	make fclean -C pacman/
+	make fclean -C solarfox/
+	make fclean -C nibbler/

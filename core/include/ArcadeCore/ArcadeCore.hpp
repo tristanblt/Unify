@@ -25,6 +25,7 @@ class ArcadeCore {
 
         void launchCore(DisplayLibrary *);
         void loadCoreAssets(Builder &b);
+        Start *changeGame(std::string);
     protected:
     private:
         CoreState _coreState;
