@@ -25,6 +25,12 @@ void ArcadeCore::loadCoreAssets(Builder &builder)
     builder.loadAsset("assets/imgs/gear.png", AssetType::SPRITE);
 }
 
+void ArcadeCore::switchGraphicalLibrary(IBuilder *b)
+{
+    if (b->getEvents().keyboardState[Key::N] == InputState::CLICK)
+        std::cout << "dlkcjdslkj" << std::endl;
+}
+
 void ArcadeCore::launchCore(DisplayLibrary *library)
 {
     Start *game = NULL;
@@ -34,6 +40,7 @@ void ArcadeCore::launchCore(DisplayLibrary *library)
     loadCoreAssets(builder);
     _menu.start(&builder);
     while (builder.windowIsOpen()) {
+        switchGraphicalLibrary(&builder);
         builder.updateEvents();
         builder.windowClear();
         if (_coreState == CoreState::CORE_MENU) {
@@ -46,7 +53,7 @@ void ArcadeCore::launchCore(DisplayLibrary *library)
         else {
             if (_coreState != CoreState::CORE_PAUSE)
                 game->update(&builder);
-            _layout.update(&builder, _coreState);
+            _layout.update(&builder, _coreState, game->getName());
         }
         builder.windowDisplay();
     }

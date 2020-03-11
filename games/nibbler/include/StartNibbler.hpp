@@ -17,6 +17,7 @@ class StartNibbler : public Start {
 
         void start(IBuilder *b);
         void update(IBuilder *b);
+        std::string getName() const;
     protected:
     private:
 

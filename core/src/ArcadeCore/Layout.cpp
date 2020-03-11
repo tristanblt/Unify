@@ -15,7 +15,7 @@ Layout::~Layout()
 {
 }
 
-void Layout::update(IBuilder *b, CoreState &coreState)
+void Layout::update(IBuilder *b, CoreState &coreState, const std::string &name)
 {
     b->rectDraw(
         {
@@ -40,7 +40,7 @@ void Layout::update(IBuilder *b, CoreState &coreState)
     );
     b->textDraw(
         {
-            /**/"Pac-Man"/**/,
+            name,
             {
                 (b->windowWidth() - (0.5f * /**/8/**/ * (b->windowHeight() / 25.0f))) * 0.5f,
                 ((b->windowHeight() - b->toUnit(b->windowHeight() / 16.0f)))

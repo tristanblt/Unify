@@ -17,7 +17,7 @@ class Layout {
         Layout();
         ~Layout();
 
-        void update (IBuilder *, CoreState &);
+        void update (IBuilder *, CoreState &, const std::string &);
     protected:
     private:
 };
