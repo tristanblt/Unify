@@ -81,7 +81,7 @@ void Layout::update(IBuilder *b, CoreState &coreState)
                     (b->windowWidth() / 8.0f),
                     (b->windowHeight() / 20.0f)
                 },
-                30,
+                (b->windowWidth() / 120.0f),
                 b->hexToColor(0x111111FF),
                 "Back to home",
                 2
