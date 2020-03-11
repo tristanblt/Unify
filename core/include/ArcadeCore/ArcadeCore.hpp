@@ -27,12 +27,15 @@ class ArcadeCore {
         void loadCoreAssets(Builder &);
         Start *changeGame(std::string);
 
+        DisplayLibrary *importGraphicalLibs(const std::string &);
         void switchGraphicalLibrary(IBuilder *);
     protected:
     private:
         CoreState _coreState;
         Menu _menu;
         Layout _layout;
+        std::vector<DisplayLibrary *> _libs;
+        int _currentLib;
 };
 
 #endif /* !ArcadeCore_HPP_ */

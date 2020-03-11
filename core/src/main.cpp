@@ -14,16 +14,14 @@
 
 int main(int argc, char const *argv[])
 {
-    DLLoader<DisplayLibrary> *loader = new DLLoader<DisplayLibrary>(argv[1]);
+    ArcadeCore arcadeCore;
     DisplayLibrary *lib;
-    ArcadeCore ArcadeCore;
 
-    if (loader == nullptr)
+    if (argc < 2)
         return (84);
-    lib = loader->getInstance();
-    if (!lib)
+    lib = arcadeCore.importGraphicalLibs(std::string(argv[1]));
+    if (lib == NULL)
         return (84);
-    ArcadeCore.launchCore(lib);
-    (void) argc;
+    arcadeCore.launchCore(lib);
     return 0;
 }

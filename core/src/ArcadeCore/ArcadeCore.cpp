@@ -25,10 +25,37 @@ void ArcadeCore::loadCoreAssets(Builder &builder)
     builder.loadAsset("assets/imgs/gear.png", AssetType::SPRITE);
 }
 
+DisplayLibrary *ArcadeCore::importGraphicalLibs(const std::string &firstLib)
+{
+    std::ifstream f("assets/files/displaylibs.config");
+    std::string buffer;
+    std::vector<std::string> file;
+    DisplayLibrary *ret = NULL;
+
+    if (!f)
+        throw std::invalid_argument("Could not open file displaylibs.config");
+    while (std::getline(f, buffer))
+        if(buffer.size() > 0)
+            file.push_back(buffer);
+    f.close();
+    for (size_t i = 0; i < file.size(); i += 3) {
+        DLLoader<DisplayLibrary> *loader = new DLLoader<DisplayLibrary>(file[i].c_str());
+        DisplayLibrary *tmp = loader->getInstance();
+        if (file[i] == firstLib)
+            ret = tmp;
+        _libs.push_back(tmp);
+        _currentLib = _libs.size() - 1;
+    }
+    return (ret);
+}
+
 void ArcadeCore::switchGraphicalLibrary(IBuilder *b)
 {
-    if (b->getEvents().keyboardState[Key::N] == InputState::CLICK)
-        std::cout << "dlkcjdslkj" << std::endl;
+    if (b->getEvents().keyboardState[Key::N] == InputState::CLICK) {
+        if (_currentLib + 1 > _libs.size() - 1)
+            _currentLib = 0;
+        b->reloadLibrary(_libs[_currentLib]);
+    }
 }
 
 void ArcadeCore::launchCore(DisplayLibrary *library)
@@ -58,3 +85,4 @@ void ArcadeCore::launchCore(DisplayLibrary *library)
         builder.windowDisplay();
     }
 }
+
