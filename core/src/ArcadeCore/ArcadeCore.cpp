@@ -32,14 +32,17 @@ void ArcadeCore::launchCore(DisplayLibrary *library)
     if (!game)
         return;
     game->start(&b);
+    unsigned char cpt = 0;
     while (b.windowIsOpen()) {
         b.windowClear();
-        if (isMenu)
-            m.update(&b);
-        else {
-            game->update(&b);
-            layout.update(&b);
-        }
+        // b.rectDraw((Box){1, 5, 10, 4}, (Color){255, 255, 0, 255});
+        b.circleDraw((CircleModel){30, 15, 20}, (Color){100, 100, 100, 255});
+        // if (isMenu)
+        //     m.update(&b);
+        // else {
+        //     game->update(&b);
+        //     layout.update(&b);
+        // }
         b.windowDisplay();
     }
 }
