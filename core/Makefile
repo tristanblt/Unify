@@ -5,7 +5,7 @@
 ## Makefile for
 ##
 
-NAME	=	arcade
+NAME	=	../arcade
 
 SRCPATH	=	src/
 SRCS_FILES=	main.cpp										\

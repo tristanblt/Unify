@@ -23,9 +23,15 @@ class SFMLLibrary : public DisplayLibrary {
 
         float toUnit(float);
         void loadAsset(const std::string &, AssetType);
+
+        Events updateEvents(Events *);
+        int getLastAssetIdx() const;
     protected:
     private:
-
+        void updateMouseEvents(Events *, Window *);
+        void updateKeyboardEvents(Events *);
+        sf::Event _event;
+        sf::Mouse _mouse;
 };
 
 #endif /* !SFMLLIBRARY_HPP_ */

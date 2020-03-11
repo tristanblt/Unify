@@ -10,6 +10,7 @@
 Builder::Builder(DisplayLibrary *library):
 _library(library)
 {
+    _events.mouseEvents.scrollVelocity = 0;
 }
 
 Builder::~Builder()
@@ -50,7 +51,7 @@ float Builder::windowWidth()
 void Builder::rectDraw(Box box, Color color)
 {
     _library->_rect->setPosition({box.x, box.y});
-    _library->_rect->setSize({box.h, box.w});
+    _library->_rect->setSize({box.w, box.h});
     _library->_rect->setColor(color);
     _library->_rect->draw(_library->_window);
 }
@@ -62,10 +63,10 @@ void Builder::radiusRectDraw(Box box, float radius, Color color)
     _library->_rect->setColor(color);
     _library->_circle->setColor(color);
     _library->_rect->setPosition({box.x + radius, box.y});
-    _library->_rect->setSize({box.h - radius * 2, box.w});
+    _library->_rect->setSize({box.w - radius * 2, box.h});
     _library->_rect->draw(_library->_window);
     _library->_rect->setPosition({box.x, box.y + radius});
-    _library->_rect->setSize({box.h, box.w - radius * 2});
+    _library->_rect->setSize({box.w, box.h - radius * 2});
     _library->_rect->draw(_library->_window);
     _library->_circle->setPosition({box.x, box.y});
     _library->_circle->setRadius(radius);
@@ -78,20 +79,32 @@ void Builder::radiusRectDraw(Box box, float radius, Color color)
     _library->_circle->draw(_library->_window);
 }
 
+bool Builder::buttonDraw(Box box, float radius, Color color, std::string text, int fontIdx)
+{
+    radiusRectDraw(box, radius, color);
+    textDraw({text, {(box.x + box.w  - (text.size() * box.h ) / 2.95f), box.y + box.h / 6.0f}, box.h / 2, fontIdx}, hexToColor(0xFFFFFFFF));
+    return (isInBox(box));
+}
+
 Color Builder::hexToColor(int color) const
 {
     Color ret;
 
     ret.r = ((color >> 24) & 0xff);
     ret.g = ((color >> 16) & 0xff);
-    ret.b = ((color >> 8) & 0xff);
-    ret.a = ((color) & 0xff);
+    ret.b = ((color >> 8)  & 0xff);
+    ret.a = ((color)       & 0xff);
     return (ret);
 }
 
 float Builder::toUnit(float value)
 {
     return (_library->toUnit(value));
+}
+
+void Builder::updateEvents()
+{
+    _library->updateEvents(&_events);
 }
 
 void Builder::circleDraw(CircleModel circle, Color color)
@@ -107,9 +120,17 @@ void Builder::loadAsset(const std::string &name, AssetType type)
     _library->loadAsset(name, type);
 }
 
+int Builder::getLastAssetIdx() const
+{
+    return (_library->getLastAssetIdx());
+}
+
 bool Builder::isInBox(Box box)
 {
-    return (false);
+    return (_events.mouseEvents.pos.x >= box.x &&
+            _events.mouseEvents.pos.x <= box.x + box.w &&
+            _events.mouseEvents.pos.y >= box.y &&
+            _events.mouseEvents.pos.y <= box.y + box.h);
 }
 
 void Builder::textDraw(TextModel text, Color color)
@@ -125,7 +146,13 @@ void Builder::textDraw(TextModel text, Color color)
 void Builder::spriteDraw(SpriteModel sprite)
 {
     _library->_sprite->setPosition({sprite.b.x, sprite.b.y});
-    _library->_sprite->setSize({sprite.b.w, sprite.b.h});
     _library->_sprite->setSprite(sprite.assetIdx);
+    _library->_sprite->setOpacity(sprite.opacity);
+    _library->_sprite->setSize({sprite.b.w, sprite.b.h});
     _library->_sprite->draw(_library->_window);
+}
+
+Events Builder::getEvents() const
+{
+    return (_events);
 }

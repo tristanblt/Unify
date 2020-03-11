@@ -29,13 +29,23 @@ void Sprite::setPosition(Vector2 position)
     _sprite->setPosition(position.x, position.y);
 }
 
-void Sprite::setSize(Vector2 position)
+#include <iostream>
+void Sprite::setSize(Vector2 size)
 {
-    //_sprite->setScale(sf::Vector2f());
+    if (_sprite->getTexture()) {
+        _sprite->setTextureRect(sf::IntRect(0, 0, _sprite->getTexture()->getSize().x, _sprite->getTexture()->getSize().y));
+        _sprite->setScale(sf::Vector2f(size.x / _sprite->getTexture()->getSize().x,
+                                       size.y / _sprite->getTexture()->getSize().y));
+    }
 }
 
 void Sprite::setSprite(int idx)
 {
     _sprite->setTexture(*static_cast<sf::Texture *>((*_assets)[idx]));
+}
+
+void Sprite::setOpacity(unsigned char opacity)
+{
+    _sprite->setColor(sf::Color(255, 255, 255, opacity));
 }
 

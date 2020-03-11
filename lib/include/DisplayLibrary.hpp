@@ -8,14 +8,14 @@
 #ifndef DisplayLibrary_HPP_
 #define DisplayLibrary_HPP_
 
+#include <memory>
+#include <vector>
 #include "Graphical/IWindow.hpp"
 #include "Graphical/IRectangle.hpp"
 #include "Graphical/ICircle.hpp"
 #include "Graphical/IText.hpp"
 #include "Graphical/ISprite.hpp"
 #include "core/include/ArcadeCore/Enums.hpp"
-#include <vector>
-#include <memory>
 
 class DisplayLibrary {
     public:
@@ -30,6 +30,8 @@ class DisplayLibrary {
         ISprite *_sprite;
 
         virtual void loadAsset(const std::string &, AssetType) = 0;
+        virtual Events updateEvents(Events *) = 0;
+        virtual int getLastAssetIdx() const = 0;
     protected:
         std::vector<void *> _assets;
     private:

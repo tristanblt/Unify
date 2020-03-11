@@ -9,6 +9,8 @@
 #define STRUCTS_HPP_
 
 #include <string>
+#include <map>
+#include "core/include/ArcadeCore/Enums.hpp"
 
 struct Color {
     unsigned char r;
@@ -25,8 +27,8 @@ struct Vector2 {
 struct Box {
     float x;
     float y;
-    float h;
     float w;
+    float h;
 };
 
 struct CircleModel {
@@ -42,9 +44,21 @@ struct TextModel {
     int assetIdx;
 };
 
+struct MouseEvents {
+    Vector2 pos;
+    std::map<MouseButton, InputState> mouseStates;
+    float scrollVelocity;
+};
+
+struct Events {
+    MouseEvents mouseEvents;
+    std::map<Key, InputState> keyboardState;
+    bool close;
+};
 struct SpriteModel {
     Box b;
     int assetIdx;
+    unsigned char opacity;
 };
 
 

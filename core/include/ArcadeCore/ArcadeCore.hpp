@@ -15,15 +15,21 @@
 #include "core/include/ArcadeCore/Builder.hpp"
 #include "core/include/ArcadeCore/Menu.hpp"
 #include "core/include/ArcadeCore/Layout.hpp"
+#include "core/include/ArcadeCore/Enums.hpp"
 
 class ArcadeCore {
     public:
+
         ArcadeCore();
         ~ArcadeCore();
 
         void launchCore(DisplayLibrary *);
+        void loadCoreAssets(Builder &b);
     protected:
     private:
+        CoreState _coreState;
+        Menu _menu;
+        Layout _layout;
 };
 
 #endif /* !ArcadeCore_HPP_ */
