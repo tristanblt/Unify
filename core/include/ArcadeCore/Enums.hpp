@@ -134,7 +134,8 @@ enum Key {
 enum CoreState {
     CORE_MENU,
     CORE_GAME,
-    CORE_PAUSE
+    CORE_PAUSE,
+    CORE_END
 };
 
 #endif /* !ENUMS_HPP_ */

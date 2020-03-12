@@ -40,6 +40,7 @@ struct CircleModel {
 struct TextModel {
     std::string str;
     Vector2 p;
+    Color c;
     int fontSize;
     int assetIdx;
 };
@@ -59,6 +60,29 @@ struct SpriteModel {
     Box b;
     int assetIdx;
     unsigned char opacity;
+};
+
+struct BasicButton {
+    Box b;
+    int r;
+    Color activeColor;
+    Color inactiveColor;
+    Color holdColor;
+    TextModel activeText;
+    TextModel inactiveText;
+    TextModel holdText;
+    bool state;
+};
+
+struct SpriteButton {
+    Box b;
+    SpriteModel activeSprite;
+    SpriteModel inactiveSprite;
+    SpriteModel holdSprite;
+    TextModel activeText;
+    TextModel inactiveText;
+    TextModel holdText;
+    bool state;
 };
 
 

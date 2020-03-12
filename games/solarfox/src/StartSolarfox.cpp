@@ -22,7 +22,7 @@ void StartSolarfox::start(IBuilder *b)
 
 void StartSolarfox::update(IBuilder *b)
 {
-    b->textDraw({"souag", {300, 300}, 100, 0}, {0, 0, 0, 255});
+    b->textDraw({"souag", {300, 300}, {0, 0, 0, 255}, 100, 0});
 }
 
 std::string StartSolarfox::getName() const

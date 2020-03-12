@@ -27,9 +27,11 @@ class Builder: public IBuilder {
         void rectDraw(Box, Color);
         void circleDraw(CircleModel, Color);
         void radiusRectDraw(Box, float, Color);
-        void textDraw(TextModel, Color);
+        void textDraw(TextModel);
         void spriteDraw(SpriteModel);
         bool buttonDraw(Box, float, Color, std::string, int);
+        bool basicButtonDraw(BasicButton);
+        bool spriteButtonDraw(SpriteButton);
 
         Color hexToColor(int) const;
 
@@ -44,9 +46,11 @@ class Builder: public IBuilder {
         int getLastAssetIdx() const;
 
         Events getEvents() const;
+        time_t getTime() const;
     protected:
     private:
         Events _events;
+        time_t _tick;
         DisplayLibrary *_library;
 };
 

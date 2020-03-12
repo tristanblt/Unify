@@ -22,7 +22,7 @@ void StartNibbler::start(IBuilder *b)
 
 void StartNibbler::update(IBuilder *b)
 {
-    b->textDraw({"saiske", {300, 300}, 100, 0}, {0, 0, 0, 255});
+    b->textDraw({"saiske", {300, 300}, {0, 0, 0, 255}, 100, 0});
 }
 
 std::string StartNibbler::getName() const

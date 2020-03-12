@@ -22,7 +22,16 @@ void ArcadeCore::loadCoreAssets(Builder &builder)
     builder.loadAsset("assets/fonts/Montserrat-Light.otf", AssetType::FONT);
     builder.loadAsset("assets/fonts/Montserrat-Regular.otf", AssetType::FONT);
     builder.loadAsset("assets/fonts/Montserrat-Bold.otf", AssetType::FONT);
-    builder.loadAsset("assets/imgs/gear.png", AssetType::SPRITE);
+    builder.loadAsset("assets/imgs/flaticons/gear.png", AssetType::SPRITE);
+    builder.loadAsset("assets/imgs/flaticons/refresh.png", AssetType::SPRITE);
+    builder.loadAsset("assets/imgs/flaticons/refresh-a.png", AssetType::SPRITE);
+    builder.loadAsset("assets/imgs/flaticons/refresh-h.png", AssetType::SPRITE);
+    builder.loadAsset("assets/imgs/flaticons/switch.png", AssetType::SPRITE);
+    builder.loadAsset("assets/imgs/flaticons/switch-h.png", AssetType::SPRITE);
+    builder.loadAsset("assets/imgs/flaticons/switch-a.png", AssetType::SPRITE);
+    builder.loadAsset("assets/imgs/flaticons/open-menu-i.png", AssetType::SPRITE);
+    builder.loadAsset("assets/imgs/flaticons/open-menu-h.png", AssetType::SPRITE);
+    builder.loadAsset("assets/imgs/flaticons/open-menu-a.png", AssetType::SPRITE);
 }
 
 DisplayLibrary *ArcadeCore::importGraphicalLibs(const std::string &firstLib)

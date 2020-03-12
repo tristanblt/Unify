@@ -95,8 +95,42 @@ void Builder::radiusRectDraw(Box box, float radius, Color color)
 bool Builder::buttonDraw(Box box, float radius, Color color, std::string text, int fontIdx)
 {
     radiusRectDraw(box, radius, color);
-    textDraw({text, {(box.x + box.w  - (text.size() * box.h ) / 2.95f), box.y + box.h / 6.0f}, static_cast<int>(box.h / 2), fontIdx}, hexToColor(0xFFFFFFFF));
+    textDraw({text, {(box.x + box.w  - (text.size() * box.h ) / 2.95f), box.y + box.h / 6.0f}, hexToColor(0xFFFFFFFF), static_cast<int>(box.h / 2), fontIdx});
     return (isInBox(box));
+}
+
+bool Builder::basicButtonDraw(BasicButton button)
+{
+    button.state = isInBox(button.b);
+
+    if (button.state == true && _events.mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::CLICK) {
+        radiusRectDraw(button.b, button.r, button.activeColor);
+        textDraw(button.activeText);
+    } else if (button.state == true) {
+        radiusRectDraw(button.b, button.r, button.holdColor);
+        textDraw(button.holdText);
+    } else {
+        radiusRectDraw(button.b, button.r, button.inactiveColor);
+        textDraw(button.inactiveText);
+    }
+    return (button.state);
+}
+
+bool Builder::spriteButtonDraw(SpriteButton button)
+{
+    button.state = isInBox(button.b);
+
+    if (button.state == true && _events.mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::CLICK) {
+        spriteDraw(button.activeSprite);
+        textDraw(button.activeText);
+    } else if (button.state == true) {
+        spriteDraw(button.holdSprite);
+        textDraw(button.holdText);
+    } else {
+        spriteDraw(button.inactiveSprite);
+        textDraw(button.inactiveText);
+    }
+    return (button.state);
 }
 
 Color Builder::hexToColor(int color) const
@@ -118,6 +152,7 @@ float Builder::toUnit(float value)
 void Builder::updateEvents()
 {
     _library->updateEvents(&_events);
+    time (&_tick);
 }
 
 void Builder::circleDraw(CircleModel circle, Color color)
@@ -146,13 +181,13 @@ bool Builder::isInBox(Box box)
             _events.mouseEvents.pos.y <= box.y + box.h);
 }
 
-void Builder::textDraw(TextModel text, Color color)
+void Builder::textDraw(TextModel text)
 {
     _library->_text->setPosition(text.p);
     _library->_text->setFontSize(text.fontSize);
     _library->_text->setFont(text.assetIdx);
     _library->_text->setText(text.str);
-    _library->_text->setColor(color);
+    _library->_text->setColor(text.c);
     _library->_text->draw(_library->_window);
 }
 
@@ -168,4 +203,8 @@ void Builder::spriteDraw(SpriteModel sprite)
 Events Builder::getEvents() const
 {
     return (_events);
+}
+
+time_t Builder::getTime() const{
+    return (_tick);
 }

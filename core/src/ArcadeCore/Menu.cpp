@@ -47,23 +47,53 @@ void Menu::drawHeader(IBuilder *b)
                 b->windowWidth()/32,
                 b->windowHeight() / 25.0f
             },
+            b->hexToColor(0xFFFFFFFF),
             static_cast<int>(b->windowHeight() / 12.0f),
             2
-        },
-        b->hexToColor(0xFFFFFFFF)
-    );
-    b->spriteDraw(
-        {
-            {
-                b->windowWidth() * (18.5f / 20.0f),
-                b->windowHeight() / 15.0f,
-                 b->windowWidth() / 38.0f,
-                 b->windowWidth() / 38.0f
-            },
-            3,
-            255
         }
     );
+    if (b->spriteButtonDraw(
+{        {
+            b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 13.7f,
+            b->windowWidth() / 38.0f, b->windowWidth() / 38.0f
+        },
+        {{b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 13.7f, b->windowWidth() / 38.0f, b->windowWidth() / 38.0f}, 3, 255},
+        {{b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 13.7f, b->windowWidth() / 38.0f, b->windowWidth() / 38.0f}, 3, 255},
+        {{b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 13.7f, b->windowWidth() / 38.0f, b->windowWidth() / 38.0f}, 3, 255},
+        {"", {0, 0}, b->hexToColor(0xFFFFFFFF), 0, 0},
+        {"", {0, 0}, b->hexToColor(0xFFFFFFFF), 0, 0},
+        {"", {0, 0}, b->hexToColor(0xFFFFFFFF), 0, 0},
+        false}
+        ) && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
+            std::cout << "OPTIONS" << std::endl;
+    if (b->spriteButtonDraw(
+{        {
+            b->windowWidth() * (17.2f / 20.0f), b->windowHeight() / 15.0f * 12.6f,
+            b->windowWidth() / 30.0f, b->windowWidth() / 30.0f
+        },
+        {{b->windowWidth() * (17.2f / 20.0f), b->windowHeight() / 15.0f * 12.6f, b->windowWidth() / 30.0f, b->windowWidth() / 30.0f}, 5, 255},
+        {{b->windowWidth() * (17.2f / 20.0f), b->windowHeight() / 15.0f * 12.6f, b->windowWidth() / 30.0f, b->windowWidth() / 30.0f}, 4, 255},
+        {{b->windowWidth() * (17.2f / 20.0f), b->windowHeight() / 15.0f * 12.6f, b->windowWidth() / 30.0f, b->windowWidth() / 30.0f}, 6, 255},
+        {"", {0, 0}, b->hexToColor(0xFFFFFFFF), 0, 0},
+        {"", {0, 0}, b->hexToColor(0xFFFFFFFF), 0, 0},
+        {"", {0, 0}, b->hexToColor(0xFFFFFFFF), 0, 0},
+        false}
+        ) && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
+            std::cout << "REDEMARER" << std::endl;
+    if (b->spriteButtonDraw(
+{        {
+            b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 15.0f * 12.6f,
+            b->windowWidth() / 30.0f, b->windowWidth() / 30.0f
+        },
+        {{b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 15.0f * 12.6f, b->windowWidth() / 30.0f, b->windowWidth() / 30.0f}, 9, 255},
+        {{b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 15.0f * 12.6f, b->windowWidth() / 30.0f, b->windowWidth() / 30.0f}, 7, 255},
+        {{b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 15.0f * 12.6f, b->windowWidth() / 30.0f, b->windowWidth() / 30.0f}, 8, 255},
+        {"", {0, 0}, b->hexToColor(0xFFFFFFFF), 0, 0},
+        {"", {0, 0}, b->hexToColor(0xFFFFFFFF), 0, 0},
+        {"", {0, 0}, b->hexToColor(0xFFFFFFFF), 0, 0},
+        false}
+        ) && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
+            b->windowClose();
 }
 
 void Menu::drawCarousel(IBuilder *b)
@@ -127,10 +157,10 @@ void Menu::drawCarousel(IBuilder *b)
                         (b->windowWidth() - (0.5f * _covers[i].gameName.length() * (b->windowHeight() / 24.0f))) * 0.49f,
                         b->windowHeight()/5 * 3.12f
                     },
+                    b->hexToColor(0xFFFFFFFF),
                     static_cast<int>(b->windowHeight() / 24.0f),
                     2
-                },
-                b->hexToColor(0xFFFFFFFF)
+                }
             );
             if (b->isInBox(
                 {
@@ -172,6 +202,8 @@ DLLoader<Start> *Menu::update(IBuilder *b)
     _currentGame = NULL;
     drawBackgrounds(b);
     drawHeader(b);
+    if (!b->windowIsOpen())
+        return (tmp);
     drawCarousel(b);
     return (tmp);
 }
