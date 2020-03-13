@@ -17,14 +17,14 @@
 
 class Sprite : public ISprite {
     public:
-        Sprite(std::vector<void *> *);
+        Sprite(std::vector<void *> *assets);
         ~Sprite();
 
-        void draw(IWindow *);
-        void setPosition(Vector2);
-        void setSize(Vector2);
-        void setSprite(int);
-        void setOpacity(unsigned char);
+        void draw(IWindow *window);
+        void setPosition(Vector2 position);
+        void setSize(Vector2 size);
+        void setSprite(int spriteIdx);
+        void setOpacity(unsigned char opacity);
     protected:
     private:
         sf::Sprite *_sprite;

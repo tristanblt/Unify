@@ -20,10 +20,10 @@ class Rectangle : public IRectangle {
         Rectangle();
         ~Rectangle();
 
-        void draw(IWindow *w);
-        void setPosition(Vector2);
-        void setSize(Vector2);
-        void setColor(Color);
+        void draw(IWindow *window);
+        void setPosition(Vector2 position);
+        void setSize(Vector2 size);
+        void setColor(Color color);
     protected:
     private:
         sf::RectangleShape *_rect;

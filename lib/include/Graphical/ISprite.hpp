@@ -15,11 +15,11 @@ class ISprite {
     public:
         virtual ~ISprite() = default;
 
-        virtual void draw(IWindow *w) = 0;
-        virtual void setPosition(Vector2) = 0;
-        virtual void setSize(Vector2) = 0;
-        virtual void setSprite(int) = 0;
-        virtual void setOpacity(unsigned char) = 0;
+        virtual void draw(IWindow *window) = 0;
+        virtual void setPosition(Vector2 position) = 0;
+        virtual void setSize(Vector2 size) = 0;
+        virtual void setSprite(int sprite) = 0;
+        virtual void setOpacity(unsigned char opacity) = 0;
     protected:
     private:
 };

@@ -5,8 +5,8 @@
 ** Window
 */
 
-#ifndef WINDOW_HPP_
-#define WINDOW_HPP_
+#ifndef WINDOWNCURSE_HPP_
+#define WINDOWNCURSE_HPP_
 
 #include <ncurses.h>
 #include "lib/include/Graphical/IWindow.hpp"
@@ -21,7 +21,10 @@ class Window : public IWindow {
         float width();
         void clear();
         void display();
-        
+        void close();
+        void create();
+
+        //sf::RenderWindow *getWindow() const;
     protected:
     private:
         int _width;
@@ -29,4 +32,4 @@ class Window : public IWindow {
         bool _isOpen;
 };
 
-#endif /* !WINDOW_HPP_ */
+#endif /* !WINDOWNCURSE_HPP_ */

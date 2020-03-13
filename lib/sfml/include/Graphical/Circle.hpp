@@ -20,10 +20,10 @@ class Circle : public ICircle {
         Circle();
         ~Circle();
 
-        void draw(IWindow *w);
-        void setPosition(Vector2);
-        void setRadius(float);
-        void setColor(Color);
+        void draw(IWindow *window);
+        void setPosition(Vector2 position);
+        void setRadius(float radius);
+        void setColor(Color color);
     protected:
     private:
         sf::CircleShape *_circle;

@@ -17,7 +17,7 @@ class Layout {
         Layout();
         ~Layout();
 
-        void update (IBuilder *, CoreState &, const std::string &);
+        void update(IBuilder *builder, CoreState &coreState, const std::string &gameName);
     protected:
     private:
 };

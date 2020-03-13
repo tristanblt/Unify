@@ -23,11 +23,12 @@ Circle::~Circle()
 void Circle::draw(IWindow *w)
 {
     int a = 0;
+
     for(int y = -_radius; y <= _radius; y++) {
         for (int x = -_radius; x <= _radius; x++)
             if ( x * x + y * y < _radius * _radius &&
                 (y == 0 || y < -((_radius)/(_radius / 2)) || y > (_radius / (_radius / 2))))
-                mvaddch(_y + (y > (_radius / (_radius / 2)) || y == 0 ? y + a : y), _x + x, ' ' | COLOR_PAIR(_colorPair));
+                mvaddch((_y + (y > (_radius / (_radius / 2)) || y == 0 ? y + a : y)) / 2.9, _x + x, ' ' | COLOR_PAIR(_colorPair));
         a -= ((y !=0 && y >= -((_radius) / (_radius/2))) && y <= (_radius / (_radius / 2)) ? 1 : 0);
     }
 }

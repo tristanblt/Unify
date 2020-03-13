@@ -8,9 +8,6 @@
 #ifndef ENTRY_HPP_
 #define ENTRY_HPP_
 
-#include "../sfml/include/SFMLLibrary.hpp"
-#include "../ncurses/include/nCursesLibrary.hpp"
-
 extern "C" DisplayLibrary *entryPoint();
 
 #endif /* !ENTRY_HPP_ */

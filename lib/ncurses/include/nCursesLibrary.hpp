@@ -20,9 +20,15 @@ class nCursesLibrary : public DisplayLibrary {
 
         float toUnit(float);
         void loadAsset(const std::string &, AssetType);
+
+        Events updateEvents(Events *events);
+        int getLastAssetIdx() const;
     protected:
     private:
-
+        void updateMouseEvents(Events *events, Window *window);
+        void updateKeyboardEvents(Events *events);
+        //sf::Event _event;
+        //sf::Mouse _mouse;
 };
 
 #endif /* !NCURSESLIBRARY_HPP_ */

@@ -23,12 +23,12 @@ class ArcadeCore {
         ArcadeCore();
         ~ArcadeCore();
 
-        void launchCore(DisplayLibrary *);
-        void loadCoreAssets(Builder &);
-        Start *changeGame(std::string);
+        void launchCore(DisplayLibrary *library);
+        void loadCoreAssets(Builder &builder);
+        Start *changeGame(std::string libName);
 
-        DisplayLibrary *importGraphicalLibs(const std::string &);
-        void switchGraphicalLibrary(IBuilder *);
+        DisplayLibrary *importGraphicalLibs(const std::string &libName);
+        void switchGraphicalLibrary(IBuilder *builder);
     protected:
     private:
         CoreState _coreState;

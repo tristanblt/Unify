@@ -15,12 +15,12 @@ class IText {
     public:
         virtual ~IText() = default;
 
-        virtual void draw(IWindow *w) = 0;
-        virtual void setPosition(Vector2) = 0;
-        virtual void setColor(Color) = 0;
-        virtual void setFont(int) = 0;
-        virtual void setFontSize(int) = 0;
-        virtual void setText(const std::string &) = 0;
+        virtual void draw(IWindow *window) = 0;
+        virtual void setPosition(Vector2 position) = 0;
+        virtual void setColor(Color color) = 0;
+        virtual void setFont(int fontIdx) = 0;
+        virtual void setFontSize(int fontSize) = 0;
+        virtual void setText(const std::string &text) = 0;
     protected:
     private:
 };

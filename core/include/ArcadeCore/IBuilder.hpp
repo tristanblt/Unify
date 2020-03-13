@@ -29,20 +29,21 @@ class IBuilder {
         virtual float windowHeight() = 0;
         virtual float windowWidth() = 0;
 
-        virtual void rectDraw(Box, Color) = 0;
-        virtual void circleDraw(CircleModel, Color) = 0;
-        virtual void radiusRectDraw(Box, float, Color) = 0;
-        virtual void textDraw(TextModel) = 0;
-        virtual void spriteDraw(SpriteModel) = 0;
+        virtual void rectDraw(Box box, Color color) = 0;
+        virtual void circleDraw(CircleModel circle, Color color) = 0;
+        virtual void radiusRectDraw(Box box, float radius, Color color) = 0;
+        virtual void textDraw(TextModel text) = 0;
+        virtual void spriteDraw(SpriteModel sprite) = 0;
         virtual bool buttonDraw(Box, float, Color, std::string, int) = 0;
         virtual bool basicButtonDraw(BasicButton) = 0;
         virtual bool spriteButtonDraw(SpriteButton) = 0;
-        virtual Color hexToColor(int) const = 0;
+
+        virtual Color hexToColor(int hexColor) const = 0;
         virtual float toUnit(float) = 0;
 
-        virtual bool isInBox(Box) = 0;
+        virtual bool isInBox(Box box) = 0;
 
-        virtual void loadAsset(const std::string &, AssetType) = 0;
+        virtual void loadAsset(const std::string &path, AssetType type) = 0;
 
         virtual void updateEvents() = 0;
 

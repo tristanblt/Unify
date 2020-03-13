@@ -17,15 +17,15 @@
 
 class Text : public IText {
     public:
-        Text(std::vector<void *> *);
+        Text(std::vector<void *> *assets);
         ~Text();
 
-        void draw(IWindow *w);
-        void setPosition(Vector2);
-        void setColor(Color);
-        void setFontSize(int);
-        void setText(const std::string &);
-        void setFont(int);
+        void draw(IWindow *window);
+        void setPosition(Vector2 position);
+        void setColor(Color color);
+        void setFontSize(int fontSize);
+        void setText(const std::string &text);
+        void setFont(int fontIdx);
     protected:
     private:
         sf::Text *_text;

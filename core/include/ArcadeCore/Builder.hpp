@@ -15,7 +15,7 @@ class Builder: public IBuilder {
         Builder(DisplayLibrary *);
         ~Builder();
 
-        void reloadLibrary(DisplayLibrary *);
+        void reloadLibrary(DisplayLibrary *library);
         bool windowIsOpen();
         void windowClear();
         void windowClose();
@@ -24,22 +24,22 @@ class Builder: public IBuilder {
         float windowHeight();
         float windowWidth();
 
-        void rectDraw(Box, Color);
-        void circleDraw(CircleModel, Color);
-        void radiusRectDraw(Box, float, Color);
-        void textDraw(TextModel);
-        void spriteDraw(SpriteModel);
+        void rectDraw(Box box, Color color);
+        void circleDraw(CircleModel circle, Color color);
+        void radiusRectDraw(Box box, float radius, Color color);
+        void textDraw(TextModel text);
+        void spriteDraw(SpriteModel sprite);
         bool buttonDraw(Box, float, Color, std::string, int);
         bool basicButtonDraw(BasicButton);
         bool spriteButtonDraw(SpriteButton);
 
-        Color hexToColor(int) const;
+        Color hexToColor(int hexColor) const;
 
         float toUnit(float);
 
-        bool isInBox(Box);
+        bool isInBox(Box box);
 
-        void loadAsset(const std::string &, AssetType);
+        void loadAsset(const std::string &path, AssetType type);
 
         void updateEvents();
 

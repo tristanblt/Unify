@@ -25,11 +25,11 @@ class Menu {
             int spriteIdx;
         };
 
-        DLLoader<Start> *update(IBuilder *);
-        void start(IBuilder *);
-        void drawBackgrounds(IBuilder *);
-        void drawHeader(IBuilder *);
-        void drawCarousel(IBuilder *);
+        DLLoader<Start> *update(IBuilder *builder);
+        void start(IBuilder *builder);
+        void drawBackgrounds(IBuilder *builder);
+        void drawHeader(IBuilder *builder);
+        void drawCarousel(IBuilder *builder);
     protected:
     private:
         std::vector<GameCover> _covers;

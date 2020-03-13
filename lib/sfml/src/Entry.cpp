@@ -5,6 +5,7 @@
 ** Entry
 */
 
+#include "lib/sfml/include/SFMLLibrary.hpp"
 #include "lib/include/Entry.hpp"
 #include <iostream>
 

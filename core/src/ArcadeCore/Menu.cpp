@@ -72,69 +72,27 @@ void Menu::drawCarousel(IBuilder *b)
 {
     if (b->isInBox({0, VH(20), VW(100), VH(55)})) {
         _coversOffset -= b->getEvents().mouseEvents.scrollVelocity * 10;
-        if (_coversOffset > b->windowWidth() / 2 - (b->windowWidth() / 5))
-            _coversOffset = b->windowWidth() / 2 - (b->windowWidth() / 5);
+        if (_coversOffset > VW(50) - VW(20))
+            _coversOffset = VW(50) - VW(20);
     }
     for (size_t i = 0; i < 10; i++) {
-        float color = (((b->windowHeight() / 3 + 30) * i + _coversOffset + (b->windowHeight() / 3 + 30)) / b->windowWidth());
+        float color = (((VH(33) + 30) * i + _coversOffset + (VH(33) + 30)) / VW(100));
         if (color < 0 || color > 1)
             continue;
         color -= 0.5f;
         color = color < 0 ? color * -1 : color;
         if (i < _covers.size()) {
             color = (255 - (color * 2 * 255));
-            b->spriteDraw(
-                {
-                    {
-                        (b->windowHeight() / 3 + 30) * i + _coversOffset + b->windowHeight() / 6,
-                        b->windowHeight() / 5 + 70,
-                        b->windowHeight() / 3,
-                        b->windowHeight() / 3,
-                    },
-                    _covers[i].spriteIdx,
-                    static_cast<unsigned char>(color)
-                }
-            );
+            b->spriteDraw({{(VH(33) + 30) * i + _coversOffset + VH(17), VH(20) + 70, VH(33), VH(33)}, _covers[i].spriteIdx, static_cast<unsigned char>(color)});
         }
         else {
             color = (color = (255 - (color * 2 * 255))) >= 26 ? color : 26;
-            b->radiusRectDraw(
-                {
-                    (b->windowHeight() / 3 + 30) * i + _coversOffset + b->windowHeight() / 6,
-                    b->windowHeight() / 5 + 70,
-                    b->windowHeight() / 3,
-                    b->windowHeight() / 3
-                },
-                50,
-                {
-                    static_cast<unsigned char>(color),
-                    static_cast<unsigned char>(color),
-                    static_cast<unsigned char>(color),
-                    255
-                }
-            );
+            b->radiusRectDraw({(VH(33) + 30) * i + _coversOffset + VH(17), VH(20) + 70, VH(33), VH(33)}, 50, {static_cast<unsigned char>(color), static_cast<unsigned char>(color), static_cast<unsigned char>(color), 255});
         }
         if (color > 200 && i < _covers.size()) {
-            b->textDraw(
-                {
-                    _covers[i].gameName,
-                    {
-                        (b->windowWidth() - (0.5f * _covers[i].gameName.length() * (b->windowHeight() / 24.0f))) * 0.49f,
-                        b->windowHeight()/5 * 3.12f
-                    },
-                    b->hexToColor(0xFFFFFFFF),
-                    static_cast<int>(b->windowHeight() / 24.0f),
-                    2
-                }
-            );
-            if (b->isInBox(
-                {
-                    (b->windowHeight() / 3 + 30) * i + _coversOffset + b->windowHeight() / 6,
-                    b->windowHeight() / 5 + 70,
-                    b->windowHeight() / 3,
-                    b->windowHeight() / 3,
-                }
-            ) && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
+            b->textDraw({_covers[i].gameName, {(VW(100) - (0.5f * _covers[i].gameName.length() * (VH(3)))) * 0.49f, VH(20) * 3.12f}, b->hexToColor(0xFFFFFFFF), static_cast<int>(VH(3)), 2});
+            if (b->isInBox({(VH(33) + 30) * i + _coversOffset + VH(17), VH(20) + 70, VH(33), VH(33), }) &&
+            b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
                 _currentGame = _covers[i].gameLib;
         }
     }
@@ -157,7 +115,7 @@ void Menu::start(IBuilder *b)
         DLLoader<Start> *loader = new DLLoader<Start>(file[i + 2].c_str());
         _covers.push_back({file[i], loader, b->getLastAssetIdx()});
     }
-    _coversOffset = b->windowWidth() / 2 - (b->windowWidth() / 5);
+    _coversOffset = VW(50) - VW(20);
 }
 
 DLLoader<Start> *Menu::update(IBuilder *b)

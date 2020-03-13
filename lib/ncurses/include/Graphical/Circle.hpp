@@ -5,14 +5,14 @@
 ** Circle
 */
 
-#ifndef Circle_HPP_
-#define Circle_HPP_
+#ifndef CircleNcurses_HPP_
+#define CircleNcurses_HPP_
 
 #include <ncurses.h>
 #include "lib/ncurses/include/nCursesColors.hpp"
 #include "lib/include/Graphical/ICircle.hpp"
 #include "lib/include/Graphical/IWindow.hpp"
-#include "lib/sfml/include/Graphical/Window.hpp"
+#include "lib/ncurses/include/Graphical/Window.hpp"
 #include "core/include/ArcadeCore/IBuilder.hpp"
 #include "core/include/ArcadeCore/Structs.hpp"
 
@@ -34,4 +34,4 @@ class Circle : public ICircle {
         short _colorPair;
 };
 
-#endif /* !Circle_HPP_ */
+#endif /* !CircleNcurses_HPP_ */
