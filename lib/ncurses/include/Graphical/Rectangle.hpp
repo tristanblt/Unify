@@ -5,13 +5,12 @@
 ** Rectangle
 */
 
-#ifndef RECTANGLE_HPP_
-#define RECTANGLE_HPP_
+#ifndef RECTANGLENCURSE_HPP_
+#define RECTANGLENCURSE_HPP_
 
-#include "SFML/Graphics.hpp"
 #include "lib/include/Graphical/IRectangle.hpp"
 #include "lib/include/Graphical/IWindow.hpp"
-#include "lib/sfml/include/Graphical/Window.hpp"
+#include "lib/ncurses/include/Graphical/Window.hpp"
 #include "core/include/ArcadeCore/IBuilder.hpp"
 #include "core/include/ArcadeCore/Structs.hpp"
 
@@ -34,4 +33,4 @@ class Rectangle : public IRectangle {
         short _colorPair;
 };
 
-#endif /* !RECTANGLE_HPP_ */
+#endif /* !RECTANGLENCURSE_HPP_ */

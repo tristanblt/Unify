@@ -73,7 +73,7 @@ void ArcadeCore::launchCore(DisplayLibrary *library)
     DLLoader<Start> *gameLib;
     Builder builder(library);
 
-    loadCoreAssets(builder);
+    /*loadCoreAssets(builder);
     _menu.start(&builder);
     while (builder.windowIsOpen()) {
         switchGraphicalLibrary(&builder);
@@ -91,6 +91,25 @@ void ArcadeCore::launchCore(DisplayLibrary *library)
                 game->update(&builder);
             _layout.update(&builder, _coreState, game->getName());
         }
+        builder.windowDisplay();
+    }*/
+    while (builder.windowIsOpen()) {
+        switchGraphicalLibrary(&builder);
+        //builder.updateEvents();
+        builder.windowClear();
+        builder.circleDraw({100, 100, 100}, {255, 0, 0});
+        /*if (_coreState == CoreState::CORE_MENU) {
+            if ((gameLib = _menu.update(&builder)) != NULL) {
+                game = gameLib->getInstance();
+                game->start(&builder);
+                _coreState = CoreState::CORE_GAME;
+            }
+        }
+        else {
+            if (_coreState != CoreState::CORE_PAUSE)
+                game->update(&builder);
+            _layout.update(&builder, _coreState, game->getName());
+        }*/
         builder.windowDisplay();
     }
 }

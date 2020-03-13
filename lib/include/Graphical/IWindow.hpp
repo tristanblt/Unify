@@ -7,7 +7,9 @@
 
 #ifndef IWINDOW_HPP_
 #define IWINDOW_HPP_
+
 #include "core/include/ArcadeCore/Structs.hpp"
+
 class IWindow {
     public:
         virtual ~IWindow() = default;

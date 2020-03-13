@@ -9,15 +9,6 @@
 
 Window::Window()
 {
-    initscr();
-    start_color();
-    noecho();
-    curs_set(0);
-    nodelay(stdscr, TRUE);
-    keypad(stdscr, TRUE);
-    _width = COLS;
-    _height = LINES;
-    _isOpen = true;
 }
 
 Window::~Window()
@@ -61,4 +52,22 @@ void Window::display()
         break;
     }
     refresh();
+}
+
+void Window::close()
+{
+    endwin();
+}
+
+void Window::create()
+{
+    initscr();
+    start_color();
+    noecho();
+    curs_set(0);
+    nodelay(stdscr, TRUE);
+    keypad(stdscr, TRUE);
+    _width = COLS;
+    _height = LINES;
+    _isOpen = true;
 }
