@@ -29,8 +29,8 @@ class DisplayLibrary {
         IText *_text;
         ISprite *_sprite;
 
-        virtual void loadAsset(const std::string &, AssetType) = 0;
-        virtual Events updateEvents(Events *) = 0;
+        virtual void loadAsset(const std::string &path, AssetType type) = 0;
+        virtual Events updateEvents(Events *events) = 0;
         virtual int getLastAssetIdx() const = 0;
     protected:
         std::vector<void *> _assets;

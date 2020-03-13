@@ -22,14 +22,14 @@ class SFMLLibrary : public DisplayLibrary {
         ~SFMLLibrary();
 
         float toUnit(float);
-        void loadAsset(const std::string &, AssetType);
+        void loadAsset(const std::string &path, AssetType type);
 
-        Events updateEvents(Events *);
+        Events updateEvents(Events *events);
         int getLastAssetIdx() const;
     protected:
     private:
-        void updateMouseEvents(Events *, Window *);
-        void updateKeyboardEvents(Events *);
+        void updateMouseEvents(Events *events, Window *window);
+        void updateKeyboardEvents(Events *events);
         sf::Event _event;
         sf::Mouse _mouse;
 };

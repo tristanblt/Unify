@@ -15,10 +15,10 @@ class ICircle {
     public:
         virtual ~ICircle() = default;
 
-        virtual void draw(IWindow *w) = 0;
-        virtual void setPosition(Vector2) = 0;
-        virtual void setRadius(float) = 0;
-        virtual void setColor(Color) = 0;
+        virtual void draw(IWindow *window) = 0;
+        virtual void setPosition(Vector2 position) = 0;
+        virtual void setRadius(float radius) = 0;
+        virtual void setColor(Color color) = 0;
 
     protected:
     private:

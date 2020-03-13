@@ -15,10 +15,10 @@ class IRectangle {
     public:
         virtual ~IRectangle() = default;
 
-        virtual void draw(IWindow *w) = 0;
-        virtual void setPosition(Vector2) = 0;
-        virtual void setSize(Vector2) = 0;
-        virtual void setColor(Color) = 0;
+        virtual void draw(IWindow *window) = 0;
+        virtual void setPosition(Vector2 position) = 0;
+        virtual void setSize(Vector2 size) = 0;
+        virtual void setColor(Color color) = 0;
 
     protected:
     private:
