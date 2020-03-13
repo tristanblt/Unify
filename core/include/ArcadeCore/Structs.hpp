@@ -85,5 +85,11 @@ struct SpriteButton {
     bool state;
 };
 
-
+struct newSpriteButton {
+    Box display;
+    Box active;
+    Box inactive;
+    Box hold;
+    int spriteSheetIdx;
+};
 #endif /* !STRUCTS_HPP_ */
