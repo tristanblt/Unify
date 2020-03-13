@@ -17,44 +17,10 @@ Layout::~Layout()
 
 void Layout::update(IBuilder *b, CoreState &coreState, const std::string &name)
 {
-    b->rectDraw(
-        {
-            0,
-            ((b->windowHeight() - b->toUnit(b->windowHeight() / 14.0f))),
-            b->windowWidth(),
-            b->toUnit(b->windowHeight() / 14.0f)
-        },
-        b->hexToColor(0x373737FF)
-    );
-    b->textDraw(
-        {
-            "Unify",
-            {
-                b->windowWidth()/60,
-                ((b->windowHeight() - b->toUnit(b->windowHeight() / 16.0f)))
-            },
-            b->hexToColor(0xFFFFFFFF),
-            static_cast<int>(b->windowHeight() / 25.0f),
-            2
-        }
-    );
-    b->textDraw(
-        {
-            name,
-            {
-                (b->windowWidth() - (0.5f * /**/8/**/ * (b->windowHeight() / 25.0f))) * 0.5f,
-                ((b->windowHeight() - b->toUnit(b->windowHeight() / 16.0f)))
-            },
-            b->hexToColor(0xFFFFFF99),
-            static_cast<int>(b->windowHeight() / 25.0f),
-            2
-        }
-    );
-    if (b->spriteButtonDraw(
-{        {
-            b->windowWidth() * (19.0f / 20.0f), ((b->windowHeight() - b->toUnit(b->windowHeight() / 16.0f))),
-            (b->windowHeight() / 18.0f), (b->windowHeight() / 18.0f)
-        },
+    b->rectDraw({0, ((VH(100) - b->toUnit(VH(9)))), b->windowWidth(), VH(9)}, b->hexToColor(0x373737FF));
+    b->textDraw({"Unify", {VW(2), ((VH(100) - VH(9)))}, b->hexToColor(0xFFFFFFFF), static_cast<int>(VH(4)), 2});
+    b->textDraw({name, {(VW(100) - (0.5f * 8 * (VH(4)))) * 0.5f, ((VH(100) - VH(8)))}, b->hexToColor(0xFFFFFF99), static_cast<int>(VH(4)), 2});
+    if (b->spriteButtonDraw({{b->windowWidth() * (19.0f / 20.0f), ((b->windowHeight() - b->toUnit(b->windowHeight() / 16.0f))), (b->windowHeight() / 18.0f), (b->windowHeight() / 18.0f)},
         {{b->windowWidth() * (19.0f / 20.0f), ((b->windowHeight() - b->toUnit(b->windowHeight() / 16.0f))), (b->windowHeight() / 18.0f), (b->windowHeight() / 18.0f)}, 12, 255},
         {{b->windowWidth() * (19.0f / 20.0f), ((b->windowHeight() - b->toUnit(b->windowHeight() / 16.0f))), (b->windowHeight() / 18.0f), (b->windowHeight() / 18.0f)}, 10, 255},
         {{b->windowWidth() * (19.0f / 20.0f), ((b->windowHeight() - b->toUnit(b->windowHeight() / 16.0f))), (b->windowHeight() / 18.0f), (b->windowHeight() / 18.0f)}, 11, 255},
@@ -65,16 +31,7 @@ void Layout::update(IBuilder *b, CoreState &coreState, const std::string &name)
         ) && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
         coreState = CoreState::CORE_PAUSE;
     if (coreState == CoreState::CORE_PAUSE) {
-        b->radiusRectDraw(
-            {
-                b->windowWidth() / 2 - b->windowWidth() / 3 / 2,
-                b->windowHeight() / 2 - b->windowHeight() / 2.5f / 2 - b->windowHeight() / 20,
-                b->windowWidth() / 3,
-                b->windowHeight() / 2.5f
-            },
-            30,
-            b->hexToColor(0x373737FF)
-        );
+        b->radiusRectDraw({VH(50) - VW(16), VH(50) - VH(20) - VH(5), VW(33), VH(40)}, 30, b->hexToColor(0x373737FF));
         if (b->basicButtonDraw({
                 {
                     b->windowWidth() / 2 - (b->windowWidth() / 16.0f), b->windowHeight() / 2 + b->windowHeight() / 2.5f / 2 - b->windowHeight() / 20 - (b->windowHeight() / 15.0f),
