@@ -18,42 +18,14 @@ Menu::~Menu()
 
 void Menu::drawBackgrounds(IBuilder *b)
 {
-    b->rectDraw(
-        {
-            0,
-            0,
-            b->windowWidth(),
-            b->windowHeight()
-        },
-        b->hexToColor(0x212121FF)
-    );
-    b->rectDraw(
-        {
-            0,
-            b->windowHeight()/5,
-            b->windowWidth(),
-            (b->windowHeight() * 0.55f)
-        },
-        b->hexToColor(0x1A1A1AFF)
-    );
+    b->rectDraw({0, 0, VW(100), VH(100)}, b->hexToColor(0x212121FF));
+    b->rectDraw({0, VH(20), VW(100), VH(55)}, b->hexToColor(0x1A1A1AFF));
 }
 
 void Menu::drawHeader(IBuilder *b)
 {
-    b->textDraw(
-        {
-            "Unify",
-            {
-                b->windowWidth()/32,
-                b->windowHeight() / 25.0f
-            },
-            b->hexToColor(0xFFFFFFFF),
-            static_cast<int>(b->windowHeight() / 12.0f),
-            2
-        }
-    );
-    if (b->spriteButtonDraw(
-{        {
+    b->textDraw({"Unify", {VW(5), VH(5)}, b->hexToColor(0xFFFFFFFF), (int)VH(8), 2});
+    if (b->spriteButtonDraw({{
             b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 13.7f,
             b->windowWidth() / 38.0f, b->windowWidth() / 38.0f
         },
@@ -98,14 +70,7 @@ void Menu::drawHeader(IBuilder *b)
 
 void Menu::drawCarousel(IBuilder *b)
 {
-    if (b->isInBox(
-            {
-                0,
-                b->windowHeight()/5,
-                b->windowWidth(),
-                (b->windowWidth() * 0.3f)
-            }
-        )) {
+    if (b->isInBox({0, VH(20), VW(100), VH(55)})) {
         _coversOffset -= b->getEvents().mouseEvents.scrollVelocity * 10;
         if (_coversOffset > b->windowWidth() / 2 - (b->windowWidth() / 5))
             _coversOffset = b->windowWidth() / 2 - (b->windowWidth() / 5);

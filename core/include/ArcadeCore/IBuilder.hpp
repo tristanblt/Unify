@@ -14,6 +14,7 @@
 
 #include "lib/include/DisplayLibrary.hpp"
 #include "core/include/ArcadeCore/Structs.hpp"
+#include "core/include/ArcadeCore/Responsive.hpp"
 
 class IBuilder {
     public:
