@@ -23,12 +23,12 @@ bool Window::isOpen()
 
 float Window::height()
 {
-    return ((float)_height);
+    return ((float)LINES);
 }
 
 float Window::width()
 {
-    return ((float)_width);
+    return ((float)COLS);
 }
 
 void Window::clear()

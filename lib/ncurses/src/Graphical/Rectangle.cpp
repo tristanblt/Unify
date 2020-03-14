@@ -25,22 +25,21 @@ Rectangle::~Rectangle()
 
 void Rectangle::draw(IWindow *w)
 {
-    init_pair(_colorPair, COLOR_WHITE, _nColor);
     for (int y = _y; y < _y + _height; y++)
-        for (int x = _x; x < _x + _height; x++)
-            mvaddch(x, y, ' ' | COLOR_PAIR(_colorPair));
+        for (int x = _x; x < _x + _width; x++)
+            mvaddch(y, x, ' ' | COLOR_PAIR(_colorPair));
 }
 
 void Rectangle::setPosition(Vector2 position)
 {
     _x = position.x;
-    _y = position.y;
+    _y = position.y / NCURSES_RATIO;
 }
 
 void Rectangle::setSize(Vector2 size)
 {
     _width  = size.x;
-    _height = size.y;
+    _height = size.y;// NCURSES_RATIO;
 }
 
 void Rectangle::setColor(Color color)

@@ -22,15 +22,18 @@ Circle::~Circle()
 
 void Circle::draw(IWindow *w)
 {
-    int a = 0;
+    float xpos, ypos, radsqr, xsqr;
+    int x = _x + _radius;
+    int y = _y + _radius;
 
-    for(int y = -_radius; y <= _radius; y++) {
-        for (int x = -_radius; x <= _radius; x++)
-            if ( x * x + y * y < _radius * _radius &&
-                (y == 0 || y < -((_radius)/(_radius / 2)) || y > (_radius / (_radius / 2))))
-                mvaddch((_y + (y > (_radius / (_radius / 2)) || y == 0 ? y + a : y)) / 2.9, _x + x, ' ' | COLOR_PAIR(_colorPair));
-        a -= ((y !=0 && y >= -((_radius) / (_radius/2))) && y <= (_radius / (_radius / 2)) ? 1 : 0);
+    for (xpos = x - _radius; xpos <= x + _radius; xpos += 1/*0.1*/) {
+        radsqr = pow(_radius, 2);
+        xsqr = pow(xpos - x, 2);
+        ypos = sqrt(abs(radsqr - xsqr));
+        for (int i = rintf(-ypos) + y; i < rintf(ypos) + y; i++)
+            mvaddch(rintf(xpos) / NCURSES_RATIO, i, ' ' | COLOR_PAIR(_colorPair));
     }
+    
 }
 
 void Circle::setPosition(Vector2 position)

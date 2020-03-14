@@ -97,15 +97,14 @@ void ArcadeCore::launchCore(DisplayLibrary *library)
         switchGraphicalLibrary(&builder);
         //builder.updateEvents();
         builder.windowClear();
-        builder.circleDraw({100, 100, 100}, {255, 0, 0});
-        /*if (_coreState == CoreState::CORE_MENU) {
+        if (_coreState == CoreState::CORE_MENU) {
             if ((gameLib = _menu.update(&builder)) != NULL) {
                 game = gameLib->getInstance();
                 game->start(&builder);
                 _coreState = CoreState::CORE_GAME;
             }
         }
-        else {
+        /*else {
             if (_coreState != CoreState::CORE_PAUSE)
                 game->update(&builder);
             _layout.update(&builder, _coreState, game->getName());
