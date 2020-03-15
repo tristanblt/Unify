@@ -11,6 +11,7 @@ Menu::Menu()
 {
     _currentGame = NULL;
     _state = MenuState::MENU_CAROUSSEL;
+    _interruptType = false;
 }
 
 Menu::~Menu()
@@ -25,26 +26,23 @@ void Menu::drawBackgrounds(IBuilder *b)
 
 void Menu::drawHeader(IBuilder *b)
 {
-<<<<<<< HEAD
-    b->spriteDraw({{VW(3.5), VH(4), VH(12), VH(12)}, "UnifyLogo", 255});
+    b->spriteDraw({{VW(4), VH(4), VH(11.5), VH(11.5)}, "UnifyLogo", 255});
     b->textDraw({"Unify", {VW(12.5), VH(6.5)}, b->hexToColor(0xFFFFFFFF), (int)VH(5), "UnifyBoldFont"});
-    if (_state == MenuState::MENU_CAROUSSEL)
+    if (_state == MenuState::MENU_CAROUSSEL) {
         if (b->buttonDraw("UnifySettings") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
             _state = MenuState::MENU_SETTINGS;
-    else
-        if (b->buttonDraw("UnifySettings") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
+    } else {
+        if (b->buttonDraw("UnifyBack") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
             _state = MenuState::MENU_CAROUSSEL;
-    if (b->buttonDraw("UnifyRestart") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
-            std::cout << "REDEMARER" << std::endl;
-=======
-    b->textDraw({"Unify", {VW(5), VH(5)}, b->hexToColor(0xFFFFFFFF), (int)VH(8), "UnifyBoldFont"});
-    if (b->buttonDraw("UnifySettings") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
-        std::cout << "OPTIONS" << std::endl;
-    /*if (b->buttonDraw("UnifyRestart") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
-        std::cout << "REDEMARER" << std::endl;
->>>>>>> 91bc3285d985d065c5ddfe131d354217e3e8fef4
-    if (b->buttonDraw("UnifyPower") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
-        b->windowClose();*/
+    }
+    if (b->buttonDraw("UnifyRestart") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED) {
+        _interruptType = true;
+        b->windowClose();
+    }
+    if (b->buttonDraw("UnifyPower") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED) {
+        _interruptType = false;
+        b->windowClose();
+    }
 }
 
 void Menu::drawCarousel(IBuilder *b)
@@ -107,6 +105,8 @@ void Menu::start(IBuilder *b)
     {256, 128, 128, 128}, {0, 128, 128, 128}, {128, 128, 128, 128}, "UnifyIcons"), "UnifyPower");
     b->addButton(new SpriteButton({b->windowWidth() * (17.2f / 20.0f), b->windowHeight() / 15.0f * 12.6f, b->windowWidth() / 30.0f, b->windowWidth() / 30.0f},
     {256, 256, 128, 128}, {0, 256, 128, 128}, {128, 256, 128, 128}, "UnifyIcons"), "UnifyRestart");
+    b->addButton(new SpriteButton({b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 13.7f, b->windowWidth() / 38.0f, b->windowWidth() / 38.0f},
+    {256, 512, 128, 128}, {0, 512, 128, 128}, {128, 512, 128, 128}, "UnifyIcons"), "UnifyBack");
 }
 
 DLLoader<Start> *Menu::update(IBuilder *b)
@@ -118,13 +118,14 @@ DLLoader<Start> *Menu::update(IBuilder *b)
     drawHeader(b);
     if (!b->windowIsOpen())
         return (tmp);
-<<<<<<< HEAD
     if (_state == MenuState::MENU_CAROUSSEL)
         drawCarousel(b);
     else
         drawSettings(b);
-=======
-    //drawCarousel(b);
->>>>>>> 91bc3285d985d065c5ddfe131d354217e3e8fef4
     return (tmp);
+}
+
+bool Menu::getInterruptType() const
+{
+    return (_interruptType);
 }
