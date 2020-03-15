@@ -12,6 +12,7 @@ SRCS_FILES=	Graphical/Rectangle.cpp					\
 			Graphical/Window.cpp					\
 			Graphical/Circle.cpp					\
 			nCursesLibrary.cpp						\
+			nCursesColors.cpp						\
 			Entry.cpp								\
 
 SRC	=	$(addprefix $(SRCPATH), $(SRCS_FILES))
