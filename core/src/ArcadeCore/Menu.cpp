@@ -18,13 +18,13 @@ Menu::~Menu()
 
 void Menu::drawBackgrounds(IBuilder *b)
 {
+    b->rectDraw({0, 0, VW(100), VH(100)}, b->hexToColor(0x212121FF));
     b->rectDraw({0, VH(20), VW(100), VH(55)}, b->hexToColor(0x1A1A1AFF));
-    b->rectDraw({0, VH(60), VW(100), VH(10)}, b->hexToColor(0x1A1A1AFF));
 }
 
 void Menu::drawHeader(IBuilder *b)
 {
-    /*b->textDraw({"Unify", {VW(5), VH(5)}, b->hexToColor(0xFFFFFFFF), (int)VH(8), 2});
+    b->textDraw({"Unify", {VW(5), VH(5)}, b->hexToColor(0xFFFFFFFF), (int)VH(8), 2});
     if (b->spriteButtonDraw({{
             b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 13.7f,
             b->windowWidth() / 38.0f, b->windowWidth() / 38.0f
@@ -65,7 +65,7 @@ void Menu::drawHeader(IBuilder *b)
         {"", {0, 0}, b->hexToColor(0xFFFFFFFF), 0, 0},
         false}
         ) && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
-            b->windowClose();*/
+            b->windowClose();
 }
 
 void Menu::drawCarousel(IBuilder *b)
@@ -83,17 +83,17 @@ void Menu::drawCarousel(IBuilder *b)
         color = color < 0 ? color * -1 : color;
         if (i < _covers.size()) {
             color = (255 - (color * 2 * 255));
-            //b->spriteDraw({{(VH(33) + 30) * i + _coversOffset + VH(17), VH(20) + 70, VH(33), VH(33)}, _covers[i].spriteIdx, static_cast<unsigned char>(color)});
+            b->spriteDraw({{(VH(33) + 30) * i + _coversOffset + VH(17), VH(20) + 70, VH(33), VH(33)}, _covers[i].spriteIdx, static_cast<unsigned char>(color)});
         }
         else {
             color = (color = (255 - (color * 2 * 255))) >= 26 ? color : 26;
             b->radiusRectDraw({(VH(33) + 30) * i + _coversOffset + VH(17), VH(20) + 70, VH(33), VH(33)}, 50, {static_cast<unsigned char>(color), static_cast<unsigned char>(color), static_cast<unsigned char>(color), 255});
         }
         if (color > 200 && i < _covers.size()) {
-            //b->textDraw({_covers[i].gameName, {(VW(100) - (0.5f * _covers[i].gameName.length() * (VH(3)))) * 0.49f, VH(20) * 3.12f}, b->hexToColor(0xFFFFFFFF), static_cast<int>(VH(3)), 2});
-            //if (b->isInBox({(VH(33) + 30) * i + _coversOffset + VH(17), VH(20) + 70, VH(33), VH(33), }) &&
-            //b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
-            //    _currentGame = _covers[i].gameLib;
+            b->textDraw({_covers[i].gameName, {(VW(100) - (0.5f * _covers[i].gameName.length() * (VH(3)))) * 0.49f, VH(20) * 3.12f}, b->hexToColor(0xFFFFFFFF), static_cast<int>(VH(3)), 2});
+            if (b->isInBox({(VH(33) + 30) * i + _coversOffset + VH(17), VH(20) + 70, VH(33), VH(33), }) &&
+            b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
+                _currentGame = _covers[i].gameLib;
         }
     }
 }
@@ -124,9 +124,9 @@ DLLoader<Start> *Menu::update(IBuilder *b)
 
     _currentGame = NULL;
     drawBackgrounds(b);
-    //drawHeader(b);
+    drawHeader(b);
     if (!b->windowIsOpen())
         return (tmp);
-    //drawCarousel(b);
+    drawCarousel(b);
     return (tmp);
 }
