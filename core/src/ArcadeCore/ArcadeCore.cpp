@@ -23,6 +23,7 @@ void ArcadeCore::loadCoreAssets(Builder &builder)
     builder.loadAsset("assets/fonts/Montserrat-Regular.otf", "UnifyRegularFont", AssetType::FONT);
     builder.loadAsset("assets/fonts/Montserrat-Bold.otf", "UnifyBoldFont", AssetType::FONT);
     builder.loadAsset("assets/imgs/flaticons/icons.png", "UnifyIcons", AssetType::SPRITE);
+    builder.loadAsset("assets/imgs/logo.png", "UnifyLogo", AssetType::SPRITE);
 }
 
 DisplayLibrary *ArcadeCore::importGraphicalLibs(const std::string &firstLib)
