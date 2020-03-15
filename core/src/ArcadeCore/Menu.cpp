@@ -27,10 +27,10 @@ void Menu::drawHeader(IBuilder *b)
     b->textDraw({"Unify", {VW(5), VH(5)}, b->hexToColor(0xFFFFFFFF), (int)VH(8), "UnifyBoldFont"});
     if (b->buttonDraw("UnifySettings") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
         std::cout << "OPTIONS" << std::endl;
-    /*if (b->buttonDraw("UnifyRestart") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
+    if (b->buttonDraw("UnifyRestart") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
         std::cout << "REDEMARER" << std::endl;
     if (b->buttonDraw("UnifyPower") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
-        b->windowClose();*/
+        b->windowClose();
 }
 
 void Menu::drawCarousel(IBuilder *b)
