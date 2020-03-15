@@ -46,5 +46,4 @@ void nCursesLibrary::updateMouseEvents(Events *events, Window *window)
 
 void nCursesLibrary::updateKeyboardEvents(Events *events)
 {
-
 }

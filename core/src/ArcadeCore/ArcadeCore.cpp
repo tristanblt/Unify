@@ -86,4 +86,3 @@ void ArcadeCore::launchCore(DisplayLibrary *library)
         builder.windowDisplay();
     }
 }
-

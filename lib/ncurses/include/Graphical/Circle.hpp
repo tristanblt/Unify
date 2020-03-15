@@ -15,7 +15,7 @@
 #include "lib/ncurses/include/Graphical/Window.hpp"
 #include "core/include/ArcadeCore/IBuilder.hpp"
 #include "core/include/ArcadeCore/Structs.hpp"
-
+#include <cmath>
 class Circle : public ICircle {
     public:
         Circle();

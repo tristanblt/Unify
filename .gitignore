@@ -4,3 +4,4 @@ core/arcade
 *.so
 .vscode
 arcade
+.DS_Store

@@ -5,15 +5,16 @@
 ## Makefile for
 ##
 
-NAME	=	../lib_arcade_ncurses.so
+NAME	=	../lib_arcade_vulkan.so
 
 SRCPATH	=	src/
-SRCS_FILES=	Graphical/Rectangle.cpp					\
-			Graphical/Window.cpp					\
-			Graphical/Circle.cpp					\
-			nCursesLibrary.cpp						\
-			nCursesColors.cpp						\
+SRCS_FILES=	VulkanLibrary.cpp						\
 			Entry.cpp								\
+			Graphical/Window.cpp					\
+			#Graphical/Circle.cpp					\
+			Graphical/Text.cpp						\
+			Graphical/Sprite.cpp					\
+			Graphical/Rectangle.cpp					\
 
 SRC	=	$(addprefix $(SRCPATH), $(SRCS_FILES))
 
@@ -22,7 +23,7 @@ OBJ			= 	$(SRC:%.cpp=%.o)
 CXXFLAGS	=	-W -Wall -Wextra -Wshadow	\
 			-I../../	-std=c++11 -fpic
 
-LDFLAGS		= -lncurses
+LDFLAGS		= -lvulkan -lglfw
 
 CXX		=	g++
 

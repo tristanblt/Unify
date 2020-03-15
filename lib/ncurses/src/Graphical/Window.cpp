@@ -23,12 +23,12 @@ bool Window::isOpen()
 
 float Window::height()
 {
-    return ((float)_height);
+    return (static_cast<float>(LINES));
 }
 
 float Window::width()
 {
-    return ((float)_width);
+    return (static_cast<float>(COLS));
 }
 
 void Window::clear()
@@ -40,6 +40,8 @@ void Window::display()
 {
     char c = getch();
 
+    _width = COLS;
+    _height = LINES;
     while (LINES < 35 || COLS < 150) {
         erase();
         mvprintw(LINES/2, COLS/2, "Please enlarge your terminal to be at least 150 cols by 35 lines.");
@@ -47,9 +49,9 @@ void Window::display()
         refresh();
     }
     switch (c) {
-    case 'q':
-        _isOpen = false;
-        break;
+        case 'q':
+            _isOpen = false;
+            break;
     }
     refresh();
 }
@@ -64,9 +66,9 @@ void Window::create()
     initscr();
     start_color();
     noecho();
-    curs_set(0);
     nodelay(stdscr, TRUE);
     keypad(stdscr, TRUE);
+    curs_set(0);
     _width = COLS;
     _height = LINES;
     _isOpen = true;

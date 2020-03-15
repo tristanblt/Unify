@@ -21,8 +21,12 @@ class nCursesLibrary : public DisplayLibrary {
         float toUnit(float);
         void loadAsset(const std::string &, AssetType);
 
-        Events updateEvents(Events *events);
+        Events updateEvents(Events *);
         int getLastAssetIdx() const;
+        std::map<int, Color> getKnownColors() const;
+        static int colorExists(Color);
+        static int addColor(Color);
+        static std::map<int, Color> _knownColors;
     protected:
     private:
         void updateMouseEvents(Events *events, Window *window);

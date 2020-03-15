@@ -8,13 +8,13 @@
 #ifndef NCURSESCOLORS_HPP_
 #define NCURSESCOLORS_HPP_
 
-#define NCURSES_RED 1
-#define NCURSES_GREEN 2
-#define NCURSES_BLUE 3
-#define NCURSES_YELLOW 4
-#define NCURSES_CYAN 5
-#define NCURSES_MAGENTA 6
-#define NCURSES_BLACK 7
-#define NCURSES_WHITE 7
+#include "lib/include/DisplayLibrary.hpp"
+
+namespace nCursesColors
+{
+    int colorExists(Color);
+    int addColor(Color);
+    static std::map<int, Color> _knownColors;
+};
 
 #endif /* !NCURSESCOLORS_HPP_ */
