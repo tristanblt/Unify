@@ -11,6 +11,8 @@
 #include "core/include/ArcadeCore/IBuilder.hpp"
 #include "core/include/ArcadeCore/Structs.hpp"
 #include "core/include/ArcadeCore/Enums.hpp"
+#include "core/include/ArcadeCore/BasicButton.hpp"
+#include "core/include/ArcadeCore/SpriteButton.hpp"
 
 class Layout {
     public:
@@ -18,6 +20,7 @@ class Layout {
         ~Layout();
 
         void update(IBuilder *builder, CoreState &coreState, const std::string &gameName);
+        void start(IBuilder *builder);
     protected:
     private:
 };

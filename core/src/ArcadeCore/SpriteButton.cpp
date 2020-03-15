@@ -5,10 +5,11 @@
 ** SpriteButton
 */
 
-#include "SpriteButton.hpp"
+#include "core/include/ArcadeCore/SpriteButton.hpp"
+#include "core/include/ArcadeCore/IBuilder.hpp"
 
-SpriteButton::SpriteButton(Box displayBox, Box active, Box inactive, Box holder, int spriteSeeet):
-_displayBox(displayBox), _spriteSheetIndex({active, inactive, hold}), _spriteSheetIndex(spriteSeeet)
+SpriteButton::SpriteButton(Box displayBox, Box active, Box inactive, Box hold, const std::string &spriteSeeet):
+_displayBox(displayBox), _spriteBoxes({{active, inactive, hold}}), _spriteSheetIndex(spriteSeeet)
 {
 }
 
@@ -20,11 +21,11 @@ bool SpriteButton::draw(IBuilder *builder)
 {
     bool state = builder->isInBox(_displayBox);
 
-    if (state == true && builder->_events.mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::CLICK)
-        builder->spriteDraw({_spriteBoxes[0], _spriteSheetIndex, 255});
+    if (state == true && builder->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::CLICK)
+        builder->spriteDraw({_displayBox, _spriteSheetIndex, 255}, _spriteBoxes[0]);
     else if (state == true)
-        builder->spriteDraw({_spriteBoxes[1], _spriteSheetIndex, 255});
+        builder->spriteDraw({_displayBox, _spriteSheetIndex, 255}, _spriteBoxes[1]);
     else
-        builder->spriteDraw({_spriteBoxes[2], _spriteSheetIndex, 255});
-    return (button.state && builder->_events.mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::CLICK);
+        builder->spriteDraw({_displayBox, _spriteSheetIndex, 255}, _spriteBoxes[2]);
+    return (state);
 }

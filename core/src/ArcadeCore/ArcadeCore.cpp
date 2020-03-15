@@ -19,19 +19,10 @@ ArcadeCore::~ArcadeCore()
 
 void ArcadeCore::loadCoreAssets(Builder &builder)
 {
-    builder.loadAsset("assets/fonts/Montserrat-Light.otf", AssetType::FONT);
-    builder.loadAsset("assets/fonts/Montserrat-Regular.otf", AssetType::FONT);
-    builder.loadAsset("assets/fonts/Montserrat-Bold.otf", AssetType::FONT);
-    builder.loadAsset("assets/imgs/flaticons/gear.png", AssetType::SPRITE);
-    builder.loadAsset("assets/imgs/flaticons/refresh.png", AssetType::SPRITE);
-    builder.loadAsset("assets/imgs/flaticons/refresh-a.png", AssetType::SPRITE);
-    builder.loadAsset("assets/imgs/flaticons/refresh-h.png", AssetType::SPRITE);
-    builder.loadAsset("assets/imgs/flaticons/switch.png", AssetType::SPRITE);
-    builder.loadAsset("assets/imgs/flaticons/switch-h.png", AssetType::SPRITE);
-    builder.loadAsset("assets/imgs/flaticons/switch-a.png", AssetType::SPRITE);
-    builder.loadAsset("assets/imgs/flaticons/open-menu-i.png", AssetType::SPRITE);
-    builder.loadAsset("assets/imgs/flaticons/open-menu-h.png", AssetType::SPRITE);
-    builder.loadAsset("assets/imgs/flaticons/open-menu-a.png", AssetType::SPRITE);
+    builder.loadAsset("assets/fonts/Montserrat-Light.otf", "UnifyLightFont", AssetType::FONT);
+    builder.loadAsset("assets/fonts/Montserrat-Regular.otf", "UnifyRegularFont", AssetType::FONT);
+    builder.loadAsset("assets/fonts/Montserrat-Bold.otf", "UnifyBoldFont", AssetType::FONT);
+    builder.loadAsset("assets/imgs/flaticons/icons.png", "UnifyIcons", AssetType::SPRITE);
 }
 
 DisplayLibrary *ArcadeCore::importGraphicalLibs(const std::string &firstLib)
@@ -61,7 +52,7 @@ DisplayLibrary *ArcadeCore::importGraphicalLibs(const std::string &firstLib)
 void ArcadeCore::switchGraphicalLibrary(IBuilder *b)
 {
     if (b->getEvents().keyboardState[Key::N] == InputState::CLICK) {
-        if (_currentLib + 1 > _libs.size() - 1)
+        if (static_cast<unsigned long>(_currentLib + 1) > _libs.size() - 1)
             _currentLib = 0;
         b->reloadLibrary(_libs[_currentLib]);
     }
@@ -73,8 +64,9 @@ void ArcadeCore::launchCore(DisplayLibrary *library)
     DLLoader<Start> *gameLib;
     Builder builder(library);
 
-    /*loadCoreAssets(builder);
+    loadCoreAssets(builder);
     _menu.start(&builder);
+    _layout.start(&builder);
     while (builder.windowIsOpen()) {
         switchGraphicalLibrary(&builder);
         builder.updateEvents();
@@ -91,25 +83,6 @@ void ArcadeCore::launchCore(DisplayLibrary *library)
                 game->update(&builder);
             _layout.update(&builder, _coreState, game->getName());
         }
-        builder.windowDisplay();
-    }*/
-    while (builder.windowIsOpen()) {
-        switchGraphicalLibrary(&builder);
-        //builder.updateEvents();
-        builder.windowClear();
-        builder.circleDraw({100, 100, 100}, {255, 0, 0});
-        /*if (_coreState == CoreState::CORE_MENU) {
-            if ((gameLib = _menu.update(&builder)) != NULL) {
-                game = gameLib->getInstance();
-                game->start(&builder);
-                _coreState = CoreState::CORE_GAME;
-            }
-        }
-        else {
-            if (_coreState != CoreState::CORE_PAUSE)
-                game->update(&builder);
-            _layout.update(&builder, _coreState, game->getName());
-        }*/
         builder.windowDisplay();
     }
 }

@@ -22,7 +22,7 @@ class SFMLLibrary : public DisplayLibrary {
         ~SFMLLibrary();
 
         float toUnit(float);
-        void loadAsset(const std::string &path, AssetType type);
+        void loadAsset(const std::string &path, const std::string &name, AssetType type);
 
         Events updateEvents(Events *events);
         int getLastAssetIdx() const;

@@ -16,7 +16,6 @@ int main(int argc, char const *argv[])
 {
     ArcadeCore arcadeCore;
     DisplayLibrary *lib;
-
     if (argc < 2)
         return (84);
     lib = arcadeCore.importGraphicalLibs(std::string(argv[1]));

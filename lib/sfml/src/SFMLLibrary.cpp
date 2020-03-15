@@ -68,19 +68,19 @@ Events SFMLLibrary::updateEvents(Events *e)
     return (*e);
 }
 
-void SFMLLibrary::loadAsset(const std::string &name, AssetType type)
+void SFMLLibrary::loadAsset(const std::string &path, const std::string &name, AssetType type)
 {
     if (type == AssetType::FONT) {
         sf::Font *f = new sf::Font();
-        if (!f->loadFromFile(name))
+        if (!f->loadFromFile(path))
             throw std::invalid_argument("FONT NOT FOUND"); // TODO
-        _assets.push_back((void *)f);
+        _assets[name] = (void *)f;
     }
     else if (type == AssetType::SPRITE) {
         sf::Texture *f = new sf::Texture();
-        if (!f->loadFromFile(name))
+        if (!f->loadFromFile(path))
             throw std::invalid_argument("SPRITE NOT FOUND"); // TODO
-        _assets.push_back((void *)f);
+        _assets[name] = (void *)f;
     }
 }
 

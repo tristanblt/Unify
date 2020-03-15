@@ -42,7 +42,7 @@ struct TextModel {
     Vector2 p;
     Color c;
     int fontSize;
-    int assetIdx;
+    std::string assetIdx;
 };
 
 struct MouseEvents {
@@ -58,38 +58,8 @@ struct Events {
 };
 struct SpriteModel {
     Box b;
-    int assetIdx;
+    std::string assetIdx;
     unsigned char opacity;
 };
 
-struct BasicButton {
-    Box b;
-    int r;
-    Color activeColor;
-    Color inactiveColor;
-    Color holdColor;
-    TextModel activeText;
-    TextModel inactiveText;
-    TextModel holdText;
-    bool state;
-};
-
-struct SpriteButton {
-    Box b;
-    SpriteModel activeSprite;
-    SpriteModel inactiveSprite;
-    SpriteModel holdSprite;
-    TextModel activeText;
-    TextModel inactiveText;
-    TextModel holdText;
-    bool state;
-};
-
-struct newSpriteButton {
-    Box display;
-    Box active;
-    Box inactive;
-    Box hold;
-    int spriteSheetIdx;
-};
 #endif /* !STRUCTS_HPP_ */

@@ -92,45 +92,16 @@ void Builder::radiusRectDraw(Box box, float radius, Color color)
     _library->_circle->draw(_library->_window);
 }
 
-bool Builder::buttonDraw(Box box, float radius, Color color, std::string text, int fontIdx)
+bool Builder::buttonDraw(std::string name)
 {
-    radiusRectDraw(box, radius, color);
-    textDraw({text, {(box.x + box.w  - (text.size() * box.h ) / 2.95f), box.y + box.h / 6.0f}, hexToColor(0xFFFFFFFF), static_cast<int>(box.h / 2), fontIdx});
-    return (isInBox(box));
+    if (_buttons.find(name) == _buttons.end())
+        throw std::invalid_argument("Could not find button");
+    return (_buttons[name]->draw(this));
 }
 
-bool Builder::basicButtonDraw(BasicButton button)
+void Builder::addButton(IButton *button, std::string name)
 {
-    button.state = isInBox(button.b);
-
-    if (button.state == true && _events.mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::CLICK) {
-        radiusRectDraw(button.b, button.r, button.activeColor);
-        textDraw(button.activeText);
-    } else if (button.state == true) {
-        radiusRectDraw(button.b, button.r, button.holdColor);
-        textDraw(button.holdText);
-    } else {
-        radiusRectDraw(button.b, button.r, button.inactiveColor);
-        textDraw(button.inactiveText);
-    }
-    return (button.state);
-}
-
-bool Builder::spriteButtonDraw(SpriteButton button)
-{
-    button.state = isInBox(button.b);
-
-    if (button.state == true && _events.mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::CLICK) {
-        spriteDraw(button.activeSprite);
-        textDraw(button.activeText);
-    } else if (button.state == true) {
-        spriteDraw(button.holdSprite);
-        textDraw(button.holdText);
-    } else {
-        spriteDraw(button.inactiveSprite);
-        textDraw(button.inactiveText);
-    }
-    return (button.state);
+    _buttons[name] = button;
 }
 
 Color Builder::hexToColor(int color) const
@@ -163,9 +134,9 @@ void Builder::circleDraw(CircleModel circle, Color color)
     _library->_circle->draw(_library->_window);
 }
 
-void Builder::loadAsset(const std::string &name, AssetType type)
+void Builder::loadAsset(const std::string &path, const std::string &name, AssetType type)
 {
-    _library->loadAsset(name, type);
+    _library->loadAsset(path, name, type);
 }
 
 int Builder::getLastAssetIdx() const
@@ -197,6 +168,15 @@ void Builder::spriteDraw(SpriteModel sprite)
     _library->_sprite->setSprite(sprite.assetIdx);
     _library->_sprite->setOpacity(sprite.opacity);
     _library->_sprite->setSize({sprite.b.w, sprite.b.h});
+    _library->_sprite->draw(_library->_window);
+}
+
+void Builder::spriteDraw(SpriteModel sprite, Box frame)
+{
+    _library->_sprite->setPosition({sprite.b.x, sprite.b.y});
+    _library->_sprite->setSprite(sprite.assetIdx);
+    _library->_sprite->setOpacity(sprite.opacity);
+    _library->_sprite->setSize(sprite.b, frame);
     _library->_sprite->draw(_library->_window);
 }
 

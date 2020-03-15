@@ -11,21 +11,24 @@
 #include <array>
 #include "core/include/ArcadeCore/IButton.hpp"
 
-class BasicButton {
+class BasicButton: public IButton {
     public:
-        BasicButton();
+        BasicButton(Box displayBox, float radius, std::string text,
+        Color bActive, Color bInactive, Color bHold,
+        Color tActive, Color tInactive, Color tHold,
+        int fontSize, std::string fontIdx);
         ~BasicButton();
 
         bool draw(IBuilder *builder);
     protected:
     private:
         Box _displayBox;
-        float radius;
+        float _radius;
+        std::string _text;
         std::array <Color, 3> _boxColors;
         std::array <Color, 3> _textColors;
-        std::string _text;
-        int fontIdx;
-        int fontsize;
+        int _fontSize;
+        std::string _fontIdx;
 };
 
 #endif /* !BASICBUTTON_HPP_ */

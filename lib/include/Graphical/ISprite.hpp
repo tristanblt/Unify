@@ -18,7 +18,8 @@ class ISprite {
         virtual void draw(IWindow *window) = 0;
         virtual void setPosition(Vector2 position) = 0;
         virtual void setSize(Vector2 size) = 0;
-        virtual void setSprite(int sprite) = 0;
+        virtual void setSize(Box body, Box frame) = 0;
+        virtual void setSprite(const std::string &sprite) = 0;
         virtual void setOpacity(unsigned char opacity) = 0;
     protected:
     private:

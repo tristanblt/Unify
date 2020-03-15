@@ -18,7 +18,7 @@ class IText {
         virtual void draw(IWindow *window) = 0;
         virtual void setPosition(Vector2 position) = 0;
         virtual void setColor(Color color) = 0;
-        virtual void setFont(int fontIdx) = 0;
+        virtual void setFont(const std::string &fontIdx) = 0;
         virtual void setFontSize(int fontSize) = 0;
         virtual void setText(const std::string &text) = 0;
     protected:

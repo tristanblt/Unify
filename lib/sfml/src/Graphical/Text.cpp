@@ -7,7 +7,7 @@
 
 #include "lib/sfml/include/Graphical/Text.hpp"
 
-Text::Text(std::vector<void *> *assets)
+Text::Text(std::map<std::string, void *> *assets)
 {
     _assets = assets;
     _text = new sf::Text();
@@ -45,8 +45,10 @@ void Text::setText(const std::string &text)
     _text->setString(text);
 }
 
-void Text::setFont(int idx)
+void Text::setFont(const std::string &idx)
 {
+    if (_assets->find(idx) == _assets->end())
+        throw std::invalid_argument("Could not find font asset");
     _text->setFont(*static_cast<sf::Font *>((*_assets)[idx]));
 }
 

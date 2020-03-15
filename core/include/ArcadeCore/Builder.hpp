@@ -9,6 +9,7 @@
 #define BUILDER_HPP_
 
 #include "core/include/ArcadeCore/IBuilder.hpp"
+#include "core/include/ArcadeCore/IButton.hpp"
 
 class Builder: public IBuilder {
     public:
@@ -29,9 +30,10 @@ class Builder: public IBuilder {
         void radiusRectDraw(Box box, float radius, Color color);
         void textDraw(TextModel text);
         void spriteDraw(SpriteModel sprite);
-        bool buttonDraw(Box, float, Color, std::string, int);
-        bool basicButtonDraw(BasicButton);
-        bool spriteButtonDraw(SpriteButton);
+        void spriteDraw(SpriteModel sprite, Box frame);
+
+        void addButton(IButton *button, std::string name);
+        bool buttonDraw(std::string name);
 
         Color hexToColor(int hexColor) const;
 
@@ -39,7 +41,7 @@ class Builder: public IBuilder {
 
         bool isInBox(Box box);
 
-        void loadAsset(const std::string &path, AssetType type);
+        void loadAsset(const std::string &path, const std::string &name, AssetType type);
 
         void updateEvents();
 
@@ -49,6 +51,7 @@ class Builder: public IBuilder {
         time_t getTime() const;
     protected:
     private:
+        std::map <std::string, IButton *> _buttons;
         Events _events;
         time_t _tick;
         DisplayLibrary *_library;

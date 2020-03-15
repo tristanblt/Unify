@@ -24,48 +24,13 @@ void Menu::drawBackgrounds(IBuilder *b)
 
 void Menu::drawHeader(IBuilder *b)
 {
-    b->textDraw({"Unify", {VW(5), VH(5)}, b->hexToColor(0xFFFFFFFF), (int)VH(8), 2});
-    if (b->spriteButtonDraw({{
-            b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 13.7f,
-            b->windowWidth() / 38.0f, b->windowWidth() / 38.0f
-        },
-        {{b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 13.7f, b->windowWidth() / 38.0f, b->windowWidth() / 38.0f}, 3, 255},
-        {{b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 13.7f, b->windowWidth() / 38.0f, b->windowWidth() / 38.0f}, 3, 255},
-        {{b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 13.7f, b->windowWidth() / 38.0f, b->windowWidth() / 38.0f}, 3, 255},
-        {"", {0, 0}, b->hexToColor(0xFFFFFFFF), 0, 0},
-        {"", {0, 0}, b->hexToColor(0xFFFFFFFF), 0, 0},
-        {"", {0, 0}, b->hexToColor(0xFFFFFFFF), 0, 0},
-        false}
-        ) && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
+    b->textDraw({"Unify", {VW(5), VH(5)}, b->hexToColor(0xFFFFFFFF), (int)VH(8), "UnifyBoldFont"});
+    if (b->buttonDraw("UnifySettings") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
             std::cout << "OPTIONS" << std::endl;
-    if (b->spriteButtonDraw(
-{        {
-            b->windowWidth() * (17.2f / 20.0f), b->windowHeight() / 15.0f * 12.6f,
-            b->windowWidth() / 30.0f, b->windowWidth() / 30.0f
-        },
-        {{b->windowWidth() * (17.2f / 20.0f), b->windowHeight() / 15.0f * 12.6f, b->windowWidth() / 30.0f, b->windowWidth() / 30.0f}, 5, 255},
-        {{b->windowWidth() * (17.2f / 20.0f), b->windowHeight() / 15.0f * 12.6f, b->windowWidth() / 30.0f, b->windowWidth() / 30.0f}, 4, 255},
-        {{b->windowWidth() * (17.2f / 20.0f), b->windowHeight() / 15.0f * 12.6f, b->windowWidth() / 30.0f, b->windowWidth() / 30.0f}, 6, 255},
-        {"", {0, 0}, b->hexToColor(0xFFFFFFFF), 0, 0},
-        {"", {0, 0}, b->hexToColor(0xFFFFFFFF), 0, 0},
-        {"", {0, 0}, b->hexToColor(0xFFFFFFFF), 0, 0},
-        false}
-        ) && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
+    if (b->buttonDraw("UnifyRestart") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
             std::cout << "REDEMARER" << std::endl;
-    if (b->spriteButtonDraw(
-{        {
-            b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 15.0f * 12.6f,
-            b->windowWidth() / 30.0f, b->windowWidth() / 30.0f
-        },
-        {{b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 15.0f * 12.6f, b->windowWidth() / 30.0f, b->windowWidth() / 30.0f}, 9, 255},
-        {{b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 15.0f * 12.6f, b->windowWidth() / 30.0f, b->windowWidth() / 30.0f}, 7, 255},
-        {{b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 15.0f * 12.6f, b->windowWidth() / 30.0f, b->windowWidth() / 30.0f}, 8, 255},
-        {"", {0, 0}, b->hexToColor(0xFFFFFFFF), 0, 0},
-        {"", {0, 0}, b->hexToColor(0xFFFFFFFF), 0, 0},
-        {"", {0, 0}, b->hexToColor(0xFFFFFFFF), 0, 0},
-        false}
-        ) && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
-            b->windowClose();
+    if (b->buttonDraw("UnifyPower") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
+        b->windowClose();
 }
 
 void Menu::drawCarousel(IBuilder *b)
@@ -90,7 +55,7 @@ void Menu::drawCarousel(IBuilder *b)
             b->radiusRectDraw({(VH(33) + 30) * i + _coversOffset + VH(17), VH(20) + 70, VH(33), VH(33)}, 50, {static_cast<unsigned char>(color), static_cast<unsigned char>(color), static_cast<unsigned char>(color), 255});
         }
         if (color > 200 && i < _covers.size()) {
-            b->textDraw({_covers[i].gameName, {(VW(100) - (0.5f * _covers[i].gameName.length() * (VH(3)))) * 0.49f, VH(20) * 3.12f}, b->hexToColor(0xFFFFFFFF), static_cast<int>(VH(3)), 2});
+            b->textDraw({_covers[i].gameName, {(VW(100) - (0.5f * _covers[i].gameName.length() * (VH(3)))) * 0.49f, VH(20) * 3.12f}, b->hexToColor(0xFFFFFFFF), static_cast<int>(VH(3)), "UnifyBoldFont"});
             if (b->isInBox({(VH(33) + 30) * i + _coversOffset + VH(17), VH(20) + 70, VH(33), VH(33), }) &&
             b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
                 _currentGame = _covers[i].gameLib;
@@ -111,11 +76,18 @@ void Menu::start(IBuilder *b)
             file.push_back(buffer);
     f.close();
     for (size_t i = 0; i < file.size() / 3 * 3; i += 3) {
-        b->loadAsset(file[i + 1], AssetType::SPRITE);
+        b->loadAsset(file[i + 1], "UnifyCover" + std::to_string(i), AssetType::SPRITE);
         DLLoader<Start> *loader = new DLLoader<Start>(file[i + 2].c_str());
-        _covers.push_back({file[i], loader, b->getLastAssetIdx()});
+        _covers.push_back({file[i], loader, "UnifyCover" + std::to_string(i)});
     }
     _coversOffset = VW(50) - VW(20);
+
+    b->addButton(new SpriteButton({b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 13.7f, b->windowWidth() / 38.0f, b->windowWidth() / 38.0f},
+    {0, 0, 128, 128}, {256, 0, 128, 128}, {128, 0, 128, 128}, "UnifyIcons"), "UnifySettings");
+    b->addButton(new SpriteButton({b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 15.0f * 12.6f, b->windowWidth() / 30.0f, b->windowWidth() / 30.0f},
+    {0, 0, 128, 128}, {256, 0, 128, 128}, {128, 0, 128, 128}, "UnifyIcons"), "UnifyPower");
+    b->addButton(new SpriteButton({b->windowWidth() * (17.2f / 20.0f), b->windowHeight() / 15.0f * 12.6f, b->windowWidth() / 30.0f, b->windowWidth() / 30.0f},
+    {0, 0, 128, 128}, {256, 0, 128, 128}, {128, 0, 128, 128}, "UnifyIcons"), "UnifyRestart");
 }
 
 DLLoader<Start> *Menu::update(IBuilder *b)

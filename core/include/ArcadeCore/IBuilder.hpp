@@ -15,6 +15,7 @@
 #include "lib/include/DisplayLibrary.hpp"
 #include "core/include/ArcadeCore/Structs.hpp"
 #include "core/include/ArcadeCore/Responsive.hpp"
+#include "core/include/ArcadeCore/IButton.hpp"
 
 class IBuilder {
     public:
@@ -34,16 +35,17 @@ class IBuilder {
         virtual void radiusRectDraw(Box box, float radius, Color color) = 0;
         virtual void textDraw(TextModel text) = 0;
         virtual void spriteDraw(SpriteModel sprite) = 0;
-        virtual bool buttonDraw(Box, float, Color, std::string, int) = 0;
-        virtual bool basicButtonDraw(BasicButton) = 0;
-        virtual bool spriteButtonDraw(SpriteButton) = 0;
+        virtual void spriteDraw(SpriteModel sprite, Box frame) = 0;
+
+        virtual bool buttonDraw(std::string name) = 0;
+        virtual void addButton(IButton *button, std::string name) = 0;
 
         virtual Color hexToColor(int hexColor) const = 0;
         virtual float toUnit(float) = 0;
 
         virtual bool isInBox(Box box) = 0;
 
-        virtual void loadAsset(const std::string &path, AssetType type) = 0;
+        virtual void loadAsset(const std::string &path, const std::string &name, AssetType type) = 0;
 
         virtual void updateEvents() = 0;
 

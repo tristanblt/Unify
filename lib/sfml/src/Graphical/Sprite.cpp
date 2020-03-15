@@ -7,7 +7,7 @@
 
 #include "lib/sfml/include/Graphical/Sprite.hpp"
 
-Sprite::Sprite(std::vector<void *> *assets)
+Sprite::Sprite(std::map<std::string, void *> *assets)
 {
     _assets = assets;
     _sprite = new sf::Sprite();
@@ -39,8 +39,19 @@ void Sprite::setSize(Vector2 size)
     }
 }
 
-void Sprite::setSprite(int idx)
+void Sprite::setSize(Box body, Box frame)
 {
+    if (_sprite->getTexture()) {
+        _sprite->setTextureRect(sf::IntRect(frame.x, frame.y, frame.h, frame.w));
+        _sprite->setScale(sf::Vector2f(body.h / frame.h,
+                                       body.w / frame.w));
+    }
+}
+
+void Sprite::setSprite(const std::string &idx)
+{
+    if (_assets->find(idx) == _assets->end())
+        throw std::invalid_argument("Could not find sprite asset");
     _sprite->setTexture(*static_cast<sf::Texture *>((*_assets)[idx]));
 }
 

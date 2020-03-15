@@ -17,18 +17,19 @@
 
 class Sprite : public ISprite {
     public:
-        Sprite(std::vector<void *> *assets);
+        Sprite(std::map<std::string, void *> *assets);
         ~Sprite();
 
         void draw(IWindow *window);
         void setPosition(Vector2 position);
         void setSize(Vector2 size);
-        void setSprite(int spriteIdx);
+        void setSprite(const std::string &spriteIdx);
+        void setSize(Box body, Box frame);
         void setOpacity(unsigned char opacity);
     protected:
     private:
         sf::Sprite *_sprite;
-        std::vector<void *> *_assets;
+        std::map<std::string, void *> *_assets;
 };
 
 #endif /* !Sprite_HPP_ */

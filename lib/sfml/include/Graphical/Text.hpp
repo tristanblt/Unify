@@ -17,7 +17,7 @@
 
 class Text : public IText {
     public:
-        Text(std::vector<void *> *assets);
+        Text(std::map<std::string, void *> *assets);
         ~Text();
 
         void draw(IWindow *window);
@@ -25,11 +25,11 @@ class Text : public IText {
         void setColor(Color color);
         void setFontSize(int fontSize);
         void setText(const std::string &text);
-        void setFont(int fontIdx);
+        void setFont(const std::string &fontIdx);
     protected:
     private:
         sf::Text *_text;
-        std::vector<void *> *_assets;
+        std::map<std::string, void *> *_assets;
 };
 
 #endif /* !Text_HPP_ */

@@ -11,9 +11,9 @@
 #include <array>
 #include "core/include/ArcadeCore/IButton.hpp"
 
-class SpriteButton: public button {
+class SpriteButton: public IButton {
     public:
-        SpriteButton(Box display, Box actiive, Box inactive, Box hold, int spriteSheet);
+        SpriteButton(Box display, Box active, Box inactive, Box hold, const std::string &spriteSheet);
         ~SpriteButton();
 
         bool draw(IBuilder *builder);
@@ -21,7 +21,7 @@ class SpriteButton: public button {
     private:
         Box _displayBox;
         std::array <Box, 3> _spriteBoxes;
-        int _spriteSheetIndex;
+        std::string _spriteSheetIndex;
 };
 
 #endif /* !SPRITEBUTTON_HPP_ */

@@ -11,6 +11,8 @@
 #include "core/include/ArcadeCore/IBuilder.hpp"
 #include "games/include/Start.hpp"
 #include "core/include/DLLoader.hpp"
+#include "core/include/ArcadeCore/BasicButton.hpp"
+#include "core/include/ArcadeCore/SpriteButton.hpp"
 #include <vector>
 #include <fstream>
 
@@ -22,7 +24,7 @@ class Menu {
         struct GameCover {
             std::string gameName;
             DLLoader<Start> *gameLib;
-            int spriteIdx;
+            std::string spriteIdx;
         };
 
         DLLoader<Start> *update(IBuilder *builder);
