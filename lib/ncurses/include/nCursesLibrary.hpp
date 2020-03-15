@@ -12,6 +12,8 @@
 #include "lib/ncurses/include/Graphical/Window.hpp"
 #include "lib/ncurses/include/Graphical/Rectangle.hpp"
 #include "lib/ncurses/include/Graphical/Circle.hpp"
+#include "lib/ncurses/include/Graphical/Sprite.hpp"
+#include "lib/ncurses/include/Graphical/Text.hpp"
 
 class nCursesLibrary : public DisplayLibrary {
     public:
@@ -19,7 +21,7 @@ class nCursesLibrary : public DisplayLibrary {
         ~nCursesLibrary();
 
         float toUnit(float);
-        void loadAsset(const std::string &, AssetType);
+        void loadAsset(const std::string &path, const std::string &name, AssetType type);
 
         Events updateEvents(Events *);
         int getLastAssetIdx() const;

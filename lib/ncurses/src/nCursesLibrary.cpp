@@ -12,6 +12,8 @@ nCursesLibrary::nCursesLibrary()
     _rect = new Rectangle();
     _window = new Window();
     _circle = new Circle();
+    _text = new Text(&_assets);
+    _sprite = new Sprite(&_assets);
 }
 
 nCursesLibrary::~nCursesLibrary()
@@ -23,10 +25,12 @@ float nCursesLibrary::toUnit(float nb)
     return (nb);
 }
 
-void nCursesLibrary::loadAsset(const std::string &path, AssetType type)
+void nCursesLibrary::loadAsset(const std::string &path, const std::string &name, AssetType type)
 {
-    (void)path;
-    (void)type;
+    if (type == AssetType::SPRITE) {
+        PngFile *f = new PngFile();
+        _assets[name] = (void *)f;
+    }
 }
 
 Events nCursesLibrary::updateEvents(Events *events)
@@ -36,7 +40,7 @@ Events nCursesLibrary::updateEvents(Events *events)
 
 int nCursesLibrary::getLastAssetIdx() const
 {
-    //return (_assets.size() - 1);
+    return (_assets.size() - 1);
     return (0);
 }
 void nCursesLibrary::updateMouseEvents(Events *events, Window *window)

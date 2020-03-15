@@ -8,11 +8,12 @@
 #ifndef RECTANGLENCURSE_HPP_
 #define RECTANGLENCURSE_HPP_
 
+#include <ncurses.h>
+
 #include "lib/include/Graphical/IRectangle.hpp"
-#include "lib/include/Graphical/IWindow.hpp"
-#include "lib/ncurses/include/Graphical/Window.hpp"
 #include "core/include/ArcadeCore/IBuilder.hpp"
 #include "core/include/ArcadeCore/Structs.hpp"
+#include "lib/ncurses/include/nCursesColors.hpp"
 
 class Rectangle : public IRectangle {
     public:

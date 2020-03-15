@@ -6,9 +6,7 @@
 */
 
 #include "lib/ncurses/include/Graphical/Rectangle.hpp"
-#include <ncurses.h>
-#include "lib/ncurses/include/nCursesColors.hpp"
-#include <fstream>
+
 Rectangle::Rectangle():
 _x(0),
 _y(0),
@@ -34,7 +32,6 @@ void Rectangle::setPosition(Vector2 position)
 {
     _x = static_cast<int>(position.x);
     _y = static_cast<int>(position.y);
-    // _y = static_cast<int>(position.y / NCURSES_RATIO);
 }
 
 void Rectangle::setSize(Vector2 size)
@@ -45,11 +42,8 @@ void Rectangle::setSize(Vector2 size)
 
 void Rectangle::setColor(Color color)
 {
-    // std::ofstream test;
     int tmp;
 
-    // test.open("test_rectangle.txt", std::ios::app);
-    // test << "rectangle color : rgb(" << +color.r << ", " << +color.g << ", " << +color.b << ")" << std::endl;
     color.r = color.r > 250 ? 250 : color.r < 0 ? 0 : color.r;
     color.g = color.g > 250 ? 250 : color.g < 0 ? 0 : color.g;
     color.b = color.b > 250 ? 250 : color.b < 0 ? 0 : color.b;
@@ -62,8 +56,5 @@ void Rectangle::setColor(Color color)
         _nColor = _colorPair;
         init_color(_nColor, color.r * 4, color.g * 4, color.b * 4);
         init_pair(_colorPair, COLOR_WHITE, _nColor);
-        // init_pair(_colorPair, _nColor, COLOR_WHITE);
     }
-    // test << "color pair : " << _colorPair << " | nColor : " << _nColor << std::endl;
-    // test.close();
 }
