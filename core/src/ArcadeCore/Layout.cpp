@@ -19,7 +19,7 @@ Layout::~Layout()
 void Layout::start(IBuilder *b)
 {
     b->addButton(new SpriteButton({b->windowWidth() * (19.0f / 20.0f), ((b->windowHeight() - b->toUnit(b->windowHeight() / 16.0f))), (b->windowHeight() / 18.0f), (b->windowHeight() / 18.0f)},
-    {0, 0, 128, 128}, {256, 0, 128, 128}, {128, 0, 128, 128}, "UnifyIcons"), "UnifyPause");
+    {0, 384, 128, 128}, {128, 384, 128, 128}, {256, 384, 128, 128}, "UnifyIcons"), "UnifyPause");
 
     b->addButton(new BasicButton({b->windowWidth() / 2 - (b->windowWidth() / 16.0f), b->windowHeight() / 2 + b->windowHeight() / 2.5f / 2 - b->windowHeight() / 20 - (b->windowHeight() / 15.0f), (b->windowWidth() / 8.0f), (b->windowHeight() / 20.0f)}, b->windowWidth() / 120.0f, "Back to home",
     b->hexToColor(0x111111FF), b->hexToColor(0x111111FF), b->hexToColor(0x111111FF),

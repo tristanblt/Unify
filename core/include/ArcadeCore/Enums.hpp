@@ -138,4 +138,9 @@ enum CoreState {
     CORE_END
 };
 
+enum MenuState {
+    MENU_CAROUSSEL,
+    MENU_SETTINGS
+};
+
 #endif /* !ENUMS_HPP_ */

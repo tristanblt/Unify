@@ -13,6 +13,7 @@
 #include "core/include/DLLoader.hpp"
 #include "core/include/ArcadeCore/BasicButton.hpp"
 #include "core/include/ArcadeCore/SpriteButton.hpp"
+#include "core/include/ArcadeCore/Enums.hpp"
 #include <vector>
 #include <fstream>
 
@@ -32,10 +33,12 @@ class Menu {
         void drawBackgrounds(IBuilder *builder);
         void drawHeader(IBuilder *builder);
         void drawCarousel(IBuilder *builder);
+        void drawSettings(IBuilder *builder);
     protected:
     private:
         std::vector<GameCover> _covers;
         DLLoader<Start> *_currentGame;
+        MenuState _state;
         float _coversOffset;
 };
 
