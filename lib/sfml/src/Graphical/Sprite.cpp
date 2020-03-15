@@ -29,7 +29,6 @@ void Sprite::setPosition(Vector2 position)
     _sprite->setPosition(position.x, position.y);
 }
 
-#include <iostream>
 void Sprite::setSize(Vector2 size)
 {
     if (_sprite->getTexture()) {
