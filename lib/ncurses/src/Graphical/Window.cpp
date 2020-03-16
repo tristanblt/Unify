@@ -60,7 +60,6 @@ void Window::close()
 {
     endwin();
 }
-
 void Window::create()
 {
     initscr();

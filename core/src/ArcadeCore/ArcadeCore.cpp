@@ -17,13 +17,13 @@ ArcadeCore::~ArcadeCore()
 {
 }
 
-void ArcadeCore::loadCoreAssets(Builder &builder)
+void ArcadeCore::loadCoreAssets(IBuilder *builder)
 {
-    builder.loadAsset("assets/fonts/Montserrat-Light.otf", "UnifyLightFont", AssetType::FONT);
-    builder.loadAsset("assets/fonts/Montserrat-Regular.otf", "UnifyRegularFont", AssetType::FONT);
-    builder.loadAsset("assets/fonts/Montserrat-Bold.otf", "UnifyBoldFont", AssetType::FONT);
-    builder.loadAsset("assets/imgs/flaticons/icons.png", "UnifyIcons", AssetType::SPRITE);
-    builder.loadAsset("assets/imgs/logo.png", "UnifyLogo", AssetType::SPRITE);
+    builder->loadAsset("assets/fonts/Montserrat-Light.otf", "UnifyLightFont", AssetType::FONT);
+    builder->loadAsset("assets/fonts/Montserrat-Regular.otf", "UnifyRegularFont", AssetType::FONT);
+    builder->loadAsset("assets/fonts/Montserrat-Bold.otf", "UnifyBoldFont", AssetType::FONT);
+    builder->loadAsset("assets/imgs/flaticons/icons.png", "UnifyIcons", AssetType::SPRITE);
+    builder->loadAsset("assets/imgs/logo.png", "UnifyLogo", AssetType::SPRITE);
 }
 
 DisplayLibrary *ArcadeCore::importGraphicalLibs(const std::string &firstLib)
@@ -39,23 +39,35 @@ DisplayLibrary *ArcadeCore::importGraphicalLibs(const std::string &firstLib)
         if(buffer.size() > 0)
             file.push_back(buffer);
     f.close();
-    for (size_t i = 0; i < file.size(); i += 3) {
+    for (size_t i = 0; i < file.size(); i++) {
         DLLoader<DisplayLibrary> *loader = new DLLoader<DisplayLibrary>(file[i].c_str());
         DisplayLibrary *tmp = loader->getInstance();
-        if (file[i] == firstLib)
+        if (file[i] == firstLib) {
             ret = tmp;
+            _currentLib = i;
+        }
         _libs.push_back(tmp);
-        _currentLib = _libs.size() - 1;
     }
     return (ret);
 }
 
 void ArcadeCore::switchGraphicalLibrary(IBuilder *b)
 {
-    if (b->getEvents().keyboardState[Key::N] == InputState::CLICK) {
-        if (static_cast<unsigned long>(_currentLib + 1) > _libs.size() - 1)
+    static bool first = true;
+    if (b->getEvents().keyboardState[Key::N] == InputState::RELEASED && first) {
+        unsigned long tmp = static_cast<unsigned long>(_currentLib);
+        //std::cout << static_cast<unsigned long>(_currentLib) << std::endl;
+        tmp++;
+        //std::cout << static_cast<unsigned long>(_currentLib) << std::endl;
+        if (tmp > _libs.size() - 1)
             _currentLib = 0;
-        b->reloadLibrary(_libs[_currentLib]);
+        //std::cout << static_cast<unsigned long>(_currentLib) << std::endl;
+        b->reloadLibrary(_libs[tmp]);
+        //std::cout << "zcz" << static_cast<unsigned long>(_currentLib) << std::endl;
+        loadCoreAssets(b);
+        _menu.start(b);
+        b->getEvents().keyboardState[Key::N] = InputState::NONE;
+        first = false;
     }
 }
 
@@ -65,11 +77,10 @@ void ArcadeCore::launchCore(DisplayLibrary *library)
     DLLoader<Start> *gameLib;
     Builder builder(library);
 
-    loadCoreAssets(builder);
+    loadCoreAssets(&builder);
     _menu.start(&builder);
     _layout.start(&builder);
     while (builder.windowIsOpen()) {
-        switchGraphicalLibrary(&builder);
         builder.updateEvents();
         builder.windowClear();
         if (_coreState == CoreState::CORE_MENU) {
@@ -85,5 +96,6 @@ void ArcadeCore::launchCore(DisplayLibrary *library)
             _layout.update(&builder, _coreState, game->getName());
         }
         builder.windowDisplay();
+        switchGraphicalLibrary(&builder);
     }
 }

@@ -31,7 +31,7 @@ void Circle::draw(IWindow *w)
         xsqr = pow(xpos - x, 2);
         ypos = sqrt(abs(radsqr - xsqr));
         for (int i = rintf(-ypos) + y; i < rintf(ypos) + y; i++)
-            mvaddch(rintf(xpos) / NCURSES_RATIO, i, ' ' | COLOR_PAIR(_colorPair));
+            mvaddch(rintf(xpos) /*/ NCURSES_RATIO*/, i, ' ' | COLOR_PAIR(_colorPair));
     }
     
 }
@@ -49,9 +49,19 @@ void Circle::setRadius(float size)
 
 void Circle::setColor(Color color)
 {
+    int tmp;
+
     color.r = color.r > 250 ? 250 : color.r < 0 ? 0 : color.r;
     color.g = color.g > 250 ? 250 : color.g < 0 ? 0 : color.g;
     color.b = color.b > 250 ? 250 : color.b < 0 ? 0 : color.b;
-    init_color(_nColor, color.r * 4, color.g * 4, color.b * 4);
-    init_pair(_colorPair, COLOR_WHITE, _nColor);
+    tmp = nCursesColors::colorExists(color);
+    if (tmp != -1) {
+        _colorPair = tmp;
+        _nColor = tmp;
+    } else {
+        _colorPair = nCursesColors::addColor(color);
+        _nColor = _colorPair;
+        init_color(_nColor, color.r * 4, color.g * 4, color.b * 4);
+        init_pair(_colorPair, COLOR_WHITE, _nColor);
+    }
 }

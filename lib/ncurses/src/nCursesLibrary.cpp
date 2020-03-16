@@ -28,7 +28,7 @@ float nCursesLibrary::toUnit(float nb)
 void nCursesLibrary::loadAsset(const std::string &path, const std::string &name, AssetType type)
 {
     if (type == AssetType::SPRITE) {
-        PngFile *f = new PngFile();
+        PngFile *f = new PngFile(path);
         _assets[name] = (void *)f;
     }
 }

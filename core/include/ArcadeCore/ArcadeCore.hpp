@@ -24,7 +24,7 @@ class ArcadeCore {
         ~ArcadeCore();
 
         void launchCore(DisplayLibrary *library);
-        void loadCoreAssets(Builder &builder);
+        void loadCoreAssets(IBuilder *builder);
         Start *changeGame(std::string libName);
 
         DisplayLibrary *importGraphicalLibs(const std::string &libName);

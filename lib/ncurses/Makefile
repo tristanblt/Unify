@@ -16,6 +16,7 @@ SRCS_FILES=	Graphical/Rectangle.cpp					\
 			nCursesLibrary.cpp						\
 			nCursesColors.cpp						\
 			Entry.cpp								\
+			../../../core/src/ArcadeCore/PngFile.cpp\
 
 SRC	=	$(addprefix $(SRCPATH), $(SRCS_FILES))
 
@@ -24,7 +25,7 @@ OBJ			= 	$(SRC:%.cpp=%.o)
 CXXFLAGS	=	-W -Wall -Wextra -Wshadow	\
 			-I../../	-std=c++11 -fpic
 
-LDFLAGS		= -lncurses
+LDFLAGS		= -lncurses -lpng
 
 CXX		=	g++
 

@@ -25,7 +25,6 @@ void Menu::drawBackgrounds(IBuilder *b)
 
 void Menu::drawHeader(IBuilder *b)
 {
-<<<<<<< HEAD
     b->spriteDraw({{VW(3.5), VH(4), VH(12), VH(12)}, "UnifyLogo", 255});
     b->textDraw({"Unify", {VW(12.5), VH(6.5)}, b->hexToColor(0xFFFFFFFF), (int)VH(5), "UnifyBoldFont"});
     if (_state == MenuState::MENU_CAROUSSEL)
@@ -36,13 +35,6 @@ void Menu::drawHeader(IBuilder *b)
             _state = MenuState::MENU_CAROUSSEL;
     if (b->buttonDraw("UnifyRestart") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
             std::cout << "REDEMARER" << std::endl;
-=======
-    b->textDraw({"Unify", {VW(5), VH(5)}, b->hexToColor(0xFFFFFFFF), (int)VH(8), "UnifyBoldFont"});
-    if (b->buttonDraw("UnifySettings") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
-        std::cout << "OPTIONS" << std::endl;
-    if (b->buttonDraw("UnifyRestart") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
-        std::cout << "REDEMARER" << std::endl;
->>>>>>> 91bc3285d985d065c5ddfe131d354217e3e8fef4
     if (b->buttonDraw("UnifyPower") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
         b->windowClose();
 }
@@ -62,15 +54,15 @@ void Menu::drawCarousel(IBuilder *b)
         color = color < 0 ? color * -1 : color;
         if (i < _covers.size()) {
             color = (255 - (color * 2 * 255));
-            b->spriteDraw({{(VH(33) + 30) * i + _coversOffset + VH(17), VH(20) + 70, VH(33), VH(33)}, _covers[i].spriteIdx, static_cast<unsigned char>(color)});
+            b->spriteDraw({{(VH(35)) * i + _coversOffset + VH(17), VH(24), VH(33), VH(33)}, _covers[i].spriteIdx, static_cast<unsigned char>(color)});
         }
         else {
             color = (color = (255 - (color * 2 * 255))) >= 26 ? color : 26;
-            b->radiusRectDraw({(VH(33) + 30) * i + _coversOffset + VH(17), VH(20) + 70, VH(33), VH(33)}, 50, {static_cast<unsigned char>(color), static_cast<unsigned char>(color), static_cast<unsigned char>(color), 255});
+            b->radiusRectDraw({(VH(35)) * i + _coversOffset + VH(17), VH(24), VH(33), VH(33)}, VH(10), {static_cast<unsigned char>(color), static_cast<unsigned char>(color), static_cast<unsigned char>(color), 255});
         }
         if (color > 200 && i < _covers.size()) {
             b->textDraw({_covers[i].gameName, {(VW(100) - (0.5f * _covers[i].gameName.length() * (VH(3)))) * 0.49f, VH(20) * 3.12f}, b->hexToColor(0xFFFFFFFF), static_cast<int>(VH(3)), "UnifyBoldFont"});
-            if (b->isInBox({(VH(33) + 30) * i + _coversOffset + VH(17), VH(20) + 70, VH(33), VH(33), }) &&
+            if (b->isInBox({(VH(35)) * i + _coversOffset + VH(17), VH(24), VH(33), VH(33), }) &&
             b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
                 _currentGame = _covers[i].gameLib;
         }
@@ -88,6 +80,7 @@ void Menu::start(IBuilder *b)
     std::string buffer;
     std::vector<std::string> file;
 
+    _covers.clear();
     if (!f)
         throw std::invalid_argument("Could not open file games.config");
     while (std::getline(f, buffer))
@@ -118,13 +111,9 @@ DLLoader<Start> *Menu::update(IBuilder *b)
     drawHeader(b);
     if (!b->windowIsOpen())
         return (tmp);
-<<<<<<< HEAD
     if (_state == MenuState::MENU_CAROUSSEL)
         drawCarousel(b);
     else
         drawSettings(b);
-=======
-    //drawCarousel(b);
->>>>>>> 91bc3285d985d065c5ddfe131d354217e3e8fef4
     return (tmp);
 }

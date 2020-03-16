@@ -8,12 +8,13 @@
 #ifndef Sprite_HPP_
 #define Sprite_HPP_
 
-#include "SFML/Graphics.hpp"
+#include "core/include/ArcadeCore/PngFile.hpp"
 #include "lib/include/Graphical/ISprite.hpp"
 #include "lib/include/Graphical/IWindow.hpp"
-#include "lib/sfml/include/Graphical/Window.hpp"
+#include "lib/ncurses/include/Graphical/Window.hpp"
 #include "core/include/ArcadeCore/IBuilder.hpp"
 #include "core/include/ArcadeCore/Structs.hpp"
+#include "lib/ncurses/include/nCursesColors.hpp"
 
 class Sprite : public ISprite {
     public:
@@ -29,6 +30,11 @@ class Sprite : public ISprite {
     protected:
     private:
         std::map<std::string, void *> *_assets;
+        PngFile *_sprite;
+        float _x;
+        float _y;
+        Box _frame;
+        Vector2 _wantedSize;
 };
 
 #endif /* !Sprite_HPP_ */
