@@ -71,7 +71,7 @@ void ArcadeCore::switchGraphicalLibrary(IBuilder *b)
     }
 }
 
-void ArcadeCore::launchCore(DisplayLibrary *library)
+bool ArcadeCore::launchCore(DisplayLibrary *library)
 {
     Start *game = NULL;
     DLLoader<Start> *gameLib;
@@ -98,4 +98,5 @@ void ArcadeCore::launchCore(DisplayLibrary *library)
         builder.windowDisplay();
         switchGraphicalLibrary(&builder);
     }
+    return (_menu.getInterruptType());;
 }

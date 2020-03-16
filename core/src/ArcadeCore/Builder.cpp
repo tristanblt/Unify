@@ -109,8 +109,8 @@ Color Builder::hexToColor(int color) const
     Color ret;
 
     ret.r = ((color >> 24) & 0xff);
-    ret.g = ((color >> 16) & 0xff);
-    ret.b = ((color >> 8)  & 0xff);
+    ret.b = ((color >> 16) & 0xff);
+    ret.g = ((color >> 8)  & 0xff);
     ret.a = ((color)       & 0xff);
     return (ret);
 }

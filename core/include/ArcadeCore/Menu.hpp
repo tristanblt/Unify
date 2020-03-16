@@ -34,12 +34,15 @@ class Menu {
         void drawHeader(IBuilder *builder);
         void drawCarousel(IBuilder *builder);
         void drawSettings(IBuilder *builder);
+
+        bool getInterruptType() const;
     protected:
     private:
         std::vector<GameCover> _covers;
         DLLoader<Start> *_currentGame;
         MenuState _state;
         float _coversOffset;
+        bool _interruptType;
 };
 
 #endif /* !MENU_HPP_ */

@@ -23,7 +23,7 @@ class ArcadeCore {
         ArcadeCore();
         ~ArcadeCore();
 
-        void launchCore(DisplayLibrary *library);
+        bool launchCore(DisplayLibrary *library);
         void loadCoreAssets(IBuilder *builder);
         Start *changeGame(std::string libName);
 

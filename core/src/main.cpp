@@ -21,6 +21,6 @@ int main(int argc, char const *argv[])
     lib = arcadeCore.importGraphicalLibs(std::string(argv[1]));
     if (lib == NULL)
         return (84);
-    arcadeCore.launchCore(lib);
+    while (arcadeCore.launchCore(lib));
     return 0;
 }
