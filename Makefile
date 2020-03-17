@@ -24,3 +24,12 @@ fclean:
 	make fclean -C core/
 	make fclean -C lib/
 	make fclean -C games/
+
+core:
+	make -C core/
+
+games:
+	make -C games/
+
+graphicals:
+	make clean -C lib/
