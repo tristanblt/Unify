@@ -38,7 +38,6 @@ void Window::clear()
 
 void Window::display()
 {
-    char c = getch();
 
     _width = COLS;
     _height = LINES;
@@ -48,11 +47,7 @@ void Window::display()
         mvprintw(LINES/2 + 1, COLS/2, "Current size : %i cols x %i lines.", COLS, LINES);
         refresh();
     }
-    switch (c) {
-        case 'q':
-            _isOpen = false;
-            break;
-    }
+
     refresh();
 }
 
@@ -66,7 +61,9 @@ void Window::create()
     start_color();
     noecho();
     nodelay(stdscr, TRUE);
+    scrollok(stdscr, TRUE);
     keypad(stdscr, TRUE);
+    cbreak();
     curs_set(0);
     _width = COLS;
     _height = LINES;

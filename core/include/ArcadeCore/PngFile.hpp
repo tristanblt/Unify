@@ -9,6 +9,7 @@
 #define PNGFILE_HPP_
 
 #include <string>
+#include <stdexcept>
 #include <png.h>
 
 class PngFile {

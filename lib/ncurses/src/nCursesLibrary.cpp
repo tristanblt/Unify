@@ -35,7 +35,8 @@ void nCursesLibrary::loadAsset(const std::string &path, const std::string &name,
 
 Events nCursesLibrary::updateEvents(Events *events)
 {
-    return (Events());
+    updateKeyboardEvents(events);
+    return (*events);
 }
 
 int nCursesLibrary::getLastAssetIdx() const
@@ -48,6 +49,19 @@ void nCursesLibrary::updateMouseEvents(Events *events, Window *window)
 
 }
 
+#include <fstream>
+
 void nCursesLibrary::updateKeyboardEvents(Events *events)
 {
+    std::string cs;
+    char c;
+    while ((c = getch()) == ERR)
+        cs.append(&c);
+    for (int i = 0; cs[i]; i++) {
+        std::cout << cs[i] << std::endl;
+        if (cs[i] == 'a')
+            std::cout << "-------aaaaaaaaaaaaa------------" <<  std::endl;
+        if (cs[i] == ' ')
+            std::cout << "------SPAAAAAAAACE-----------" <<  std::endl;
+    }
 }
