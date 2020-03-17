@@ -35,6 +35,7 @@ void nCursesLibrary::loadAsset(const std::string &path, const std::string &name,
 
 Events nCursesLibrary::updateEvents(Events *events)
 {
+    updateMouseEvents(events, nullptr);
     updateKeyboardEvents(events);
     return (*events);
 }
@@ -44,24 +45,41 @@ int nCursesLibrary::getLastAssetIdx() const
     return (_assets.size() - 1);
     return (0);
 }
-void nCursesLibrary::updateMouseEvents(Events *events, Window *window)
+void nCursesLibrary::updateMouseEvents(Events *e, Window *window)
 {
+    MEVENT ptr;
 
+    if (getmouse(&ptr) == OK) {
+        e->mouseEvents.pos.x = ptr.x;
+        e->mouseEvents.pos.y = ptr.y;
+        if (ptr.bstate & BUTTON4_PRESSED)
+            e->mouseEvents.scrollVelocity = 1;
+        else if (ptr.bstate & BUTTON4_PRESSED)
+            e->mouseEvents.scrollVelocity = -1;
+        else
+            e->mouseEvents.scrollVelocity = 0;
+        for (int i = 0; i < 3; i++) {
+            if (ptr.bstate & mouseButtons[i])
+                e->mouseEvents.mouseStates[static_cast<MouseButton>(i)] = (e->mouseEvents.mouseStates[static_cast<MouseButton>(i)] != InputState::CLICK && e->mouseEvents.mouseStates[static_cast<MouseButton>(i)] != InputState::HOLD) ?
+                InputState::CLICK : InputState::HOLD;
+            else
+                e->mouseEvents.mouseStates[static_cast<MouseButton>(i)] = (e->mouseEvents.mouseStates[static_cast<MouseButton>(i)] != InputState::RELEASED && e->mouseEvents.mouseStates[static_cast<MouseButton>(i)] != InputState::NONE) ?
+                InputState::RELEASED : InputState::NONE;
+        }
+    }
 }
 
-#include <fstream>
-
-void nCursesLibrary::updateKeyboardEvents(Events *events)
+void nCursesLibrary::updateKeyboardEvents(Events *e)
 {
-    std::string cs;
-    char c;
-    while ((c = getch()) == ERR)
-        cs.append(&c);
-    for (int i = 0; cs[i]; i++) {
-        std::cout << cs[i] << std::endl;
-        if (cs[i] == 'a')
-            std::cout << "-------aaaaaaaaaaaaa------------" <<  std::endl;
-        if (cs[i] == ' ')
-            std::cout << "------SPAAAAAAAACE-----------" <<  std::endl;
+    int c = getch();
+    for (int i = 0; i < 99; i++) {
+        if (c >= 'a' && c <= 'z')
+            c -= 32;
+        if (keys[i] == c)
+            e->keyboardState[static_cast<Key>(i)] = (e->keyboardState[static_cast<Key>(i)] != InputState::CLICK && e->keyboardState[static_cast<Key>(i)] != InputState::HOLD) ?
+            InputState::CLICK : InputState::HOLD;
+        else
+            e->keyboardState[static_cast<Key>(i)] = (e->keyboardState[static_cast<Key>(i)] != InputState::RELEASED && e->keyboardState[static_cast<Key>(i)] != InputState::NONE) ?
+            InputState::RELEASED : InputState::NONE;
     }
 }
