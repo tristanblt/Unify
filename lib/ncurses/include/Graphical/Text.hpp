@@ -9,11 +9,13 @@
 #define Text_HPP_
 
 #include <ncurses.h>
-
+#include <png.h>
+#include "core/include/ArcadeCore/PngFile.hpp"
 #include "lib/include/Graphical/IText.hpp"
 #include "core/include/ArcadeCore/IBuilder.hpp"
 #include "core/include/ArcadeCore/Structs.hpp"
 #include "lib/ncurses/include/nCursesColors.hpp"
+#include "lib/ncurses/include/Graphical/Bitcrush.hpp"
 
 class Text : public IText {
     public:
@@ -28,12 +30,18 @@ class Text : public IText {
         void setFont(const std::string &fontIdx);
     protected:
     private:
+        int getCharPosX(char c);
+        int getCharPosY(char c);
+        std::map<std::string, void *> *_assets;
         std::string _text;
         short _nColor;
         short _colorPair;
         float _x;
         float _y;
-        int _fontSize;
+        PngFile *_font;
+        Color _color;
+        Box _frame;
+        Vector2 _wantedSize;
 };
 
 #endif /* !Text_HPP_ */

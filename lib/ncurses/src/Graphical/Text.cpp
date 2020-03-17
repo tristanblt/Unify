@@ -13,15 +13,38 @@ _colorPair(0),
 _x(0),
 _y(0)
 {
+    _assets = assets;
+    _frame.h = 256;
+    _frame.w = 256;
 }
 
 Text::~Text()
 {
 }
 
+int Text::getCharPosX(char c)
+{
+    if (c >= 'a' && c <= 'z')
+        return ((c - 'a') * 256);
+    if (c >= 'A' && c <= 'Z')
+        return ((c - 'A') * 256);
+}
+
+int Text::getCharPosY(char c)
+{
+    if ((c >= 'a' && c <= 'z') || (c >= '0' && c <= '9'))
+        return (0);
+    return (256);
+}
+
 void Text::draw(IWindow *w)
 {
-    mvprintw(_y + _fontSize - 1, _x, _text.c_str());
+    for (int i = 0; i < _text.size(); i++) {
+        _frame.x = getCharPosX(_text[i]);
+        _frame.y = getCharPosY(_text[i]);
+        Bitcrush(_font, {_x, _y}, _frame, _wantedSize);
+        _x += _wantedSize.x;
+    }
 }
 
 void Text::setPosition(Vector2 position)
@@ -32,35 +55,26 @@ void Text::setPosition(Vector2 position)
 
 void Text::setColor(Color color)
 {
-    int tmp;
-
-    color.r = color.r > 250 ? 250 : color.r < 0 ? 0 : color.r;
-    color.g = color.g > 250 ? 250 : color.g < 0 ? 0 : color.g;
-    color.b = color.b > 250 ? 250 : color.b < 0 ? 0 : color.b;
-    tmp = nCursesColors::colorExists(color);
-    if (tmp != -1) {
-        _colorPair = tmp;
-        _nColor = tmp;
-    } else {
-        _colorPair = nCursesColors::addColor(color);
-        _nColor = _colorPair;
-        init_color(_nColor, color.r * 4, color.g * 4, color.b * 4);
-        init_pair(_colorPair, COLOR_WHITE, _nColor);
-    }
+    _color = color;
 }
 
 void Text::setFontSize(int size)
 {
-    _fontSize = size;
+    _wantedSize.x = size;
+    _wantedSize.y = size;
+
 }
 
 void Text::setText(const std::string &text)
 {
-    _text = text;
+   _text = text;
 }
 
 void Text::setFont(const std::string &idx)
 {
-
+    (void)idx;
+    if (_assets->find("UnifyFontImg") == _assets->end())
+        throw std::invalid_argument("Could not find sprite asset2");
+    _font = static_cast<PngFile *>((*_assets)["UnifyFontImg"]);
 }
 

@@ -24,6 +24,7 @@ void ArcadeCore::loadCoreAssets(IBuilder *builder)
     builder->loadAsset("assets/fonts/Montserrat-Bold.otf", "UnifyBoldFont", AssetType::FONT);
     builder->loadAsset("assets/imgs/flaticons/icons.png", "UnifyIcons", AssetType::SPRITE);
     builder->loadAsset("assets/imgs/logo.png", "UnifyLogo", AssetType::SPRITE);
+    builder->loadAsset("assets/fonts/UnifyFontImg.png", "UnifyFontImg", AssetType::SPRITE);
 }
 
 DisplayLibrary *ArcadeCore::importGraphicalLibs(const std::string &firstLib)
@@ -56,14 +57,10 @@ void ArcadeCore::switchGraphicalLibrary(IBuilder *b)
     static bool first = true;
     if (b->getEvents().keyboardState[Key::N] == InputState::RELEASED && first) {
         unsigned long tmp = static_cast<unsigned long>(_currentLib);
-        //std::cout << static_cast<unsigned long>(_currentLib) << std::endl;
         tmp++;
-        //std::cout << static_cast<unsigned long>(_currentLib) << std::endl;
         if (tmp > _libs.size() - 1)
             _currentLib = 0;
-        //std::cout << static_cast<unsigned long>(_currentLib) << std::endl;
         b->reloadLibrary(_libs[tmp]);
-        //std::cout << "zcz" << static_cast<unsigned long>(_currentLib) << std::endl;
         loadCoreAssets(b);
         _menu.start(b);
         b->getEvents().keyboardState[Key::N] = InputState::NONE;

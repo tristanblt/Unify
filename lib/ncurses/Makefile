@@ -13,6 +13,7 @@ SRCS_FILES=	Graphical/Rectangle.cpp					\
 			Graphical/Circle.cpp					\
 			Graphical/Text.cpp						\
 			Graphical/Sprite.cpp					\
+			Graphical/Bitcrush.cpp					\
 			nCursesLibrary.cpp						\
 			nCursesColors.cpp						\
 			Entry.cpp								\

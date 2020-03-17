@@ -64,7 +64,7 @@ void Menu::drawCarousel(IBuilder *b)
         }
         else {
             color = (color = (255 - (color * 2 * 255))) >= 26 ? color : 26;
-            b->radiusRectDraw({(VH(35)) * i + _coversOffset + VH(17), VH(24), VH(33), VH(33)}, VH(10), {static_cast<unsigned char>(color), static_cast<unsigned char>(color), static_cast<unsigned char>(color), 255});
+            b->radiusRectDraw({(VH(35)) * i + _coversOffset + VH(17), VH(24), VH(33), VH(33)}, VH(5), {static_cast<unsigned char>(color), static_cast<unsigned char>(color), static_cast<unsigned char>(color), 255});
         }
         if (color > 200 && i < _covers.size()) {
             b->textDraw({_covers[i].gameName, {(VW(100) - (0.5f * _covers[i].gameName.length() * (VH(3)))) * 0.49f, VH(20) * 3.12f}, b->hexToColor(0xFFFFFFFF), static_cast<int>(VH(3)), "UnifyBoldFont"});
