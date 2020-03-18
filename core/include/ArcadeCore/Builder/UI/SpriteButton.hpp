@@ -9,7 +9,7 @@
 #define SPRITEBUTTON_HPP_
 
 #include <array>
-#include "core/include/ArcadeCore/IButton.hpp"
+#include "core/include/ArcadeCore/Components/Menu.hpp"
 
 class SpriteButton: public IButton {
     public:

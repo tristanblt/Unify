@@ -10,7 +10,7 @@
 
 #include <string>
 #include <map>
-#include "core/include/ArcadeCore/Enums.hpp"
+#include "core/include/ArcadeCore/Utils/Enums.hpp"
 
 struct Color {
     unsigned char r;

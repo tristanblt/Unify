@@ -5,8 +5,8 @@
 ** BasicButton
 */
 
-#include "core/include/ArcadeCore/BasicButton.hpp"
-#include "core/include/ArcadeCore/IBuilder.hpp"
+#include "core/include/ArcadeCore/Builder/UI/BasicButton.hpp"
+#include "core/include/ArcadeCore/Builder/IBuilder.hpp"
 
 BasicButton::BasicButton(Box displayBox, float radius, std::string text, Color bActive, Color bInactive, Color bHold, Color tActive, Color tInactive, Color tHold, int fontSize, std::string fontIdx):
 _displayBox(displayBox), _radius(radius), _text(text), _boxColors({{bActive, bInactive, bHold}}), _textColors({{tActive, tInactive, tHold}}), _fontSize(fontSize), _fontIdx(fontIdx)

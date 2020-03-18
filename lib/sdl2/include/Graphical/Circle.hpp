@@ -11,8 +11,8 @@
 #include "lib/include/Graphical/ICircle.hpp"
 #include "lib/include/Graphical/IWindow.hpp"
 #include "lib/sdl2/include/Graphical/Window.hpp"
-#include "core/include/ArcadeCore/IBuilder.hpp"
-#include "core/include/ArcadeCore/Structs.hpp"
+#include "core/include/ArcadeCore/Builder/IBuilder.hpp"
+#include "core/include/ArcadeCore/Utils/Structs.hpp"
 
 class Circle : public ICircle {
     public:

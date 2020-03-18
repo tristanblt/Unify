@@ -16,7 +16,7 @@
 #include "Graphical/ICircle.hpp"
 #include "Graphical/IText.hpp"
 #include "Graphical/ISprite.hpp"
-#include "core/include/ArcadeCore/Enums.hpp"
+#include "core/include/ArcadeCore/Utils/Enums.hpp"
 
 class DisplayLibrary {
     public:

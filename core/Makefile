@@ -8,13 +8,13 @@
 NAME	=	../arcade
 
 SRCPATH	=	src/
-SRCS_FILES=	main.cpp										\
-			ArcadeCore/ArcadeCore.cpp						\
-			ArcadeCore/Layout.cpp						\
-			ArcadeCore/Menu.cpp						\
-			ArcadeCore/Builder.cpp							\
-			ArcadeCore/BasicButton.cpp							\
-			ArcadeCore/SpriteButton.cpp							\
+SRCS_FILES=	main.cpp											\
+			ArcadeCore/ArcadeCore.cpp							\
+			ArcadeCore/Components/Layout.cpp					\
+			ArcadeCore/Components/Menu.cpp						\
+			ArcadeCore/Builder/Builder.cpp						\
+			ArcadeCore/Builder/UI/BasicButton.cpp				\
+			ArcadeCore/Builder/UI/SpriteButton.cpp				\
 
 SRC	=	$(addprefix $(SRCPATH), $(SRCS_FILES))
 

@@ -13,9 +13,9 @@
 #include <ctime>
 
 #include "lib/include/DisplayLibrary.hpp"
-#include "core/include/ArcadeCore/Structs.hpp"
-#include "core/include/ArcadeCore/Responsive.hpp"
-#include "core/include/ArcadeCore/IButton.hpp"
+#include "core/include/ArcadeCore/Utils/Structs.hpp"
+#include "core/include/ArcadeCore/Utils/Responsive.hpp"
+#include "core/include/ArcadeCore/Builder/UI/IButton.hpp"
 
 class IBuilder {
     public:

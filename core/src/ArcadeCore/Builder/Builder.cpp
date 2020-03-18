@@ -5,7 +5,7 @@
 ** Builder
 */
 
-#include "core/include/ArcadeCore/Builder.hpp"
+#include "core/include/ArcadeCore/Builder/Builder.hpp"
 
 Builder::Builder(DisplayLibrary *library):
 _library(library)

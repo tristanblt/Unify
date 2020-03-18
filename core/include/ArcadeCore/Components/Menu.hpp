@@ -8,12 +8,11 @@
 #ifndef MENU_HPP_
 #define MENU_HPP_
 
-#include "core/include/ArcadeCore/IBuilder.hpp"
 #include "games/include/Start.hpp"
 #include "core/include/DLLoader.hpp"
-#include "core/include/ArcadeCore/BasicButton.hpp"
-#include "core/include/ArcadeCore/SpriteButton.hpp"
-#include "core/include/ArcadeCore/Enums.hpp"
+#include "core/include/ArcadeCore/Builder/UI/BasicButton.hpp"
+#include "core/include/ArcadeCore/Builder/UI/SpriteButton.hpp"
+#include "core/include/ArcadeCore/Utils/Enums.hpp"
 #include <vector>
 #include <fstream>
 

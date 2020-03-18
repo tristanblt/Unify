@@ -10,10 +10,10 @@
 
 #include <ncurses.h>
 #include <png.h>
-#include "core/include/ArcadeCore/PngFile.hpp"
+#include "core/include/ArcadeCore/Utils/PngFile.hpp"
 #include "lib/include/Graphical/IText.hpp"
-#include "core/include/ArcadeCore/IBuilder.hpp"
-#include "core/include/ArcadeCore/Structs.hpp"
+#include "core/include/ArcadeCore/Builder/IBuilder.hpp"
+#include "core/include/ArcadeCore/Utils/Structs.hpp"
 #include "lib/ncurses/include/nCursesColors.hpp"
 #include "lib/ncurses/include/Graphical/Bitcrush.hpp"
 

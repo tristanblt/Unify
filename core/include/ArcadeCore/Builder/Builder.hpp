@@ -8,8 +8,8 @@
 #ifndef BUILDER_HPP_
 #define BUILDER_HPP_
 
-#include "core/include/ArcadeCore/IBuilder.hpp"
-#include "core/include/ArcadeCore/IButton.hpp"
+#include "core/include/ArcadeCore/Builder/IBuilder.hpp"
+#include "core/include/ArcadeCore/Components/Menu.hpp"
 
 class Builder: public IBuilder {
     public:

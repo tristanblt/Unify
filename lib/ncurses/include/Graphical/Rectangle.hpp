@@ -11,8 +11,8 @@
 #include <ncurses.h>
 
 #include "lib/include/Graphical/IRectangle.hpp"
-#include "core/include/ArcadeCore/IBuilder.hpp"
-#include "core/include/ArcadeCore/Structs.hpp"
+#include "core/include/ArcadeCore/Builder/IBuilder.hpp"
+#include "core/include/ArcadeCore/Utils/Structs.hpp"
 #include "lib/ncurses/include/nCursesColors.hpp"
 
 class Rectangle : public IRectangle {

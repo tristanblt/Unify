@@ -5,7 +5,7 @@
 ** Layout
 */
 
-#include "core/include/ArcadeCore/Layout.hpp"
+#include "core/include/ArcadeCore/Components/Layout.hpp"
 
 Layout::Layout()
 {

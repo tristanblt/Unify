@@ -8,7 +8,7 @@
 #ifndef SELECTOR_HPP_
 #define SELECTOR_HPP_
 
-#include "core/include/ArcadeCore/Structs.hpp"
+#include "core/include/ArcadeCore/Utils/Structs.hpp"
 
 class Selector {
     public:

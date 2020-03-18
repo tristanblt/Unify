@@ -8,7 +8,7 @@
 #ifndef START_HPP_
 #define START_HPP_
 
-#include "core/include/ArcadeCore/IBuilder.hpp"
+#include "core/include/ArcadeCore/Builder/IBuilder.hpp"
 
 class Start {
     public:

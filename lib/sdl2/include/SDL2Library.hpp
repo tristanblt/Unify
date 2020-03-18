@@ -15,7 +15,7 @@
 #include "lib/sdl2/include/Graphical/Circle.hpp"
 #include "lib/sdl2/include/Graphical/Text.hpp"
 #include "lib/sdl2/include/Graphical/Sprite.hpp"
-#include "core/include/ArcadeCore/Enums.hpp"
+#include "core/include/ArcadeCore/Utils/Enums.hpp"
 #include <filesystem>
 
 class SDL2Library : public DisplayLibrary {

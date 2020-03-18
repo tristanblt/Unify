@@ -8,7 +8,7 @@
 #ifndef IBUTTON_HPP_
 #define IBUTTON_HPP_
 
-#include "core/include/ArcadeCore/Structs.hpp"
+#include "core/include/ArcadeCore/Utils/Structs.hpp"
 
 class IBuilder;
 

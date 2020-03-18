@@ -5,7 +5,7 @@
 ** PngFile
 */
 
-#include "core/include/ArcadeCore/PngFile.hpp"
+#include "core/include/ArcadeCore/Utils/PngFile.hpp"
 
 PngFile::PngFile(const std::string &path) :
 _pixels(NULL)

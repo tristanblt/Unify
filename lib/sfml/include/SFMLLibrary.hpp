@@ -14,7 +14,7 @@
 #include "lib/sfml/include/Graphical/Circle.hpp"
 #include "lib/sfml/include/Graphical/Text.hpp"
 #include "lib/sfml/include/Graphical/Sprite.hpp"
-#include "core/include/ArcadeCore/Enums.hpp"
+#include "core/include/ArcadeCore/Utils/Enums.hpp"
 
 class SFMLLibrary : public DisplayLibrary {
     public:

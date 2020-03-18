@@ -12,8 +12,8 @@
 #include "lib/include/Graphical/IText.hpp"
 #include "lib/include/Graphical/IWindow.hpp"
 #include "lib/sdl2/include/Graphical/Window.hpp"
-#include "core/include/ArcadeCore/IBuilder.hpp"
-#include "core/include/ArcadeCore/Structs.hpp"
+#include "core/include/ArcadeCore/Builder/IBuilder.hpp"
+#include "core/include/ArcadeCore/Utils/Structs.hpp"
 #include "SDL2/SDL_ttf.h"
 
 #define FONT_SIZE_MAX 500.0f

@@ -13,8 +13,8 @@
 #include "lib/include/Graphical/ICircle.hpp"
 #include "lib/include/Graphical/IWindow.hpp"
 #include "lib/ncurses/include/Graphical/Window.hpp"
-#include "core/include/ArcadeCore/IBuilder.hpp"
-#include "core/include/ArcadeCore/Structs.hpp"
+#include "core/include/ArcadeCore/Builder/IBuilder.hpp"
+#include "core/include/ArcadeCore/Utils/Structs.hpp"
 #include <cmath>
 class Circle : public ICircle {
     public:

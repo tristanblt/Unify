@@ -8,11 +8,11 @@
 #ifndef LAYOUT_HPP_
 #define LAYOUT_HPP_
 
-#include "core/include/ArcadeCore/IBuilder.hpp"
-#include "core/include/ArcadeCore/Structs.hpp"
-#include "core/include/ArcadeCore/Enums.hpp"
-#include "core/include/ArcadeCore/BasicButton.hpp"
-#include "core/include/ArcadeCore/SpriteButton.hpp"
+#include "core/include/ArcadeCore/Builder/IBuilder.hpp"
+#include "core/include/ArcadeCore/Utils/Structs.hpp"
+#include "core/include/ArcadeCore/Utils/Enums.hpp"
+#include "core/include/ArcadeCore/Builder/UI/BasicButton.hpp"
+#include "core/include/ArcadeCore/Builder/UI/SpriteButton.hpp"
 
 class Layout {
     public:

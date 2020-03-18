@@ -10,7 +10,7 @@
 
 #define FRAMERATE_LIMIT 60
 
-#include "core/include/ArcadeCore/Structs.hpp"
+#include "core/include/ArcadeCore/Utils/Structs.hpp"
 
 class IWindow {
     public:
