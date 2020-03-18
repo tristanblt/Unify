@@ -22,8 +22,6 @@ class DisplayLibrary {
     public:
         ~DisplayLibrary() = default;
 
-        virtual float toUnit(float) = 0;
-
         IRectangle *_rect;
         ICircle *_circle;
         IWindow *_window;
@@ -32,7 +30,6 @@ class DisplayLibrary {
 
         virtual void loadAsset(const std::string &path, const std::string &name, AssetType type) = 0;
         virtual Events updateEvents(Events *events) = 0;
-        virtual int getLastAssetIdx() const = 0;
     protected:
         std::map<std::string, void *> _assets;
     private:
