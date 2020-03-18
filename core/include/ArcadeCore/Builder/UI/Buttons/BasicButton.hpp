@@ -9,7 +9,6 @@
 #define BASICBUTTON_HPP_
 
 #include <array>
-#include "core/include/ArcadeCore/Components/Menu.hpp"
 #include "core/include/ArcadeCore/Builder/UI/Buttons/IButton.hpp"
 
 class BasicButton: public IButton {

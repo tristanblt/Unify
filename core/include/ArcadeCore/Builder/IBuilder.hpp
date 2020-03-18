@@ -16,6 +16,7 @@
 #include "core/include/ArcadeCore/Utils/Structs.hpp"
 #include "core/include/ArcadeCore/Utils/Responsive.hpp"
 #include "core/include/ArcadeCore/Builder/UI/Buttons/IButton.hpp"
+#include "core/include/ArcadeCore/Builder/UI/Buttons/BasicButton.hpp"
 
 class IBuilder {
     public:
