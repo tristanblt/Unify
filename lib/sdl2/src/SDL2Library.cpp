@@ -24,8 +24,21 @@ SDL2Library::~SDL2Library()
 
 void SDL2Library::updateMouseEvents(Events *e, Window *w)
 {
-    (void)e;
     (void)w;
+
+    int width = 0, height = 0;
+    Uint32 mouseState = SDL_GetMouseState(&width, &height);
+
+    e->mouseEvents.scrollVelocity = 0;
+    e->mouseEvents.pos = {(float)width, (float)height};
+    for (int i = 0; i < 3; i++) {
+        if (mouseState & SDL_BUTTON(i + 1))
+            e->mouseEvents.mouseStates[static_cast<MouseButton>(i)] = (e->mouseEvents.mouseStates[static_cast<MouseButton>(i)] != InputState::CLICK && e->mouseEvents.mouseStates[static_cast<MouseButton>(i)] != InputState::HOLD) ?
+            InputState::CLICK : InputState::HOLD;
+        else
+            e->mouseEvents.mouseStates[static_cast<MouseButton>(i)] = (e->mouseEvents.mouseStates[static_cast<MouseButton>(i)] != InputState::RELEASED && e->mouseEvents.mouseStates[static_cast<MouseButton>(i)] != InputState::NONE) ?
+            InputState::RELEASED : InputState::NONE;
+    }
 }
 
 void SDL2Library::updateKeyboardEvents(Events *e)
@@ -37,6 +50,7 @@ Events SDL2Library::updateEvents(Events *e)
 {
     SDL_Event event;
 
+    updateMouseEvents(e, NULL);
     while (SDL_PollEvent(&event)) {
         switch(event.type)
         {
@@ -48,6 +62,9 @@ Events SDL2Library::updateEvents(Events *e)
                     _window->close();
                 if ( event.key.keysym.sym == SDLK_n )
                     e->keyboardState[Key::N] = InputState::RELEASED;
+                break;
+            case SDL_MOUSEWHEEL:
+                e->mouseEvents.scrollVelocity = event.wheel.y;
                 break;
         }
     }

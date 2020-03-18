@@ -12,6 +12,7 @@ Menu::Menu()
     _currentGame = NULL;
     _state = MenuState::MENU_CAROUSSEL;
     _interruptType = false;
+    _coversOffset = 0;
 }
 
 Menu::~Menu()
@@ -98,8 +99,8 @@ void Menu::start(IBuilder *b)
         DLLoader<Start> *loader = new DLLoader<Start>(file[i + 2].c_str());
         _covers.push_back({file[i], loader, "UnifyCover" + std::to_string(i)});
     }
-    _coversOffset = VW(50) - VW(20);
-
+    if (_coversOffset == 0)
+        _coversOffset = VW(50) - VW(20);
     b->addButton(new SpriteButton({b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 13.7f, b->windowWidth() / 38.0f, b->windowWidth() / 38.0f},
     {256, 0, 128, 128}, {0, 0, 128, 128}, {128, 0, 128, 128}, "UnifyIcons"), "UnifySettings");
     b->addButton(new SpriteButton({b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 15.0f * 12.6f, b->windowWidth() / 30.0f, b->windowWidth() / 30.0f},

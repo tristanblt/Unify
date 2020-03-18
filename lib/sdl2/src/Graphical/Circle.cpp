@@ -60,7 +60,7 @@ void Circle::setPosition(Vector2 position)
 
 void Circle::setRadius(float size)
 {
-    _circle.r = size / 2;
+    _circle.r = size;
 }
 
 void Circle::setColor(Color color)

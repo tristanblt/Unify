@@ -54,8 +54,7 @@ DisplayLibrary *ArcadeCore::importGraphicalLibs(const std::string &firstLib)
 
 void ArcadeCore::switchGraphicalLibrary(IBuilder *b)
 {
-    static bool first = true;
-    if (b->getEvents().keyboardState[Key::N] == InputState::RELEASED && first) {
+    if (b->getEvents().keyboardState[Key::N] == InputState::RELEASED) {
         unsigned long tmp = static_cast<unsigned long>(_currentLib);
         tmp++;
         if (tmp > _libs.size() - 1)
@@ -65,7 +64,6 @@ void ArcadeCore::switchGraphicalLibrary(IBuilder *b)
         _menu.start(b);
         _layout.start(b);
         b->getEvents().keyboardState[Key::N] = InputState::NONE;
-        first = false;
     }
 }
 
