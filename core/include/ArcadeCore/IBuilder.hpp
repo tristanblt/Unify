@@ -48,8 +48,6 @@ class IBuilder {
 
         virtual void updateEvents() = 0;
 
-        virtual int getLastAssetIdx() const = 0;
-
         virtual Events getEvents() const = 0;
         virtual time_t getTime() const = 0;
     protected:

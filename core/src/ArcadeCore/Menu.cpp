@@ -77,7 +77,7 @@ void Menu::drawCarousel(IBuilder *b)
 
 void Menu::drawSettings(IBuilder *b)
 {
-
+    (void)b;
 }
 
 void Menu::start(IBuilder *b)

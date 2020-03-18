@@ -43,8 +43,6 @@ class Builder: public IBuilder {
 
         void updateEvents();
 
-        int getLastAssetIdx() const;
-
         Events getEvents() const;
         time_t getTime() const;
     protected:

@@ -24,13 +24,11 @@ class SFMLLibrary : public DisplayLibrary {
         void loadAsset(const std::string &path, const std::string &name, AssetType type);
 
         Events updateEvents(Events *events);
-        int getLastAssetIdx() const;
     protected:
     private:
         void updateMouseEvents(Events *events, Window *window);
         void updateKeyboardEvents(Events *events);
         sf::Event _event;
-        sf::Mouse _mouse;
 };
 
 #endif /* !SFMLLIBRARY_HPP_ */

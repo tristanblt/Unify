@@ -134,11 +134,6 @@ void Builder::loadAsset(const std::string &path, const std::string &name, AssetT
     _library->loadAsset(path, name, type);
 }
 
-int Builder::getLastAssetIdx() const
-{
-    return (_library->getLastAssetIdx());
-}
-
 bool Builder::isInBox(Box box)
 {
     return (_events.mouseEvents.pos.x >= box.x &&

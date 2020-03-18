@@ -34,8 +34,6 @@ class Text : public IText {
         int getCharPosY(char c);
         std::map<std::string, void *> *_assets;
         std::string _text;
-        short _nColor;
-        short _colorPair;
         float _x;
         float _y;
         PngFile *_font;

@@ -24,12 +24,13 @@ SDL2Library::~SDL2Library()
 
 void SDL2Library::updateMouseEvents(Events *e, Window *w)
 {
-
+    (void)e;
+    (void)w;
 }
 
 void SDL2Library::updateKeyboardEvents(Events *e)
 {
-
+    (void)e;
 }
 
 Events SDL2Library::updateEvents(Events *e)
@@ -69,9 +70,4 @@ void SDL2Library::loadAsset(const std::string &path, const std::string &name, As
         _assets[name + "_srfce"] = (void *)f;
         _assets[name] = (void *)t;
     }
-}
-
-int SDL2Library::getLastAssetIdx() const
-{
-    return (_assets.size() - 1);
 }

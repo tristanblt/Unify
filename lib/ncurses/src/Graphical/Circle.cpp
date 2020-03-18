@@ -22,6 +22,7 @@ Circle::~Circle()
 
 void Circle::draw(IWindow *w)
 {
+    (void)w;
     float xpos, ypos, radsqr, xsqr;
     int x = _x + _radius;
     int y = _y + _radius;

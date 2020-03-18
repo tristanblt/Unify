@@ -41,11 +41,6 @@ float Window::width()
 
 void Window::clear()
 {
-    // TODO :remove
-    sf::Event event;
-    while (_window->pollEvent(event))
-        if (event.type == sf::Event::Closed)
-            _window->close();
     _window->clear(sf::Color::White);
 }
 

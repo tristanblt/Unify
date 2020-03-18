@@ -23,6 +23,7 @@ Rectangle::~Rectangle()
 
 void Rectangle::draw(IWindow *w)
 {
+    (void)w;
     for (int y = _y; y < _y + _height; y++)
         for (int x = _x; x < _x + _width; x++)
             mvaddch(y, x, ' ' | COLOR_PAIR(_colorPair));
@@ -37,7 +38,7 @@ void Rectangle::setPosition(Vector2 position)
 void Rectangle::setSize(Vector2 size)
 {
     _width  = static_cast<int>(size.x);
-    _height = static_cast<int>(size.y);// NCURSES_RATIO;
+    _height = static_cast<int>(size.y);
 }
 
 void Rectangle::setColor(Color color)

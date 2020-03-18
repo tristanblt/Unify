@@ -24,7 +24,6 @@ class nCursesLibrary : public DisplayLibrary {
         void loadAsset(const std::string &path, const std::string &name, AssetType type);
 
         Events updateEvents(Events *);
-        int getLastAssetIdx() const;
         std::map<int, Color> getKnownColors() const;
         static int colorExists(Color);
         static int addColor(Color);
@@ -38,8 +37,6 @@ class nCursesLibrary : public DisplayLibrary {
         const int mouseButtons[3] = {BUTTON1_CLICKED, BUTTON2_CLICKED, BUTTON3_CLICKED};
         void updateMouseEvents(Events *events, Window *window);
         void updateKeyboardEvents(Events *events);
-        //sf::Event _event;
-        //sf::Mouse _mouse;
 };
 
 #endif /* !NCURSESLIBRARY_HPP_ */

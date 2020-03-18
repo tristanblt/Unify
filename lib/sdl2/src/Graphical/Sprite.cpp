@@ -33,7 +33,7 @@ void Sprite::setSize(Vector2 size)
 {
     _body.w = size.x;
     _body.h = size.y;
-    _frame = {-1, -1};
+    _frame = {-1, -1, -1, -1};
 }
 
 void Sprite::setSize(Box body, Box frame)
@@ -51,4 +51,5 @@ void Sprite::setSprite(const std::string &idx)
 
 void Sprite::setOpacity(unsigned char opacity)
 {
+    (void) opacity;
 }

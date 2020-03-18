@@ -24,7 +24,6 @@ class Window : public IWindow {
         void close();
         void create();
 
-        //sf::RenderWindow *getWindow() const;
     protected:
     private:
         int _width;

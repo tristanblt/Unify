@@ -35,15 +35,11 @@ Events nCursesLibrary::updateEvents(Events *events)
     return (*events);
 }
 
-int nCursesLibrary::getLastAssetIdx() const
-{
-    return (_assets.size() - 1);
-    return (0);
-}
 void nCursesLibrary::updateMouseEvents(Events *e, Window *window)
 {
     MEVENT ptr;
 
+    (void)window;
     if (getmouse(&ptr) == OK) {
         e->mouseEvents.pos.x = ptr.x;
         e->mouseEvents.pos.y = ptr.y;

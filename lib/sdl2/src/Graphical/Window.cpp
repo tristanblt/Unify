@@ -61,7 +61,7 @@ void Window::clear()
 void Window::display()
 {
     SDL_RenderPresent(_renderer);
-    if (frameRate > SDL_GetTicks() - frameStart)
+    if (static_cast<unsigned int>(frameRate) > SDL_GetTicks() - frameStart)
         SDL_Delay(frameRate - (SDL_GetTicks() - frameStart));
 }
 
