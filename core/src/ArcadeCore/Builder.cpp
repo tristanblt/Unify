@@ -115,11 +115,6 @@ Color Builder::hexToColor(int color) const
     return (ret);
 }
 
-float Builder::toUnit(float value)
-{
-    return (_library->toUnit(value));
-}
-
 void Builder::updateEvents()
 {
     _library->updateEvents(&_events);

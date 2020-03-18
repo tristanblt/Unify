@@ -19,7 +19,7 @@ Layout::~Layout()
 void Layout::start(IBuilder *b)
 {
     b->addButton(new SpriteButton({b->windowWidth() * (19.0f / 20.0f),
-    ((b->windowHeight() - b->toUnit(b->windowHeight() / 16.0f))),
+    ((b->windowHeight() - b->windowHeight() / 16.0f)),
     (b->windowHeight() / 18.0f),
     (b->windowHeight() / 18.0f)},
     {256, 384, 128, 128}, {0, 384, 128, 128}, {128, 384, 128, 128}, "UnifyIcons"), "UnifyPause");

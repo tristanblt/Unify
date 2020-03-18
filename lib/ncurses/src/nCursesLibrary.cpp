@@ -20,11 +20,6 @@ nCursesLibrary::~nCursesLibrary()
 {
 }
 
-float nCursesLibrary::toUnit(float nb)
-{
-    return (nb);
-}
-
 void nCursesLibrary::loadAsset(const std::string &path, const std::string &name, AssetType type)
 {
     if (type == AssetType::SPRITE) {

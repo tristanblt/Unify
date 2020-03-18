@@ -22,11 +22,6 @@ SDL2Library::~SDL2Library()
 {
 }
 
-float SDL2Library::toUnit(float value)
-{
-    return (value);
-}
-
 void SDL2Library::updateMouseEvents(Events *e, Window *w)
 {
 
@@ -73,7 +68,6 @@ void SDL2Library::loadAsset(const std::string &path, const std::string &name, As
         SDL_Texture *t = SDL_CreateTextureFromSurface(dynamic_cast<Window *>(_window)->getRenderer(), f);
         _assets[name + "_srfce"] = (void *)f;
         _assets[name] = (void *)t;
-
     }
 }
 

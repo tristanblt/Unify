@@ -37,8 +37,6 @@ class Builder: public IBuilder {
 
         Color hexToColor(int hexColor) const;
 
-        float toUnit(float);
-
         bool isInBox(Box box);
 
         void loadAsset(const std::string &path, const std::string &name, AssetType type);

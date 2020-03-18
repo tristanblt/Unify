@@ -22,11 +22,6 @@ SFMLLibrary::~SFMLLibrary()
 {
 }
 
-float SFMLLibrary::toUnit(float value)
-{
-    return (value);
-}
-
 void SFMLLibrary::updateMouseEvents(Events *e, Window *w)
 {
     e->mouseEvents.pos.x = sf::Mouse::getPosition(*w->getWindow()).x;

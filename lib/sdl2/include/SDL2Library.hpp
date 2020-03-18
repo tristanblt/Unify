@@ -23,7 +23,6 @@ class SDL2Library : public DisplayLibrary {
         SDL2Library();
         ~SDL2Library();
 
-        float toUnit(float);
         void loadAsset(const std::string &path, const std::string &name, AssetType type);
 
         Events updateEvents(Events *events);

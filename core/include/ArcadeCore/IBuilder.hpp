@@ -41,7 +41,6 @@ class IBuilder {
         virtual void addButton(IButton *button, std::string name) = 0;
 
         virtual Color hexToColor(int hexColor) const = 0;
-        virtual float toUnit(float) = 0;
 
         virtual bool isInBox(Box box) = 0;
 

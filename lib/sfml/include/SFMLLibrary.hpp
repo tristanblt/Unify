@@ -21,7 +21,6 @@ class SFMLLibrary : public DisplayLibrary {
         SFMLLibrary();
         ~SFMLLibrary();
 
-        float toUnit(float);
         void loadAsset(const std::string &path, const std::string &name, AssetType type);
 
         Events updateEvents(Events *events);
