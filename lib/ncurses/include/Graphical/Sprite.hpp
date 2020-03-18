@@ -8,12 +8,12 @@
 #ifndef Sprite_HPP_
 #define Sprite_HPP_
 
-#include "core/include/ArcadeCore/PngFile.hpp"
+#include "core/include/ArcadeCore/Utils/PngFile.hpp"
 #include "lib/include/Graphical/ISprite.hpp"
 #include "lib/include/Graphical/IWindow.hpp"
 #include "lib/ncurses/include/Graphical/Window.hpp"
-#include "core/include/ArcadeCore/IBuilder.hpp"
-#include "core/include/ArcadeCore/Structs.hpp"
+#include "core/include/ArcadeCore/Builder/IBuilder.hpp"
+#include "core/include/ArcadeCore/Utils/Structs.hpp"
 #include "lib/ncurses/include/nCursesColors.hpp"
 #include "lib/ncurses/include/Graphical/Bitcrush.hpp"
 

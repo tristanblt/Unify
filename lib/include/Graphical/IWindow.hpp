@@ -8,7 +8,9 @@
 #ifndef IWINDOW_HPP_
 #define IWINDOW_HPP_
 
-#include "core/include/ArcadeCore/Structs.hpp"
+#define FRAMERATE_LIMIT 60
+
+#include "core/include/ArcadeCore/Utils/Structs.hpp"
 
 class IWindow {
     public:

@@ -9,7 +9,7 @@
 #define IText_HPP_
 
 #include "lib/include/Graphical/IWindow.hpp"
-#include "core/include/ArcadeCore/Structs.hpp"
+#include "core/include/ArcadeCore/Utils/Structs.hpp"
 
 class IText {
     public:

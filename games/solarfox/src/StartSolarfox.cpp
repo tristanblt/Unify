@@ -17,7 +17,7 @@ StartSolarfox::~StartSolarfox()
 
 void StartSolarfox::start(IBuilder *b)
 {
-
+    (void)b;
 }
 
 void StartSolarfox::update(IBuilder *b)

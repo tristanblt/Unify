@@ -8,8 +8,8 @@
 #ifndef BITCRUSH_HPP_
 #define BITCRUSH_HPP_
 
-#include "core/include/ArcadeCore/PngFile.hpp"
-#include "core/include/ArcadeCore/Structs.hpp"
+#include "core/include/ArcadeCore/Utils/PngFile.hpp"
+#include "core/include/ArcadeCore/Utils/Structs.hpp"
 #include "lib/ncurses/include/nCursesColors.hpp"
 #include <ncurses.h>
 #include <vector>

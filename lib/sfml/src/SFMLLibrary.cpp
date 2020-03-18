@@ -22,11 +22,6 @@ SFMLLibrary::~SFMLLibrary()
 {
 }
 
-float SFMLLibrary::toUnit(float value)
-{
-    return (value);
-}
-
 void SFMLLibrary::updateMouseEvents(Events *e, Window *w)
 {
     e->mouseEvents.pos.x = sf::Mouse::getPosition(*w->getWindow()).x;
@@ -82,9 +77,4 @@ void SFMLLibrary::loadAsset(const std::string &path, const std::string &name, As
             throw std::invalid_argument("SPRITE NOT FOUND"); // TODO
         _assets[name] = (void *)f;
     }
-}
-
-int SFMLLibrary::getLastAssetIdx() const
-{
-    return (_assets.size() - 1);
 }

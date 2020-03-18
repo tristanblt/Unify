@@ -16,11 +16,12 @@ int main(int argc, char const *argv[])
 {
     ArcadeCore arcadeCore;
     DisplayLibrary *lib;
+
     if (argc < 2)
         return (84);
     lib = arcadeCore.importGraphicalLibs(std::string(argv[1]));
     if (lib == NULL)
         return (84);
     while (arcadeCore.launchCore(lib));
-    return 0;
+    return (0);
 }

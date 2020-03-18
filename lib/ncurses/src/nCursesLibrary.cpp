@@ -20,11 +20,6 @@ nCursesLibrary::~nCursesLibrary()
 {
 }
 
-float nCursesLibrary::toUnit(float nb)
-{
-    return (nb);
-}
-
 void nCursesLibrary::loadAsset(const std::string &path, const std::string &name, AssetType type)
 {
     if (type == AssetType::SPRITE) {
@@ -40,15 +35,11 @@ Events nCursesLibrary::updateEvents(Events *events)
     return (*events);
 }
 
-int nCursesLibrary::getLastAssetIdx() const
-{
-    return (_assets.size() - 1);
-    return (0);
-}
 void nCursesLibrary::updateMouseEvents(Events *e, Window *window)
 {
     MEVENT ptr;
 
+    (void)window;
     if (getmouse(&ptr) == OK) {
         e->mouseEvents.pos.x = ptr.x;
         e->mouseEvents.pos.y = ptr.y;

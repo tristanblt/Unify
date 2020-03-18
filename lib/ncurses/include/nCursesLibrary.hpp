@@ -14,18 +14,16 @@
 #include "lib/ncurses/include/Graphical/Circle.hpp"
 #include "lib/ncurses/include/Graphical/Sprite.hpp"
 #include "lib/ncurses/include/Graphical/Text.hpp"
-#include "core/include/ArcadeCore/PngFile.hpp"
+#include "core/include/ArcadeCore/Utils/PngFile.hpp"
 
 class nCursesLibrary : public DisplayLibrary {
     public:
         nCursesLibrary();
         ~nCursesLibrary();
 
-        float toUnit(float);
         void loadAsset(const std::string &path, const std::string &name, AssetType type);
 
         Events updateEvents(Events *);
-        int getLastAssetIdx() const;
         std::map<int, Color> getKnownColors() const;
         static int colorExists(Color);
         static int addColor(Color);
@@ -39,8 +37,6 @@ class nCursesLibrary : public DisplayLibrary {
         const int mouseButtons[3] = {BUTTON1_CLICKED, BUTTON2_CLICKED, BUTTON3_CLICKED};
         void updateMouseEvents(Events *events, Window *window);
         void updateKeyboardEvents(Events *events);
-        //sf::Event _event;
-        //sf::Mouse _mouse;
 };
 
 #endif /* !NCURSESLIBRARY_HPP_ */

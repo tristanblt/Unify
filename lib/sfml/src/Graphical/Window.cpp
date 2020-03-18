@@ -16,7 +16,7 @@ void Window::create()
 {
     sf::VideoMode m = sf::VideoMode::getFullscreenModes()[0];
     _window = new sf::RenderWindow(sf::VideoMode(m.width, m.height), "test", sf::Style::Fullscreen | sf::Style::Close);
-    _window->setFramerateLimit(60);
+    _window->setFramerateLimit(FRAMERATE_LIMIT);
 }
 
 Window::~Window()
@@ -41,11 +41,6 @@ float Window::width()
 
 void Window::clear()
 {
-    // TODO :remove
-    sf::Event event;
-    while (_window->pollEvent(event))
-        if (event.type == sf::Event::Closed)
-            _window->close();
     _window->clear(sf::Color::White);
 }
 

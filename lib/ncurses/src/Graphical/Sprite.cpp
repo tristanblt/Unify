@@ -19,6 +19,7 @@ Sprite::~Sprite()
 
 void Sprite::draw(IWindow *w)
 {
+    (void)w;
     _frame.w = (_frame.w == -1 ? _sprite->getWidth() : _frame.w);
     _frame.h = (_frame.h == -1 ? _sprite->getHeight() : _frame.h);
 
@@ -60,6 +61,6 @@ void Sprite::setSprite(const std::string &idx)
 
 void Sprite::setOpacity(unsigned char opacity)
 {
-
+    (void)opacity;
 }
 
