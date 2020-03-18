@@ -10,7 +10,6 @@ NAME	=	../lib_arcade_unify_showcase.so
 SRCPATH	=	src/
 SRCS_FILES=	Entry.cpp							\
 			StartUnifyShowcase.cpp				\
-			../../../core/src/ArcadeCore/Builder/UI/Buttons/BasicButton.cpp
 
 SRC	=	$(addprefix $(SRCPATH), $(SRCS_FILES))
 
