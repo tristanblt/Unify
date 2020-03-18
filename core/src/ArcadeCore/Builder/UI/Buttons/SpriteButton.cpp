@@ -5,7 +5,7 @@
 ** SpriteButton
 */
 
-#include "core/include/ArcadeCore/Builder/UI/SpriteButton.hpp"
+#include "core/include/ArcadeCore/Builder/UI/Buttons/SpriteButton.hpp"
 #include "core/include/ArcadeCore/Builder/IBuilder.hpp"
 
 SpriteButton::SpriteButton(Box displayBox, Box active, Box inactive, Box hold, const std::string &spriteSeeet):
