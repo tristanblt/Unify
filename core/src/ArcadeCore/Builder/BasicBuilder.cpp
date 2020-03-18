@@ -18,13 +18,14 @@ Builder::~Builder()
 {
 }
 
+/* ----------------------------- window managing ---------------------------- */
+
 void Builder::reloadLibrary(DisplayLibrary *newLibrary)
 {
     windowClose();
     _library = newLibrary;
     windowCreate();
 }
-
 
 bool Builder::windowIsOpen()
 {
@@ -61,6 +62,8 @@ float Builder::windowWidth()
     return (_library->_window->width());
 }
 
+/* ------------------------------- basic draw ------------------------------- */
+
 void Builder::rectDraw(Box box, Color color)
 {
     _library->_rect->setPosition({box.x, box.y});
@@ -92,54 +95,12 @@ void Builder::radiusRectDraw(Box box, float radius, Color color)
     _library->_circle->draw(_library->_window);
 }
 
-bool Builder::buttonDraw(std::string name)
-{
-    if (_buttons.find(name) == _buttons.end())
-        throw std::invalid_argument("Could not find button");
-    return (_buttons[name]->draw(this));
-}
-
-void Builder::addButton(IButton *button, std::string name)
-{
-    _buttons[name] = button;
-}
-
-Color Builder::hexToColor(int color) const
-{
-    Color ret;
-
-    ret.r = ((color >> 24) & 0xff);
-    ret.b = ((color >> 16) & 0xff);
-    ret.g = ((color >> 8)  & 0xff);
-    ret.a = ((color)       & 0xff);
-    return (ret);
-}
-
-void Builder::updateEvents()
-{
-    _library->updateEvents(&_events);
-    time (&_tick);
-}
-
 void Builder::circleDraw(CircleModel circle, Color color)
 {
     _library->_circle->setPosition({circle.x, circle.y});
     _library->_circle->setRadius(circle.r);
     _library->_circle->setColor(color);
     _library->_circle->draw(_library->_window);
-}
-
-void Builder::loadAsset(const std::string &path, const std::string &name, AssetType type)
-{
-    _library->loadAsset(path, name, type);
-}
-
-bool Builder::isInBox(Box box)
-{
-    return (_events.mouseEvents.pos.x >= box.x &&
-            _events.mouseEvents.pos.x <= box.x + box.w &&
-            _events.mouseEvents.pos.y >= box.y &&
-            _events.mouseEvents.pos.y <= box.y + box.h);
 }
 
 void Builder::textDraw(TextModel text)
@@ -170,11 +131,51 @@ void Builder::spriteDraw(SpriteModel sprite, Box frame)
     _library->_sprite->draw(_library->_window);
 }
 
+/* -------------------------------- collider -------------------------------- */
+
+bool Builder::isInBox(Box box)
+{
+    return (_events.mouseEvents.pos.x >= box.x &&
+            _events.mouseEvents.pos.x <= box.x + box.w &&
+            _events.mouseEvents.pos.y >= box.y &&
+            _events.mouseEvents.pos.y <= box.y + box.h);
+}
+
+/* --------------------------------- events --------------------------------- */
+
 Events Builder::getEvents() const
 {
     return (_events);
 }
 
+void Builder::updateEvents()
+{
+    _library->updateEvents(&_events);
+    time (&_tick);
+}
+
+/* ---------------------------------- time ---------------------------------- */
+
 time_t Builder::getTime() const{
     return (_tick);
+}
+
+/* --------------------------------- assets --------------------------------- */
+
+void Builder::loadAsset(const std::string &path, const std::string &name, AssetType type)
+{
+    _library->loadAsset(path, name, type);
+}
+
+/* ---------------------------------- utils --------------------------------- */
+
+Color Builder::hexToColor(int color) const
+{
+    Color ret;
+
+    ret.r = ((color >> 24) & 0xff);
+    ret.b = ((color >> 16) & 0xff);
+    ret.g = ((color >> 8)  & 0xff);
+    ret.a = ((color)       & 0xff);
+    return (ret);
 }

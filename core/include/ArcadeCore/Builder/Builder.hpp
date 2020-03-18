@@ -16,6 +16,12 @@ class Builder: public IBuilder {
         Builder(DisplayLibrary *);
         ~Builder();
 
+/* -------------------------------------------------------------------------- */
+/*                                    basic                                   */
+/* -------------------------------------------------------------------------- */
+
+/* ----------------------------- window managing ---------------------------- */
+
         void reloadLibrary(DisplayLibrary *library);
         bool windowIsOpen();
         void windowClear();
@@ -25,6 +31,8 @@ class Builder: public IBuilder {
         float windowHeight();
         float windowWidth();
 
+/* ------------------------------- basic draw ------------------------------- */
+
         void rectDraw(Box box, Color color);
         void circleDraw(CircleModel circle, Color color);
         void radiusRectDraw(Box box, float radius, Color color);
@@ -32,19 +40,38 @@ class Builder: public IBuilder {
         void spriteDraw(SpriteModel sprite);
         void spriteDraw(SpriteModel sprite, Box frame);
 
-        void addButton(IButton *button, std::string name);
-        bool buttonDraw(std::string name);
-
-        Color hexToColor(int hexColor) const;
+/* -------------------------------- collider -------------------------------- */
 
         bool isInBox(Box box);
 
-        void loadAsset(const std::string &path, const std::string &name, AssetType type);
+/* --------------------------------- events --------------------------------- */
 
         void updateEvents();
-
         Events getEvents() const;
+
+/* ---------------------------------- time ---------------------------------- */
+
         time_t getTime() const;
+
+/* --------------------------------- assets --------------------------------- */
+
+        void loadAsset(const std::string &path, const std::string &name, AssetType type);
+
+/* ---------------------------------- utils --------------------------------- */
+
+        Color hexToColor(int hexColor) const;
+
+
+
+/* -------------------------------------------------------------------------- */
+/*                                     ui                                     */
+/* -------------------------------------------------------------------------- */
+
+/* --------------------------------- buttons -------------------------------- */
+
+        bool buttonDraw(std::string name);
+        void addButton(IButton *button, std::string name);
+
     protected:
     private:
         std::map <std::string, IButton *> _buttons;

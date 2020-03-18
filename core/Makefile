@@ -12,7 +12,8 @@ SRCS_FILES=	main.cpp													\
 			ArcadeCore/ArcadeCore.cpp									\
 			ArcadeCore/Components/Layout.cpp							\
 			ArcadeCore/Components/Menu.cpp								\
-			ArcadeCore/Builder/Builder.cpp								\
+			ArcadeCore/Builder/BasicBuilder.cpp							\
+			ArcadeCore/Builder/UI/UIBuilder.cpp							\
 			ArcadeCore/Builder/UI/Buttons/BasicButton.cpp				\
 			ArcadeCore/Builder/UI/Buttons/SpriteButton.cpp				\
 
