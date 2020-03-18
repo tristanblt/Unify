@@ -5,16 +5,16 @@
 ## Makefile for
 ##
 
-NAME	=	../lib_arcade_vulkan.so
+NAME	=	../lib_arcade_sdl2.so
 
 SRCPATH	=	src/
-SRCS_FILES=	VulkanLibrary.cpp						\
+SRCS_FILES=	SDL2Library.cpp							\
 			Entry.cpp								\
 			Graphical/Window.cpp					\
-			#Graphical/Circle.cpp					\
+			Graphical/Rectangle.cpp					\
+			Graphical/Circle.cpp					\
 			Graphical/Text.cpp						\
 			Graphical/Sprite.cpp					\
-			Graphical/Rectangle.cpp					\
 
 SRC	=	$(addprefix $(SRCPATH), $(SRCS_FILES))
 
@@ -23,7 +23,7 @@ OBJ			= 	$(SRC:%.cpp=%.o)
 CXXFLAGS	=	-W -Wall -Wextra -Wshadow	\
 			-I../../	-std=c++11 -fpic
 
-LDFLAGS		= -lvulkan -lglfw
+LDFLAGS		= -lsdl2 -lsdl2_ttf -lsdl2_image -lsdl2_gfx
 
 CXX		=	g++
 

@@ -8,10 +8,9 @@
 #ifndef Circle_HPP_
 #define Circle_HPP_
 
-#include "Vulkan/Graphics.hpp"
 #include "lib/include/Graphical/ICircle.hpp"
 #include "lib/include/Graphical/IWindow.hpp"
-#include "lib/Vulkan/include/Graphical/Window.hpp"
+#include "lib/sdl2/include/Graphical/Window.hpp"
 #include "core/include/ArcadeCore/IBuilder.hpp"
 #include "core/include/ArcadeCore/Structs.hpp"
 
@@ -26,7 +25,8 @@ class Circle : public ICircle {
         void setColor(Color color);
     protected:
     private:
-        sf::CircleShape *_circle;
+        CircleModel _circle;
+        Color _color;
 };
 
 #endif /* !Circle_HPP_ */

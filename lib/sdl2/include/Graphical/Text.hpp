@@ -8,16 +8,19 @@
 #ifndef Text_HPP_
 #define Text_HPP_
 
-#include "Vulkan/Graphics.hpp"
+#include "SDL2/SDL.h"
 #include "lib/include/Graphical/IText.hpp"
 #include "lib/include/Graphical/IWindow.hpp"
-#include "lib/Vulkan/include/Graphical/Window.hpp"
+#include "lib/sdl2/include/Graphical/Window.hpp"
 #include "core/include/ArcadeCore/IBuilder.hpp"
 #include "core/include/ArcadeCore/Structs.hpp"
+#include "SDL2/SDL_ttf.h"
+
+#define FONT_SIZE_MAX 500.0f
 
 class Text : public IText {
     public:
-        Text(std::vector<void *> *assets);
+        Text(std::map<std::string, void *> *assets);
         ~Text();
 
         void draw(IWindow *window);
@@ -25,11 +28,16 @@ class Text : public IText {
         void setColor(Color color);
         void setFontSize(int fontSize);
         void setText(const std::string &text);
-        void setFont(int fontIdx);
+        void setFont(const std::string &idx);
     protected:
     private:
-        sf::Text *_text;
-        std::vector<void *> *_assets;
+        std::string _text;
+        Color _color;
+        TTF_Font *_font;
+        std::map<std::string, void *> *_assets;
+        int _fontSize;
+        float _x;
+        float _y;
 };
 
 #endif /* !Text_HPP_ */

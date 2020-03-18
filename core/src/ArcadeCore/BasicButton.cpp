@@ -23,15 +23,18 @@ bool BasicButton::draw(IBuilder *builder)
 
     if (state == true && builder->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::CLICK) {
         builder->radiusRectDraw(_displayBox, _radius, _boxColors[0]);
-        builder->textDraw({_text, {static_cast<float>(_displayBox.x + (_displayBox.w / 2) - (_text.size() / 2 * _fontSize / 1.6)), _displayBox.y + (_displayBox.h / 2) - _fontSize / 2},
+        builder->textDraw({_text, {static_cast<float>(_displayBox.x + (_displayBox.w / 2) - (_text.size() / 2 * _fontSize / 1.6)),
+        _displayBox.y + (_displayBox.h / 2) - _fontSize / 2},
         _textColors[0], _fontSize, _fontIdx});
     } else if (state == true) {
         builder->radiusRectDraw(_displayBox, _radius, _boxColors[2]);
-        builder->textDraw({_text, {static_cast<float>(_displayBox.x + (_displayBox.w / 2) - (_text.size() / 2 * _fontSize / 1.6)), _displayBox.y + (_displayBox.h / 2) - _fontSize / 2},
+        builder->textDraw({_text, {static_cast<float>(_displayBox.x + (_displayBox.w / 2) - (_text.size() / 2 * _fontSize / 1.6)),
+        _displayBox.y + (_displayBox.h / 2) - _fontSize / 2},
         _textColors[2], _fontSize, _fontIdx});
     } else {
         builder->radiusRectDraw(_displayBox, _radius, _boxColors[1]);
-        builder->textDraw({_text, {static_cast<float>(_displayBox.x + (_displayBox.w / 2) - (_text.size() / 2 * _fontSize / 1.6)), _displayBox.y + (_displayBox.h / 2) - _fontSize / 2},
+        builder->textDraw({_text, {static_cast<float>(_displayBox.x + (_displayBox.w / 2) - (_text.size() / 2 * _fontSize / 1.6)),
+        _displayBox.y + (_displayBox.h / 2) - _fontSize / 2},
         _textColors[1], _fontSize, _fontIdx});
     }
     return (state);

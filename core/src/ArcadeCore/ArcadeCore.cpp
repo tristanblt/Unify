@@ -19,9 +19,9 @@ ArcadeCore::~ArcadeCore()
 
 void ArcadeCore::loadCoreAssets(IBuilder *builder)
 {
-    builder->loadAsset("assets/fonts/Montserrat-Light.otf", "UnifyLightFont", AssetType::FONT);
-    builder->loadAsset("assets/fonts/Montserrat-Regular.otf", "UnifyRegularFont", AssetType::FONT);
-    builder->loadAsset("assets/fonts/Montserrat-Bold.otf", "UnifyBoldFont", AssetType::FONT);
+    builder->loadAsset("assets/fonts/Montserrat-Light.ttf", "UnifyLightFont", AssetType::FONT);
+    builder->loadAsset("assets/fonts/Montserrat-Regular.ttf", "UnifyRegularFont", AssetType::FONT);
+    builder->loadAsset("assets/fonts/Montserrat-Bold.ttf", "UnifyBoldFont", AssetType::FONT);
     builder->loadAsset("assets/imgs/flaticons/icons.png", "UnifyIcons", AssetType::SPRITE);
     builder->loadAsset("assets/imgs/logo.png", "UnifyLogo", AssetType::SPRITE);
     builder->loadAsset("assets/fonts/UnifyFontImg.png", "UnifyFontImg", AssetType::SPRITE);
@@ -63,6 +63,7 @@ void ArcadeCore::switchGraphicalLibrary(IBuilder *b)
         b->reloadLibrary(_libs[tmp]);
         loadCoreAssets(b);
         _menu.start(b);
+        _layout.start(b);
         b->getEvents().keyboardState[Key::N] = InputState::NONE;
         first = false;
     }
@@ -95,5 +96,5 @@ bool ArcadeCore::launchCore(DisplayLibrary *library)
         builder.windowDisplay();
         switchGraphicalLibrary(&builder);
     }
-    return (_menu.getInterruptType());;
+    return (_menu.getInterruptType());
 }

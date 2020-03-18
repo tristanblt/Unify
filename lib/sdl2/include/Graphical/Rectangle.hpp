@@ -8,10 +8,10 @@
 #ifndef RECTANGLE_HPP_
 #define RECTANGLE_HPP_
 
-#include "Vulkan/Graphics.hpp"
+#include "SDL2/SDL.h"
 #include "lib/include/Graphical/IRectangle.hpp"
 #include "lib/include/Graphical/IWindow.hpp"
-#include "lib/Vulkan/include/Graphical/Window.hpp"
+#include "lib/sdl2/include/Graphical/Window.hpp"
 #include "core/include/ArcadeCore/IBuilder.hpp"
 #include "core/include/ArcadeCore/Structs.hpp"
 
@@ -26,7 +26,8 @@ class Rectangle : public IRectangle {
         void setColor(Color color);
     protected:
     private:
-        sf::RectangleShape *_rect;
+        SDL_Rect *_rect;
+        Color _color;
 };
 
 #endif /* !RECTANGLE_HPP_ */

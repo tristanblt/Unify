@@ -8,27 +8,31 @@
 #ifndef Sprite_HPP_
 #define Sprite_HPP_
 
-#include "Vulkan/Graphics.hpp"
+#include "SDL2/SDL.h"
+#include "SDL2/SDL_image.h"
 #include "lib/include/Graphical/ISprite.hpp"
 #include "lib/include/Graphical/IWindow.hpp"
-#include "lib/Vulkan/include/Graphical/Window.hpp"
+#include "lib/sdl2/include/Graphical/Window.hpp"
 #include "core/include/ArcadeCore/IBuilder.hpp"
 #include "core/include/ArcadeCore/Structs.hpp"
 
 class Sprite : public ISprite {
     public:
-        Sprite(std::vector<void *> *assets);
+        Sprite(std::map<std::string, void *> *assets);
         ~Sprite();
 
         void draw(IWindow *window);
         void setPosition(Vector2 position);
         void setSize(Vector2 size);
-        void setSprite(int spriteIdx);
+        void setSize(Box body, Box frame);
+        void setSprite(const std::string &idx);
         void setOpacity(unsigned char opacity);
     protected:
     private:
-        sf::Sprite *_sprite;
-        std::vector<void *> *_assets;
+        std::map<std::string, void *> *_assets;
+        SDL_Texture *_sprite;
+        Box _body;
+        Box _frame;
 };
 
 #endif /* !Sprite_HPP_ */

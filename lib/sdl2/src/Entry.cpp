@@ -5,11 +5,11 @@
 ** Entry
 */
 
-#include "lib/vulkan/include/VulkanLibrary.hpp"
+#include "lib/sdl2/include/SDL2Library.hpp"
 #include "lib/include/Entry.hpp"
 #include <iostream>
 
 extern "C" DisplayLibrary *entryPoint()
 {
-    return (new VulkanLibrary());
+    return (new SDL2Library());
 }

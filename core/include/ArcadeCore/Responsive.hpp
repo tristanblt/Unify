@@ -11,6 +11,4 @@
 #define VW(n) (b->windowWidth() * ((float)n / 100))
 #define VH(n) (b->windowHeight() * ((float)n / 100))
 
-#define NCURSES_RATIO 2
-
 #endif /* !RESPONSIVE_HPP_ */

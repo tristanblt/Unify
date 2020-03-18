@@ -8,9 +8,10 @@
 #ifndef WINDOW_HPP_
 #define WINDOW_HPP_
 
-#define GLFW_INCLUDE_VULKAN
-#include <GLFW/glfw3.h>
 #include "lib/include/Graphical/IWindow.hpp"
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_image.h>
 
 class Window : public IWindow {
     public:
@@ -25,11 +26,14 @@ class Window : public IWindow {
         void close();
         void create();
         
-        //sf::RenderWindow *getWindow() const;
+        SDL_Renderer *getRenderer() const;
     protected:
     private:
-        GLFWwindow *_window;
-        //sf::RenderWindow *_window;
+        SDL_Window *_window;
+        SDL_Renderer *_renderer;
+        bool _isWindowOpen;
+        int frameRate;
+        Uint32 frameStart;
 };
 
 #endif /* !WINDOW_HPP_ */
