@@ -26,7 +26,7 @@ void StartUnifyShowcase::start(IBuilder *b)
 void StartUnifyShowcase::update(IBuilder *b)
 {
     b->rectDraw({0, 0, VW(100), VH(100)}, b->hexToColor(0x111111FF));
-    b->buttonDraw("UnifyNextScene");
+    //b->buttonDraw("UnifyNextScene");
 }
 
 std::string StartUnifyShowcase::getName() const

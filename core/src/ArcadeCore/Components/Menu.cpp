@@ -50,6 +50,8 @@ void Menu::drawCarousel(IBuilder *b)
 {
     if (b->isInBox({0, VH(20), VW(100), VH(55)})) {
         _coversOffset -= b->getEvents().mouseEvents.scrollVelocity * 10;
+        _coversOffset += b->getEvents().joyConEvents.buttons1[JOY_R1] == InputState::HOLD ? -50 : 0;
+        _coversOffset += b->getEvents().joyConEvents.buttons1[JOY_L1] == InputState::HOLD ? 50 : 0;
         if (_coversOffset > VW(50) - VW(20))
             _coversOffset = VW(50) - VW(20);
     }
@@ -70,7 +72,8 @@ void Menu::drawCarousel(IBuilder *b)
         if (color > 200 && i < _covers.size()) {
             b->textDraw({_covers[i].gameName, {(VW(100) - (0.5f * _covers[i].gameName.length() * (VH(3)))) * 0.49f, VH(20) * 3.12f}, b->hexToColor(0xFFFFFFFF), static_cast<int>(VH(3)), "UnifyBoldFont"});
             if (b->isInBox({(VH(35)) * i + _coversOffset + VH(17), VH(24), VH(33), VH(33), }) &&
-            b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
+            (b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED ||
+            b->getEvents().joyConEvents.buttons1[JoyConButtons::JOY_A] == InputState::RELEASED))
                 _currentGame = _covers[i].gameLib;
         }
     }

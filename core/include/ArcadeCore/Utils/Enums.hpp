@@ -27,6 +27,15 @@ enum InputState {
     HOLD
 };
 
+enum JoyConState {
+    JOY_NONE,
+    JOY_CLICK_R,
+    JOY_CLICK_L,
+    JOY_RELEASED,
+    JOY_HOLD_L,
+    JOY_HOLD_R,
+};
+
 enum Key {
     A,
     B,
@@ -129,6 +138,17 @@ enum Key {
     F14,
     F15,
     PAUSE
+};
+
+enum JoyConButtons {
+    JOY_B,
+    JOY_A,
+    JOY_Y,
+    JOY_X,
+    JOY_L1,
+    JOY_R1,
+    JOY_OP,
+    JOY_MENU
 };
 
 enum CoreState {

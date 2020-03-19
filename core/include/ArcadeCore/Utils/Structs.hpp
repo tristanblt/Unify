@@ -51,11 +51,26 @@ struct MouseEvents {
     float scrollVelocity;
 };
 
+struct Vector2State {
+    JoyConState x;
+    JoyConState y;
+};
+
+struct JoyConEvents {
+    std::map<JoyConButtons, InputState> buttons1;
+    std::map<JoyConButtons, InputState> buttons2;
+    Vector2State mainAxe1;
+    Vector2State mainAxe2;
+    Vector2 cursorPos;
+};
+
 struct Events {
     MouseEvents mouseEvents;
+    JoyConEvents joyConEvents;
     std::map<Key, InputState> keyboardState;
     bool close;
 };
+
 struct SpriteModel {
     Box b;
     std::string assetIdx;
