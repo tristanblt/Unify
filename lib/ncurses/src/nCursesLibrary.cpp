@@ -62,7 +62,7 @@ void nCursesLibrary::updateMouseEvents(Events *e, Window *window)
 
 void nCursesLibrary::updateKeyboardEvents(Events *e)
 {
-    int c = getch();
+    /*int c = getch();
     for (int i = 0; i < 99; i++) {
         if (c >= 'a' && c <= 'z')
             c -= 32;
@@ -72,5 +72,5 @@ void nCursesLibrary::updateKeyboardEvents(Events *e)
         else
             e->keyboardState[static_cast<Key>(i)] = (e->keyboardState[static_cast<Key>(i)] != InputState::RELEASED && e->keyboardState[static_cast<Key>(i)] != InputState::NONE) ?
             InputState::RELEASED : InputState::NONE;
-    }
+    }*/
 }

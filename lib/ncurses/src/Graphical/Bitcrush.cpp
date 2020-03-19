@@ -7,12 +7,11 @@
 
 #include "lib/ncurses/include/Graphical/Bitcrush.hpp"
 
-Bitcrush::Bitcrush(PngFile *png, Vector2 pos, Box frame, Vector2 wantedSize)
+Bitcrush::Bitcrush(PngFile *png, Vector2 pos, Box frame, Vector2 wantedSize, IWindow *w)
 {
     png_bytep *pixels = png->getPixels();
     png_bytep px;
     Color color;
-    short colorPair, nColor;
     int tmp;
     Vector2 ratio = {
         frame.w / wantedSize.x,
@@ -75,20 +74,7 @@ Bitcrush::Bitcrush(PngFile *png, Vector2 pos, Box frame, Vector2 wantedSize)
             if (px[3] == 0)
                 continue;
             color = {px[0], px[1], px[2], px[3]};
-            color.r = color.r > 250 ? 250 : color.r < 0 ? 0 : color.r;
-            color.g = color.g > 250 ? 250 : color.g < 0 ? 0 : color.g;
-            color.b = color.b > 250 ? 250 : color.b < 0 ? 0 : color.b;
-            tmp = nCursesColors::colorExists(color);
-            if (tmp != -1) {
-                colorPair = tmp;
-                nColor = tmp;
-            } else {
-                colorPair = nCursesColors::addColor(color);
-                nColor = colorPair;
-                init_color(nColor, color.r * 4, color.g * 4, color.b * 4);
-                init_pair(colorPair, COLOR_WHITE, nColor);
-            }
-            mvaddch(pos.y + (y - frame.y) / ratio.y, pos.x + (x - frame.x) / ratio.x, ' ' | COLOR_PAIR(colorPair));
+            dynamic_cast<Window *>(w)->drawBufferPixel(pos.x + (x - frame.x) / ratio.x, pos.y + (y - frame.y) / ratio.y, color);
         }
     }
 }
