@@ -29,6 +29,7 @@ class ArcadeCore {
 
         DisplayLibrary *importGraphicalLibs(const std::string &libName);
         void switchGraphicalLibrary(IBuilder *builder);
+        void joyConCursors(IBuilder *b);
     protected:
     private:
         CoreState _coreState;

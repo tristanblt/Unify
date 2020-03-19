@@ -28,6 +28,10 @@ class SFMLLibrary : public DisplayLibrary {
     private:
         void updateMouseEvents(Events *events, Window *window);
         void updateKeyboardEvents(Events *events);
+        void updateJoyConEvents(Events *events);
+        void updateCursorJoyCon(Events *events);
+        void joyConInputState(bool, InputState &state);
+
         sf::Event _event;
 };
 

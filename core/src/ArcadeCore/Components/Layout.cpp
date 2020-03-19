@@ -42,6 +42,11 @@ void Layout::update(IBuilder *b, CoreState &coreState, const std::string &name)
     b->rectDraw({0, VH(100) - VH(7), VW(100), VH(7)}, b->hexToColor(0x373737FF));
     b->textDraw({"Unify", {VW(2), VH(94)}, b->hexToColor(0xFFFFFFFF), static_cast<int>(VH(4)), "UnifyBoldFont"});
     b->textDraw({name, {VW(50) - (name.size() * VH(1.3)), VH(94)}, b->hexToColor(0xFFFFFF77), static_cast<int>(VH(4)), "UnifyBoldFont"});
-    if (b->buttonDraw("UnifyPause") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
+    if (coreState == CoreState::CORE_PAUSE && b->getEvents().joyConEvents.buttons[JOY_OP] == InputState::RELEASED)
+        coreState = CoreState::CORE_GAME;    
+    else if ((b->buttonDraw("UnifyPause") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED) ||
+    b->getEvents().joyConEvents.buttons[JOY_OP] == InputState::RELEASED)
         coreState = CoreState::CORE_PAUSE;
+    if (b->getEvents().joyConEvents.buttons[JOY_MENU] == InputState::RELEASED)
+        coreState = CoreState::CORE_MENU;
 }

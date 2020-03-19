@@ -52,6 +52,69 @@ void SFMLLibrary::updateKeyboardEvents(Events *e)
     }
 }
 
+void SFMLLibrary::joyConInputState(bool on, InputState &state)
+{
+    if (on)
+        state = (state != InputState::CLICK && state != InputState::HOLD) ? InputState::CLICK : InputState::HOLD;
+    else
+        state = (state != InputState::RELEASED && state != InputState::NONE) ? InputState::RELEASED : InputState::NONE;
+}
+
+void SFMLLibrary::updateCursorJoyCon(Events *e)
+{
+    if (e->joyConEvents.cursorPos.x == -1 && e->joyConEvents.cursorPos.y == -1)
+        e->joyConEvents.cursorPos = {_window->width() / 2, _window->height() / 2};
+    if (e->joyConEvents.mainAxe.x == JoyConState::JOY_HOLD_L)
+        e->joyConEvents.cursorPos.x -= 30;
+    if (e->joyConEvents.mainAxe.x == JoyConState::JOY_HOLD_R)
+        e->joyConEvents.cursorPos.x += 30;
+    if (e->joyConEvents.mainAxe.y == JoyConState::JOY_HOLD_L)
+        e->joyConEvents.cursorPos.y -= 30;
+    if (e->joyConEvents.mainAxe.y == JoyConState::JOY_HOLD_R)
+        e->joyConEvents.cursorPos.y += 30;
+    if (e->joyConEvents.cursorPos.x < 0)
+        e->joyConEvents.cursorPos.x = 0;
+    if (e->joyConEvents.cursorPos.x > _window->width())
+        e->joyConEvents.cursorPos.x = _window->width();
+    if (e->joyConEvents.cursorPos.y < 0)
+        e->joyConEvents.cursorPos.y = 0;
+    if (e->joyConEvents.cursorPos.y > _window->height())
+        e->joyConEvents.cursorPos.y = _window->height();
+}
+
+void SFMLLibrary::updateJoyConEvents(Events *e)
+{
+    if (sf::Joystick::isConnected(0)) {
+        if (sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::PovX) > 0)
+            e->joyConEvents.mainAxe.x = (e->joyConEvents.mainAxe.x != JoyConState::JOY_CLICK_R && e->joyConEvents.mainAxe.x != JoyConState::JOY_HOLD_R) ?
+            JoyConState::JOY_CLICK_R : JoyConState::JOY_HOLD_R;
+        else if (sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::PovX) < 0)
+            e->joyConEvents.mainAxe.x = (e->joyConEvents.mainAxe.x != JoyConState::JOY_CLICK_L && e->joyConEvents.mainAxe.x != JoyConState::JOY_HOLD_L) ?
+            JoyConState::JOY_CLICK_L : JoyConState::JOY_HOLD_L;
+        else
+            e->joyConEvents.mainAxe.x = (e->joyConEvents.mainAxe.x != JoyConState::JOY_RELEASED && e->joyConEvents.mainAxe.x != JoyConState::JOY_NONE) ?
+            JoyConState::JOY_RELEASED : JoyConState::JOY_NONE;
+        if (sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::PovY) > 0)
+            e->joyConEvents.mainAxe.y = (e->joyConEvents.mainAxe.y != JoyConState::JOY_CLICK_L && e->joyConEvents.mainAxe.y != JoyConState::JOY_HOLD_L) ?
+            JoyConState::JOY_CLICK_L : JoyConState::JOY_HOLD_L;
+        else if (sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::PovY) < 0)
+            e->joyConEvents.mainAxe.y = (e->joyConEvents.mainAxe.y != JoyConState::JOY_CLICK_R && e->joyConEvents.mainAxe.y != JoyConState::JOY_HOLD_R) ?
+            JoyConState::JOY_CLICK_R : JoyConState::JOY_HOLD_R;
+        else
+            e->joyConEvents.mainAxe.y = (e->joyConEvents.mainAxe.y != JoyConState::JOY_RELEASED && e->joyConEvents.mainAxe.y != JoyConState::JOY_NONE) ?
+            JoyConState::JOY_RELEASED : JoyConState::JOY_NONE;
+        joyConInputState(sf::Joystick::isButtonPressed(0, 1), e->joyConEvents.buttons[JOY_B]);
+        joyConInputState(sf::Joystick::isButtonPressed(0, 2), e->joyConEvents.buttons[JOY_A]);
+        joyConInputState(sf::Joystick::isButtonPressed(0, 3), e->joyConEvents.buttons[JOY_Y]);
+        joyConInputState(sf::Joystick::isButtonPressed(0, 4), e->joyConEvents.buttons[JOY_X]);
+        joyConInputState(sf::Joystick::isButtonPressed(0, 4), e->joyConEvents.buttons[JOY_L1]);
+        joyConInputState(sf::Joystick::isButtonPressed(0, 5), e->joyConEvents.buttons[JOY_R1]);
+        joyConInputState(sf::Joystick::isButtonPressed(0, 8), e->joyConEvents.buttons[JOY_OP]);
+        joyConInputState(sf::Joystick::isButtonPressed(0, 13), e->joyConEvents.buttons[JOY_MENU]);
+        updateCursorJoyCon(e);
+    }
+}
+
 Events SFMLLibrary::updateEvents(Events *e)
 {
     sf::Event event;
@@ -60,6 +123,7 @@ Events SFMLLibrary::updateEvents(Events *e)
     _event = event;
     updateMouseEvents(e, dynamic_cast<Window *>(_window));
     updateKeyboardEvents(e);
+    updateJoyConEvents(e);
     return (*e);
 }
 

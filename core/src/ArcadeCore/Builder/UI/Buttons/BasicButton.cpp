@@ -21,7 +21,8 @@ bool BasicButton::draw(IBuilder *builder)
 {
     bool state = builder->isInBox(_displayBox);
 
-    if (state == true && builder->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::CLICK) {
+    if (state == true && (builder->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::CLICK ||
+    builder->getEvents().joyConEvents.buttons[JoyConButtons::JOY_A] == true)) {
         builder->radiusRectDraw(_displayBox, _radius, _boxColors[0]);
         builder->textDraw({_text, {static_cast<float>(_displayBox.x + (_displayBox.w / 2) - (_text.size() / 2 * _fontSize / 1.6)),
         _displayBox.y + (_displayBox.h / 2) - _fontSize / 2},

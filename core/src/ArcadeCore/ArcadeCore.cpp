@@ -25,6 +25,7 @@ void ArcadeCore::loadCoreAssets(IBuilder *builder)
     builder->loadAsset("assets/imgs/flaticons/icons.png", "UnifyIcons", AssetType::SPRITE);
     builder->loadAsset("assets/imgs/logo.png", "UnifyLogo", AssetType::SPRITE);
     builder->loadAsset("assets/fonts/UnifyFontImg.png", "UnifyFontImg", AssetType::SPRITE);
+    builder->loadAsset("assets/imgs/wii-cursors.png", "UnifyJoyConsCursors", AssetType::SPRITE);
 }
 
 DisplayLibrary *ArcadeCore::importGraphicalLibs(const std::string &firstLib)
@@ -67,6 +68,11 @@ void ArcadeCore::switchGraphicalLibrary(IBuilder *b)
     }
 }
 
+void ArcadeCore::joyConCursors(IBuilder *b)
+{
+    b->spriteDraw({{b->getEvents().joyConEvents.cursorPos.x - 15, b->getEvents().joyConEvents.cursorPos.y, 176, 120}, "UnifyJoyConsCursors", 255}, {481, 3, 44, 30});
+}
+
 bool ArcadeCore::launchCore(DisplayLibrary *library)
 {
     Start *game = NULL;
@@ -91,6 +97,7 @@ bool ArcadeCore::launchCore(DisplayLibrary *library)
                 game->update(&builder);
             _layout.update(&builder, _coreState, game->getName());
         }
+        joyConCursors(&builder);
         builder.windowDisplay();
         switchGraphicalLibrary(&builder);
     }

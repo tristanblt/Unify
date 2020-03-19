@@ -12,6 +12,7 @@ _library(library)
 {
     windowCreate();
     _events.mouseEvents.scrollVelocity = 0;
+    _events.joyConEvents.cursorPos = {-1, -1};
 }
 
 Builder::~Builder()
@@ -135,10 +136,14 @@ void Builder::spriteDraw(SpriteModel sprite, Box frame)
 
 bool Builder::isInBox(Box box)
 {
-    return (_events.mouseEvents.pos.x >= box.x &&
+    return ((_events.mouseEvents.pos.x >= box.x &&
             _events.mouseEvents.pos.x <= box.x + box.w &&
             _events.mouseEvents.pos.y >= box.y &&
-            _events.mouseEvents.pos.y <= box.y + box.h);
+            _events.mouseEvents.pos.y <= box.y + box.h) ||
+            (_events.joyConEvents.cursorPos.x >= box.x &&
+            _events.joyConEvents.cursorPos.x <= box.x + box.w &&
+            _events.joyConEvents.cursorPos.y >= box.y &&
+            _events.joyConEvents.cursorPos.y <= box.y + box.h));
 }
 
 /* --------------------------------- events --------------------------------- */
