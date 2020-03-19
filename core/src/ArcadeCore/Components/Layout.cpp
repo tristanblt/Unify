@@ -18,16 +18,16 @@ Layout::~Layout()
 
 void Layout::start(IBuilder *b)
 {
-    b->addButton(new SpriteButton({b->windowWidth() * (19.0f / 20.0f),
+    b->addSpriteButton({b->windowWidth() * (19.0f / 20.0f),
     ((b->windowHeight() - b->windowHeight() / 16.0f)),
     (b->windowHeight() / 18.0f),
     (b->windowHeight() / 18.0f)},
-    {256, 384, 128, 128}, {0, 384, 128, 128}, {128, 384, 128, 128}, "UnifyIcons"), "UnifyPause");
+    {256, 384, 128, 128}, {0, 384, 128, 128}, {128, 384, 128, 128}, "UnifyIcons", "UnifyPause");
 
-    b->addButton(new BasicButton({VW(44), VH(55), VW(12), VH(5)}, VH(2.5), "Back to home",
+    b->addBasicButton({VW(44), VH(55), VW(12), VH(5)}, VH(2.5),
     b->hexToColor(0x505050FF), b->hexToColor(0x505050FF), b->hexToColor(0x505050FF),
     b->hexToColor(0xDEDEDEFF), b->hexToColor(0xFFFFFFFF), b->hexToColor(0x1B79E6FF),
-    VH(2), "UnifyBoldFont"), "UnifyReturnHome");
+    "Back to home", VH(2), "UnifyBoldFont", "UnifyReturnHome");
 }
 
 void Layout::update(IBuilder *b, CoreState &coreState, const std::string &name)

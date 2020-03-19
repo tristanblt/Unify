@@ -15,8 +15,6 @@
 #include "lib/include/DisplayLibrary.hpp"
 #include "core/include/ArcadeCore/Utils/Structs.hpp"
 #include "core/include/ArcadeCore/Utils/Responsive.hpp"
-#include "core/include/ArcadeCore/Builder/UI/Buttons/IButton.hpp"
-#include "core/include/ArcadeCore/Builder/UI/Buttons/BasicButton.hpp"
 
 class IBuilder {
     public:
@@ -74,7 +72,12 @@ class IBuilder {
 /* --------------------------------- buttons -------------------------------- */
 
         virtual bool buttonDraw(std::string name) = 0;
-        virtual void addButton(IButton *button, std::string name) = 0;
+        virtual void addBasicButton(Box displayBox, float radius,
+                                    Color boxActive, Color boxInactive, Color boxHold,
+                                    Color txtActive, Color txtInactive, Color txtHold, std::string text, int fontSize,
+                                    std::string fontIdx, std::string name) = 0;
+        virtual void addSpriteButton(Box displayBox, Box spriteBoxActive, Box spriteBoxInactive, Box spriteBoxHold, std::string spriteSheetIndex, std::string name) = 0;
+        virtual void addSwitchButton(SwitchButton button, std::string name) = 0;
 };
 
 #endif /* !IBUILDER_HPP_ */

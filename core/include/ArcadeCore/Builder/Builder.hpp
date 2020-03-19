@@ -68,13 +68,23 @@ class Builder: public IBuilder {
 /* -------------------------------------------------------------------------- */
 
 /* --------------------------------- buttons -------------------------------- */
-
+    public:
         bool buttonDraw(std::string name);
-        void addButton(IButton *button, std::string name);
-
+        void addBasicButton(Box displayBox, float radius,
+                                    Color boxActive, Color boxInactive, Color boxHold,
+                                    Color txtActive, Color txtInactive, Color txtHold, std::string text, int fontSize,
+                                    std::string fontIdx, std::string name);
+        void addSpriteButton(Box displayBox, Box spriteBoxActive, Box spriteBoxInactive, Box spriteBoxHold, std::string spriteSheetIndex, std::string name);
+        void addSwitchButton(SwitchButton button, std::string name);
     protected:
+        bool basicButtonDraw(BasicButton b);
+        bool spriteButtonDraw(SpriteButton b);
+        bool switchButtonDraw(SwitchButton b);
+    public:
+
+
     private:
-        std::map <std::string, IButton *> _buttons;
+        std::map <std::string, GameObject> _gameObjects;
         Events _events;
         time_t _tick;
         DisplayLibrary *_library;

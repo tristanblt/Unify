@@ -10,8 +10,6 @@
 
 #include "games/include/Start.hpp"
 #include "core/include/DLLoader.hpp"
-#include "core/include/ArcadeCore/Builder/UI/Buttons/BasicButton.hpp"
-#include "core/include/ArcadeCore/Builder/UI/Buttons/SpriteButton.hpp"
 #include "core/include/ArcadeCore/Utils/Enums.hpp"
 #include <vector>
 #include <fstream>

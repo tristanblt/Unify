@@ -101,14 +101,14 @@ void Menu::start(IBuilder *b)
     }
     if (_coversOffset == 0)
         _coversOffset = VW(50) - VW(20);
-    b->addButton(new SpriteButton({b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 13.7f, b->windowWidth() / 38.0f, b->windowWidth() / 38.0f},
-    {256, 0, 128, 128}, {0, 0, 128, 128}, {128, 0, 128, 128}, "UnifyIcons"), "UnifySettings");
-    b->addButton(new SpriteButton({b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 15.0f * 12.6f, b->windowWidth() / 30.0f, b->windowWidth() / 30.0f},
-    {256, 128, 128, 128}, {0, 128, 128, 128}, {128, 128, 128, 128}, "UnifyIcons"), "UnifyPower");
-    b->addButton(new SpriteButton({b->windowWidth() * (17.2f / 20.0f), b->windowHeight() / 15.0f * 12.6f, b->windowWidth() / 30.0f, b->windowWidth() / 30.0f},
-    {256, 256, 128, 128}, {0, 256, 128, 128}, {128, 256, 128, 128}, "UnifyIcons"), "UnifyRestart");
-    b->addButton(new SpriteButton({b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 13.7f, b->windowWidth() / 38.0f, b->windowWidth() / 38.0f},
-    {256, 512, 128, 128}, {0, 512, 128, 128}, {128, 512, 128, 128}, "UnifyIcons"), "UnifyBack");
+    b->addSpriteButton({b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 13.7f, b->windowWidth() / 38.0f, b->windowWidth() / 38.0f},
+    {256, 0, 128, 128}, {0, 0, 128, 128}, {128, 0, 128, 128}, "UnifyIcons", "UnifySettings");
+    b->addSpriteButton({b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 15.0f * 12.6f, b->windowWidth() / 30.0f, b->windowWidth() / 30.0f},
+    {256, 128, 128, 128}, {0, 128, 128, 128}, {128, 128, 128, 128}, "UnifyIcons", "UnifyPower");
+    b->addSpriteButton({b->windowWidth() * (17.2f / 20.0f), b->windowHeight() / 15.0f * 12.6f, b->windowWidth() / 30.0f, b->windowWidth() / 30.0f},
+    {256, 256, 128, 128}, {0, 256, 128, 128}, {128, 256, 128, 128}, "UnifyIcons", "UnifyRestart");
+    b->addSpriteButton({b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 13.7f, b->windowWidth() / 38.0f, b->windowWidth() / 38.0f},
+    {256, 512, 128, 128}, {0, 512, 128, 128}, {128, 512, 128, 128}, "UnifyIcons", "UnifyBack");
 }
 
 DLLoader<Start> *Menu::update(IBuilder *b)

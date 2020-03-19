@@ -62,4 +62,29 @@ struct SpriteModel {
     unsigned char opacity;
 };
 
+struct BasicButton {
+    Box displayBox;
+    float radius;
+    std::array <Color, 3> boxColors;
+    std::array <Color, 3> textColors;
+    std::string text;
+    int fontSize;
+    std::string fontIdx;
+};
+
+struct SpriteButton {
+    Box displayBox;
+    std::array <Box, 3> spriteBoxes;
+    std::string spriteSheetIndex;
+};
+
+struct SwitchButton {
+    Box displayBox;
+};
+
+struct GameObject {
+    ObjectType type;
+    void *item;
+};
+
 #endif /* !STRUCTS_HPP_ */

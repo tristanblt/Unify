@@ -11,8 +11,6 @@
 #include "core/include/ArcadeCore/Builder/IBuilder.hpp"
 #include "core/include/ArcadeCore/Utils/Structs.hpp"
 #include "core/include/ArcadeCore/Utils/Enums.hpp"
-#include "core/include/ArcadeCore/Builder/UI/Buttons/BasicButton.hpp"
-#include "core/include/ArcadeCore/Builder/UI/Buttons/SpriteButton.hpp"
 
 class Layout {
     public:

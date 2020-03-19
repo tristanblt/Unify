@@ -17,10 +17,10 @@ StartUnifyShowcase::~StartUnifyShowcase()
 
 void StartUnifyShowcase::start(IBuilder *b)
 {
-    b->addButton(new BasicButton({VW(44), VH(55), VW(12), VH(5)}, VH(2.5), "Next scene",
+    b->addBasicButton({VW(44), VH(55), VW(12), VH(5)}, VH(2.5),
     b->hexToColor(0x505050FF), b->hexToColor(0x505050FF), b->hexToColor(0x505050FF),
     b->hexToColor(0xDEDEDEFF), b->hexToColor(0xFFFFFFFF), b->hexToColor(0x1B79E6FF),
-    VH(2), "UnifyBoldFont"), "UnifyNextScene");
+     "Next scene", VH(2), "UnifyBoldFont", "UnifyNextScene");
 }
 
 void StartUnifyShowcase::update(IBuilder *b)

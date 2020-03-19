@@ -143,4 +143,12 @@ enum MenuState {
     MENU_SETTINGS
 };
 
+enum ObjectType {
+    BASIC_BUTTON,
+    SPRITE_BUTTON,
+    SWITCH_BUTTON,
+    SLIDER,
+    SELECTOR,
+};
+
 #endif /* !ENUMS_HPP_ */
