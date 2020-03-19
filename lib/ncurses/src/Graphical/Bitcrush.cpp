@@ -17,10 +17,10 @@ Bitcrush::Bitcrush(PngFile *png, Vector2 pos, Box frame, Vector2 wantedSize, IWi
         frame.w / wantedSize.x,
         frame.h / wantedSize.y //* NCURSES_RATIO
     };
-    std::vector<std::vector<Color> > crushed;
-    Color sum;
-    int coef;
-    int a = 0, b = 0;
+    //std::vector<std::vector<Color> > crushed;
+    //Color sum;
+    //int coef;
+    //int a = 0, b = 0;
 
     /*crushed.resize(static_cast<int>(frame.w / ratio.x) + 1, std::vector<Color>(static_cast<int>(frame.h / ratio.y) + 1));
     for(int y = frame.y; y < (frame.h + frame.y) - ratio.y && y < png->getHeight(); y+=ratio.y) {

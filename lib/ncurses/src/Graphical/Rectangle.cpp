@@ -42,7 +42,7 @@ void Rectangle::setPosition(Vector2 position)
 void Rectangle::setSize(Vector2 size)
 {
     _width  = static_cast<int>(size.x);
-    _height = static_cast<int>(size.y);// NCURSES_RATIO;
+    _height = static_cast<int>(size.y);
 }
 
 void Rectangle::setColor(Color color)

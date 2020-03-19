@@ -38,7 +38,6 @@ class Window : public IWindow {
         void  drawBufferPixel(int, int, Color);
         std::vector<std::vector<Color>> getBuffer(void);
 
-        //sf::RenderWindow *getWindow() const;
     protected:
     private:
         size_t _width;

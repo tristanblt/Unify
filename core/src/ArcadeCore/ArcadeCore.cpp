@@ -19,12 +19,13 @@ ArcadeCore::~ArcadeCore()
 
 void ArcadeCore::loadCoreAssets(IBuilder *builder)
 {
-    builder->loadAsset("assets/fonts/Montserrat-Light.otf", "UnifyLightFont", AssetType::FONT);
-    builder->loadAsset("assets/fonts/Montserrat-Regular.otf", "UnifyRegularFont", AssetType::FONT);
-    builder->loadAsset("assets/fonts/Montserrat-Bold.otf", "UnifyBoldFont", AssetType::FONT);
+    builder->loadAsset("assets/fonts/Montserrat-Light.ttf", "UnifyLightFont", AssetType::FONT);
+    builder->loadAsset("assets/fonts/Montserrat-Regular.ttf", "UnifyRegularFont", AssetType::FONT);
+    builder->loadAsset("assets/fonts/Montserrat-Bold.ttf", "UnifyBoldFont", AssetType::FONT);
     builder->loadAsset("assets/imgs/flaticons/icons.png", "UnifyIcons", AssetType::SPRITE);
     builder->loadAsset("assets/imgs/logo.png", "UnifyLogo", AssetType::SPRITE);
     builder->loadAsset("assets/fonts/UnifyFontImg.png", "UnifyFontImg", AssetType::SPRITE);
+    builder->loadAsset("assets/imgs/wii-cursors.png", "UnifyJoyConsCursors", AssetType::SPRITE);
 }
 
 DisplayLibrary *ArcadeCore::importGraphicalLibs(const std::string &firstLib)
@@ -54,8 +55,7 @@ DisplayLibrary *ArcadeCore::importGraphicalLibs(const std::string &firstLib)
 
 void ArcadeCore::switchGraphicalLibrary(IBuilder *b)
 {
-    static bool first = true;
-    if (b->getEvents().keyboardState[Key::N] == InputState::RELEASED && first) {
+    if (b->getEvents().keyboardState[Key::N] == InputState::RELEASED) {
         unsigned long tmp = static_cast<unsigned long>(_currentLib);
         tmp++;
         if (tmp > _libs.size() - 1)
@@ -63,9 +63,14 @@ void ArcadeCore::switchGraphicalLibrary(IBuilder *b)
         b->reloadLibrary(_libs[tmp]);
         loadCoreAssets(b);
         _menu.start(b);
+        _layout.start(b);
         b->getEvents().keyboardState[Key::N] = InputState::NONE;
-        first = false;
     }
+}
+
+void ArcadeCore::joyConCursors(IBuilder *b)
+{
+    b->spriteDraw({{b->getEvents().joyConEvents.cursorPos.x - 15, b->getEvents().joyConEvents.cursorPos.y, 176, 120}, "UnifyJoyConsCursors", 255}, {481, 3, 44, 30});
 }
 
 bool ArcadeCore::launchCore(DisplayLibrary *library)
@@ -92,8 +97,9 @@ bool ArcadeCore::launchCore(DisplayLibrary *library)
                 game->update(&builder);
             _layout.update(&builder, _coreState, game->getName());
         }
+        joyConCursors(&builder);
         builder.windowDisplay();
         switchGraphicalLibrary(&builder);
     }
-    return (_menu.getInterruptType());;
+    return (_menu.getInterruptType());
 }

@@ -27,6 +27,7 @@ int Text::getCharPosX(char c)
         return ((c - 'a') * 256);
     if (c >= 'A' && c <= 'Z')
         return ((c - 'A') * 256);
+    return (0);
 }
 
 int Text::getCharPosY(char c)

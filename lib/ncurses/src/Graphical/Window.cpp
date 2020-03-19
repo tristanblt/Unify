@@ -128,6 +128,7 @@ void Window::create()
     nodelay(stdscr, TRUE);
     scrollok(stdscr, TRUE);
     keypad(stdscr, TRUE);
+    mousemask(ALL_MOUSE_EVENTS | REPORT_MOUSE_POSITION, NULL);
     cbreak();
     curs_set(0);
     _width = COLS;

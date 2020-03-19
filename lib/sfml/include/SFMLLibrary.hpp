@@ -14,24 +14,25 @@
 #include "lib/sfml/include/Graphical/Circle.hpp"
 #include "lib/sfml/include/Graphical/Text.hpp"
 #include "lib/sfml/include/Graphical/Sprite.hpp"
-#include "core/include/ArcadeCore/Enums.hpp"
+#include "core/include/ArcadeCore/Utils/Enums.hpp"
 
 class SFMLLibrary : public DisplayLibrary {
     public:
         SFMLLibrary();
         ~SFMLLibrary();
 
-        float toUnit(float);
         void loadAsset(const std::string &path, const std::string &name, AssetType type);
 
         Events updateEvents(Events *events);
-        int getLastAssetIdx() const;
     protected:
     private:
         void updateMouseEvents(Events *events, Window *window);
         void updateKeyboardEvents(Events *events);
+        void updateJoyConEvents(Events *events);
+        void updateCursorJoyCon(Events *events);
+        void joyConInputState(bool, InputState &state);
+
         sf::Event _event;
-        sf::Mouse _mouse;
 };
 
 #endif /* !SFMLLIBRARY_HPP_ */

@@ -17,13 +17,11 @@
 #include "Graphical/ICircle.hpp"
 #include "Graphical/IText.hpp"
 #include "Graphical/ISprite.hpp"
-#include "core/include/ArcadeCore/Enums.hpp"
+#include "core/include/ArcadeCore/Utils/Enums.hpp"
 
 class DisplayLibrary {
     public:
         ~DisplayLibrary() = default;
-
-        virtual float toUnit(float) = 0;
 
         IRectangle *_rect;
         ICircle *_circle;
@@ -33,7 +31,6 @@ class DisplayLibrary {
 
         virtual void loadAsset(const std::string &path, const std::string &name, AssetType type) = 0;
         virtual Events updateEvents(Events *events) = 0;
-        virtual int getLastAssetIdx() const = 0;
     protected:
         std::map<std::string, void *> _assets;
     private:

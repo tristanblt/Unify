@@ -11,9 +11,9 @@
 #include <ncurses.h>
 
 #include "lib/include/Graphical/IRectangle.hpp"
-#include "core/include/ArcadeCore/IBuilder.hpp"
-#include "core/include/ArcadeCore/Structs.hpp"
 #include "lib/ncurses/include/Graphical/Window.hpp"
+#include "core/include/ArcadeCore/Builder/IBuilder.hpp"
+#include "core/include/ArcadeCore/Utils/Structs.hpp"
 
 #define UPPER_BLOCK "\u2580"
 

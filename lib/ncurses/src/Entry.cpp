@@ -5,7 +5,7 @@
 ** Entry
 */
 
-#include "lib//ncurses/include/nCursesLibrary.hpp"
+#include "lib/ncurses/include/nCursesLibrary.hpp"
 #include "lib/include/Entry.hpp"
 #include <iostream>
 

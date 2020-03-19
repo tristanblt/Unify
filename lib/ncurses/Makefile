@@ -16,7 +16,7 @@ SRCS_FILES=	Graphical/Rectangle.cpp					\
 			Graphical/Bitcrush.cpp					\
 			nCursesLibrary.cpp						\
 			Entry.cpp								\
-			../../../core/src/ArcadeCore/PngFile.cpp\
+			../../../core/src/ArcadeCore/Utils/PngFile.cpp\
 
 SRC	=	$(addprefix $(SRCPATH), $(SRCS_FILES))
 

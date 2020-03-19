@@ -12,10 +12,10 @@
 #include "lib/include/Graphical/IWindow.hpp"
 #include "lib/include/Graphical/IRectangle.hpp"
 #include "games/include/Start.hpp"
-#include "core/include/ArcadeCore/Builder.hpp"
-#include "core/include/ArcadeCore/Menu.hpp"
-#include "core/include/ArcadeCore/Layout.hpp"
-#include "core/include/ArcadeCore/Enums.hpp"
+#include "core/include/ArcadeCore/Builder/Builder.hpp"
+#include "core/include/ArcadeCore/Components/Menu.hpp"
+#include "core/include/ArcadeCore/Components/Layout.hpp"
+#include "core/include/ArcadeCore/Utils/Enums.hpp"
 
 class ArcadeCore {
     public:
@@ -29,6 +29,7 @@ class ArcadeCore {
 
         DisplayLibrary *importGraphicalLibs(const std::string &libName);
         void switchGraphicalLibrary(IBuilder *builder);
+        void joyConCursors(IBuilder *b);
     protected:
     private:
         CoreState _coreState;

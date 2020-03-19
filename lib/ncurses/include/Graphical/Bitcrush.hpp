@@ -8,9 +8,9 @@
 #ifndef BITCRUSH_HPP_
 #define BITCRUSH_HPP_
 
-#include "core/include/ArcadeCore/PngFile.hpp"
-#include "core/include/ArcadeCore/Structs.hpp"
 #include "lib/ncurses/include/Graphical/Window.hpp"
+#include "core/include/ArcadeCore/Utils/PngFile.hpp"
+#include "core/include/ArcadeCore/Utils/Structs.hpp"
 #include <ncurses.h>
 #include <vector>
 #include <iostream>

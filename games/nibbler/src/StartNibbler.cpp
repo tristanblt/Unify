@@ -17,7 +17,7 @@ StartNibbler::~StartNibbler()
 
 void StartNibbler::start(IBuilder *b)
 {
-
+    (void)b;
 }
 
 void StartNibbler::update(IBuilder *b)
