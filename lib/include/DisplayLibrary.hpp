@@ -11,6 +11,7 @@
 #include <memory>
 #include <map>
 #include <string>
+#include <vector>
 #include "Graphical/IWindow.hpp"
 #include "Graphical/IRectangle.hpp"
 #include "Graphical/ICircle.hpp"

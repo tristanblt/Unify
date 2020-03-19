@@ -53,15 +53,15 @@ void nCursesLibrary::updateMouseEvents(Events *events, Window *window)
 
 void nCursesLibrary::updateKeyboardEvents(Events *events)
 {
-    std::string cs;
-    char c;
-    while ((c = getch()) == ERR)
-        cs.append(&c);
-    for (int i = 0; cs[i]; i++) {
-        std::cout << cs[i] << std::endl;
-        if (cs[i] == 'a')
-            std::cout << "-------aaaaaaaaaaaaa------------" <<  std::endl;
-        if (cs[i] == ' ')
-            std::cout << "------SPAAAAAAAACE-----------" <<  std::endl;
-    }
+    // std::string cs;
+    // char c;
+    // while ((c = getch()) == ERR)
+    //     cs.append(&c);
+    // for (int i = 0; cs[i]; i++) {
+    //     std::cout << cs[i] << std::endl;
+    //     if (cs[i] == 'a')
+    //         std::cout << "-------aaaaaaaaaaaaa------------" <<  std::endl;
+    //     if (cs[i] == ' ')
+    //         std::cout << "------SPAAAAAAAACE-----------" <<  std::endl;
+    // }
 }

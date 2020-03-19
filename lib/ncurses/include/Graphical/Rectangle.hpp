@@ -13,7 +13,9 @@
 #include "lib/include/Graphical/IRectangle.hpp"
 #include "core/include/ArcadeCore/IBuilder.hpp"
 #include "core/include/ArcadeCore/Structs.hpp"
-#include "lib/ncurses/include/nCursesColors.hpp"
+#include "lib/ncurses/include/Graphical/Window.hpp"
+
+#define UPPER_BLOCK "\u2580"
 
 class Rectangle : public IRectangle {
     public:
@@ -30,8 +32,9 @@ class Rectangle : public IRectangle {
         int _y;
         int _width;
         int _height;
-        short _nColor;
-        short _colorPair;
+        Color _color;
+        // short _nColor;
+        // short _colorPair;
 };
 
 #endif /* !RECTANGLENCURSE_HPP_ */

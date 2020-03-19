@@ -8,10 +8,9 @@
 #include "lib/ncurses/include/Graphical/Text.hpp"
 
 Text::Text(std::map<std::string, void *> *assets) :
-_nColor(1),
-_colorPair(0),
 _x(0),
-_y(0)
+_y(0),
+_color({0, 0, 0, 255})
 {
     _assets = assets;
     _frame.h = 256;
@@ -39,10 +38,10 @@ int Text::getCharPosY(char c)
 
 void Text::draw(IWindow *w)
 {
-    for (int i = 0; i < _text.size(); i++) {
+    for (size_t i = 0; i < _text.size(); i++) {
         _frame.x = getCharPosX(_text[i]);
         _frame.y = getCharPosY(_text[i]);
-        Bitcrush(_font, {_x, _y}, _frame, _wantedSize);
+        Bitcrush(_font, {_x, _y}, _frame, _wantedSize, w);
         _x += _wantedSize.x;
     }
 }

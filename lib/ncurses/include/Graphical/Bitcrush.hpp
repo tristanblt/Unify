@@ -10,14 +10,14 @@
 
 #include "core/include/ArcadeCore/PngFile.hpp"
 #include "core/include/ArcadeCore/Structs.hpp"
-#include "lib/ncurses/include/nCursesColors.hpp"
+#include "lib/ncurses/include/Graphical/Window.hpp"
 #include <ncurses.h>
 #include <vector>
 #include <iostream>
 
 class Bitcrush {
     public:
-        Bitcrush(PngFile *png, Vector2 pos, Box frame, Vector2 wantedSize);
+        Bitcrush(PngFile *png, Vector2 pos, Box frame, Vector2 wantedSize, IWindow *w);
         ~Bitcrush();
 
     protected:
