@@ -65,72 +65,280 @@ float Builder::windowWidth()
 
 /* ------------------------------- basic draw ------------------------------- */
 
-void Builder::rectDraw(Box box, Color color)
+void Builder::rectInit(const std::string &name)
 {
-    _library->_rect->setPosition({box.x, box.y});
-    _library->_rect->setSize({box.w, box.h});
-    _library->_rect->setColor(color);
+    RectModel *o = new RectModel();
+
+    _gameObjects[name] = {
+        ObjectType::TYPE_RECT,
+        (void *)o
+    };
+}
+
+void Builder::rectSetPotition(const std::string &name, Vector2 pos)
+{
+    RectModel *o = static_cast<RectModel *>(_gameObjects[name].item);
+
+    o->b.x = pos.x;
+    o->b.y = pos.y;
+}
+
+void Builder::rectSetSize(const std::string &name, Vector2 size)
+{
+    RectModel *o = static_cast<RectModel *>(_gameObjects[name].item);
+
+    o->b.w = size.x;
+    o->b.h = size.y;
+}
+
+void Builder::rectSetColor(const std::string &name, Color color)
+{
+    RectModel *o = static_cast<RectModel *>(_gameObjects[name].item);
+
+    o->c = color;
+}
+
+void Builder::rectDraw(const std::string &name)
+{
+    RectModel *o = static_cast<RectModel *>(_gameObjects[name].item);
+    _library->_rect->setPosition({o->b.x, o->b.y});
+    _library->_rect->setSize({o->b.w, o->b.h});
+    _library->_rect->setColor(o->c);
     _library->_rect->draw(_library->_window);
 }
 
-void Builder::radiusRectDraw(Box box, float radius, Color color)
+void Builder::circleInit(const std::string &name)
 {
-    if (radius * 2 > box.h)
-        radius = box.h;
-    _library->_rect->setColor(color);
-    _library->_circle->setColor(color);
-    _library->_rect->setPosition({box.x + radius, box.y});
-    _library->_rect->setSize({box.w - radius * 2, box.h});
-    _library->_rect->draw(_library->_window);
-    _library->_rect->setPosition({box.x, box.y + radius});
-    _library->_rect->setSize({box.w, box.h - radius * 2});
-    _library->_rect->draw(_library->_window);
-    _library->_circle->setPosition({box.x, box.y});
-    _library->_circle->setRadius(radius);
-    _library->_circle->draw(_library->_window);
-    _library->_circle->setPosition({box.x, box.y + box.h - radius * 2});
-    _library->_circle->draw(_library->_window);
-    _library->_circle->setPosition({box.x + box.w - radius * 2, box.y});
-    _library->_circle->draw(_library->_window);
-    _library->_circle->setPosition({box.x + box.w - radius * 2, box.y + box.h - radius * 2});
+    CircleModel *o = new CircleModel();
+
+    _gameObjects[name] = {
+        ObjectType::TYPE_CIRCLE,
+        (void *)o
+    };
+}
+
+void Builder::circleSetPotition(const std::string &name, Vector2 pos)
+{
+    CircleModel *o = static_cast<CircleModel *>(_gameObjects[name].item);
+
+    o->p.x = pos.x;
+    o->p.y = pos.y;
+}
+
+void Builder::circleSetRadius(const std::string &name, float radius)
+{
+    CircleModel *o = static_cast<CircleModel *>(_gameObjects[name].item);
+
+    o->r = radius;
+}
+
+void Builder::circleSetColor(const std::string &name, Color color)
+{
+    CircleModel *o = static_cast<CircleModel *>(_gameObjects[name].item);
+
+    o->c = color;
+}
+
+void Builder::circleDraw(const std::string &name)
+{
+    CircleModel *o = static_cast<CircleModel *>(_gameObjects[name].item);
+
+    _library->_circle->setPosition({o->p.x, o->p.y});
+    _library->_circle->setRadius(o->r);
+    _library->_circle->setColor(o->c);
     _library->_circle->draw(_library->_window);
 }
 
-void Builder::circleDraw(CircleModel circle, Color color)
+void Builder::radiusRectInit(const std::string &name)
 {
-    _library->_circle->setPosition({circle.x, circle.y});
-    _library->_circle->setRadius(circle.r);
-    _library->_circle->setColor(color);
+    RadiusRectModel *o = new RadiusRectModel();
+
+    _gameObjects[name] = {
+        ObjectType::TYPE_RADIUS_RECT,
+        (void *)o
+    };
+}
+
+void Builder::radiusRectSetPotition(const std::string &name, Vector2 pos)
+{
+    RadiusRectModel *o = static_cast<RadiusRectModel *>(_gameObjects[name].item);
+
+    o->b.x = pos.x;
+    o->b.y = pos.y;
+}
+
+void Builder::radiusRectSetSize(const std::string &name, Vector2 size)
+{
+    RadiusRectModel *o = static_cast<RadiusRectModel *>(_gameObjects[name].item);
+
+    o->b.w = size.x;
+    o->b.h = size.y;
+}
+
+void Builder::radiusRectSetRadius(const std::string &name, float radius)
+{
+    RadiusRectModel *o = static_cast<RadiusRectModel *>(_gameObjects[name].item);
+
+    o->r = radius;
+}
+
+void Builder::radiusRectSetColor(const std::string &name, Color color)
+{
+    RadiusRectModel *o = static_cast<RadiusRectModel *>(_gameObjects[name].item);
+
+    o->c = color;
+}
+
+void Builder::radiusRectDraw(const std::string &name)
+{
+    RadiusRectModel *o = static_cast<RadiusRectModel *>(_gameObjects[name].item);
+
+    if (o->r * 2 > o->b.h)
+        o->r = o->b.h;
+    _library->_rect->setColor(o->c);
+    _library->_circle->setColor(o->c);
+    _library->_rect->setPosition({o->b.x + o->r, o->b.y});
+    _library->_rect->setSize({o->b.w - o->r * 2, o->b.h});
+    _library->_rect->draw(_library->_window);
+    _library->_rect->setPosition({o->b.x, o->b.y + o->r});
+    _library->_rect->setSize({o->b.w, o->b.h - o->r * 2});
+    _library->_rect->draw(_library->_window);
+    _library->_circle->setPosition({o->b.x, o->b.y});
+    _library->_circle->setRadius(o->r);
+    _library->_circle->draw(_library->_window);
+    _library->_circle->setPosition({o->b.x, o->b.y + o->b.h - o->r * 2});
+    _library->_circle->draw(_library->_window);
+    _library->_circle->setPosition({o->b.x + o->b.w - o->r * 2, o->b.y});
+    _library->_circle->draw(_library->_window);
+    _library->_circle->setPosition({o->b.x + o->b.w - o->r * 2, o->b.y + o->b.h - o->r * 2});
     _library->_circle->draw(_library->_window);
 }
 
-void Builder::textDraw(TextModel text)
+void Builder::textInit(const std::string &name)
 {
-    _library->_text->setPosition(text.p);
-    _library->_text->setFontSize(text.fontSize);
-    _library->_text->setFont(text.assetIdx);
-    _library->_text->setText(text.str);
-    _library->_text->setColor(text.c);
+    TextModel *o = new TextModel();
+
+    _gameObjects[name] = {
+        ObjectType::TYPE_TEXT,
+        (void *)o
+    };
+}
+
+void Builder::textSetPotition(const std::string &name, Vector2 pos)
+{
+    TextModel *o = static_cast<TextModel *>(_gameObjects[name].item);
+
+    o->p.x = pos.x;
+    o->p.y = pos.y;
+}
+
+void Builder::textSetFontSize(const std::string &name, int size)
+{
+    TextModel *o = static_cast<TextModel *>(_gameObjects[name].item);
+
+    o->size = size;
+}
+
+void Builder::textSetFont(const std::string &name, const std::string &fontIdx)
+{
+    TextModel *o = static_cast<TextModel *>(_gameObjects[name].item);
+
+    o->idx = fontIdx;
+}
+
+void Builder::textSetColor(const std::string &name, Color color)
+{
+    TextModel *o = static_cast<TextModel *>(_gameObjects[name].item);
+
+    o->c = color;
+}
+
+void Builder::textSetText(const std::string &name, const std::string &text)
+{
+    TextModel *o = static_cast<TextModel *>(_gameObjects[name].item);
+
+    o->s = text;
+}
+
+
+void Builder::textDraw(const std::string &name)
+{
+    TextModel *o = static_cast<TextModel *>(_gameObjects[name].item);
+
+    _library->_text->setPosition(o->p);
+    _library->_text->setFontSize(o->size);
+    _library->_text->setFont(o->idx);
+    _library->_text->setText(o->s);
+    _library->_text->setColor(o->c);
     _library->_text->draw(_library->_window);
+
 }
 
-void Builder::spriteDraw(SpriteModel sprite)
+void Builder::spriteInit(const std::string &name)
 {
-    _library->_sprite->setPosition({sprite.b.x, sprite.b.y});
-    _library->_sprite->setSprite(sprite.assetIdx);
-    _library->_sprite->setOpacity(sprite.opacity);
-    _library->_sprite->setSize({sprite.b.w, sprite.b.h});
-    _library->_sprite->draw(_library->_window);
+    SpriteModel *o = new SpriteModel();
+
+    _gameObjects[name] = {
+        ObjectType::TYPE_SPRITE,
+        (void *)o
+    };
 }
 
-void Builder::spriteDraw(SpriteModel sprite, Box frame)
+void Builder::spriteSetPotition(const std::string &name, Vector2 pos)
 {
-    _library->_sprite->setPosition({sprite.b.x, sprite.b.y});
-    _library->_sprite->setSprite(sprite.assetIdx);
-    _library->_sprite->setOpacity(sprite.opacity);
-    _library->_sprite->setSize(sprite.b, frame);
-    _library->_sprite->draw(_library->_window);
+    SpriteModel *o = static_cast<SpriteModel *>(_gameObjects[name].item);
+
+    o->b.x = pos.x;
+    o->b.y = pos.y;
 }
+
+void Builder::spriteSetSize(const std::string &name, Vector2 body, Box frame)
+{
+    SpriteModel *o = static_cast<SpriteModel *>(_gameObjects[name].item);
+
+    o->f = frame;
+    o->b.w = body.x;
+    o->b.h = body.y;
+}
+
+void Builder::spriteSetSize(const std::string &name, Vector2 size)
+{
+    SpriteModel *o = static_cast<SpriteModel *>(_gameObjects[name].item);
+
+    o->b.w = size.x;
+    o->b.h = size.y;
+    o->f = {-1, -1, -1, -1};
+}
+
+void Builder::spriteSetSprite(const std::string &name, const std::string &sprite)
+{
+    SpriteModel *o = static_cast<SpriteModel *>(_gameObjects[name].item);
+
+    o->idx = sprite;
+}
+
+void Builder::spriteSetOpacity(const std::string &name, unsigned char opacity)
+{
+    SpriteModel *o = static_cast<SpriteModel *>(_gameObjects[name].item);
+
+    o->opct = opacity;
+}
+
+void Builder::spriteDraw(const std::string &name)
+{
+    SpriteModel *o = static_cast<SpriteModel *>(_gameObjects[name].item);
+
+    _library->_sprite->setPosition({o->b.x, o->b.y});
+    _library->_sprite->setSprite(o->idx);
+    _library->_sprite->setOpacity(o->opct);
+    if (o->f.x == -1 && o->f.y == -1 && o->f.w == -1 && o->f.h == -1)
+        _library->_sprite->setSize({o->b.w, o->b.h});
+    else
+        _library->_sprite->setSize(o->b, o->f);
+    _library->_sprite->draw(_library->_window);
+
+}
+
 
 /* -------------------------------- collider -------------------------------- */
 

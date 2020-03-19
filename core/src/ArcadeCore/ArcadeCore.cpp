@@ -70,7 +70,7 @@ void ArcadeCore::switchGraphicalLibrary(IBuilder *b)
 
 void ArcadeCore::joyConCursors(IBuilder *b)
 {
-    b->spriteDraw({{b->getEvents().joyConEvents.cursorPos.x - 15, b->getEvents().joyConEvents.cursorPos.y, 176, 120}, "UnifyJoyConsCursors", 255}, {481, 3, 44, 30});
+    //b->spriteDraw({{b->getEvents().joyConEvents.cursorPos.x - 15, b->getEvents().joyConEvents.cursorPos.y, 176, 120}, "UnifyJoyConsCursors", 255}, {481, 3, 44, 30});
 }
 
 bool ArcadeCore::launchCore(DisplayLibrary *library)

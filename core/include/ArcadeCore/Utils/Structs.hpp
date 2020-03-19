@@ -31,18 +31,36 @@ struct Box {
     float h;
 };
 
-struct CircleModel {
-    float x;
-    float y;
+struct RectModel {
+    Box b;
+    Color c;
+};
+
+struct RadiusRectModel {
+    Box b;
     float r;
+    Color c;
+};
+
+struct CircleModel {
+    Vector2 p;
+    float r;
+    Color c;
 };
 
 struct TextModel {
-    std::string str;
+    std::string s;
     Vector2 p;
+    int size;
+    std::string idx;
     Color c;
-    int fontSize;
-    std::string assetIdx;
+};
+
+struct SpriteModel {
+    Box b;
+    Box f;
+    std::string idx;
+    unsigned char opct;
 };
 
 struct MouseEvents {
@@ -71,17 +89,11 @@ struct Events {
     bool close;
 };
 
-struct SpriteModel {
-    Box b;
-    std::string assetIdx;
-    unsigned char opacity;
-};
-
 struct BasicButton {
     Box displayBox;
     float radius;
-    std::array <Color, 3> boxColors;
-    std::array <Color, 3> textColors;
+    //std::array <Color, 3> boxColors;
+    //std::array <Color, 3> textColors;
     std::string text;
     int fontSize;
     std::string fontIdx;
@@ -89,7 +101,7 @@ struct BasicButton {
 
 struct SpriteButton {
     Box displayBox;
-    std::array <Box, 3> spriteBoxes;
+    //std::array <Box, 3> spriteBoxes;
     std::string spriteSheetIndex;
 };
 
