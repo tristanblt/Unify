@@ -57,8 +57,10 @@ struct Vector2State {
 };
 
 struct JoyConEvents {
-    std::map<JoyConButtons, InputState> buttons;
-    Vector2State mainAxe;
+    std::map<JoyConButtons, InputState> buttons1;
+    std::map<JoyConButtons, InputState> buttons2;
+    Vector2State mainAxe1;
+    Vector2State mainAxe2;
     Vector2 cursorPos;
 };
 

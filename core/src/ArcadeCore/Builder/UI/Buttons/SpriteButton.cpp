@@ -23,8 +23,8 @@ bool SpriteButton::draw(IBuilder *builder)
 
     if (state == true && ((builder->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::CLICK ||
                           builder->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::HOLD) ||
-                          (builder->getEvents().joyConEvents.buttons[JoyConButtons::JOY_A] == InputState::CLICK ||
-                          builder->getEvents().joyConEvents.buttons[JoyConButtons::JOY_A] == InputState::HOLD)))
+                          (builder->getEvents().joyConEvents.buttons1[JoyConButtons::JOY_A] == InputState::CLICK ||
+                          builder->getEvents().joyConEvents.buttons1[JoyConButtons::JOY_A] == InputState::HOLD)))
         builder->spriteDraw({_displayBox, _spriteSheetIndex, 255}, _spriteBoxes[0]);
     else if (state == true)
         builder->spriteDraw({_displayBox, _spriteSheetIndex, 255}, _spriteBoxes[2]);

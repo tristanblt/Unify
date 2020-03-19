@@ -147,8 +147,8 @@ enum JoyConButtons {
     JOY_X,
     JOY_L1,
     JOY_R1,
-    JOY_OP = 8,
-    JOY_MENU = 13
+    JOY_OP,
+    JOY_MENU
 };
 
 enum CoreState {

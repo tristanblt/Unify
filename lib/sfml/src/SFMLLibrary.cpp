@@ -64,13 +64,13 @@ void SFMLLibrary::updateCursorJoyCon(Events *e)
 {
     if (e->joyConEvents.cursorPos.x == -1 && e->joyConEvents.cursorPos.y == -1)
         e->joyConEvents.cursorPos = {_window->width() / 2, _window->height() / 2};
-    if (e->joyConEvents.mainAxe.x == JoyConState::JOY_HOLD_L)
+    if (e->joyConEvents.mainAxe1.x == JoyConState::JOY_HOLD_L)
         e->joyConEvents.cursorPos.x -= 30;
-    if (e->joyConEvents.mainAxe.x == JoyConState::JOY_HOLD_R)
+    if (e->joyConEvents.mainAxe1.x == JoyConState::JOY_HOLD_R)
         e->joyConEvents.cursorPos.x += 30;
-    if (e->joyConEvents.mainAxe.y == JoyConState::JOY_HOLD_L)
+    if (e->joyConEvents.mainAxe1.y == JoyConState::JOY_HOLD_L)
         e->joyConEvents.cursorPos.y -= 30;
-    if (e->joyConEvents.mainAxe.y == JoyConState::JOY_HOLD_R)
+    if (e->joyConEvents.mainAxe1.y == JoyConState::JOY_HOLD_R)
         e->joyConEvents.cursorPos.y += 30;
     if (e->joyConEvents.cursorPos.x < 0)
         e->joyConEvents.cursorPos.x = 0;
@@ -86,32 +86,74 @@ void SFMLLibrary::updateJoyConEvents(Events *e)
 {
     if (sf::Joystick::isConnected(0)) {
         if (sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::PovX) > 0)
-            e->joyConEvents.mainAxe.x = (e->joyConEvents.mainAxe.x != JoyConState::JOY_CLICK_R && e->joyConEvents.mainAxe.x != JoyConState::JOY_HOLD_R) ?
+            e->joyConEvents.mainAxe1.x = (e->joyConEvents.mainAxe1.x != JoyConState::JOY_CLICK_R && e->joyConEvents.mainAxe1.x != JoyConState::JOY_HOLD_R) ?
             JoyConState::JOY_CLICK_R : JoyConState::JOY_HOLD_R;
         else if (sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::PovX) < 0)
-            e->joyConEvents.mainAxe.x = (e->joyConEvents.mainAxe.x != JoyConState::JOY_CLICK_L && e->joyConEvents.mainAxe.x != JoyConState::JOY_HOLD_L) ?
+            e->joyConEvents.mainAxe1.x = (e->joyConEvents.mainAxe1.x != JoyConState::JOY_CLICK_L && e->joyConEvents.mainAxe1.x != JoyConState::JOY_HOLD_L) ?
             JoyConState::JOY_CLICK_L : JoyConState::JOY_HOLD_L;
         else
-            e->joyConEvents.mainAxe.x = (e->joyConEvents.mainAxe.x != JoyConState::JOY_RELEASED && e->joyConEvents.mainAxe.x != JoyConState::JOY_NONE) ?
+            e->joyConEvents.mainAxe1.x = (e->joyConEvents.mainAxe1.x != JoyConState::JOY_RELEASED && e->joyConEvents.mainAxe1.x != JoyConState::JOY_NONE) ?
             JoyConState::JOY_RELEASED : JoyConState::JOY_NONE;
         if (sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::PovY) > 0)
-            e->joyConEvents.mainAxe.y = (e->joyConEvents.mainAxe.y != JoyConState::JOY_CLICK_L && e->joyConEvents.mainAxe.y != JoyConState::JOY_HOLD_L) ?
+            e->joyConEvents.mainAxe1.y = (e->joyConEvents.mainAxe1.y != JoyConState::JOY_CLICK_L && e->joyConEvents.mainAxe1.y != JoyConState::JOY_HOLD_L) ?
             JoyConState::JOY_CLICK_L : JoyConState::JOY_HOLD_L;
         else if (sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::PovY) < 0)
-            e->joyConEvents.mainAxe.y = (e->joyConEvents.mainAxe.y != JoyConState::JOY_CLICK_R && e->joyConEvents.mainAxe.y != JoyConState::JOY_HOLD_R) ?
+            e->joyConEvents.mainAxe1.y = (e->joyConEvents.mainAxe1.y != JoyConState::JOY_CLICK_R && e->joyConEvents.mainAxe1.y != JoyConState::JOY_HOLD_R) ?
             JoyConState::JOY_CLICK_R : JoyConState::JOY_HOLD_R;
         else
-            e->joyConEvents.mainAxe.y = (e->joyConEvents.mainAxe.y != JoyConState::JOY_RELEASED && e->joyConEvents.mainAxe.y != JoyConState::JOY_NONE) ?
+            e->joyConEvents.mainAxe1.y = (e->joyConEvents.mainAxe1.y != JoyConState::JOY_RELEASED && e->joyConEvents.mainAxe1.y != JoyConState::JOY_NONE) ?
             JoyConState::JOY_RELEASED : JoyConState::JOY_NONE;
-        joyConInputState(sf::Joystick::isButtonPressed(0, 1), e->joyConEvents.buttons[JOY_B]);
-        joyConInputState(sf::Joystick::isButtonPressed(0, 2), e->joyConEvents.buttons[JOY_A]);
-        joyConInputState(sf::Joystick::isButtonPressed(0, 3), e->joyConEvents.buttons[JOY_Y]);
-        joyConInputState(sf::Joystick::isButtonPressed(0, 4), e->joyConEvents.buttons[JOY_X]);
-        joyConInputState(sf::Joystick::isButtonPressed(0, 4), e->joyConEvents.buttons[JOY_L1]);
-        joyConInputState(sf::Joystick::isButtonPressed(0, 5), e->joyConEvents.buttons[JOY_R1]);
-        joyConInputState(sf::Joystick::isButtonPressed(0, 8), e->joyConEvents.buttons[JOY_OP]);
-        joyConInputState(sf::Joystick::isButtonPressed(0, 13), e->joyConEvents.buttons[JOY_MENU]);
+        joyConInputState(sf::Joystick::isButtonPressed(0, 0), e->joyConEvents.buttons1[JOY_B]);
+        joyConInputState(sf::Joystick::isButtonPressed(0, 1), e->joyConEvents.buttons1[JOY_A]);
+        joyConInputState(sf::Joystick::isButtonPressed(0, 2), e->joyConEvents.buttons1[JOY_Y]);
+        joyConInputState(sf::Joystick::isButtonPressed(0, 3), e->joyConEvents.buttons1[JOY_X]);
+        joyConInputState(sf::Joystick::isButtonPressed(0, 4), e->joyConEvents.buttons1[JOY_L1]);
+        joyConInputState(sf::Joystick::isButtonPressed(0, 5), e->joyConEvents.buttons1[JOY_R1]);
+        joyConInputState(sf::Joystick::isButtonPressed(0, 9), e->joyConEvents.buttons1[JOY_OP]);
+        joyConInputState(sf::Joystick::isButtonPressed(0, 12), e->joyConEvents.buttons1[JOY_MENU]);
+        if (sf::Joystick::isButtonPressed(0, 72)) {
+            joyConInputState(sf::Joystick::isButtonPressed(0, 8), e->joyConEvents.buttons1[JOY_OP]);
+            joyConInputState(sf::Joystick::isButtonPressed(0, 13), e->joyConEvents.buttons1[JOY_MENU]);
+        }
+        else {
+            joyConInputState(sf::Joystick::isButtonPressed(0, 9), e->joyConEvents.buttons1[JOY_OP]);
+            joyConInputState(sf::Joystick::isButtonPressed(0, 12), e->joyConEvents.buttons1[JOY_MENU]);
+        }
         updateCursorJoyCon(e);
+    }
+    if (sf::Joystick::isConnected(1)) {
+        if (sf::Joystick::getAxisPosition(1, sf::Joystick::Axis::PovX) > 0)
+            e->joyConEvents.mainAxe2.x = (e->joyConEvents.mainAxe2.x != JoyConState::JOY_CLICK_R && e->joyConEvents.mainAxe2.x != JoyConState::JOY_HOLD_R) ?
+            JoyConState::JOY_CLICK_R : JoyConState::JOY_HOLD_R;
+        else if (sf::Joystick::getAxisPosition(1, sf::Joystick::Axis::PovX) < 0)
+            e->joyConEvents.mainAxe2.x = (e->joyConEvents.mainAxe2.x != JoyConState::JOY_CLICK_L && e->joyConEvents.mainAxe2.x != JoyConState::JOY_HOLD_L) ?
+            JoyConState::JOY_CLICK_L : JoyConState::JOY_HOLD_L;
+        else
+            e->joyConEvents.mainAxe2.x = (e->joyConEvents.mainAxe2.x != JoyConState::JOY_RELEASED && e->joyConEvents.mainAxe2.x != JoyConState::JOY_NONE) ?
+            JoyConState::JOY_RELEASED : JoyConState::JOY_NONE;
+        if (sf::Joystick::getAxisPosition(1, sf::Joystick::Axis::PovY) > 0)
+            e->joyConEvents.mainAxe2.y = (e->joyConEvents.mainAxe2.y != JoyConState::JOY_CLICK_L && e->joyConEvents.mainAxe2.y != JoyConState::JOY_HOLD_L) ?
+            JoyConState::JOY_CLICK_L : JoyConState::JOY_HOLD_L;
+        else if (sf::Joystick::getAxisPosition(1, sf::Joystick::Axis::PovY) < 0)
+            e->joyConEvents.mainAxe2.y = (e->joyConEvents.mainAxe2.y != JoyConState::JOY_CLICK_R && e->joyConEvents.mainAxe2.y != JoyConState::JOY_HOLD_R) ?
+            JoyConState::JOY_CLICK_R : JoyConState::JOY_HOLD_R;
+        else
+            e->joyConEvents.mainAxe2.y = (e->joyConEvents.mainAxe2.y != JoyConState::JOY_RELEASED && e->joyConEvents.mainAxe2.y != JoyConState::JOY_NONE) ?
+            JoyConState::JOY_RELEASED : JoyConState::JOY_NONE;
+        joyConInputState(sf::Joystick::isButtonPressed(1, 1), e->joyConEvents.buttons2[JOY_B]);
+        joyConInputState(sf::Joystick::isButtonPressed(1, 2), e->joyConEvents.buttons2[JOY_A]);
+        joyConInputState(sf::Joystick::isButtonPressed(1, 3), e->joyConEvents.buttons2[JOY_Y]);
+        joyConInputState(sf::Joystick::isButtonPressed(1, 4), e->joyConEvents.buttons2[JOY_X]);
+        joyConInputState(sf::Joystick::isButtonPressed(1, 4), e->joyConEvents.buttons2[JOY_L1]);
+        joyConInputState(sf::Joystick::isButtonPressed(1, 5), e->joyConEvents.buttons2[JOY_R1]);
+        if (sf::Joystick::isButtonPressed(1, 72)) {
+            joyConInputState(sf::Joystick::isButtonPressed(1, 8), e->joyConEvents.buttons2[JOY_OP]);
+            joyConInputState(sf::Joystick::isButtonPressed(1, 13), e->joyConEvents.buttons2[JOY_MENU]);
+        }
+        else {
+            joyConInputState(sf::Joystick::isButtonPressed(1, 9), e->joyConEvents.buttons2[JOY_OP]);
+            joyConInputState(sf::Joystick::isButtonPressed(1, 12), e->joyConEvents.buttons2[JOY_MENU]);
+        }
     }
 }
 
