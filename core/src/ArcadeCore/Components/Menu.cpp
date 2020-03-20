@@ -21,15 +21,25 @@ Menu::~Menu()
 
 void Menu::drawBackgrounds(IBuilder *b)
 {
-    b->rectDraw({0, 0, VW(100), VH(100)}, b->hexToColor(0x212121FF));
-    b->rectDraw({0, VH(20), VW(100), VH(55)}, b->hexToColor(0x1A1A1AFF));
+    b->rectSetPotition("UnifyMenuBackground", {0, 0});
+    b->rectSetSize("UnifyMenuBackground", {VW(100), VH(100)});
+    b->rectDraw("UnifyMenuBackground");
+    
+    b->rectSetPotition("UnifyMenuCarouselBackground", {0, VH(20)});
+    b->rectSetSize("UnifyMenuCarouselBackground", {VW(100), VH(55)});
+    b->rectDraw("UnifyMenuCarouselBackground");
 }
 
 void Menu::drawHeader(IBuilder *b)
 {
-    b->spriteDraw({{VW(4), VH(4), VH(11.5), VH(11.5)}, "UnifyLogo", 255});
-    b->textDraw({"Unify", {VW(12.5), VH(6.5)}, b->hexToColor(0xFFFFFFFF), (int)VH(5), "UnifyBoldFont"});
-    if (_state == MenuState::MENU_CAROUSSEL) {
+    b->spriteSetPotition("UnifyMenuLogo", {VW(4), VH(4)});
+    b->spriteSetSize("UnifyMenuLogo", {VH(11.5), VH(11.5)});
+    b->spriteDraw("UnifyMenuLogo");
+
+    b->textSetPotition("UnifyMenuLogoName", {VW(12.5), VH(6.5)});
+    b->textSetFontSize("UnifyMenuLogoName", (int)VH(5));
+    b->textDraw("UnifyMenuLogoName");
+    /*if (_state == MenuState::MENU_CAROUSSEL) {
         if (b->buttonDraw("UnifySettings") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
             _state = MenuState::MENU_SETTINGS;
     } else {
@@ -43,7 +53,7 @@ void Menu::drawHeader(IBuilder *b)
     if (b->buttonDraw("UnifyPower") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED) {
         _interruptType = false;
         b->windowClose();
-    }
+    }*/
 }
 
 void Menu::drawCarousel(IBuilder *b)
@@ -63,14 +73,32 @@ void Menu::drawCarousel(IBuilder *b)
         color = color < 0 ? color * -1 : color;
         if (i < _covers.size()) {
             color = (255 - (color * 2 * 255));
-            b->spriteDraw({{(VH(35)) * i + _coversOffset + VH(17), VH(24), VH(33), VH(33)}, _covers[i].spriteIdx, static_cast<unsigned char>(color)});
+            b->spriteSetPotition("UnifyMenuCarouselCoverPicture", {(VH(35)) * i + _coversOffset + VH(17), VH(24)});
+            b->spriteSetSize("UnifyMenuCarouselCoverPicture", {VH(33), VH(33)});
+            b->spriteSetSprite("UnifyMenuCarouselCoverPicture", _covers[i].spriteIdx);
+            b->spriteSetOpacity("UnifyMenuCarouselCoverPicture", static_cast<unsigned char>(color));
+            b->spriteDraw("UnifyMenuCarouselCoverPicture");
         }
         else {
             color = (color = (255 - (color * 2 * 255))) >= 26 ? color : 26;
-            b->radiusRectDraw({(VH(35)) * i + _coversOffset + VH(17), VH(24), VH(33), VH(33)}, VH(5), {static_cast<unsigned char>(color), static_cast<unsigned char>(color), static_cast<unsigned char>(color), 255});
+            b->radiusRectSetPotition("UnifyMenuCarouselCoverEmpty", {(VH(35)) * i + _coversOffset + VH(17), VH(24)});
+            b->radiusRectSetSize("UnifyMenuCarouselCoverEmpty", {VH(33), VH(33)});
+            b->radiusRectSetRadius("UnifyMenuCarouselCoverEmpty", VH(4));
+            b->radiusRectSetColor("UnifyMenuCarouselCoverEmpty",
+                {
+                    static_cast<unsigned char>(color),
+                    static_cast<unsigned char>(color),
+                    static_cast<unsigned char>(color),
+                    255
+                }
+            );
+            b->radiusRectDraw("UnifyMenuCarouselCoverEmpty");
         }
         if (color > 200 && i < _covers.size()) {
-            b->textDraw({_covers[i].gameName, {(VW(100) - (0.5f * _covers[i].gameName.length() * (VH(3)))) * 0.49f, VH(20) * 3.12f}, b->hexToColor(0xFFFFFFFF), static_cast<int>(VH(3)), "UnifyBoldFont"});
+            b->textSetText("UnifyMenuCarouselCoverTitle", _covers[i].gameName);
+            b->textSetPotition("UnifyMenuCarouselCoverTitle", {(VW(100) - (0.5f * _covers[i].gameName.length() * (VH(3)))) * 0.49f, VH(20) * 3.12f});
+            b->textSetFontSize("UnifyMenuCarouselCoverTitle", static_cast<int>(VH(3)));
+            b->textDraw("UnifyMenuCarouselCoverTitle");
             if (b->isInBox({(VH(35)) * i + _coversOffset + VH(17), VH(24), VH(33), VH(33), }) &&
             (b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED ||
             b->getEvents().joyConEvents.buttons1[JoyConButtons::JOY_A] == InputState::RELEASED))
@@ -104,14 +132,37 @@ void Menu::start(IBuilder *b)
     }
     if (_coversOffset == 0)
         _coversOffset = VW(50) - VW(20);
-    b->addSpriteButton({b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 13.7f, b->windowWidth() / 38.0f, b->windowWidth() / 38.0f},
+    /*b->addSpriteButton({b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 13.7f, b->windowWidth() / 38.0f, b->windowWidth() / 38.0f},
     {256, 0, 128, 128}, {0, 0, 128, 128}, {128, 0, 128, 128}, "UnifyIcons", "UnifySettings");
     b->addSpriteButton({b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 15.0f * 12.6f, b->windowWidth() / 30.0f, b->windowWidth() / 30.0f},
     {256, 128, 128, 128}, {0, 128, 128, 128}, {128, 128, 128, 128}, "UnifyIcons", "UnifyPower");
     b->addSpriteButton({b->windowWidth() * (17.2f / 20.0f), b->windowHeight() / 15.0f * 12.6f, b->windowWidth() / 30.0f, b->windowWidth() / 30.0f},
     {256, 256, 128, 128}, {0, 256, 128, 128}, {128, 256, 128, 128}, "UnifyIcons", "UnifyRestart");
     b->addSpriteButton({b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 13.7f, b->windowWidth() / 38.0f, b->windowWidth() / 38.0f},
-    {256, 512, 128, 128}, {0, 512, 128, 128}, {128, 512, 128, 128}, "UnifyIcons", "UnifyBack");
+    {256, 512, 128, 128}, {0, 512, 128, 128}, {128, 512, 128, 128}, "UnifyIcons", "UnifyBack");*/
+
+    b->rectInit("UnifyMenuBackground");
+    b->rectSetColor("UnifyMenuBackground", b->hexToColor(0x212121FF));
+
+    b->rectInit("UnifyMenuCarouselBackground");
+    b->rectSetColor("UnifyMenuCarouselBackground", b->hexToColor(0x1A1A1AFF));
+
+    b->spriteInit("UnifyMenuLogo");
+    b->spriteSetSprite("UnifyMenuLogo", "UnifyLogo");
+    b->spriteSetOpacity("UnifyMenuLogo", 255);
+
+    b->textInit("UnifyMenuLogoName");
+    b->textSetText("UnifyMenuLogoName", "Unify");
+    b->textSetColor("UnifyMenuLogoName", b->hexToColor(0xFFFFFFFF));
+    b->textSetFont("UnifyMenuLogoName", "UnifyBoldFont");
+
+    b->spriteInit("UnifyMenuCarouselCoverPicture");
+
+    b->radiusRectInit("UnifyMenuCarouselCoverEmpty");
+
+    b->textInit("UnifyMenuCarouselCoverTitle");
+    b->textSetColor("UnifyMenuCarouselCoverTitle", b->hexToColor(0xFFFFFFFF));
+    b->textSetFont("UnifyMenuCarouselCoverTitle", "UnifyBoldFont");
 }
 
 DLLoader<Start> *Menu::update(IBuilder *b)

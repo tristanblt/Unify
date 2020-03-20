@@ -37,12 +37,40 @@ class IBuilder {
 
 /* ------------------------------- basic draw ------------------------------- */
 
-        virtual void rectDraw(Box box, Color color) = 0;
-        virtual void radiusRectDraw(Box box, float radius, Color color) = 0;
-        virtual void circleDraw(CircleModel circle, Color color) = 0;
-        virtual void textDraw(TextModel text) = 0;
-        virtual void spriteDraw(SpriteModel sprite) = 0;
-        virtual void spriteDraw(SpriteModel sprite, Box frame) = 0;
+        virtual void rectInit(const std::string &name) = 0;
+        virtual void rectSetPotition(const std::string &name, Vector2 pos) = 0;
+        virtual void rectSetSize(const std::string &name, Vector2 size) = 0;
+        virtual void rectSetColor(const std::string &name, Color color) = 0;
+        virtual void rectDraw(const std::string &name) = 0;
+
+        virtual void circleInit(const std::string &name) = 0;
+        virtual void circleSetPotition(const std::string &name, Vector2 pos) = 0;
+        virtual void circleSetRadius(const std::string &name, float radius) = 0;
+        virtual void circleSetColor(const std::string &name, Color color) = 0;
+        virtual void circleDraw(const std::string &name) = 0;
+
+        virtual void radiusRectInit(const std::string &name) = 0;
+        virtual void radiusRectSetPotition(const std::string &name, Vector2 pos) = 0;
+        virtual void radiusRectSetSize(const std::string &name, Vector2 size) = 0;
+        virtual void radiusRectSetRadius(const std::string &name, float radius) = 0;
+        virtual void radiusRectSetColor(const std::string &name, Color color) = 0;
+        virtual void radiusRectDraw(const std::string &name) = 0;
+
+        virtual void textInit(const std::string &name) = 0;
+        virtual void textSetPotition(const std::string &name, Vector2 pos) = 0;
+        virtual void textSetFontSize(const std::string &name, int size) = 0;
+        virtual void textSetFont(const std::string &name, const std::string &fontIdx) = 0;
+        virtual void textSetColor(const std::string &name, Color color) = 0;
+        virtual void textSetText(const std::string &name, const std::string &text) = 0;
+        virtual void textDraw(const std::string &name) = 0;
+
+        virtual void spriteInit(const std::string &name) = 0;
+        virtual void spriteSetPotition(const std::string &name, Vector2 pos) = 0;
+        virtual void spriteSetSize(const std::string &name, Vector2 body, Box frame) = 0;
+        virtual void spriteSetSize(const std::string &name, Vector2 size) = 0;
+        virtual void spriteSetSprite(const std::string &name, const std::string &sprite) = 0;
+        virtual void spriteSetOpacity(const std::string &name, unsigned char opacity) = 0;
+        virtual void spriteDraw(const std::string &name) = 0;
 
 /* -------------------------------- collider -------------------------------- */
 
@@ -71,7 +99,7 @@ class IBuilder {
 
 /* --------------------------------- buttons -------------------------------- */
 
-        virtual bool buttonDraw(std::string name) = 0;
+        virtual bool buttonDraw(const std::string &name) = 0;
         virtual void addBasicButton(Box displayBox, float radius,
                                     Color boxActive, Color boxInactive, Color boxHold,
                                     Color txtActive, Color txtInactive, Color txtHold, std::string text, int fontSize,

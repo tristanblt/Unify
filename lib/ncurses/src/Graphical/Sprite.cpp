@@ -23,7 +23,7 @@ void Sprite::draw(IWindow *w)
     _frame.w = (_frame.w == -1 ? _sprite->getWidth() : _frame.w);
     _frame.h = (_frame.h == -1 ? _sprite->getHeight() : _frame.h);
 
-    Bitcrush(_sprite, {_x, _y}, _frame, _wantedSize);
+    Bitcrush(_sprite, {_x, _y}, _frame, _wantedSize, w);
 }
 
 void Sprite::setPosition(Vector2 position)
@@ -63,4 +63,3 @@ void Sprite::setOpacity(unsigned char opacity)
 {
     (void)opacity;
 }
-

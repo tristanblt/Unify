@@ -164,11 +164,16 @@ enum MenuState {
 };
 
 enum ObjectType {
-    BASIC_BUTTON,
-    SPRITE_BUTTON,
-    SWITCH_BUTTON,
-    SLIDER,
-    SELECTOR,
+    TYPE_RECT,
+    TYPE_RADIUS_RECT,
+    TYPE_CIRCLE,
+    TYPE_TEXT,
+    TYPE_SPRITE,
+    TYPE_BASIC_BUTTON,
+    TYPE_SPRITE_BUTTON,
+    TYPE_SWITCH_BUTTON,
+    TYPE_SLIDER,
+    TYPE_SELECTOR,
 };
 
 #endif /* !ENUMS_HPP_ */

@@ -84,4 +84,3 @@ void nCursesLibrary::updateKeyboardEvents(Events *e, int chr, bool firstIteratio
             e->keyboardState[static_cast<Key>(i)] = (e->keyboardState[static_cast<Key>(i)] != InputState::RELEASED && e->keyboardState[static_cast<Key>(i)] != InputState::NONE) ?
             InputState::RELEASED : (firstIteration == false ? InputState::RELEASED : InputState::NONE);
     }
-}

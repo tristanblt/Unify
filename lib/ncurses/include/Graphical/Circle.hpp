@@ -9,7 +9,6 @@
 #define CircleNcurses_HPP_
 
 #include <ncurses.h>
-#include "lib/ncurses/include/nCursesColors.hpp"
 #include "lib/include/Graphical/ICircle.hpp"
 #include "lib/include/Graphical/IWindow.hpp"
 #include "lib/ncurses/include/Graphical/Window.hpp"
@@ -30,8 +29,7 @@ class Circle : public ICircle {
         int _x;
         int _y;
         int _radius;
-        short _nColor;
-        short _colorPair;
+        Color _color;
 };
 
 #endif /* !CircleNcurses_HPP_ */

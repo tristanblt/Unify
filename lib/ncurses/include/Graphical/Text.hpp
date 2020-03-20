@@ -14,7 +14,6 @@
 #include "lib/include/Graphical/IText.hpp"
 #include "core/include/ArcadeCore/Builder/IBuilder.hpp"
 #include "core/include/ArcadeCore/Utils/Structs.hpp"
-#include "lib/ncurses/include/nCursesColors.hpp"
 #include "lib/ncurses/include/Graphical/Bitcrush.hpp"
 
 class Text : public IText {
