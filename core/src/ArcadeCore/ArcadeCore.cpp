@@ -97,7 +97,7 @@ bool ArcadeCore::launchCore(DisplayLibrary *library)
                 game->update(&builder);
             _layout.update(&builder, _coreState, game->getName());
         }
-        joyConCursors(&builder);
+        // joyConCursors(&builder);
         builder.windowDisplay();
         switchGraphicalLibrary(&builder);
     }

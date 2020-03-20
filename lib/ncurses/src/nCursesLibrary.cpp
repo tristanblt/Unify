@@ -30,47 +30,58 @@ void nCursesLibrary::loadAsset(const std::string &path, const std::string &name,
 
 Events nCursesLibrary::updateEvents(Events *events)
 {
-    updateMouseEvents(events, nullptr);
-    updateKeyboardEvents(events);
+    std::cout << "\033[?1003h";
+    updateMouseEvents(events, 0, true);
+    // updateKeyboardEvents(events, 0, true);
+    for (int key = wgetch(stdscr); key != ERR; key = wgetch(stdscr)) {
+        updateMouseEvents(events, key, false);
+        // updateKeyboardEvents(events, key, false);
+    }
+    std::cout << "\033[?1003l";
     return (*events);
 }
 
-void nCursesLibrary::updateMouseEvents(Events *e, Window *window)
+void nCursesLibrary::updateMouseEvents(Events *e, int key, bool firstIteration)
 {
     MEVENT ptr;
 
-    (void)window;
+    if (firstIteration == true) {
+        for (int i = 0; i < 3; i++)
+            if (e->mouseEvents.mouseStates[static_cast<MouseButton>(i)] == InputState::CLICK)
+                e->mouseEvents.mouseStates[static_cast<MouseButton>(i)] = InputState::HOLD;
+            else if (e->mouseEvents.mouseStates[static_cast<MouseButton>(i)] == InputState::RELEASED)
+                e->mouseEvents.mouseStates[static_cast<MouseButton>(i)] = InputState::NONE;
+        e->mouseEvents.scrollVelocity = 0;
+        return;
+    }
+    if (key != KEY_MOUSE)
+        return;
     if (getmouse(&ptr) == OK) {
         e->mouseEvents.pos.x = ptr.x;
         e->mouseEvents.pos.y = ptr.y;
         if (ptr.bstate & BUTTON4_PRESSED)
             e->mouseEvents.scrollVelocity = 1;
-        else if (ptr.bstate & BUTTON4_PRESSED)
+        else if (ptr.bstate & BUTTON5_PRESSED)
             e->mouseEvents.scrollVelocity = -1;
-        else
-            e->mouseEvents.scrollVelocity = 0;
         for (int i = 0; i < 3; i++) {
             if (ptr.bstate & mouseButtons[i])
-                e->mouseEvents.mouseStates[static_cast<MouseButton>(i)] = (e->mouseEvents.mouseStates[static_cast<MouseButton>(i)] != InputState::CLICK && e->mouseEvents.mouseStates[static_cast<MouseButton>(i)] != InputState::HOLD) ?
-                InputState::CLICK : InputState::HOLD;
+                e->mouseEvents.mouseStates[static_cast<MouseButton>(i)] = InputState::CLICK;
             else
-                e->mouseEvents.mouseStates[static_cast<MouseButton>(i)] = (e->mouseEvents.mouseStates[static_cast<MouseButton>(i)] != InputState::RELEASED && e->mouseEvents.mouseStates[static_cast<MouseButton>(i)] != InputState::NONE) ?
-                InputState::RELEASED : InputState::NONE;
+                e->mouseEvents.mouseStates[static_cast<MouseButton>(i)] = InputState::RELEASED;
         }
     }
 }
 
-void nCursesLibrary::updateKeyboardEvents(Events *e)
+void nCursesLibrary::updateKeyboardEvents(Events *e, int chr, bool firstIteration)
 {
-    int c = getch();
     for (int i = 0; i < 99; i++) {
-        if (c >= 'a' && c <= 'z')
-            c -= 32;
-        if (keys[i] == c)
+        if (chr >= 'a' && chr <= 'z')
+            chr -= 32;
+        if (keys[i] == chr)
             e->keyboardState[static_cast<Key>(i)] = (e->keyboardState[static_cast<Key>(i)] != InputState::CLICK && e->keyboardState[static_cast<Key>(i)] != InputState::HOLD) ?
-            InputState::CLICK : InputState::HOLD;
+            InputState::CLICK : (firstIteration == false ?  InputState::CLICK : InputState::HOLD);
         else
             e->keyboardState[static_cast<Key>(i)] = (e->keyboardState[static_cast<Key>(i)] != InputState::RELEASED && e->keyboardState[static_cast<Key>(i)] != InputState::NONE) ?
-            InputState::RELEASED : InputState::NONE;
+            InputState::RELEASED : (firstIteration == false ? InputState::RELEASED : InputState::NONE);
     }
 }
