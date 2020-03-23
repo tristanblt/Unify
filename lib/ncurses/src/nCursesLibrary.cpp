@@ -32,12 +32,16 @@ Events nCursesLibrary::updateEvents(Events *events)
 {
     std::cout << "\033[?1003h";
     updateMouseEvents(events, 0, true);
-    // updateKeyboardEvents(events, 0, true);
+    updateKeyboardEvents(events, 0, true);
     for (int key = wgetch(stdscr); key != ERR; key = wgetch(stdscr)) {
         updateMouseEvents(events, key, false);
-        // updateKeyboardEvents(events, key, false);
+        updateKeyboardEvents(events, key, false);
     }
     std::cout << "\033[?1003l";
+    // if (events->keyboardState[Key::A] == InputState::CLICK)
+    //     std::cout << "OOK" << std::endl;
+    // if (events->keyboardState[Key::A] == InputState::HOLD)
+    //     std::cout << "OOERTYUYGHK" << std::endl;
     return (*events);
 }
 
@@ -74,14 +78,23 @@ void nCursesLibrary::updateMouseEvents(Events *e, int key, bool firstIteration)
 
 void nCursesLibrary::updateKeyboardEvents(Events *e, int chr, bool firstIteration)
 {
-    for (int i = 0; i < 99; i++) {
-        if (chr >= 'a' && chr <= 'z')
-            chr -= 32;
-        if (keys[i] == chr)
-            e->keyboardState[static_cast<Key>(i)] = (e->keyboardState[static_cast<Key>(i)] != InputState::CLICK && e->keyboardState[static_cast<Key>(i)] != InputState::HOLD) ?
-            InputState::CLICK : (firstIteration == false ?  InputState::CLICK : InputState::HOLD);
-        else
-            e->keyboardState[static_cast<Key>(i)] = (e->keyboardState[static_cast<Key>(i)] != InputState::RELEASED && e->keyboardState[static_cast<Key>(i)] != InputState::NONE) ?
-            InputState::RELEASED : (firstIteration == false ? InputState::RELEASED : InputState::NONE);
+    if (firstIteration == true) {
+        for (int i = 0; i < 100; i++)
+            if (e->keyboardState[static_cast<Key>(i)] == InputState::CLICK)
+                e->keyboardState[static_cast<Key>(i)] = InputState::HOLD;
+            else if (e->keyboardState[static_cast<Key>(i)] == InputState::RELEASED)
+                e->keyboardState[static_cast<Key>(i)] = InputState::NONE;
+        return;
+    }
+    if (chr == KEY_MOUSE)
+        return;
+    if (chr >= 'a' && chr <= 'z')
+        chr -= 32;
+    std::cout << chr << std::endl;
+    for (int i = 0; i < 100; i++) {
+        if (keys[i] == chr && e->keyboardState[static_cast<Key>(i)] != InputState::HOLD)
+            e->keyboardState[static_cast<Key>(i)] = InputState::CLICK;
+        else if (keys[i] != chr && e->keyboardState[static_cast<Key>(i)] != InputState::NONE)
+            e->keyboardState[static_cast<Key>(i)] = InputState::RELEASED;
     }
 }
