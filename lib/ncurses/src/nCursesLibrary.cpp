@@ -65,8 +65,8 @@ void nCursesLibrary::updateMouseEvents(Events *e, int key, bool firstIteration)
         e->mouseEvents.pos.y = ptr.y;
         if (ptr.bstate & BUTTON4_PRESSED)
             e->mouseEvents.scrollVelocity = 1;
-        else if (ptr.bstate & BUTTON5_PRESSED)
-            e->mouseEvents.scrollVelocity = -1;
+        // else if (ptr.bstate & BUTTON5_PRESSED)
+        //     e->mouseEvents.scrollVelocity = -1;
         for (int i = 0; i < 3; i++) {
             if (ptr.bstate & mouseButtons[i])
                 e->mouseEvents.mouseStates[static_cast<MouseButton>(i)] = InputState::CLICK;

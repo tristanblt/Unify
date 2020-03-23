@@ -53,7 +53,7 @@ DisplayLibrary *ArcadeCore::importGraphicalLibs(const std::string &firstLib)
     return (ret);
 }
 
-void ArcadeCore::switchGraphicalLibrary(IBuilder *b)
+void ArcadeCore::switchGraphicalLibrary(Builder *b)
 {
     if (b->getEvents().keyboardState[Key::N] == InputState::RELEASED) {
         unsigned long tmp = static_cast<unsigned long>(_currentLib);
@@ -70,7 +70,10 @@ void ArcadeCore::switchGraphicalLibrary(IBuilder *b)
 
 void ArcadeCore::joyConCursors(IBuilder *b)
 {
-    //b->spriteDraw({{b->getEvents().joyConEvents.cursorPos.x - 15, b->getEvents().joyConEvents.cursorPos.y, 176, 120}, "UnifyJoyConsCursors", 255}, {481, 3, 44, 30});
+    if (b->getEvents().joyConEvents.cursorPos.x == -1 && b->getEvents().joyConEvents.cursorPos.y == -1)
+        return;
+    b->spriteSetPosition("UnifyJoyConCursor", {b->getEvents().joyConEvents.cursorPos.x - 15, b->getEvents().joyConEvents.cursorPos.y});
+    b->spriteDraw("UnifyJoyConCursor");
 }
 
 bool ArcadeCore::launchCore(DisplayLibrary *library)
@@ -82,6 +85,10 @@ bool ArcadeCore::launchCore(DisplayLibrary *library)
     loadCoreAssets(&builder);
     _menu.start(&builder);
     _layout.start(&builder);
+    builder.spriteInit("UnifyJoyConCursor");
+    builder.spriteSetOpacity("UnifyJoyConCursor", 255);
+    builder.spriteSetSprite("UnifyJoyConCursor", "UnifyJoyConsCursors");
+    builder.spriteSetSize("UnifyJoyConCursor", {176, 120}, {481, 3, 44, 30});
     while (builder.windowIsOpen()) {
         builder.updateEvents();
         builder.windowClear();

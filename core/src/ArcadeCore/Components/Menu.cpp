@@ -21,44 +21,57 @@ Menu::~Menu()
 
 void Menu::drawBackgrounds(IBuilder *b)
 {
-    b->rectSetPotition("UnifyMenuBackground", {0, 0});
+    b->rectSetPosition("UnifyMenuBackground", {0, 0});
     b->rectSetSize("UnifyMenuBackground", {VW(100), VH(100)});
     b->rectDraw("UnifyMenuBackground");
     
-    b->rectSetPotition("UnifyMenuCarouselBackground", {0, VH(20)});
+    b->rectSetPosition("UnifyMenuCarouselBackground", {0, VH(20)});
     b->rectSetSize("UnifyMenuCarouselBackground", {VW(100), VH(55)});
     b->rectDraw("UnifyMenuCarouselBackground");
 }
 
 void Menu::drawHeader(IBuilder *b)
 {
-    b->spriteSetPotition("UnifyMenuLogo", {VW(4), VH(4)});
+    b->spriteSetPosition("UnifyMenuLogo", {VW(4), VH(4)});
     b->spriteSetSize("UnifyMenuLogo", {VH(11.5), VH(11.5)});
     b->spriteDraw("UnifyMenuLogo");
 
-    b->textSetPotition("UnifyMenuLogoName", {VW(12.5), VH(6.5)});
+    b->textSetPosition("UnifyMenuLogoName", {VW(12.5), VH(6.5)});
     b->textSetFontSize("UnifyMenuLogoName", (int)VH(5));
     b->textDraw("UnifyMenuLogoName");
-    /*if (_state == MenuState::MENU_CAROUSSEL) {
-        if (b->buttonDraw("UnifySettings") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
+
+    b->spriteButtonSetDisplayBox("UnifySettingsButton", {b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 13.7f, b->windowWidth() / 38.0f, b->windowWidth() / 38.0f});
+    b->spriteButtonSetSpriteBoxes("UnifySettingsButton", {256, 0, 128, 128}, {0, 0, 128, 128}, {128, 0, 128, 128});
+
+    b->spriteButtonSetDisplayBox("UnifyBackButton", {b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 13.7f, b->windowWidth() / 38.0f, b->windowWidth() / 38.0f});
+    b->spriteButtonSetSpriteBoxes("UnifyBackButton", {256, 512, 128, 128}, {0, 512, 128, 128}, {128, 512, 128, 128});
+
+    b->spriteButtonSetDisplayBox("UnifyRestartButton", {b->windowWidth() * (17.2f / 20.0f), b->windowHeight() / 15.0f * 12.6f, b->windowWidth() / 30.0f, b->windowWidth() / 30.0f});
+    b->spriteButtonSetSpriteBoxes("UnifyRestartButton", {256, 256, 128, 128}, {0, 256, 128, 128}, {128, 256, 128, 128});
+
+    b->spriteButtonSetDisplayBox("UnifyPowerButton", {b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 15.0f * 12.6f, b->windowWidth() / 30.0f, b->windowWidth() / 30.0f});
+    b->spriteButtonSetSpriteBoxes("UnifyPowerButton", {256, 128, 128, 128}, {0, 128, 128, 128}, {128, 128, 128, 128});
+
+    if (_state == MenuState::MENU_CAROUSSEL) {
+        if (b->buttonDraw("UnifySettingsButton") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
             _state = MenuState::MENU_SETTINGS;
     } else {
-        if (b->buttonDraw("UnifyBack") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
+        if (b->buttonDraw("UnifyBackButton") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
             _state = MenuState::MENU_CAROUSSEL;
     }
-    if (b->buttonDraw("UnifyRestart") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED) {
+    if (b->buttonDraw("UnifyRestartButton") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED) {
         _interruptType = true;
         b->windowClose();
     }
-    if (b->buttonDraw("UnifyPower") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED) {
+    if (b->buttonDraw("UnifyPowerButton") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED) {
         _interruptType = false;
         b->windowClose();
-    }*/
+    }
 }
 
 void Menu::drawCarousel(IBuilder *b)
 {
-    if (b->isInBox({0, VH(20), VW(100), VH(55)})) {
+    if (b->isMouseInBox({0, VH(20), VW(100), VH(55)})) {
         _coversOffset -= b->getEvents().mouseEvents.scrollVelocity * 10;
         _coversOffset += b->getEvents().joyConEvents.buttons1[JOY_R1] == InputState::HOLD ? -50 : 0;
         _coversOffset += b->getEvents().joyConEvents.buttons1[JOY_L1] == InputState::HOLD ? 50 : 0;
@@ -73,7 +86,7 @@ void Menu::drawCarousel(IBuilder *b)
         color = color < 0 ? color * -1 : color;
         if (i < _covers.size()) {
             color = (255 - (color * 2 * 255));
-            b->spriteSetPotition("UnifyMenuCarouselCoverPicture", {(VH(35)) * i + _coversOffset + VH(17), VH(24)});
+            b->spriteSetPosition("UnifyMenuCarouselCoverPicture", {(VH(35)) * i + _coversOffset + VH(17), VH(24)});
             b->spriteSetSize("UnifyMenuCarouselCoverPicture", {VH(33), VH(33)});
             b->spriteSetSprite("UnifyMenuCarouselCoverPicture", _covers[i].spriteIdx);
             b->spriteSetOpacity("UnifyMenuCarouselCoverPicture", static_cast<unsigned char>(color));
@@ -81,7 +94,7 @@ void Menu::drawCarousel(IBuilder *b)
         }
         else {
             color = (color = (255 - (color * 2 * 255))) >= 26 ? color : 26;
-            b->radiusRectSetPotition("UnifyMenuCarouselCoverEmpty", {(VH(35)) * i + _coversOffset + VH(17), VH(24)});
+            b->radiusRectSetPosition("UnifyMenuCarouselCoverEmpty", {(VH(35)) * i + _coversOffset + VH(17), VH(24)});
             b->radiusRectSetSize("UnifyMenuCarouselCoverEmpty", {VH(33), VH(33)});
             b->radiusRectSetRadius("UnifyMenuCarouselCoverEmpty", VH(4));
             b->radiusRectSetColor("UnifyMenuCarouselCoverEmpty",
@@ -96,10 +109,10 @@ void Menu::drawCarousel(IBuilder *b)
         }
         if (color > 200 && i < _covers.size()) {
             b->textSetText("UnifyMenuCarouselCoverTitle", _covers[i].gameName);
-            b->textSetPotition("UnifyMenuCarouselCoverTitle", {(VW(100) - (0.5f * _covers[i].gameName.length() * (VH(3)))) * 0.49f, VH(20) * 3.12f});
+            b->textSetPosition("UnifyMenuCarouselCoverTitle", {(VW(100) - (0.5f * _covers[i].gameName.length() * (VH(3)))) * 0.49f, VH(20) * 3.12f});
             b->textSetFontSize("UnifyMenuCarouselCoverTitle", static_cast<int>(VH(3)));
             b->textDraw("UnifyMenuCarouselCoverTitle");
-            if (b->isInBox({(VH(35)) * i + _coversOffset + VH(17), VH(24), VH(33), VH(33), }) &&
+            if (b->isMouseInBox({(VH(35)) * i + _coversOffset + VH(17), VH(24), VH(33), VH(33), }) &&
             (b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED ||
             b->getEvents().joyConEvents.buttons1[JoyConButtons::JOY_A] == InputState::RELEASED))
                 _currentGame = _covers[i].gameLib;
@@ -132,14 +145,18 @@ void Menu::start(IBuilder *b)
     }
     if (_coversOffset == 0)
         _coversOffset = VW(50) - VW(20);
-    /*b->addSpriteButton({b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 13.7f, b->windowWidth() / 38.0f, b->windowWidth() / 38.0f},
-    {256, 0, 128, 128}, {0, 0, 128, 128}, {128, 0, 128, 128}, "UnifyIcons", "UnifySettings");
-    b->addSpriteButton({b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 15.0f * 12.6f, b->windowWidth() / 30.0f, b->windowWidth() / 30.0f},
-    {256, 128, 128, 128}, {0, 128, 128, 128}, {128, 128, 128, 128}, "UnifyIcons", "UnifyPower");
-    b->addSpriteButton({b->windowWidth() * (17.2f / 20.0f), b->windowHeight() / 15.0f * 12.6f, b->windowWidth() / 30.0f, b->windowWidth() / 30.0f},
-    {256, 256, 128, 128}, {0, 256, 128, 128}, {128, 256, 128, 128}, "UnifyIcons", "UnifyRestart");
-    b->addSpriteButton({b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 13.7f, b->windowWidth() / 38.0f, b->windowWidth() / 38.0f},
-    {256, 512, 128, 128}, {0, 512, 128, 128}, {128, 512, 128, 128}, "UnifyIcons", "UnifyBack");*/
+
+    b->spriteButtonInit("UnifySettingsButton");
+    b->spriteButtonSetSprite("UnifySettingsButton", "UnifyIcons");
+
+    b->spriteButtonInit("UnifyBackButton");
+    b->spriteButtonSetSprite("UnifyBackButton", "UnifyIcons");
+
+    b->spriteButtonInit("UnifyRestartButton");
+    b->spriteButtonSetSprite("UnifyRestartButton", "UnifyIcons");
+
+    b->spriteButtonInit("UnifyPowerButton");
+    b->spriteButtonSetSprite("UnifyPowerButton", "UnifyIcons");
 
     b->rectInit("UnifyMenuBackground");
     b->rectSetColor("UnifyMenuBackground", b->hexToColor(0x212121FF));
