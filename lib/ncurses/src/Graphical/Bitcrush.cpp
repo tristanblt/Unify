@@ -41,7 +41,7 @@ Bitcrush::Bitcrush(PngFile *png, Vector2 pos, Box frame, Vector2 wantedSize, IWi
                 }
             }
             crushed[b][a] = sum;
-            //std::cout << b << std::endl;
+            ////std::cout << b << std::endl;
             b++;
         }
         b = 0;

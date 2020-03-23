@@ -13,6 +13,7 @@
 
 Window::Window()
 {
+    _first = true;
 }
 
 Window::~Window()
@@ -56,7 +57,6 @@ void Window::display()
     for (size_t i = 0; i < _colorBuffer.size(); i++)
         for (size_t j = 0; _width > _colorBuffer[i].size(); j++)
             _colorBuffer[i].push_back({0, 0, 0, 255});
-
     size_t a = 0;
     int colorPair = -1;
     for (size_t i = 0; i < _colorBuffer.size(); i+=2, a++) {
@@ -71,7 +71,10 @@ void Window::display()
             attroff(COLOR_PAIR(colorPair));
         }
     }
+    //std::cout << "a" << std::endl;
     refresh();
+    //std::cout << "b" << std::endl;
+
 }
 /*#else
 void Window::display()
@@ -152,32 +155,38 @@ void Window::drawBufferPixel(int x, int y, Color color)
 
 void Window::close()
 {
-    endwin();
+    //endwin();
+    //nocbreak();
 }
 
 void Window::create()
 {
+    if (!_first)
+        return;
     setlocale(LC_ALL, "");
     initscr();
-    start_color();
     noecho();
-    nodelay(stdscr, TRUE);
-    scrollok(stdscr, TRUE);
-    keypad(stdscr, TRUE);
-    halfdelay(1);
-    mousemask(ALL_MOUSE_EVENTS | REPORT_MOUSE_POSITION, NULL);
     cbreak();
-    curs_set(0);
+    //std::cout << "heu" << _first << std::endl;
     _width = COLS;
     _height = LINES;
     _isOpen = true;
+    //std::cout << "heu" << std::endl;
+    curs_set(0);
+    halfdelay(1);
+    mousemask(ALL_MOUSE_EVENTS | REPORT_MOUSE_POSITION, NULL);
+    scrollok(stdscr, TRUE);
+    nodelay(stdscr, TRUE);
+    start_color();
+    keypad(stdscr, TRUE);
+    //std::cout << "heu" << std::endl;
     initColors();
     for (size_t i = 0; _height * 2 > _colorBuffer.size(); i++)
         _colorBuffer.push_back(std::vector<Color> ());
     for (size_t i = 0; i < _colorBuffer.size(); i++)
         for (size_t j = 0; _width > _colorBuffer[i].size(); j++)
             _colorBuffer[i].push_back({0, 0, 0, 255});
-    // display();
+    _first = false;
 }
 
 void Window::initColors(void)

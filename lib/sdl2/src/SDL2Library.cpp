@@ -51,6 +51,8 @@ Events SDL2Library::updateEvents(Events *e)
     SDL_Event event;
 
     updateMouseEvents(e, NULL);
+    e->keyboardState[Key::N] = InputState::NONE;
+
     while (SDL_PollEvent(&event)) {
         switch(event.type)
         {

@@ -48,6 +48,8 @@ class Window : public IWindow {
         size_t _height;
         bool _isOpen;
 
+        bool _first;
+
         std::map<int, Color> _knownColors;
         std::map<int, ColorPair> _colorPairs;
         std::vector<std::vector<Color>> _colorBuffer;

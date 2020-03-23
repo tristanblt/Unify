@@ -59,12 +59,20 @@ void ArcadeCore::switchGraphicalLibrary(Builder *b)
         unsigned long tmp = static_cast<unsigned long>(_currentLib);
         tmp++;
         if (tmp > _libs.size() - 1)
-            _currentLib = 0;
+            tmp = 0;
+        //std::cout << "CHANGE LIB TO : " << tmp << " AND THE MAX IS : " << _libs.size() << std::endl;
+        b->getEvents().keyboardState[Key::N] = InputState::NONE;
         b->reloadLibrary(_libs[tmp]);
         loadCoreAssets(b);
         _menu.start(b);
         _layout.start(b);
-        b->getEvents().keyboardState[Key::N] = InputState::NONE;
+        //std::cout << "heu" << std::endl;
+        _currentLib = tmp;
+        //if (tmp == 0)
+        //b->windowClose();
+        //std::cout << "heuuuuuuuu" << std::endl;
+
+
     }
 }
 
@@ -90,7 +98,9 @@ bool ArcadeCore::launchCore(DisplayLibrary *library)
     builder.spriteSetSprite("UnifyJoyConCursor", "UnifyJoyConsCursors");
     builder.spriteSetSize("UnifyJoyConCursor", {176, 120}, {481, 3, 44, 30});
     while (builder.windowIsOpen()) {
+        //std::cout << "d" << std::endl;
         builder.updateEvents();
+        //std::cout << "c" << std::endl;
         builder.windowClear();
         if (_coreState == CoreState::CORE_MENU) {
             if ((gameLib = _menu.update(&builder)) != NULL) {
