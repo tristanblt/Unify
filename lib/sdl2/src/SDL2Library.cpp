@@ -43,31 +43,40 @@ void SDL2Library::updateMouseEvents(Events *e, Window *w)
 
 void SDL2Library::updateKeyboardEvents(Events *e)
 {
-    (void)e;
+    // SDL_Event event;
+
+    // while (SDL_PollEvent(&event)) {
+    //     for (int i = 0; i < 100; i++) {
+    //     if (event.key.keysym.sym == keys[i])
+    //         e->keyboardState[static_cast<Key>(i)] = (e->keyboardState[static_cast<Key>(i)] != InputState::CLICK && e->keyboardState[static_cast<Key>(i)] != InputState::HOLD) ?
+    //         InputState::CLICK : InputState::HOLD;
+    //     else
+    //         e->keyboardState[static_cast<Key>(i)] = (e->keyboardState[static_cast<Key>(i)] != InputState::RELEASED && e->keyboardState[static_cast<Key>(i)] != InputState::NONE) ?
+    //         InputState::RELEASED : InputState::NONE;
+    // }
+    //     switch(event.type)
+    //     {
+    //         case SDL_QUIT:
+    //             _window->close();
+    //             break;
+    //         case SDL_KEYUP:
+    //             if ( event.key.keysym.sym == SDLK_q )
+    //                 _window->close();
+    //             if ( event.key.keysym.sym == SDLK_n )
+    //                 e->keyboardState[Key::N] = InputState::RELEASED;
+    //             break;
+    //         case SDL_MOUSEWHEEL:
+    //             e->mouseEvents.scrollVelocity = event.wheel.y;
+    //             break;
+    //     }
+    // }
 }
 
 Events SDL2Library::updateEvents(Events *e)
 {
-    SDL_Event event;
 
     updateMouseEvents(e, NULL);
-    while (SDL_PollEvent(&event)) {
-        switch(event.type)
-        {
-            case SDL_QUIT:
-                _window->close();
-                break;
-            case SDL_KEYUP:
-                if ( event.key.keysym.sym == SDLK_q )
-                    _window->close();
-                if ( event.key.keysym.sym == SDLK_n )
-                    e->keyboardState[Key::N] = InputState::RELEASED;
-                break;
-            case SDL_MOUSEWHEEL:
-                e->mouseEvents.scrollVelocity = event.wheel.y;
-                break;
-        }
-    }
+    
     return (*e);
 }
 

@@ -38,10 +38,6 @@ Events nCursesLibrary::updateEvents(Events *events)
         updateKeyboardEvents(events, key, false);
     }
     std::cout << "\033[?1003l";
-    // if (events->keyboardState[Key::A] == InputState::CLICK)
-    //     std::cout << "OOK" << std::endl;
-    // if (events->keyboardState[Key::A] == InputState::HOLD)
-    //     std::cout << "OOERTYUYGHK" << std::endl;
     return (*events);
 }
 
