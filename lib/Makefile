@@ -23,4 +23,4 @@ clean:
 fclean:
 	make fclean -C sfml/
 	make fclean -C ncurses/
-	make fclean -C sdl2/
+	# make fclean -C sdl2/

@@ -15,6 +15,7 @@ SRCS_FILES=	Graphical/Rectangle.cpp					\
 			Graphical/Sprite.cpp					\
 			SFMLLibrary.cpp							\
 			Entry.cpp								\
+			SfmlExceptions.cpp						\
 
 SRC	=	$(addprefix $(SRCPATH), $(SRCS_FILES))
 

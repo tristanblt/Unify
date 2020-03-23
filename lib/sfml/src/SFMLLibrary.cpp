@@ -6,6 +6,7 @@
 */
 
 #include "../include/SFMLLibrary.hpp"
+#include "lib/sfml/include/SfmlExceptions.hpp"
 
 #include <iostream>
 
@@ -174,13 +175,13 @@ void SFMLLibrary::loadAsset(const std::string &path, const std::string &name, As
     if (type == AssetType::FONT) {
         sf::Font *f = new sf::Font();
         if (!f->loadFromFile(path))
-            throw std::invalid_argument("FONT NOT FOUND"); // TODO
+            throw SfmlAssetException("could not open font '"+path+"'");
         _assets[name] = (void *)f;
     }
     else if (type == AssetType::SPRITE) {
         sf::Texture *f = new sf::Texture();
         if (!f->loadFromFile(path))
-            throw std::invalid_argument("SPRITE NOT FOUND"); // TODO
+            throw SfmlAssetException("could not open '"+path+"'");
         _assets[name] = (void *)f;
     }
 }

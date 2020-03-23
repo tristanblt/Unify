@@ -6,6 +6,7 @@
 */
 
 #include "lib/sfml/include/Graphical/Text.hpp"
+#include "lib/sfml/include/SfmlExceptions.hpp"
 
 Text::Text(std::map<std::string, void *> *assets)
 {
@@ -48,7 +49,7 @@ void Text::setText(const std::string &text)
 void Text::setFont(const std::string &idx)
 {
     if (_assets->find(idx) == _assets->end())
-        throw std::invalid_argument("Could not find font asset");
+        throw SfmlAssetException("Could not find '"+idx+"' font");
     _text->setFont(*static_cast<sf::Font *>((*_assets)[idx]));
 }
 

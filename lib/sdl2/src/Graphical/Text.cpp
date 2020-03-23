@@ -6,6 +6,7 @@
 */
 
 #include "lib/sdl2/include/Graphical/Text.hpp"
+#include "lib/sdl2/include/SDL2Exceptions.hpp"
 
 Text::Text(std::map<std::string, void *> *assets)
 {
@@ -58,6 +59,6 @@ void Text::setText(const std::string &text)
 void Text::setFont(const std::string &idx)
 {
     if (_assets->find(idx) == _assets->end())
-        throw std::invalid_argument("Could not find font asset");
+        throw SDL2AssetException("Could not find '"+idx+"' font");
     _font = static_cast<TTF_Font *>((*_assets)[idx]);
 }

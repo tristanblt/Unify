@@ -10,6 +10,7 @@ NAME	=	../arcade
 SRCPATH	=	src/
 
 SRCS_FILES=	main.cpp													\
+			ArcadeCore/CoreException.cpp								\
 			ArcadeCore/ArcadeCore.cpp									\
 			ArcadeCore/Components/Layout.cpp							\
 			ArcadeCore/Components/Menu.cpp								\
