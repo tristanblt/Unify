@@ -30,7 +30,7 @@ void nCursesLibrary::loadAsset(const std::string &path, const std::string &name,
 
 Events nCursesLibrary::updateEvents(Events *events)
 {
-    std::cout << "\033[?1003h";
+    //std::cout << "\033[?1003h";
     updateMouseEvents(events, 0, true);
     updateKeyboardEvents(events, 0, true);
     for (int key = wgetch(stdscr); key != ERR; key = wgetch(stdscr)) {
@@ -86,7 +86,7 @@ void nCursesLibrary::updateKeyboardEvents(Events *e, int chr, bool firstIteratio
         return;
     if (chr >= 'a' && chr <= 'z')
         chr -= 32;
-    std::cout << chr << std::endl;
+    //std::cout << chr << std::endl;
     for (int i = 0; i < 100; i++) {
         if (keys[i] == chr && e->keyboardState[static_cast<Key>(i)] != InputState::HOLD)
             e->keyboardState[static_cast<Key>(i)] = InputState::CLICK;

@@ -15,7 +15,7 @@
 #ifndef ARCADE_LINUX
 #define UPPER_BLOCK "\u2580"
 #else
-#define UPPER_BLOCK L"\u2580"
+#define UPPER_BLOCK L'\u2580'
 #endif
 
 class Window : public IWindow {
@@ -47,6 +47,8 @@ class Window : public IWindow {
         size_t _width;
         size_t _height;
         bool _isOpen;
+
+        bool _first;
 
         std::map<int, Color> _knownColors;
         std::map<int, ColorPair> _colorPairs;

@@ -6,6 +6,7 @@
 */
 
 #include "lib/ncurses/include/Graphical/Text.hpp"
+#include "lib/ncurses/include/NCursesException.hpp"
 
 Text::Text(std::map<std::string, void *> *assets) :
 _x(0),
@@ -74,7 +75,7 @@ void Text::setFont(const std::string &idx)
 {
     (void)idx;
     if (_assets->find("UnifyFontImg") == _assets->end())
-        throw std::invalid_argument("Could not find sprite asset2");
+        throw NCursesAssetException("Could not open 'UnifyFontImg'");
     _font = static_cast<PngFile *>((*_assets)["UnifyFontImg"]);
 }
 

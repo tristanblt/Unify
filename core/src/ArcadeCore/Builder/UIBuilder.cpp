@@ -6,6 +6,7 @@
 */
 
 #include "core/include/ArcadeCore/Builder/Builder.hpp"
+#include "core/include/ArcadeCore/CoreException.hpp"
 
 /* --------------------------------- buttons -------------------------------- */
 
@@ -122,7 +123,7 @@ void Builder::switchButtonInit(const std::string &name)
 bool Builder::buttonDraw(const std::string &name)
 {
     if (_gameObjects.find(name) == _gameObjects.end())
-        throw std::invalid_argument("Could not find button");
+        throw BuilderException("could not find button");
     if (_gameObjects[name].type == ObjectType::TYPE_BASIC_BUTTON)
         return (basicButtonDraw(name));
     if (_gameObjects[name].type == ObjectType::TYPE_SPRITE_BUTTON)

@@ -15,6 +15,7 @@ SRCS_FILES=	SDL2Library.cpp							\
 			Graphical/Circle.cpp					\
 			Graphical/Text.cpp						\
 			Graphical/Sprite.cpp					\
+			SDL2Exceptions.cpp						\
 
 SRC	=	$(addprefix $(SRCPATH), $(SRCS_FILES))
 
@@ -23,7 +24,7 @@ OBJ			= 	$(SRC:%.cpp=%.o)
 CXXFLAGS	=	-W -Wall -Wextra -Wshadow	\
 			-I../../	-std=c++11 -fpic
 
-LDFLAGS		= sdl2-config -lsdl2 -lsdl2_ttf -lsdl2_image -lsdl2_gfx
+LDFLAGS		= -lsdl2 -lsdl2_ttf -lsdl2_image -lsdl2_gfx
 
 CXX		=	g++
 

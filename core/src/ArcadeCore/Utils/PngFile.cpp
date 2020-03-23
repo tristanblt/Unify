@@ -6,6 +6,7 @@
 */
 
 #include "core/include/ArcadeCore/Utils/PngFile.hpp"
+#include "core/include/ArcadeCore/CoreException.hpp"
 
 PngFile::PngFile(const std::string &path) :
 _pixels(NULL)
@@ -14,12 +15,12 @@ _pixels(NULL)
     _png = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
 
     if(!_png)
-        throw std::invalid_argument("CAN'T OPEN PNG FILE"); //todo
+        throw FileException("could not open '"+path+"'");
     _info = png_create_info_struct(_png);
     if(!_info)
-        throw std::invalid_argument("CAN'T OPEN PNG FILE"); //todo
+        throw PngLibException("could get file info");
     if(setjmp(png_jmpbuf(_png)))
-        throw std::invalid_argument("CAN'T OPEN PNG FILE"); //todo
+        throw PngLibException("setjmp error");
     png_init_io(_png, _fp);
     png_read_info(_png, _info);
     _width = png_get_image_width(_png, _info);
@@ -40,7 +41,7 @@ _pixels(NULL)
         png_set_gray_to_rgb(_png);
     png_read_update_info(_png, _info);
     if (_pixels)
-        throw std::invalid_argument("CAN'T OPEN PNG FILE"); //todo
+        throw PngLibException("could not load pixels");
     _pixels = (png_bytep*)malloc(sizeof(png_bytep) * _height);
     for(int y = 0; y < _height; y++)
         _pixels[y] = (png_byte*)malloc(png_get_rowbytes(_png, _info));

@@ -6,6 +6,7 @@
 */
 
 #include "../include/SDL2Library.hpp"
+#include "lib/sdl2/include/SDL2Exceptions.hpp"
 
 #include <iostream>
 
@@ -76,7 +77,29 @@ Events SDL2Library::updateEvents(Events *e)
 {
 
     updateMouseEvents(e, NULL);
+<<<<<<< HEAD
     
+=======
+    e->keyboardState[Key::N] = InputState::NONE;
+
+    while (SDL_PollEvent(&event)) {
+        switch(event.type)
+        {
+            case SDL_QUIT:
+                _window->close();
+                break;
+            case SDL_KEYUP:
+                if ( event.key.keysym.sym == SDLK_q )
+                    _window->close();
+                if ( event.key.keysym.sym == SDLK_n )
+                    e->keyboardState[Key::N] = InputState::RELEASED;
+                break;
+            case SDL_MOUSEWHEEL:
+                e->mouseEvents.scrollVelocity = event.wheel.y;
+                break;
+        }
+    }
+>>>>>>> 909a9316f9cce2a19a88e7cc6f500912e911a2e6
     return (*e);
 }
 
@@ -85,13 +108,13 @@ void SDL2Library::loadAsset(const std::string &path, const std::string &name, As
     if (type == AssetType::FONT) {
         TTF_Font *f = TTF_OpenFont(path.c_str(), FONT_SIZE_MAX);
         if (f == NULL)
-            throw std::invalid_argument("FONT NOT FOUND"); // TODO
+            throw SDL2AssetException("could not open font '"+path+"'");
         _assets[name] = (void *)f;
     }
     else if (type == AssetType::SPRITE) {
         SDL_Surface *f = IMG_Load(path.c_str());
         if (f == NULL)
-            throw std::invalid_argument("SPRITE NOT FOUND"); // TODO
+            throw SDL2AssetException("could not open '"+path+"'");
         SDL_Texture *t = SDL_CreateTextureFromSurface(dynamic_cast<Window *>(_window)->getRenderer(), f);
         _assets[name + "_srfce"] = (void *)f;
         _assets[name] = (void *)t;
