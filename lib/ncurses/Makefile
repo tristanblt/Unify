@@ -25,7 +25,16 @@ OBJ			= 	$(SRC:%.cpp=%.o)
 CXXFLAGS	=	-W -Wall -Wextra -Wshadow	\
 			-I../../	-std=c++11 -fpic
 
-LDFLAGS		= -lncurses -lpng
+LDFLAGS		= -lpng
+
+UNAME_S	= $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+	CXXFLAGS +=	-DARCADE_LINUX
+    LDFLAGS += -lncursesw
+else
+	CXXFLAGS += -DARCADE_MAC
+    LDFLAGS += -lncurses
+endif
 
 CXX		=	g++
 

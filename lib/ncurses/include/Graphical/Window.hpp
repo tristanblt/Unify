@@ -12,7 +12,11 @@
 #include <vector>
 #include "lib/include/Graphical/IWindow.hpp"
 
+#ifndef ARCADE_LINUX
 #define UPPER_BLOCK "\u2580"
+#else
+#define UPPER_BLOCK L"\u2580"
+#endif
 
 class Window : public IWindow {
     public:
