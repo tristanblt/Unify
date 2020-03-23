@@ -7,6 +7,7 @@
 
 #include "core/include/ArcadeCore/ArcadeCore.hpp"
 #include "core/include/DLLoader.hpp"
+#include "core/include/ArcadeCore/CoreException.hpp"
 
 ArcadeCore::ArcadeCore()
 {
@@ -36,7 +37,7 @@ DisplayLibrary *ArcadeCore::importGraphicalLibs(const std::string &firstLib)
     DisplayLibrary *ret = NULL;
 
     if (!f)
-        throw std::invalid_argument("Could not open file displaylibs.config");
+        throw FileException("could not open file 'displaylibs.config'");
     while (std::getline(f, buffer))
         if(buffer.size() > 0)
             file.push_back(buffer);

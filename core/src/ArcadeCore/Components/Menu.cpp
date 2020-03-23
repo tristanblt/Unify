@@ -6,6 +6,7 @@
 */
 
 #include "core/include/ArcadeCore/Components/Menu.hpp"
+#include "core/include/ArcadeCore/CoreException.hpp"
 
 Menu::Menu()
 {
@@ -133,7 +134,7 @@ void Menu::start(IBuilder *b)
 
     _covers.clear();
     if (!f)
-        throw std::invalid_argument("Could not open file games.config");
+        throw FileException("Could not open file 'games.config'");
     while (std::getline(f, buffer))
         if(buffer.size() > 0)
             file.push_back(buffer);

@@ -6,6 +6,7 @@
 */
 
 #include "lib/sdl2/include/Graphical/Sprite.hpp"
+#include "lib/sdl2/include/SDL2Exceptions.hpp"
 
 Sprite::Sprite(std::map<std::string, void *> *assets)
 {
@@ -45,7 +46,7 @@ void Sprite::setSize(Box body, Box frame)
 void Sprite::setSprite(const std::string &idx)
 {
     if (_assets->find(idx) == _assets->end())
-        throw std::invalid_argument("Could not find font asset");
+        throw SDL2AssetException("Could not find '"+idx+"' asset");
     _sprite = static_cast<SDL_Texture *>((*_assets)[idx]);
 }
 

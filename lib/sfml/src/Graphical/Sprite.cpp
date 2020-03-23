@@ -6,6 +6,7 @@
 */
 
 #include "lib/sfml/include/Graphical/Sprite.hpp"
+#include "lib/sfml/include/SfmlExceptions.hpp"
 
 Sprite::Sprite(std::map<std::string, void *> *assets)
 {
@@ -50,7 +51,7 @@ void Sprite::setSize(Box body, Box frame)
 void Sprite::setSprite(const std::string &idx)
 {
     if (_assets->find(idx) == _assets->end())
-        throw std::invalid_argument("Could not find sprite asset");
+        throw SfmlAssetException("Could not find '"+idx+"' asset");
     _sprite->setTexture(*static_cast<sf::Texture *>((*_assets)[idx]));
 }
 

@@ -41,72 +41,37 @@ void Window::clear()
     erase();
 }
 
-// #ifndef ARCADE_LINUX
 void Window::display()
 {
+    size_t a = 0;
+    int colorPair = -1;
     _width = COLS;
     _height = LINES * 2;
-    while (LINES < 35 || COLS < 150) {
-        erase();
-        mvprintw(LINES/2, COLS/2, "Please enlarge your terminal to be at least 150 cols by 35 lines.");
-        mvprintw(LINES/2 + 1, COLS/2, "Current size : %i cols x %i lines.", COLS, LINES);
-        refresh();
-    }
+
     for (size_t i = 0; _height * 2 > _colorBuffer.size(); i++)
         _colorBuffer.push_back(std::vector<Color> ());
     for (size_t i = 0; i < _colorBuffer.size(); i++)
         for (size_t j = 0; _width > _colorBuffer[i].size(); j++)
             _colorBuffer[i].push_back({0, 0, 0, 255});
-    size_t a = 0;
-    int colorPair = -1;
-    for (size_t i = 0; i < _colorBuffer.size(); i+=2, a++) {
-        for (size_t j = 0; j < _colorBuffer[i].size(); j++) {
-            colorPair = getColorPair(_colorBuffer[i][j], _colorBuffer[i+1][j]);
-            attron(COLOR_PAIR(colorPair));
-            #ifndef ARCADE_LINUX
-            mvaddstr(a, j, UPPER_BLOCK);
-            #else
-            mvaddwstr(a, j, UPPER_BLOCK);
-            #endif
-            attroff(COLOR_PAIR(colorPair));
-        }
-    }
-    //std::cout << "a" << std::endl;
-    refresh();
-    //std::cout << "b" << std::endl;
-
-}
-/*#else
-void Window::display()
-{
-    _width = COLS;
-    _height = LINES * 2;
-    while (LINES < 35 || COLS < 150) {
-        erase();
-        mvprintw(LINES/2, COLS/2, "Please enlarge your terminal to be at least 150 cols by 35 lines.");
+    if (LINES < 80 || LINES > 100 || COLS < 330|| COLS > 350) {
+        mvprintw(LINES/2, COLS/2, "Please resize your terminal to be between 330 cols/80 lines and 350 cols/100 lines.");
         mvprintw(LINES/2 + 1, COLS/2, "Current size : %i cols x %i lines.", COLS, LINES);
-        refresh();
-    }
-    for (size_t i = 0; _height * 2 > _colorBuffer.size(); i++)
-        _colorBuffer.push_back(std::vector<Color> ());
-    for (size_t i = 0; i < _colorBuffer.size(); i++)
-        for (size_t j = 0; _width > _colorBuffer[i].size(); j++)
-            _colorBuffer[i].push_back({0, 0, 0, 255});
-
-    size_t a = 0;
-    int colorPair = -1;
-    for (size_t i = 0; i < _colorBuffer.size(); i+=2, a++) {
-        for (size_t j = 0; j < _colorBuffer[i].size(); j++) {
-            colorPair = getColorPair(_colorBuffer[i][j], _colorBuffer[i+1][j]);
-            attron(COLOR_PAIR(colorPair));
-            mvaddwstr(a, j, UPPER_BLOCK);
-            attroff(COLOR_PAIR(colorPair));
+    } else {
+        for (size_t i = 0; i < _colorBuffer.size(); i+=2, a++) {
+            for (size_t j = 0; j < _colorBuffer[i].size(); j++) {
+                colorPair = getColorPair(_colorBuffer[i][j], _colorBuffer[i+1][j]);
+                attron(COLOR_PAIR(colorPair));
+                #ifndef ARCADE_LINUX
+                mvaddstr(a, j, UPPER_BLOCK);
+                #else
+                mvaddwstr(a, j, UPPER_BLOCK);
+                #endif
+                attroff(COLOR_PAIR(colorPair));
+            }
         }
     }
     refresh();
 }
-#endif*/
-
 
 short Window::getColor(Color color)
 {
@@ -167,11 +132,9 @@ void Window::create()
     initscr();
     noecho();
     cbreak();
-    //std::cout << "heu" << _first << std::endl;
     _width = COLS;
     _height = LINES;
     _isOpen = true;
-    //std::cout << "heu" << std::endl;
     curs_set(0);
     halfdelay(1);
     mousemask(ALL_MOUSE_EVENTS | REPORT_MOUSE_POSITION, NULL);
@@ -179,14 +142,9 @@ void Window::create()
     nodelay(stdscr, TRUE);
     start_color();
     keypad(stdscr, TRUE);
-    //std::cout << "heu" << std::endl;
     initColors();
-    for (size_t i = 0; _height * 2 > _colorBuffer.size(); i++)
-        _colorBuffer.push_back(std::vector<Color> ());
-    for (size_t i = 0; i < _colorBuffer.size(); i++)
-        for (size_t j = 0; _width > _colorBuffer[i].size(); j++)
-            _colorBuffer[i].push_back({0, 0, 0, 255});
-    _first = false;
+    display();
+    _first = false; 
 }
 
 void Window::initColors(void)

@@ -6,6 +6,7 @@
 */
 
 #include "lib/ncurses/include/Graphical/Sprite.hpp"
+#include "lib/ncurses/include/NCursesException.hpp"
 
 Sprite::Sprite(std::map<std::string, void *> *assets)
 {
@@ -55,7 +56,7 @@ void Sprite::setSize(Box body, Box frame)
 void Sprite::setSprite(const std::string &idx)
 {
     if (_assets->find(idx) == _assets->end())
-        throw std::invalid_argument("Could not find sprite asset");
+        throw NCursesAssetException("Could not open '"+idx+"'");
     _sprite = static_cast<PngFile *>((*_assets)[idx]);
 }
 

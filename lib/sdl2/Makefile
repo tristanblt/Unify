@@ -15,6 +15,7 @@ SRCS_FILES=	SDL2Library.cpp							\
 			Graphical/Circle.cpp					\
 			Graphical/Text.cpp						\
 			Graphical/Sprite.cpp					\
+			SDL2Exceptions.cpp						\
 
 SRC	=	$(addprefix $(SRCPATH), $(SRCS_FILES))
 
