@@ -75,7 +75,7 @@ void Builder::rectInit(const std::string &name)
     };
 }
 
-void Builder::rectSetPotition(const std::string &name, Vector2 pos)
+void Builder::rectSetPosition(const std::string &name, Vector2 pos)
 {
     RectModel *o = static_cast<RectModel *>(_gameObjects[name].item);
 
@@ -117,7 +117,7 @@ void Builder::circleInit(const std::string &name)
     };
 }
 
-void Builder::circleSetPotition(const std::string &name, Vector2 pos)
+void Builder::circleSetPosition(const std::string &name, Vector2 pos)
 {
     CircleModel *o = static_cast<CircleModel *>(_gameObjects[name].item);
 
@@ -159,7 +159,7 @@ void Builder::radiusRectInit(const std::string &name)
     };
 }
 
-void Builder::radiusRectSetPotition(const std::string &name, Vector2 pos)
+void Builder::radiusRectSetPosition(const std::string &name, Vector2 pos)
 {
     RadiusRectModel *o = static_cast<RadiusRectModel *>(_gameObjects[name].item);
 
@@ -224,7 +224,7 @@ void Builder::textInit(const std::string &name)
     };
 }
 
-void Builder::textSetPotition(const std::string &name, Vector2 pos)
+void Builder::textSetPosition(const std::string &name, Vector2 pos)
 {
     TextModel *o = static_cast<TextModel *>(_gameObjects[name].item);
 
@@ -284,7 +284,7 @@ void Builder::spriteInit(const std::string &name)
     };
 }
 
-void Builder::spriteSetPotition(const std::string &name, Vector2 pos)
+void Builder::spriteSetPosition(const std::string &name, Vector2 pos)
 {
     SpriteModel *o = static_cast<SpriteModel *>(_gameObjects[name].item);
 
@@ -342,7 +342,7 @@ void Builder::spriteDraw(const std::string &name)
 
 /* -------------------------------- collider -------------------------------- */
 
-bool Builder::isInBox(Box box)
+bool Builder::isMouseInBox(Box box)
 {
     return ((_events.mouseEvents.pos.x >= box.x &&
             _events.mouseEvents.pos.x <= box.x + box.w &&

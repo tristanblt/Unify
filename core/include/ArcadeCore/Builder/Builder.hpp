@@ -36,26 +36,26 @@ class Builder: public IBuilder {
 /* ------------------------------- basic draw ------------------------------- */
 
         void rectInit(const std::string &name);
-        void rectSetPotition(const std::string &name, Vector2 pos);
+        void rectSetPosition(const std::string &name, Vector2 pos);
         void rectSetSize(const std::string &name, Vector2 size);
         void rectSetColor(const std::string &name, Color color);
         void rectDraw(const std::string &name);
 
         void circleInit(const std::string &name);
-        void circleSetPotition(const std::string &name, Vector2 pos);
+        void circleSetPosition(const std::string &name, Vector2 pos);
         void circleSetRadius(const std::string &name, float radius);
         void circleSetColor(const std::string &name, Color color);
         void circleDraw(const std::string &name);
 
         void radiusRectInit(const std::string &name);
-        void radiusRectSetPotition(const std::string &name, Vector2 pos);
+        void radiusRectSetPosition(const std::string &name, Vector2 pos);
         void radiusRectSetSize(const std::string &name, Vector2 size);
         void radiusRectSetRadius(const std::string &name, float radius);
         void radiusRectSetColor(const std::string &name, Color color);
         void radiusRectDraw(const std::string &name);
 
         void textInit(const std::string &name);
-        void textSetPotition(const std::string &name, Vector2 pos);
+        void textSetPosition(const std::string &name, Vector2 pos);
         void textSetFontSize(const std::string &name, int size);
         void textSetFont(const std::string &name, const std::string &fontIdx);
         void textSetColor(const std::string &name, Color color);
@@ -63,7 +63,7 @@ class Builder: public IBuilder {
         void textDraw(const std::string &name);
 
         void spriteInit(const std::string &name);
-        void spriteSetPotition(const std::string &name, Vector2 pos);
+        void spriteSetPosition(const std::string &name, Vector2 pos);
         void spriteSetSize(const std::string &name, Vector2 body, Box frame);
         void spriteSetSize(const std::string &name, Vector2 size);
         void spriteSetSprite(const std::string &name, const std::string &sprite);
@@ -72,7 +72,7 @@ class Builder: public IBuilder {
 
 /* -------------------------------- collider -------------------------------- */
 
-        bool isInBox(Box box);
+        bool isMouseInBox(Box box);
 
 /* --------------------------------- events --------------------------------- */
 
@@ -98,20 +98,31 @@ class Builder: public IBuilder {
 /* -------------------------------------------------------------------------- */
 
 /* --------------------------------- buttons -------------------------------- */
-    public:
-        bool buttonDraw(const std::string &name);
-        void addBasicButton(Box displayBox, float radius,
-                                    Color boxActive, Color boxInactive, Color boxHold,
-                                    Color txtActive, Color txtInactive, Color txtHold, std::string text, int fontSize,
-                                    std::string fontIdx, std::string name);
-        void addSpriteButton(Box displayBox, Box spriteBoxActive, Box spriteBoxInactive, Box spriteBoxHold, std::string spriteSheetIndex, std::string name);
-        void addSwitchButton(SwitchButton button, std::string name);
-    protected:
-        bool basicButtonDraw(BasicButton b);
-        bool spriteButtonDraw(SpriteButton b);
-        bool switchButtonDraw(SwitchButton b);
-    public:
 
+        void basicButtonInit(const std::string &name);
+        void basicButtonSetDisplayBox(const std::string &name, Box box);
+        void basicButtonSetRadius(const std::string &name, float radius);
+        void basicButtonSetBackgroundColors(const std::string &name, Color color_n, Color color_h, Color color_c);
+        void basicButtonSetTextColors(const std::string &name, Color color_n, Color color_h, Color color_c);
+        void basicButtonSetText(const std::string &name, const std::string &text);
+        void basicButtonSetFontSize(const std::string &name, int size);
+        void basicButtonSetFont(const std::string &name, const std::string &idx);
+
+        void spriteButtonInit(const std::string &name);
+        void spriteButtonSetDisplayBox(const std::string &name, Box box);
+        void spriteButtonSetSpriteBoxes(const std::string &name, Box box_n, Box box_h, Box box_c);
+        void spriteButtonSetSprite(const std::string &name, const std::string &idx);
+
+        void switchButtonInit(const std::string &name);
+    
+        bool buttonDraw(const std::string &name);
+
+    protected:
+        bool basicButtonDraw(const std::string &name);
+        bool spriteButtonDraw(const std::string &name);
+        bool switchButtonDraw(const std::string &name);
+
+    public:
 
     private:
         std::map <std::string, GameObject> _gameObjects;
