@@ -9,7 +9,6 @@
 #define StartUnifyShowcase_HPP_
 
 #include "games/include/Start.hpp"
-#include "core/include/ArcadeCore/Utils/Responsive.hpp"
 
 class StartUnifyShowcase : public Start {
     public:

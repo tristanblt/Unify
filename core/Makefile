@@ -14,7 +14,7 @@ SRCS_FILES=	main.cpp													\
 			ArcadeCore/Components/Layout.cpp							\
 			ArcadeCore/Components/Menu.cpp								\
 			ArcadeCore/Builder/BasicBuilder.cpp							\
-			ArcadeCore/Builder/UI/UIBuilder.cpp							\
+			ArcadeCore/Builder/UIBuilder.cpp							\
 
 SRC	=	$(addprefix $(SRCPATH), $(SRCS_FILES))
 
