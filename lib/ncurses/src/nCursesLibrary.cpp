@@ -37,11 +37,7 @@ Events nCursesLibrary::updateEvents(Events *events)
         updateMouseEvents(events, key, false);
         updateKeyboardEvents(events, key, false);
     }
-    //std::cout << "\033[?1003l";
-    // if (events->keyboardState[Key::A] == InputState::CLICK)
-    //     //std::cout << "OOK" << std::endl;
-    // if (events->keyboardState[Key::A] == InputState::HOLD)
-    //     //std::cout << "OOERTYUYGHK" << std::endl;
+    std::cout << "\033[?1003l";
     return (*events);
 }
 
