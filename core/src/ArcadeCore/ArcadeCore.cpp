@@ -61,19 +61,12 @@ void ArcadeCore::switchGraphicalLibrary(Builder *b)
         tmp++;
         if (tmp > _libs.size() - 1)
             tmp = 0;
-        //std::cout << "CHANGE LIB TO : " << tmp << " AND THE MAX IS : " << _libs.size() << std::endl;
         b->getEvents().keyboardState[Key::N] = InputState::NONE;
         b->reloadLibrary(_libs[tmp]);
         loadCoreAssets(b);
         _menu.start(b);
         _layout.start(b);
-        //std::cout << "heu" << std::endl;
         _currentLib = tmp;
-        //if (tmp == 0)
-        //b->windowClose();
-        //std::cout << "heuuuuuuuu" << std::endl;
-
-
     }
 }
 
