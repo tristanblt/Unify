@@ -123,7 +123,20 @@ void Menu::drawCarousel(IBuilder *b)
 
 void Menu::drawSettings(IBuilder *b)
 {
-    (void)b;
+    int result;
+
+    b->selectorSetDisplayBox("UnifySettingsSelector", {0, VH(20), VW(30), VH(55)});
+    result = b->selectorDraw("UnifySettingsSelector");
+    if (result == 0) {
+        // slider de son
+    } else if (result == 1) {
+        // deux boutons
+    } else if (result == 2) {
+        std::cout << "dd" << std::endl;
+        b->textSetPosition("UnifySettingsCredits", {VW(35), VH(25)});
+        b->textSetFontSize("UnifySettingsCredits", VH(2));
+        b->textDraw("UnifySettingsCredits");
+    }
 }
 
 void Menu::start(IBuilder *b)
@@ -181,6 +194,16 @@ void Menu::start(IBuilder *b)
     b->textInit("UnifyMenuCarouselCoverTitle");
     b->textSetColor("UnifyMenuCarouselCoverTitle", b->hexToColor(0xFFFFFFFF));
     b->textSetFont("UnifyMenuCarouselCoverTitle", "UnifyBoldFont");
+
+    b->selectorInit("UnifySettingsSelector");
+    b->selectorSetItems("UnifySettingsSelector", {"Audio", "Graphics", "Credits"});
+    b->selectorSetFont("UnifySettingsSelector", "UnifyBoldFont");
+    b->selectorSetBackgroundColors("UnifySettingsSelector", b->hexToColor(0x111111FF), b->hexToColor(0x090909FF), b->hexToColor(0x000000FF));
+
+    b->textInit("UnifySettingsCredits");
+    b->textSetColor("UnifySettingsCredits", b->hexToColor(0xFFFFFFFF));
+    b->textSetFont("UnifySettingsCredits", "UnifyBoldFont");
+    b->textSetText("UnifySettingsCredits", "Credits:\n\nEpitech Project 2020, Arcade\n\nKenan Barbot\nNathan Quentel\nTristan Bouillot");
 }
 
 DLLoader<Start> *Menu::update(IBuilder *b)

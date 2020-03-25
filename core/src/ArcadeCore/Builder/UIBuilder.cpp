@@ -19,7 +19,7 @@ void Builder::basicButtonInit(const std::string &name)
         (void *)o
     };
     textInit(name + "_text");
-    textInit(name + "_radiusRect");
+    radiusRectInit(name + "_radiusRect");
 }
 
 void Builder::basicButtonSetDisplayBox(const std::string &name, Box box)
@@ -168,8 +168,7 @@ bool Builder::spriteButtonDraw(const std::string &name)
     spriteSetOpacity(name + "_sprite", 255);
     spriteSetSprite(name + "_sprite", o->spriteSheetIndex);
     spriteSetPosition(name + "_sprite", {o->displayBox.x, o->displayBox.y});
-    if (state == true && (getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::CLICK ||
-                          getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::HOLD))
+    if (state == true && (getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::CLICK || getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::HOLD))
         spriteSetSize(name + "_sprite", {o->displayBox.w, o->displayBox.h}, o->spriteBoxes[0]);
     else if (state == true)
         spriteSetSize(name + "_sprite", {o->displayBox.w, o->displayBox.h}, o->spriteBoxes[1]);
@@ -183,3 +182,80 @@ bool Builder::switchButtonDraw(const std::string &name)
 {
     return (false);
 }
+
+void Builder::selectorInit(const std::string &name)
+{
+    Selector *o = new Selector();
+
+    _gameObjects[name] = {
+        ObjectType::TYPE_SELECTOR,
+        (void *)o
+    };
+    rectInit(name + "_rect");
+    textInit(name + "_text");
+    textSetColor(name + "_text", hexToColor(0xFFFFFFFF));
+}
+
+void Builder::selectorSetDisplayBox(const std::string &name, Box box)
+{
+    Selector *o = static_cast<Selector *>(_gameObjects[name].item);
+
+    o->displayBox = box;
+}
+
+void Builder::selectorSetBackgroundColors(const std::string &name, Color color_n, Color color_h, Color color_c)
+{
+    Selector *o = static_cast<Selector *>(_gameObjects[name].item);
+
+    o->boxColors[0] = color_n;
+    o->boxColors[1] = color_h;
+    o->boxColors[2] = color_c;
+}
+
+void Builder::selectorSetItems(const std::string &name, const std::vector<std::string> &items)
+{
+    Selector *o = static_cast<Selector *>(_gameObjects[name].item);
+
+    o->items = items;
+}
+
+void Builder::selectorSetFont(const std::string &name, const std::string &idx)
+{
+    Selector *o = static_cast<Selector *>(_gameObjects[name].item);
+
+    o->fontIdx = idx;
+}
+
+int Builder::selectorDraw(const std::string &name)
+{
+    Selector *o = static_cast<Selector *>(_gameObjects[name].item);
+    int i = 0;
+    float height = (windowHeight() * ((float)8 / 100));
+
+    rectSetPosition(name + "_rect", {o->displayBox.x, o->displayBox.y});
+    rectSetSize(name + "_rect", {o->displayBox.w, o->displayBox.h});
+    rectSetColor(name + "_rect", o->boxColors[0]);
+    rectDraw(name + "_rect");
+    textSetFont(name + "_text", o->fontIdx);
+    textSetFontSize(name + "_text", (windowHeight() * ((float)2 / 100)));
+    for (auto &elem : o->items) {
+        bool state = isMouseInBox({o->displayBox.x, o->displayBox.y + i * height, o->displayBox.w, height});
+        rectSetPosition(name + "_rect", {o->displayBox.x, o->displayBox.y + i * height});
+        rectSetSize(name + "_rect", {o->displayBox.w, height});
+        if (state && getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
+            o->selected = i;
+        else if (state)
+            rectSetColor(name + "_rect", o->boxColors[2]);
+        else if (i == o->selected)
+            rectSetColor(name + "_rect", o->boxColors[1]);
+        else
+            rectSetColor(name + "_rect", o->boxColors[0]);
+        rectDraw(name + "_rect");
+        textSetText(name + "_text", elem);
+        textSetPosition(name + "_text", {o->displayBox.x + 60, o->displayBox.y + i * height + (windowHeight() * ((float)3 / 100))});
+        textDraw(name + "_text");
+        i++;
+    }
+    return (o->selected);
+}
+

@@ -11,6 +11,7 @@
 #include <string>
 #include <map>
 #include <array>
+#include <vector>
 #include "core/include/ArcadeCore/Utils/Enums.hpp"
 
 struct Color {
@@ -113,6 +114,18 @@ struct SwitchButton {
 struct GameObject {
     ObjectType type;
     void *item;
+};
+
+struct Selector {
+    Box displayBox;
+    std::vector<std::string> items;
+    std::array <Color, 3> boxColors;
+    std::string fontIdx;
+    int selected;
+};
+
+struct Slider {
+
 };
 
 #endif /* !STRUCTS_HPP_ */

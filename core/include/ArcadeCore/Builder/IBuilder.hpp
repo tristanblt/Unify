@@ -115,6 +115,16 @@ class IBuilder {
         virtual void switchButtonInit(const std::string &name) = 0;
 
         virtual bool buttonDraw(const std::string &name) = 0;
+
+        //virtual void sliderInit(const std::string &name) = 0;
+        //virtual int sliderDraw(const std::string &name) = 0;
+
+        virtual void selectorInit(const std::string &name) = 0;
+        virtual void selectorSetDisplayBox(const std::string &name, Box box) = 0;
+        virtual void selectorSetBackgroundColors(const std::string &name, Color color_n, Color color_h, Color color_c) = 0;
+        virtual void selectorSetItems(const std::string &name, const std::vector<std::string> &items) = 0;
+        virtual void selectorSetFont(const std::string &name, const std::string &idx) = 0;
+        virtual int selectorDraw(const std::string &name) = 0;
 };
 
 #endif /* !IBUILDER_HPP_ */
