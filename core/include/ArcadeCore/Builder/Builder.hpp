@@ -142,6 +142,7 @@ class Builder: public IBuilder {
         std::map <std::string, GameObject> _gameObjects;
         Events _events;
         time_t _tick;
+        time_t _tickDiff;
         DisplayLibrary *_library;
 };
 

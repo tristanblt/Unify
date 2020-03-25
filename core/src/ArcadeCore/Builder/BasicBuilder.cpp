@@ -12,6 +12,9 @@ _library(library)
 {
     windowCreate();
     _events.mouseEvents.scrollVelocity = 0;
+    _events.deltaTime = 1;
+    time(&_tick);
+    _tickDiff = 0;
     _events.joyConEvents.cursorPos = {-1, -1};
 }
 
@@ -278,6 +281,7 @@ void Builder::spriteInit(const std::string &name)
 {
     SpriteModel *o = new SpriteModel();
 
+    o->opct = 255;
     _gameObjects[name] = {
         ObjectType::TYPE_SPRITE,
         (void *)o
@@ -363,8 +367,13 @@ Events Builder::getEvents() const
 
 void Builder::updateEvents()
 {
+    time_t newTick;
+
     _library->updateEvents(&_events);
-    time (&_tick);
+    time(&newTick);
+    _events.deltaTime = 1.0f - static_cast<float>((newTick - _tick) / (_tickDiff + 1));
+    _tickDiff = newTick - _tick;
+    _tick = newTick;
 }
 
 /* ---------------------------------- time ---------------------------------- */

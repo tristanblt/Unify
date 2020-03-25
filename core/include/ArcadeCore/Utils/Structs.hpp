@@ -88,6 +88,7 @@ struct Events {
     MouseEvents mouseEvents;
     JoyConEvents joyConEvents;
     std::map<Key, InputState> keyboardState;
+    float deltaTime;
     bool close;
 };
 
