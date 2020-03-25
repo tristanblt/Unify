@@ -46,9 +46,9 @@ void Player::draw(IBuilder *b)
 {
     setNewDir(b);
     if (b->getEvents().keyboardState[Key::SPACE] == InputState::HOLD)
-        updatePos(_speed * 1.5f);
+        updatePos(_speed * 1.5f * b->getEvents().deltaTime);
     else
-        updatePos(_speed);
+        updatePos(_speed* b->getEvents().deltaTime);
     b->spriteSetSize("Player", {VH(4), VH(4)});
     b->spriteSetPosition("Player", _pos);
     b->spriteDraw("Player");
