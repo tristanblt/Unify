@@ -8,17 +8,17 @@
 NAME	=	../lib_arcade_ncurses.so
 
 SRCPATH	=	src/
-SRCS_FILES=	Graphical/Rectangle.cpp					\
-			Graphical/Window.cpp					\
-			Graphical/Circle.cpp					\
-			Graphical/Text.cpp						\
-			Graphical/Sprite.cpp					\
-			Graphical/Bitcrush.cpp					\
-			nCursesLibrary.cpp						\
-			Entry.cpp								\
-			../../../core/src/ArcadeCore/Utils/PngFile.cpp\
-			../../../core/src/ArcadeCore/CoreException.cpp\
-			NCursesException.cpp					\
+SRCS_FILES=	Graphical/Rectangle.cpp							\
+			Graphical/Window.cpp							\
+			Graphical/Circle.cpp							\
+			Graphical/Text.cpp								\
+			Graphical/Sprite.cpp							\
+			Graphical/Bitcrush.cpp							\
+			nCursesLibrary.cpp								\
+			Entry.cpp										\
+			../../../core/src/ArcadeCore/Utils/PngFile.cpp	\
+			../../../core/src/ArcadeCore/CoreException.cpp	\
+			NCursesException.cpp							\
 
 SRC	=	$(addprefix $(SRCPATH), $(SRCS_FILES))
 
