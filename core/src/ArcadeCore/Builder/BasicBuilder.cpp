@@ -278,6 +278,7 @@ void Builder::spriteInit(const std::string &name)
 {
     SpriteModel *o = new SpriteModel();
 
+    o->opct = 255;
     _gameObjects[name] = {
         ObjectType::TYPE_SPRITE,
         (void *)o
