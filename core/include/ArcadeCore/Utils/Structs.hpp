@@ -111,10 +111,6 @@ struct SwitchButton {
     Box displayBox;
 };
 
-struct GameObject {
-    ObjectType type;
-    void *item;
-};
 
 struct Selector {
     Box displayBox;
@@ -125,7 +121,15 @@ struct Selector {
 };
 
 struct Slider {
+    float width;
+    Vector2 pos;
+    Color backgroundColor;
+    Color slideColor;
+};
 
+struct GameObject {
+    ObjectType type;
+    void *item;
 };
 
 #endif /* !STRUCTS_HPP_ */

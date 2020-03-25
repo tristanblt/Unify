@@ -117,8 +117,12 @@ class Builder: public IBuilder {
     
         bool buttonDraw(const std::string &name);
 
-        //void sliderInit(const std::string &name);
-        //int sliderDraw(const std::string &name);
+        void sliderInit(const std::string &name);
+        void sliderSetWidth(const std::string &name, float width);
+        void sliderSetPosition(const std::string &name, Vector2 position);
+        void sliderSetBackgroundColor(const std::string &name, Color color);
+        void sliderSetSliderColor(const std::string &name, Color color);
+        void sliderDraw(const std::string &name, int &value);
 
         void selectorInit(const std::string &name);
         void selectorSetDisplayBox(const std::string &name, Box box);

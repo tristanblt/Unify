@@ -116,8 +116,12 @@ class IBuilder {
 
         virtual bool buttonDraw(const std::string &name) = 0;
 
-        //virtual void sliderInit(const std::string &name) = 0;
-        //virtual int sliderDraw(const std::string &name) = 0;
+        virtual void sliderInit(const std::string &name) = 0;
+        virtual void sliderSetWidth(const std::string &name, float width) = 0;
+        virtual void sliderSetPosition(const std::string &name, Vector2 position) = 0;
+        virtual void sliderSetBackgroundColor(const std::string &name, Color color) = 0;
+        virtual void sliderSetSliderColor(const std::string &name, Color color) = 0;
+        virtual void sliderDraw(const std::string &name, int &value) = 0;
 
         virtual void selectorInit(const std::string &name) = 0;
         virtual void selectorSetDisplayBox(const std::string &name, Box box) = 0;

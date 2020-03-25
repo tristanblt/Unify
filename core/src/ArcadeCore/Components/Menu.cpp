@@ -36,23 +36,17 @@ void Menu::drawHeader(IBuilder *b)
     b->spriteSetPosition("UnifyMenuLogo", {VW(4), VH(4)});
     b->spriteSetSize("UnifyMenuLogo", {VH(11.5), VH(11.5)});
     b->spriteDraw("UnifyMenuLogo");
-
     b->textSetPosition("UnifyMenuLogoName", {VW(12.5), VH(6.5)});
     b->textSetFontSize("UnifyMenuLogoName", (int)VH(5));
     b->textDraw("UnifyMenuLogoName");
-
     b->spriteButtonSetDisplayBox("UnifySettingsButton", {b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 13.7f, b->windowWidth() / 38.0f, b->windowWidth() / 38.0f});
     b->spriteButtonSetSpriteBoxes("UnifySettingsButton", {256, 0, 128, 128}, {0, 0, 128, 128}, {128, 0, 128, 128});
-
     b->spriteButtonSetDisplayBox("UnifyBackButton", {b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 13.7f, b->windowWidth() / 38.0f, b->windowWidth() / 38.0f});
     b->spriteButtonSetSpriteBoxes("UnifyBackButton", {256, 512, 128, 128}, {0, 512, 128, 128}, {128, 512, 128, 128});
-
     b->spriteButtonSetDisplayBox("UnifyRestartButton", {b->windowWidth() * (17.2f / 20.0f), b->windowHeight() / 15.0f * 12.6f, b->windowWidth() / 30.0f, b->windowWidth() / 30.0f});
     b->spriteButtonSetSpriteBoxes("UnifyRestartButton", {256, 256, 128, 128}, {0, 256, 128, 128}, {128, 256, 128, 128});
-
     b->spriteButtonSetDisplayBox("UnifyPowerButton", {b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 15.0f * 12.6f, b->windowWidth() / 30.0f, b->windowWidth() / 30.0f});
     b->spriteButtonSetSpriteBoxes("UnifyPowerButton", {256, 128, 128, 128}, {0, 128, 128, 128}, {128, 128, 128, 128});
-
     if (_state == MenuState::MENU_CAROUSSEL) {
         if (b->buttonDraw("UnifySettingsButton") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
             _state = MenuState::MENU_SETTINGS;
@@ -124,15 +118,20 @@ void Menu::drawCarousel(IBuilder *b)
 void Menu::drawSettings(IBuilder *b)
 {
     int result;
+    static int a = 50;
 
     b->selectorSetDisplayBox("UnifySettingsSelector", {0, VH(20), VW(30), VH(55)});
     result = b->selectorDraw("UnifySettingsSelector");
     if (result == 0) {
-        // slider de son
+        b->sliderSetWidth("UnifySettingsAudioSlider", VW(30));
+        b->sliderSetPosition("UnifySettingsAudioSlider", {VW(35), VH(30)});
+        b->sliderDraw("UnifySettingsAudioSlider", a);
+        b->textSetFontSize("UnifySettingsAudioText", VH(2));
+        b->textSetPosition("UnifySettingsAudioText", {VW(35), VH(25)});
+        b->textDraw("UnifySettingsAudioText");
     } else if (result == 1) {
         // deux boutons
     } else if (result == 2) {
-        std::cout << "dd" << std::endl;
         b->textSetPosition("UnifySettingsCredits", {VW(35), VH(25)});
         b->textSetFontSize("UnifySettingsCredits", VH(2));
         b->textDraw("UnifySettingsCredits");
@@ -204,6 +203,15 @@ void Menu::start(IBuilder *b)
     b->textSetColor("UnifySettingsCredits", b->hexToColor(0xFFFFFFFF));
     b->textSetFont("UnifySettingsCredits", "UnifyBoldFont");
     b->textSetText("UnifySettingsCredits", "Credits:\n\nEpitech Project 2020, Arcade\n\nKenan Barbot\nNathan Quentel\nTristan Bouillot");
+
+    b->sliderInit("UnifySettingsAudioSlider");
+    b->sliderSetBackgroundColor("UnifySettingsAudioSlider", b->hexToColor(0x101010FF));
+    b->sliderSetSliderColor("UnifySettingsAudioSlider", b->hexToColor(0x595959FF));
+
+    b->textInit("UnifySettingsAudioText");
+    b->textSetColor("UnifySettingsAudioText", b->hexToColor(0xFFFFFFFF));
+    b->textSetFont("UnifySettingsAudioText", "UnifyLightFont");
+    b->textSetText("UnifySettingsAudioText", "Audio level");
 }
 
 DLLoader<Start> *Menu::update(IBuilder *b)
