@@ -142,10 +142,10 @@ bool Builder::basicButtonDraw(const std::string &name)
     radiusRectSetSize(name + "_radiusRect", {o->displayBox.w, o->displayBox.h});
     textSetText(name + "_text", o->text);
     textSetPosition(name + "_text", {static_cast<float>(o->displayBox.x + (o->displayBox.w / 2) - (o->text.size() / 2 * o->fontSize / 1.6)),
-                                    o->displayBox.y + (o->displayBox.h / 2) - o->fontSize / 2});
+                                    o->displayBox.y + (o->displayBox.h / 2) - o->fontSize / 1.5f});
     textSetFontSize(name + "_text", o->fontSize);
     textSetFont(name + "_text", o->fontIdx);
-    if (state == true && getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::CLICK) {
+    if (state == true && getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::HOLD) {
         radiusRectSetColor(name + "_radiusRect", o->boxColors[0]);
         textSetColor(name + "_text", o->textColors[0]);
     } else if (state == true) {
@@ -168,7 +168,7 @@ bool Builder::spriteButtonDraw(const std::string &name)
     spriteSetOpacity(name + "_sprite", 255);
     spriteSetSprite(name + "_sprite", o->spriteSheetIndex);
     spriteSetPosition(name + "_sprite", {o->displayBox.x, o->displayBox.y});
-    if (state == true && (getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::CLICK || getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::HOLD))
+    if (state == true && getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::HOLD)
         spriteSetSize(name + "_sprite", {o->displayBox.w, o->displayBox.h}, o->spriteBoxes[0]);
     else if (state == true)
         spriteSetSize(name + "_sprite", {o->displayBox.w, o->displayBox.h}, o->spriteBoxes[1]);
