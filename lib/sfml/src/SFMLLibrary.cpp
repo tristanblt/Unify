@@ -185,3 +185,11 @@ void SFMLLibrary::loadAsset(const std::string &path, const std::string &name, As
         _assets[name] = (void *)f;
     }
 }
+
+void SFMLLibrary::unloadAsset(const std::string &name, AssetType type)
+{
+    if (type == AssetType::FONT)
+        delete static_cast<sf::Font *>(_assets[name]);
+    else if (type == AssetType::SPRITE)
+        delete static_cast<sf::Texture *>(_assets[name]);
+}

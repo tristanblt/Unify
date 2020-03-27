@@ -73,9 +73,18 @@ class Builder: public IBuilder {
 /* -------------------------------- collider -------------------------------- */
 
         bool isMouseInBox(Box box);
+        bool GameObjectCollide(const std::string &obj1, const std::string &obj2);
+        bool GameObjectCollideToBox(const std::string &obj, Box b);
+        bool GameObjectCollideToRadius(const std::string &obj, Vector2 pos, float r);
+        bool circleToCircleCollide(Box b1, Box b2);
+        bool circleToRectCollide(Box b1, Box b2);
+        bool rectToRectCollide(Box b1, Box b2);
+
+        bool objectExists(const std::string &name);
 
 /* --------------------------------- events --------------------------------- */
 
+    public:
         void updateEvents();
         Events getEvents() const;
 
@@ -86,12 +95,17 @@ class Builder: public IBuilder {
 /* --------------------------------- assets --------------------------------- */
 
         void loadAsset(const std::string &path, const std::string &name, AssetType type);
+        void unloadAsset(const std::string &name, AssetType type);
+        void lockUnifyGameObjects();
 
 /* ---------------------------------- utils --------------------------------- */
 
         Color hexToColor(int hexColor) const;
+        Box getBody(const std::string &name);
 
+/* -------------------------- game objects managing ------------------------- */
 
+        void deleteGameObject(const std::string &name);
 
 /* -------------------------------------------------------------------------- */
 /*                                     ui                                     */
@@ -117,6 +131,20 @@ class Builder: public IBuilder {
     
         bool buttonDraw(const std::string &name);
 
+        void sliderInit(const std::string &name);
+        void sliderSetWidth(const std::string &name, float width);
+        void sliderSetPosition(const std::string &name, Vector2 position);
+        void sliderSetBackgroundColor(const std::string &name, Color color);
+        void sliderSetSliderColor(const std::string &name, Color color);
+        void sliderDraw(const std::string &name, int &value);
+
+        void selectorInit(const std::string &name);
+        void selectorSetDisplayBox(const std::string &name, Box box);
+        void selectorSetBackgroundColors(const std::string &name, Color color_n, Color color_h, Color color_c);
+        void selectorSetFont(const std::string &name, const std::string &idx);
+        void selectorSetItems(const std::string &name, const std::vector<std::string> &items);
+        int selectorDraw(const std::string &name);
+
     protected:
         bool basicButtonDraw(const std::string &name);
         bool spriteButtonDraw(const std::string &name);
@@ -128,7 +156,9 @@ class Builder: public IBuilder {
         std::map <std::string, GameObject> _gameObjects;
         Events _events;
         time_t _tick;
+        time_t _tickDiff;
         DisplayLibrary *_library;
+        bool _unifyLock;
 };
 
 #endif /* !BUILDER_HPP_ */

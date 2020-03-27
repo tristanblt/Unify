@@ -30,6 +30,7 @@ class DisplayLibrary {
         ISprite *_sprite;
 
         virtual void loadAsset(const std::string &path, const std::string &name, AssetType type) = 0;
+        virtual void unloadAsset(const std::string &name, AssetType type) = 0;
         virtual Events updateEvents(Events *events) = 0;
     protected:
         std::map<std::string, void *> _assets;

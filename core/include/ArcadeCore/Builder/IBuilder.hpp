@@ -11,10 +11,13 @@
 #include <string>
 #include <iostream>
 #include <ctime>
+#include <cstdlib>
+#include <cmath>
 
 #include "lib/include/DisplayLibrary.hpp"
 #include "core/include/ArcadeCore/Utils/Structs.hpp"
 #include "core/include/ArcadeCore/Utils/Responsive.hpp"
+#include "core/include/ArcadeCore/CoreException.hpp"
 
 class IBuilder {
     public:
@@ -71,9 +74,13 @@ class IBuilder {
         virtual void spriteSetOpacity(const std::string &name, unsigned char opacity) = 0;
         virtual void spriteDraw(const std::string &name) = 0;
 
+        virtual bool objectExists(const std::string &name) = 0;
 /* -------------------------------- collider -------------------------------- */
 
         virtual bool isMouseInBox(Box box) = 0;
+        virtual bool GameObjectCollide(const std::string &obj1, const std::string &obj2) = 0;
+        virtual bool GameObjectCollideToBox(const std::string &obj, Box b) = 0;
+        virtual bool GameObjectCollideToRadius(const std::string &obj, Vector2 pos, float r) = 0;
 
 /* --------------------------------- events --------------------------------- */
 
@@ -87,10 +94,15 @@ class IBuilder {
 /* --------------------------------- assets --------------------------------- */
 
         virtual void loadAsset(const std::string &path, const std::string &name, AssetType type) = 0;
+        virtual void unloadAsset(const std::string &name, AssetType type) = 0;
 
 /* ---------------------------------- utils --------------------------------- */
 
         virtual Color hexToColor(int hexColor) const = 0;
+
+/* -------------------------- game objects managing ------------------------- */
+
+        virtual void deleteGameObject(const std::string &name) = 0;
 
 /* -------------------------------------------------------------------------- */
 /*                                     ui                                     */
@@ -115,6 +127,20 @@ class IBuilder {
         virtual void switchButtonInit(const std::string &name) = 0;
 
         virtual bool buttonDraw(const std::string &name) = 0;
+
+        virtual void sliderInit(const std::string &name) = 0;
+        virtual void sliderSetWidth(const std::string &name, float width) = 0;
+        virtual void sliderSetPosition(const std::string &name, Vector2 position) = 0;
+        virtual void sliderSetBackgroundColor(const std::string &name, Color color) = 0;
+        virtual void sliderSetSliderColor(const std::string &name, Color color) = 0;
+        virtual void sliderDraw(const std::string &name, int &value) = 0;
+
+        virtual void selectorInit(const std::string &name) = 0;
+        virtual void selectorSetDisplayBox(const std::string &name, Box box) = 0;
+        virtual void selectorSetBackgroundColors(const std::string &name, Color color_n, Color color_h, Color color_c) = 0;
+        virtual void selectorSetItems(const std::string &name, const std::vector<std::string> &items) = 0;
+        virtual void selectorSetFont(const std::string &name, const std::string &idx) = 0;
+        virtual int selectorDraw(const std::string &name) = 0;
 };
 
 #endif /* !IBUILDER_HPP_ */

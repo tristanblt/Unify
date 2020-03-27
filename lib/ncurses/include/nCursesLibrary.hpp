@@ -22,6 +22,7 @@ class nCursesLibrary : public DisplayLibrary {
         ~nCursesLibrary();
 
         void loadAsset(const std::string &path, const std::string &name, AssetType type);
+        void unloadAsset(const std::string &name, AssetType type);
 
         Events updateEvents(Events *);
         std::map<int, Color> getKnownColors() const;

@@ -24,6 +24,7 @@ class SDL2Library : public DisplayLibrary {
         ~SDL2Library();
 
         void loadAsset(const std::string &path, const std::string &name, AssetType type);
+        void unloadAsset(const std::string &name, AssetType type);
 
         Events updateEvents(Events *events);
     protected:

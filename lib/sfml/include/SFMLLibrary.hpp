@@ -22,6 +22,7 @@ class SFMLLibrary : public DisplayLibrary {
         ~SFMLLibrary();
 
         void loadAsset(const std::string &path, const std::string &name, AssetType type);
+        void unloadAsset(const std::string &name, AssetType type);
 
         Events updateEvents(Events *events);
     protected:

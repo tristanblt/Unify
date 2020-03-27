@@ -123,6 +123,11 @@ void StartNibbler::update(IBuilder *b)
     b->spriteDraw("headLt");
 }
 
+void StartNibbler::finish(IBuilder *b)
+{
+    (void) b;
+}
+
 std::string StartNibbler::getName() const
 {
     return ("Nibbler");

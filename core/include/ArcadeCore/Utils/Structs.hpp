@@ -11,6 +11,7 @@
 #include <string>
 #include <map>
 #include <array>
+#include <vector>
 #include "core/include/ArcadeCore/Utils/Enums.hpp"
 
 struct Color {
@@ -87,6 +88,7 @@ struct Events {
     MouseEvents mouseEvents;
     JoyConEvents joyConEvents;
     std::map<Key, InputState> keyboardState;
+    float deltaTime;
     bool close;
 };
 
@@ -108,6 +110,22 @@ struct SpriteButton {
 
 struct SwitchButton {
     Box displayBox;
+};
+
+
+struct Selector {
+    Box displayBox;
+    std::vector<std::string> items;
+    std::array <Color, 3> boxColors;
+    std::string fontIdx;
+    int selected;
+};
+
+struct Slider {
+    float width;
+    Vector2 pos;
+    Color backgroundColor;
+    Color slideColor;
 };
 
 struct GameObject {
