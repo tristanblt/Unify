@@ -16,6 +16,7 @@ class Start {
 
         virtual void start(IBuilder *builder) = 0;
         virtual void update(IBuilder *builder) = 0;
+        virtual void finish(IBuilder *builder) = 0;
         virtual std::string getName() const = 0;
     protected:
     private:

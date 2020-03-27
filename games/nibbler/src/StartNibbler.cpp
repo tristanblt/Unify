@@ -25,6 +25,11 @@ void StartNibbler::update(IBuilder *b)
     //b->textDraw({"saiske", {300, 300}, {0, 0, 0, 255}, 100, "UnifyLightFont"});
 }
 
+void StartNibbler::finish(IBuilder *b)
+{
+    (void) b;
+}
+
 std::string StartNibbler::getName() const
 {
     return ("Nibbler");

@@ -38,6 +38,11 @@ void StartSolarfox::update(IBuilder *b)
         _gameInstance->occurs(b);
 }
 
+void StartSolarfox::finish(IBuilder *b)
+{
+    (void) b;
+}
+
 std::string StartSolarfox::getName() const
 {
     return ("Solar Fox");
