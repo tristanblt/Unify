@@ -20,6 +20,7 @@ class GameInstance: public IComponent {
     protected:
         void setMap(IBuilder *b);
         void setEnemies(IBuilder *b);
+        void drawBackground(IBuilder *b);
     private:
         int _level;
         int _score;

@@ -9,6 +9,7 @@
 #define ICOMPONENT_HPP_
 
 #include "games/solarfox/include/Enum.hpp"
+#include "core/include/ArcadeCore/Builder/IBuilder.hpp"
 
 class IComponent {
     public:
