@@ -10,6 +10,7 @@
 Builder::Builder(DisplayLibrary *library):
 _library(library)
 {
+    _unifyLock = false;
     windowCreate();
     _events.mouseEvents.scrollVelocity = 0;
     _events.deltaTime = 1;
@@ -70,6 +71,8 @@ float Builder::windowWidth()
 
 void Builder::rectInit(const std::string &name)
 {
+    if (_unifyLock && name.substr(0, 5) == "Unify")
+        throw BuilderException("Your game objects cannot start with \"Unify\" : " + name);
     RectModel *o = new RectModel();
 
     _gameObjects[name] = {
@@ -80,6 +83,8 @@ void Builder::rectInit(const std::string &name)
 
 void Builder::rectSetPosition(const std::string &name, Vector2 pos)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     RectModel *o = static_cast<RectModel *>(_gameObjects[name].item);
 
     o->b.x = pos.x;
@@ -88,6 +93,8 @@ void Builder::rectSetPosition(const std::string &name, Vector2 pos)
 
 void Builder::rectSetSize(const std::string &name, Vector2 size)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     RectModel *o = static_cast<RectModel *>(_gameObjects[name].item);
 
     o->b.w = size.x;
@@ -96,6 +103,8 @@ void Builder::rectSetSize(const std::string &name, Vector2 size)
 
 void Builder::rectSetColor(const std::string &name, Color color)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     RectModel *o = static_cast<RectModel *>(_gameObjects[name].item);
 
     o->c = color;
@@ -103,6 +112,8 @@ void Builder::rectSetColor(const std::string &name, Color color)
 
 void Builder::rectDraw(const std::string &name)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     RectModel *o = static_cast<RectModel *>(_gameObjects[name].item);
     _library->_rect->setPosition({o->b.x, o->b.y});
     _library->_rect->setSize({o->b.w, o->b.h});
@@ -112,6 +123,8 @@ void Builder::rectDraw(const std::string &name)
 
 void Builder::circleInit(const std::string &name)
 {
+    if (_unifyLock && name.substr(0, 5) == "Unify")
+        throw BuilderException("Your game objects cannot start with \"Unify\" : " + name);
     CircleModel *o = new CircleModel();
 
     _gameObjects[name] = {
@@ -122,6 +135,8 @@ void Builder::circleInit(const std::string &name)
 
 void Builder::circleSetPosition(const std::string &name, Vector2 pos)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     CircleModel *o = static_cast<CircleModel *>(_gameObjects[name].item);
 
     o->p.x = pos.x;
@@ -130,6 +145,8 @@ void Builder::circleSetPosition(const std::string &name, Vector2 pos)
 
 void Builder::circleSetRadius(const std::string &name, float radius)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     CircleModel *o = static_cast<CircleModel *>(_gameObjects[name].item);
 
     o->r = radius;
@@ -137,6 +154,8 @@ void Builder::circleSetRadius(const std::string &name, float radius)
 
 void Builder::circleSetColor(const std::string &name, Color color)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     CircleModel *o = static_cast<CircleModel *>(_gameObjects[name].item);
 
     o->c = color;
@@ -144,6 +163,8 @@ void Builder::circleSetColor(const std::string &name, Color color)
 
 void Builder::circleDraw(const std::string &name)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     CircleModel *o = static_cast<CircleModel *>(_gameObjects[name].item);
 
     _library->_circle->setPosition({o->p.x, o->p.y});
@@ -154,6 +175,8 @@ void Builder::circleDraw(const std::string &name)
 
 void Builder::radiusRectInit(const std::string &name)
 {
+    if (_unifyLock && name.substr(0, 5) == "Unify")
+        throw BuilderException("Your game objects cannot start with \"Unify\" : " + name);
     RadiusRectModel *o = new RadiusRectModel();
 
     _gameObjects[name] = {
@@ -164,6 +187,8 @@ void Builder::radiusRectInit(const std::string &name)
 
 void Builder::radiusRectSetPosition(const std::string &name, Vector2 pos)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     RadiusRectModel *o = static_cast<RadiusRectModel *>(_gameObjects[name].item);
 
     o->b.x = pos.x;
@@ -172,6 +197,8 @@ void Builder::radiusRectSetPosition(const std::string &name, Vector2 pos)
 
 void Builder::radiusRectSetSize(const std::string &name, Vector2 size)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     RadiusRectModel *o = static_cast<RadiusRectModel *>(_gameObjects[name].item);
 
     o->b.w = size.x;
@@ -180,6 +207,8 @@ void Builder::radiusRectSetSize(const std::string &name, Vector2 size)
 
 void Builder::radiusRectSetRadius(const std::string &name, float radius)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     RadiusRectModel *o = static_cast<RadiusRectModel *>(_gameObjects[name].item);
 
     o->r = radius;
@@ -187,6 +216,8 @@ void Builder::radiusRectSetRadius(const std::string &name, float radius)
 
 void Builder::radiusRectSetColor(const std::string &name, Color color)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     RadiusRectModel *o = static_cast<RadiusRectModel *>(_gameObjects[name].item);
 
     o->c = color;
@@ -194,6 +225,8 @@ void Builder::radiusRectSetColor(const std::string &name, Color color)
 
 void Builder::radiusRectDraw(const std::string &name)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     RadiusRectModel *o = static_cast<RadiusRectModel *>(_gameObjects[name].item);
 
     if (o->r * 2 > o->b.h)
@@ -219,6 +252,8 @@ void Builder::radiusRectDraw(const std::string &name)
 
 void Builder::textInit(const std::string &name)
 {
+    if (_unifyLock && name.substr(0, 5) == "Unify")
+        throw BuilderException("Your game objects cannot start with \"Unify\" : " + name);
     TextModel *o = new TextModel();
 
     _gameObjects[name] = {
@@ -229,6 +264,8 @@ void Builder::textInit(const std::string &name)
 
 void Builder::textSetPosition(const std::string &name, Vector2 pos)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     TextModel *o = static_cast<TextModel *>(_gameObjects[name].item);
 
     o->p.x = pos.x;
@@ -237,6 +274,8 @@ void Builder::textSetPosition(const std::string &name, Vector2 pos)
 
 void Builder::textSetFontSize(const std::string &name, int size)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     TextModel *o = static_cast<TextModel *>(_gameObjects[name].item);
 
     o->size = size;
@@ -244,6 +283,8 @@ void Builder::textSetFontSize(const std::string &name, int size)
 
 void Builder::textSetFont(const std::string &name, const std::string &fontIdx)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     TextModel *o = static_cast<TextModel *>(_gameObjects[name].item);
 
     o->idx = fontIdx;
@@ -251,6 +292,8 @@ void Builder::textSetFont(const std::string &name, const std::string &fontIdx)
 
 void Builder::textSetColor(const std::string &name, Color color)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     TextModel *o = static_cast<TextModel *>(_gameObjects[name].item);
 
     o->c = color;
@@ -258,6 +301,8 @@ void Builder::textSetColor(const std::string &name, Color color)
 
 void Builder::textSetText(const std::string &name, const std::string &text)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     TextModel *o = static_cast<TextModel *>(_gameObjects[name].item);
 
     o->s = text;
@@ -266,6 +311,8 @@ void Builder::textSetText(const std::string &name, const std::string &text)
 
 void Builder::textDraw(const std::string &name)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     TextModel *o = static_cast<TextModel *>(_gameObjects[name].item);
 
     _library->_text->setPosition(o->p);
@@ -279,6 +326,8 @@ void Builder::textDraw(const std::string &name)
 
 void Builder::spriteInit(const std::string &name)
 {
+    if (_unifyLock && name.substr(0, 5) == "Unify")
+        throw BuilderException("Your game objects cannot start with \"Unify\" : " + name);
     SpriteModel *o = new SpriteModel();
 
     o->opct = 255;
@@ -290,6 +339,8 @@ void Builder::spriteInit(const std::string &name)
 
 void Builder::spriteSetPosition(const std::string &name, Vector2 pos)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     SpriteModel *o = static_cast<SpriteModel *>(_gameObjects[name].item);
 
     o->b.x = pos.x;
@@ -298,6 +349,8 @@ void Builder::spriteSetPosition(const std::string &name, Vector2 pos)
 
 void Builder::spriteSetSize(const std::string &name, Vector2 body, Box frame)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     SpriteModel *o = static_cast<SpriteModel *>(_gameObjects[name].item);
 
     o->f = frame;
@@ -307,6 +360,8 @@ void Builder::spriteSetSize(const std::string &name, Vector2 body, Box frame)
 
 void Builder::spriteSetSize(const std::string &name, Vector2 size)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     SpriteModel *o = static_cast<SpriteModel *>(_gameObjects[name].item);
 
     o->b.w = size.x;
@@ -316,6 +371,8 @@ void Builder::spriteSetSize(const std::string &name, Vector2 size)
 
 void Builder::spriteSetSprite(const std::string &name, const std::string &sprite)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     SpriteModel *o = static_cast<SpriteModel *>(_gameObjects[name].item);
 
     o->idx = sprite;
@@ -323,6 +380,8 @@ void Builder::spriteSetSprite(const std::string &name, const std::string &sprite
 
 void Builder::spriteSetOpacity(const std::string &name, unsigned char opacity)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     SpriteModel *o = static_cast<SpriteModel *>(_gameObjects[name].item);
 
     o->opct = opacity;
@@ -330,6 +389,8 @@ void Builder::spriteSetOpacity(const std::string &name, unsigned char opacity)
 
 void Builder::spriteDraw(const std::string &name)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     SpriteModel *o = static_cast<SpriteModel *>(_gameObjects[name].item);
 
     _library->_sprite->setPosition({o->b.x, o->b.y});
@@ -476,6 +537,17 @@ void Builder::loadAsset(const std::string &path, const std::string &name, AssetT
     _library->loadAsset(path, name, type);
 }
 
+void Builder::lockUnifyGameObjects()
+{
+    _unifyLock = true;
+}
+
+void Builder::unloadAsset(const std::string &name, AssetType type)
+{
+    _library->unloadAsset(name, type);
+}
+
+
 /* ---------------------------------- utils --------------------------------- */
 
 Color Builder::hexToColor(int color) const
@@ -494,4 +566,10 @@ bool Builder::objectExists(const std::string &name)
     if (_gameObjects.find(name) == _gameObjects.end())
         return (false);
     return (true);
+/* -------------------------- game objects managing ------------------------- */
+
+void Builder::deleteGameObject(const std::string &name)
+{
+    free(_gameObjects[name].item);
+    _gameObjects.erase(name);
 }

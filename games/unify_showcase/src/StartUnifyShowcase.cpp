@@ -29,6 +29,11 @@ void StartUnifyShowcase::update(IBuilder *b)
     //b->buttonDraw("UnifyNextScene");
 }
 
+void StartUnifyShowcase::finish(IBuilder *b)
+{
+    (void) b;
+}
+
 std::string StartUnifyShowcase::getName() const
 {
     return ("Unify Showcase");

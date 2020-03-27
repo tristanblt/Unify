@@ -26,6 +26,7 @@ class StartSolarfox : public Start {
 
         void start(IBuilder *builder);
         void update(IBuilder *builder);
+        void finish(IBuilder *builder);
         std::string getName() const;
     protected:
     private:

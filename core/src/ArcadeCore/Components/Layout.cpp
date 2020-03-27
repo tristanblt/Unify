@@ -23,9 +23,15 @@ void Layout::start(IBuilder *b)
 
     b->basicButtonInit("UnifyReturnHomeButton");
     b->basicButtonSetBackgroundColors("UnifyReturnHomeButton", b->hexToColor(0x505050FF), b->hexToColor(0x505050FF), b->hexToColor(0x505050FF));
-    b->basicButtonSetTextColors("UnifyReturnHomeButton", b->hexToColor(0xDEDEDEFF), b->hexToColor(0xFFFFFFFF), b->hexToColor(0x1B79E6FF));
+    b->basicButtonSetTextColors("UnifyReturnHomeButton", b->hexToColor(0x1B79E6FF), b->hexToColor(0xDEDEDEFF), b->hexToColor(0xFFFFFFFF));
     b->basicButtonSetFont("UnifyReturnHomeButton", "UnifyBoldFont");
     b->basicButtonSetText("UnifyReturnHomeButton", "Back to home");
+
+    b->basicButtonInit("UnifyReturnGameButton");
+    b->basicButtonSetBackgroundColors("UnifyReturnGameButton", b->hexToColor(0x505050FF), b->hexToColor(0x505050FF), b->hexToColor(0x505050FF));
+    b->basicButtonSetTextColors("UnifyReturnGameButton", b->hexToColor(0x1B79E6FF), b->hexToColor(0xDEDEDEFF), b->hexToColor(0xFFFFFFFF));
+    b->basicButtonSetFont("UnifyReturnGameButton", "UnifyBoldFont");
+    b->basicButtonSetText("UnifyReturnGameButton", "Return to game");
 
     b->rectInit("UnifyLayoutPauseBackground");
     b->rectSetColor("UnifyLayoutPauseBackground", b->hexToColor(0x37373788));
@@ -49,10 +55,22 @@ void Layout::start(IBuilder *b)
     b->textInit("UnifyLayoutFooterGameName");
     b->textSetFont("UnifyLayoutFooterGameName", "UnifyBoldFont");
     b->textSetColor("UnifyLayoutFooterGameName", b->hexToColor(0xFFFFFF77));
+
+    b->sliderInit("UnifyLayoutAudioSlider");
+    b->sliderSetBackgroundColor("UnifyLayoutAudioSlider", b->hexToColor(0x101010FF));
+    b->sliderSetSliderColor("UnifyLayoutAudioSlider", b->hexToColor(0x595959FF));
+
+    b->textInit("UnifyLayoutAudioText");
+    b->textSetColor("UnifyLayoutAudioText", b->hexToColor(0xFFFFFFFF));
+    b->textSetFont("UnifyLayoutAudioText", "UnifyLightFont");
+    b->textSetText("UnifyLayoutAudioText", "Audio level");
+    
 }
 
 void Layout::update(IBuilder *b, CoreState &coreState, const std::string &name)
 {
+    static int a = 50;
+
     if (coreState == CoreState::CORE_PAUSE) {
         b->rectSetPosition("UnifyLayoutPauseBackground", {VW(0), VH(0)});
         b->rectSetSize("UnifyLayoutPauseBackground", {VW(100), VH(100)});
@@ -62,15 +80,29 @@ void Layout::update(IBuilder *b, CoreState &coreState, const std::string &name)
         b->rectSetSize("UnifyLayoutPauseBanner", {VW(100), VH(33)});
         b->rectDraw("UnifyLayoutPauseBanner");
 
-        b->textSetPosition("UnifyLayoutPauseText", {VH(79.5) - (5 * VH(2)), VH(31)});
+        b->textSetPosition("UnifyLayoutPauseText", {VW(50) - (5 * VH(2)), VH(31)});
         b->textSetFontSize("UnifyLayoutPauseText", static_cast<int>(VH(6)));
         b->textDraw("UnifyLayoutPauseText");
 
-        b->basicButtonSetDisplayBox("UnifyReturnHomeButton", {VW(44), VH(55), VW(12), VH(5)});
+        b->basicButtonSetDisplayBox("UnifyReturnHomeButton", {VW(37), VH(55), VW(12), VH(5)});
         b->basicButtonSetFontSize("UnifyReturnHomeButton", VH(2));
         b->basicButtonSetRadius("UnifyReturnHomeButton", VH(2.5));
         if (b->buttonDraw("UnifyReturnHomeButton") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
             coreState = CoreState::CORE_MENU;
+        
+        b->basicButtonSetDisplayBox("UnifyReturnGameButton", {VW(51), VH(55), VW(12), VH(5)});
+        b->basicButtonSetFontSize("UnifyReturnGameButton", VH(2));
+        b->basicButtonSetRadius("UnifyReturnGameButton", VH(2.5));
+        if (b->buttonDraw("UnifyReturnGameButton") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
+            coreState = CoreState::CORE_GAME;
+
+        b->sliderSetWidth("UnifyLayoutAudioSlider", VW(30));
+        b->sliderSetPosition("UnifyLayoutAudioSlider", {VW(35), VH(43)});
+        b->sliderDraw("UnifyLayoutAudioSlider", a);
+
+        b->textSetFontSize("UnifyLayoutAudioText", VH(2));
+        b->textSetPosition("UnifyLayoutAudioText", {VW(35), VH(40)});
+        b->textDraw("UnifyLayoutAudioText");
     }
     b->rectSetPosition("UnifyLayoutFooter", {0, VH(100) - VH(7)});
     b->rectSetSize("UnifyLayoutFooter", {VW(100), VH(7)});
@@ -80,7 +112,7 @@ void Layout::update(IBuilder *b, CoreState &coreState, const std::string &name)
     b->textSetFontSize("UnifyLayoutFooterName", static_cast<int>(VH(4)));
     b->textDraw("UnifyLayoutFooterName");
 
-    b->textSetPosition("UnifyLayoutFooterGameName", {VW(50) - (name.size() * VH(1.3)), VH(94.6)});
+    b->textSetPosition("UnifyLayoutFooterGameName", {VW(50) - (name.size() * VW(0.5f)), VH(94.6)});
     b->textSetFontSize("UnifyLayoutFooterGameName", static_cast<int>(VH(3)));
     b->textSetText("UnifyLayoutFooterGameName", name);
     b->textDraw("UnifyLayoutFooterGameName");

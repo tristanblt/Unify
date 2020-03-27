@@ -12,6 +12,8 @@
 
 void Builder::basicButtonInit(const std::string &name)
 {
+    if (_unifyLock && name.substr(0, 5) == "Unify")
+        throw BuilderException("Your game objects cannot start with \"Unify\" : " + name);
     BasicButton *o = new BasicButton();
 
     _gameObjects[name] = {
@@ -24,6 +26,8 @@ void Builder::basicButtonInit(const std::string &name)
 
 void Builder::basicButtonSetDisplayBox(const std::string &name, Box box)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     BasicButton *o = static_cast<BasicButton *>(_gameObjects[name].item);
 
     o->displayBox = box;
@@ -31,6 +35,8 @@ void Builder::basicButtonSetDisplayBox(const std::string &name, Box box)
 
 void Builder::basicButtonSetRadius(const std::string &name, float radius)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     BasicButton *o = static_cast<BasicButton *>(_gameObjects[name].item);
 
     o->radius = radius;
@@ -38,6 +44,8 @@ void Builder::basicButtonSetRadius(const std::string &name, float radius)
 
 void Builder::basicButtonSetBackgroundColors(const std::string &name, Color color_n, Color color_h, Color color_c)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     BasicButton *o = static_cast<BasicButton *>(_gameObjects[name].item);
 
     o->boxColors[0] = color_n;
@@ -47,6 +55,8 @@ void Builder::basicButtonSetBackgroundColors(const std::string &name, Color colo
 
 void Builder::basicButtonSetTextColors(const std::string &name, Color color_n, Color color_h, Color color_c)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     BasicButton *o = static_cast<BasicButton *>(_gameObjects[name].item);
 
     o->textColors[0] = color_n;
@@ -56,6 +66,8 @@ void Builder::basicButtonSetTextColors(const std::string &name, Color color_n, C
 
 void Builder::basicButtonSetText(const std::string &name, const std::string &text)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     BasicButton *o = static_cast<BasicButton *>(_gameObjects[name].item);
 
     o->text = text;
@@ -63,6 +75,8 @@ void Builder::basicButtonSetText(const std::string &name, const std::string &tex
 
 void Builder::basicButtonSetFontSize(const std::string &name, int size)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     BasicButton *o = static_cast<BasicButton *>(_gameObjects[name].item);
 
     o->fontSize = size;
@@ -70,6 +84,8 @@ void Builder::basicButtonSetFontSize(const std::string &name, int size)
 
 void Builder::basicButtonSetFont(const std::string &name, const std::string &idx)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     BasicButton *o = static_cast<BasicButton *>(_gameObjects[name].item);
 
     o->fontIdx = idx;
@@ -77,6 +93,8 @@ void Builder::basicButtonSetFont(const std::string &name, const std::string &idx
 
 void Builder::spriteButtonInit(const std::string &name)
 {
+    if (_unifyLock && name.substr(0, 5) == "Unify")
+        throw BuilderException("Your game objects cannot start with \"Unify\" : " + name);
     SpriteButton *o = new SpriteButton();
 
     _gameObjects[name] = {
@@ -88,6 +106,8 @@ void Builder::spriteButtonInit(const std::string &name)
 
 void Builder::spriteButtonSetDisplayBox(const std::string &name, Box box)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     SpriteButton *o = static_cast<SpriteButton *>(_gameObjects[name].item);
 
     o->displayBox = box;
@@ -95,6 +115,8 @@ void Builder::spriteButtonSetDisplayBox(const std::string &name, Box box)
 
 void Builder::spriteButtonSetSpriteBoxes(const std::string &name, Box box_n, Box box_h, Box box_c)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     SpriteButton *o = static_cast<SpriteButton *>(_gameObjects[name].item);
 
     o->spriteBoxes[0] = box_n;
@@ -104,6 +126,8 @@ void Builder::spriteButtonSetSpriteBoxes(const std::string &name, Box box_n, Box
 
 void Builder::spriteButtonSetSprite(const std::string &name, const std::string &idx)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     SpriteButton *o = static_cast<SpriteButton *>(_gameObjects[name].item);
 
     o->spriteSheetIndex = idx;
@@ -111,6 +135,8 @@ void Builder::spriteButtonSetSprite(const std::string &name, const std::string &
 
 void Builder::switchButtonInit(const std::string &name)
 {
+    if (_unifyLock && name.substr(0, 5) == "Unify")
+        throw BuilderException("Your game objects cannot start with \"Unify\" : " + name);
     SwitchButton *o = new SwitchButton();
 
     _gameObjects[name] = {
@@ -142,10 +168,10 @@ bool Builder::basicButtonDraw(const std::string &name)
     radiusRectSetSize(name + "_radiusRect", {o->displayBox.w, o->displayBox.h});
     textSetText(name + "_text", o->text);
     textSetPosition(name + "_text", {static_cast<float>(o->displayBox.x + (o->displayBox.w / 2) - (o->text.size() / 2 * o->fontSize / 1.6)),
-                                    o->displayBox.y + (o->displayBox.h / 2) - o->fontSize / 2});
+                                    o->displayBox.y + (o->displayBox.h / 2) - o->fontSize / 1.5f});
     textSetFontSize(name + "_text", o->fontSize);
     textSetFont(name + "_text", o->fontIdx);
-    if (state == true && getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::CLICK) {
+    if (state == true && getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::HOLD) {
         radiusRectSetColor(name + "_radiusRect", o->boxColors[0]);
         textSetColor(name + "_text", o->textColors[0]);
     } else if (state == true) {
@@ -165,10 +191,9 @@ bool Builder::spriteButtonDraw(const std::string &name)
     SpriteButton *o = static_cast<SpriteButton *>(_gameObjects[name].item);
     bool state = isMouseInBox(o->displayBox);
 
-    spriteSetOpacity(name + "_sprite", 255);
     spriteSetSprite(name + "_sprite", o->spriteSheetIndex);
     spriteSetPosition(name + "_sprite", {o->displayBox.x, o->displayBox.y});
-    if (state == true && (getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::CLICK || getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::HOLD))
+    if (state == true && getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::HOLD)
         spriteSetSize(name + "_sprite", {o->displayBox.w, o->displayBox.h}, o->spriteBoxes[0]);
     else if (state == true)
         spriteSetSize(name + "_sprite", {o->displayBox.w, o->displayBox.h}, o->spriteBoxes[1]);
@@ -180,11 +205,14 @@ bool Builder::spriteButtonDraw(const std::string &name)
 
 bool Builder::switchButtonDraw(const std::string &name)
 {
+    (void) name;
     return (false);
 }
 
 void Builder::selectorInit(const std::string &name)
 {
+    if (_unifyLock && name.substr(0, 5) == "Unify")
+        throw BuilderException("Your game objects cannot start with \"Unify\" : " + name);
     Selector *o = new Selector();
 
     _gameObjects[name] = {
@@ -198,6 +226,8 @@ void Builder::selectorInit(const std::string &name)
 
 void Builder::selectorSetDisplayBox(const std::string &name, Box box)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     Selector *o = static_cast<Selector *>(_gameObjects[name].item);
 
     o->displayBox = box;
@@ -205,6 +235,8 @@ void Builder::selectorSetDisplayBox(const std::string &name, Box box)
 
 void Builder::selectorSetBackgroundColors(const std::string &name, Color color_n, Color color_h, Color color_c)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     Selector *o = static_cast<Selector *>(_gameObjects[name].item);
 
     o->boxColors[0] = color_n;
@@ -214,6 +246,8 @@ void Builder::selectorSetBackgroundColors(const std::string &name, Color color_n
 
 void Builder::selectorSetItems(const std::string &name, const std::vector<std::string> &items)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     Selector *o = static_cast<Selector *>(_gameObjects[name].item);
 
     o->items = items;
@@ -221,6 +255,8 @@ void Builder::selectorSetItems(const std::string &name, const std::vector<std::s
 
 void Builder::selectorSetFont(const std::string &name, const std::string &idx)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     Selector *o = static_cast<Selector *>(_gameObjects[name].item);
 
     o->fontIdx = idx;
@@ -228,6 +264,8 @@ void Builder::selectorSetFont(const std::string &name, const std::string &idx)
 
 int Builder::selectorDraw(const std::string &name)
 {
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
     Selector *o = static_cast<Selector *>(_gameObjects[name].item);
     int i = 0;
     float height = (windowHeight() * ((float)8 / 100));
@@ -259,3 +297,75 @@ int Builder::selectorDraw(const std::string &name)
     return (o->selected);
 }
 
+void Builder::sliderInit(const std::string &name)
+{
+    if (_unifyLock && name.substr(0, 5) == "Unify")
+        throw BuilderException("Your game objects cannot start with \"Unify\" : " + name);
+    Slider *o = new Slider();
+
+    _gameObjects[name] = {
+        ObjectType::TYPE_SLIDER,
+        (void *)o
+    };
+    radiusRectInit(name + "_radiusRect");
+    circleInit(name + "_circle");
+    textInit(name + "_text");
+    textSetColor(name + "_text", hexToColor(0xFFFFFFFF));
+}
+
+void Builder::sliderSetWidth(const std::string &name, float width)
+{
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
+    Slider *o = static_cast<Slider *>(_gameObjects[name].item);
+
+    o->width = width;
+} 
+
+void Builder::sliderSetPosition(const std::string &name, Vector2 position)
+{
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
+    Slider *o = static_cast<Slider *>(_gameObjects[name].item);
+
+    o->pos = position;
+}
+
+void Builder::sliderSetBackgroundColor(const std::string &name, Color color)
+{
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
+    Slider *o = static_cast<Slider *>(_gameObjects[name].item);
+
+    o->backgroundColor = color;
+}
+
+void Builder::sliderSetSliderColor(const std::string &name, Color color)
+{
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
+    Slider *o = static_cast<Slider *>(_gameObjects[name].item);
+
+    o->slideColor = color;
+}
+
+void Builder::sliderDraw(const std::string &name, int &value)
+{
+    if (_gameObjects.find(name) == _gameObjects.end())
+        throw BuilderException("Could not find game object : " + name);
+    Slider *o = static_cast<Slider *>(_gameObjects[name].item);
+    float mouseX = getEvents().mouseEvents.pos.x;
+
+    radiusRectSetPosition(name + "_radiusRect", {o->pos.x, o->pos.y});
+    radiusRectSetSize(name + "_radiusRect", {o->width, windowHeight() * ((float)2 / 100)});
+    radiusRectSetRadius(name + "_radiusRect", windowHeight() * ((float)1 / 100));
+    radiusRectSetColor(name + "_radiusRect", o->backgroundColor);
+    radiusRectDraw(name + "_radiusRect");
+    if (isMouseInBox({o->pos.x, o->pos.y, o->width, windowHeight() * ((float)2 / 100)}) &&
+        getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::HOLD)
+        value = (mouseX - o->pos.x) * 100 / o->width;
+    circleSetRadius(name + "_circle", windowHeight() * (1.5f / 100));
+    circleSetColor(name + "_circle", o->slideColor);
+    circleSetPosition(name + "_circle", {o->pos.x + o->width * ((float)value / 100) - windowHeight() * (0.75f / 100), o->pos.y - windowHeight() * (0.5f / 100)});
+    circleDraw(name + "_circle");
+}

@@ -95,12 +95,17 @@ class Builder: public IBuilder {
 /* --------------------------------- assets --------------------------------- */
 
         void loadAsset(const std::string &path, const std::string &name, AssetType type);
+        void unloadAsset(const std::string &name, AssetType type);
+        void lockUnifyGameObjects();
 
 /* ---------------------------------- utils --------------------------------- */
 
         Color hexToColor(int hexColor) const;
         Box getBody(const std::string &name);
 
+/* -------------------------- game objects managing ------------------------- */
+
+        void deleteGameObject(const std::string &name);
 
 /* -------------------------------------------------------------------------- */
 /*                                     ui                                     */
@@ -126,8 +131,12 @@ class Builder: public IBuilder {
     
         bool buttonDraw(const std::string &name);
 
-        //void sliderInit(const std::string &name);
-        //int sliderDraw(const std::string &name);
+        void sliderInit(const std::string &name);
+        void sliderSetWidth(const std::string &name, float width);
+        void sliderSetPosition(const std::string &name, Vector2 position);
+        void sliderSetBackgroundColor(const std::string &name, Color color);
+        void sliderSetSliderColor(const std::string &name, Color color);
+        void sliderDraw(const std::string &name, int &value);
 
         void selectorInit(const std::string &name);
         void selectorSetDisplayBox(const std::string &name, Box box);
@@ -149,6 +158,7 @@ class Builder: public IBuilder {
         time_t _tick;
         time_t _tickDiff;
         DisplayLibrary *_library;
+        bool _unifyLock;
 };
 
 #endif /* !BUILDER_HPP_ */
