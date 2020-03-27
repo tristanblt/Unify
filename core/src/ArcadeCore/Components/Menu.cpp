@@ -179,7 +179,6 @@ void Menu::start(IBuilder *b)
 
     b->spriteInit("UnifyMenuLogo");
     b->spriteSetSprite("UnifyMenuLogo", "UnifyLogo");
-    b->spriteSetOpacity("UnifyMenuLogo", 255);
 
     b->textInit("UnifyMenuLogoName");
     b->textSetText("UnifyMenuLogoName", "Unify");

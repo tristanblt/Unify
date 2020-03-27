@@ -86,12 +86,16 @@ class Builder: public IBuilder {
 /* --------------------------------- assets --------------------------------- */
 
         void loadAsset(const std::string &path, const std::string &name, AssetType type);
+        void unloadAsset(const std::string &name, AssetType type);
+        void lockUnifyGameObjects();
 
 /* ---------------------------------- utils --------------------------------- */
 
         Color hexToColor(int hexColor) const;
 
+/* -------------------------- game objects managing ------------------------- */
 
+        void deleteGameObject(const std::string &name);
 
 /* -------------------------------------------------------------------------- */
 /*                                     ui                                     */
@@ -144,6 +148,7 @@ class Builder: public IBuilder {
         time_t _tick;
         time_t _tickDiff;
         DisplayLibrary *_library;
+        bool _unifyLock;
 };
 
 #endif /* !BUILDER_HPP_ */

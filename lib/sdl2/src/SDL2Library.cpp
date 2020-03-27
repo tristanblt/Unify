@@ -87,3 +87,13 @@ void SDL2Library::loadAsset(const std::string &path, const std::string &name, As
         _assets[name] = (void *)t;
     }
 }
+
+void SDL2Library::unloadAsset(const std::string &name, AssetType type)
+{
+    if (type == AssetType::FONT)
+        TTF_CloseFont(static_cast<TTF_Font *>(_assets[name]));
+    else if (type == AssetType::SPRITE) {
+        SDL_DestroyTexture(static_cast<SDL_Texture *>(_assets[name]))
+        SDL_FreeSurface(static_cast<SDL_Surface *>(_assets[name] + "_srfce"))
+    }
+}

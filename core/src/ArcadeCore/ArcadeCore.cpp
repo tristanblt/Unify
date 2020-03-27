@@ -88,13 +88,11 @@ bool ArcadeCore::launchCore(DisplayLibrary *library)
     _menu.start(&builder);
     _layout.start(&builder);
     builder.spriteInit("UnifyJoyConCursor");
-    builder.spriteSetOpacity("UnifyJoyConCursor", 255);
     builder.spriteSetSprite("UnifyJoyConCursor", "UnifyJoyConsCursors");
     builder.spriteSetSize("UnifyJoyConCursor", {176, 120}, {481, 3, 44, 30});
+    builder.lockUnifyGameObjects();
     while (builder.windowIsOpen()) {
-        //std::cout << "d" << std::endl;
         builder.updateEvents();
-        //std::cout << "c" << std::endl;
         builder.windowClear();
         if (_coreState == CoreState::CORE_MENU) {
             if ((gameLib = _menu.update(&builder)) != NULL) {
@@ -108,7 +106,7 @@ bool ArcadeCore::launchCore(DisplayLibrary *library)
                 game->update(&builder);
             _layout.update(&builder, _coreState, game->getName());
         }
-        // joyConCursors(&builder);
+        joyConCursors(&builder);
         builder.windowDisplay();
         switchGraphicalLibrary(&builder);
     }

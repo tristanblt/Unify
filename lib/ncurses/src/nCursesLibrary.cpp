@@ -28,6 +28,13 @@ void nCursesLibrary::loadAsset(const std::string &path, const std::string &name,
     }
 }
 
+void nCursesLibrary::unloadAsset(const std::string &name, AssetType type)
+{
+    if (type == AssetType::SPRITE)
+        delete static_cast<PngFile *>(_assets[name]);
+}
+
+
 Events nCursesLibrary::updateEvents(Events *events)
 {
     //std::cout << "\033[?1003h";

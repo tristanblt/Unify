@@ -15,6 +15,7 @@
 #include "lib/include/DisplayLibrary.hpp"
 #include "core/include/ArcadeCore/Utils/Structs.hpp"
 #include "core/include/ArcadeCore/Utils/Responsive.hpp"
+#include "core/include/ArcadeCore/CoreException.hpp"
 
 class IBuilder {
     public:
@@ -87,10 +88,15 @@ class IBuilder {
 /* --------------------------------- assets --------------------------------- */
 
         virtual void loadAsset(const std::string &path, const std::string &name, AssetType type) = 0;
+        virtual void unloadAsset(const std::string &name, AssetType type) = 0;
 
 /* ---------------------------------- utils --------------------------------- */
 
         virtual Color hexToColor(int hexColor) const = 0;
+
+/* -------------------------- game objects managing ------------------------- */
+
+        virtual void deleteGameObject(const std::string &name) = 0;
 
 /* -------------------------------------------------------------------------- */
 /*                                     ui                                     */
