@@ -17,6 +17,7 @@ _library(library)
     time(&_tick);
     _tickDiff = 0;
     _events.joyConEvents.cursorPos = {-1, -1};
+
 }
 
 Builder::~Builder()

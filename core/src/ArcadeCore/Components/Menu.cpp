@@ -66,6 +66,7 @@ void Menu::drawHeader(IBuilder *b)
 
 void Menu::drawCarousel(IBuilder *b)
 {
+    _coversOffset += 0.1f;
     if (b->isMouseInBox({0, VH(20), VW(100), VH(55)})) {
         _coversOffset -= b->getEvents().mouseEvents.scrollVelocity * 10;
         _coversOffset += b->getEvents().joyConEvents.buttons1[JOY_R1] == InputState::HOLD ? -50 : 0;
@@ -79,7 +80,9 @@ void Menu::drawCarousel(IBuilder *b)
             continue;
         color -= 0.5f;
         color = color < 0 ? color * -1 : color;
+        std::cerr << "bib" << std::endl;
         if (i < _covers.size()) {
+        std::cerr << "bab" << std::endl;
             color = (255 - (color * 2 * 255));
             b->spriteSetPosition("UnifyMenuCarouselCoverPicture", {(VH(35)) * i + _coversOffset + VH(17), VH(24)});
             b->spriteSetSize("UnifyMenuCarouselCoverPicture", {VH(33), VH(33)});
@@ -101,6 +104,7 @@ void Menu::drawCarousel(IBuilder *b)
                 }
             );
             b->radiusRectDraw("UnifyMenuCarouselCoverEmpty");
+            std::cerr << "bob" << std::endl;
         }
         if (color > 200 && i < _covers.size()) {
             b->textSetText("UnifyMenuCarouselCoverTitle", _covers[i].gameName);
