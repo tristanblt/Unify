@@ -561,6 +561,8 @@ bool Builder::objectExists(const std::string &name)
     if (_gameObjects.find(name) == _gameObjects.end())
         return (false);
     return (true);
+}
+
 /* -------------------------- game objects managing ------------------------- */
 
 void Builder::deleteGameObject(const std::string &name)
