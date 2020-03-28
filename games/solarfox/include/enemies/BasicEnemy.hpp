@@ -11,10 +11,10 @@
 
 class BasicEnemy: public IEntity {
     public:
-        BasicEnemy(int level);
+        BasicEnemy(int level, IBuilder *b);
         ~BasicEnemy();
 
-        void behave(Player player);
+        void behave(GameInstance *game);
     protected:
     private:
         float _speed;

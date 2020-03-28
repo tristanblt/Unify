@@ -18,11 +18,8 @@ StartSolarfox::~StartSolarfox()
 
 void StartSolarfox::start(IBuilder *b)
 {
-    b->loadAsset("games/solarfox/assets/imgs/enemy1.png", "Enemy1", AssetType::SPRITE);
-    b->loadAsset("games/solarfox/assets/imgs/enemy2.png", "Enemy2", AssetType::SPRITE);
-    b->loadAsset("games/solarfox/assets/imgs/laser1.png", "Laser1", AssetType::SPRITE);
-    b->loadAsset("games/solarfox/assets/imgs/laser2.png", "Laser2", AssetType::SPRITE);
-    b->loadAsset("games/solarfox/assets/imgs/player-ship.png", "Player", AssetType::SPRITE);
+    b->loadAsset("games/solarfox/assets/octuple-max.ttf", "SF_font", AssetType::FONT);
+    b->loadAsset("games/solarfox/assets/imgs/sheet.png", "SF_sheet", AssetType::SPRITE);
     b->loadAsset("games/solarfox/assets/imgs/space1.png", "Background1", AssetType::SPRITE);
     b->loadAsset("games/solarfox/assets/imgs/space2.png", "Background2", AssetType::SPRITE);
     b->loadAsset("games/solarfox/assets/imgs/space3.png", "Background3", AssetType::SPRITE);

@@ -17,15 +17,16 @@ class Player {
         Player(int level, IBuilder *b);
         ~Player();
 
-        void draw(IBuilder *b);
+        bool draw(IBuilder *b);
     protected:
-        void updatePos(float offset);
+        bool updatePos(float offset, IBuilder *b);
         void setNewDir(IBuilder *b);
     private:
         std::string _objectIdx;
         Orientation _dir;
         float _speed;
         Vector2 _pos;
+        Vector2 _size;
 };
 
 #endif /* !PLAYER_HPP_ */
