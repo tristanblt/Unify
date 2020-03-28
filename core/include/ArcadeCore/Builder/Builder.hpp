@@ -87,7 +87,6 @@ class Builder: public IBuilder {
 
         void loadAsset(const std::string &path, const std::string &name, AssetType type);
         void unloadAsset(const std::string &name, AssetType type);
-        void lockUnifyGameObjects();
 
 /* ---------------------------------- utils --------------------------------- */
 
@@ -96,6 +95,8 @@ class Builder: public IBuilder {
 /* -------------------------- game objects managing ------------------------- */
 
         void deleteGameObject(const std::string &name);
+        void lockUnifyGameObjects();
+        void unlockUnifyGameObjects();
 
 /* -------------------------------------------------------------------------- */
 /*                                     ui                                     */
