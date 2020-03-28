@@ -24,12 +24,15 @@ class ArcadeCore {
         ~ArcadeCore();
 
         bool launchCore(DisplayLibrary *library);
+        void startLaunchCore(Builder *builder);
         void loadCoreAssets(IBuilder *builder);
         Start *changeGame(std::string libName);
 
         DisplayLibrary *importGraphicalLibs(const std::string &libName);
-        void switchGraphicalLibrary(Builder *builder);
-        void joyConCursors(IBuilder *b);
+        void switchGraphicalLibrary(Builder *builder, int i);
+        void triggerSwitchGraphicalLibrary(Builder *builder);
+        void updateJoyConCursors(IBuilder *b);
+        void manageMenuAndGame(Builder *b, DLLoader<Start> *&gameLib, Start *&game);
     protected:
     private:
         CoreState _coreState;

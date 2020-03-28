@@ -54,28 +54,67 @@ DisplayLibrary *ArcadeCore::importGraphicalLibs(const std::string &firstLib)
     return (ret);
 }
 
-void ArcadeCore::switchGraphicalLibrary(Builder *b)
+void ArcadeCore::switchGraphicalLibrary(Builder *b, int i)
+{
+    if (static_cast<size_t>(i) > _libs.size() - 1)
+        i = 0;
+    if (i < 0)
+        i = _libs.size() - 1;
+    b->reloadLibrary(_libs[i]);
+    b->unlockUnifyGameObjects();
+    loadCoreAssets(b);
+    _menu.start(b);
+    _layout.start(b);
+    b->lockUnifyGameObjects();
+    _currentLib = i;
+}
+
+void ArcadeCore::triggerSwitchGraphicalLibrary(Builder *b)
 {
     if (b->getEvents().keyboardState[Key::N] == InputState::RELEASED) {
-        unsigned long tmp = static_cast<unsigned long>(_currentLib);
-        tmp++;
-        if (tmp > _libs.size() - 1)
-            tmp = 0;
+        switchGraphicalLibrary(b, _currentLib + 1);
         b->getEvents().keyboardState[Key::N] = InputState::NONE;
-        b->reloadLibrary(_libs[tmp]);
-        loadCoreAssets(b);
-        _menu.start(b);
-        _layout.start(b);
-        _currentLib = tmp;
+    }
+    if (b->getEvents().keyboardState[Key::B] == InputState::RELEASED) {
+        switchGraphicalLibrary(b, _currentLib - 1);
+        b->getEvents().keyboardState[Key::B] = InputState::NONE;
     }
 }
 
-void ArcadeCore::joyConCursors(IBuilder *b)
+void ArcadeCore::updateJoyConCursors(IBuilder *b)
 {
     if (b->getEvents().joyConEvents.cursorPos.x == -1 && b->getEvents().joyConEvents.cursorPos.y == -1)
         return;
-    b->spriteSetPosition("UnifyJoyConCursor", {b->getEvents().joyConEvents.cursorPos.x - 15, b->getEvents().joyConEvents.cursorPos.y});
+    b->spriteSetPosition("UnifyJoyConCursor", {b->getEvents().joyConEvents.cursorPos.x - 15,
+    b->getEvents().joyConEvents.cursorPos.y});
     b->spriteDraw("UnifyJoyConCursor");
+}
+
+void ArcadeCore::startLaunchCore(Builder *b)
+{
+    loadCoreAssets(b);
+    _menu.start(b);
+    _layout.start(b);
+    b->spriteInit("UnifyJoyConCursor");
+    b->spriteSetSprite("UnifyJoyConCursor", "UnifyJoyConsCursors");
+    b->spriteSetSize("UnifyJoyConCursor", {176, 120}, {481, 3, 44, 30});
+    b->lockUnifyGameObjects();
+}
+
+void ArcadeCore::manageMenuAndGame(Builder *b, DLLoader<Start> *&gameLib, Start *&game)
+{
+    if (_coreState == CoreState::CORE_MENU) {
+        if ((gameLib = _menu.update(b)) != NULL) {
+            game = gameLib->getInstance();
+            game->start(b);
+            _coreState = CoreState::CORE_GAME;
+        }
+    }
+    else {
+        if (_coreState != CoreState::CORE_PAUSE)
+            game->update(b);
+        _layout.update(b, _coreState, game->getName());
+    }
 }
 
 bool ArcadeCore::launchCore(DisplayLibrary *library)
@@ -84,31 +123,14 @@ bool ArcadeCore::launchCore(DisplayLibrary *library)
     DLLoader<Start> *gameLib;
     Builder builder(library);
 
-    loadCoreAssets(&builder);
-    _menu.start(&builder);
-    _layout.start(&builder);
-    builder.spriteInit("UnifyJoyConCursor");
-    builder.spriteSetSprite("UnifyJoyConCursor", "UnifyJoyConsCursors");
-    builder.spriteSetSize("UnifyJoyConCursor", {176, 120}, {481, 3, 44, 30});
-    builder.lockUnifyGameObjects();
+    startLaunchCore(&builder);
     while (builder.windowIsOpen()) {
         builder.updateEvents();
         builder.windowClear();
-        if (_coreState == CoreState::CORE_MENU) {
-            if ((gameLib = _menu.update(&builder)) != NULL) {
-                game = gameLib->getInstance();
-                game->start(&builder);
-                _coreState = CoreState::CORE_GAME;
-            }
-        }
-        else {
-            if (_coreState != CoreState::CORE_PAUSE)
-                game->update(&builder);
-            _layout.update(&builder, _coreState, game->getName());
-        }
-        joyConCursors(&builder);
+        manageMenuAndGame(&builder, gameLib, game);
+        updateJoyConCursors(&builder);
         builder.windowDisplay();
-        switchGraphicalLibrary(&builder);
+        triggerSwitchGraphicalLibrary(&builder);
     }
     return (_menu.getInterruptType());
 }

@@ -17,6 +17,7 @@ _library(library)
     time(&_tick);
     _tickDiff = 0;
     _events.joyConEvents.cursorPos = {-1, -1};
+
 }
 
 Builder::~Builder()
@@ -537,11 +538,6 @@ void Builder::loadAsset(const std::string &path, const std::string &name, AssetT
     _library->loadAsset(path, name, type);
 }
 
-void Builder::lockUnifyGameObjects()
-{
-    _unifyLock = true;
-}
-
 void Builder::unloadAsset(const std::string &name, AssetType type)
 {
     _library->unloadAsset(name, type);
@@ -573,4 +569,14 @@ void Builder::deleteGameObject(const std::string &name)
 {
     free(_gameObjects[name].item);
     _gameObjects.erase(name);
+}
+
+void Builder::lockUnifyGameObjects()
+{
+    _unifyLock = true;
+}
+
+void Builder::unlockUnifyGameObjects()
+{
+    _unifyLock = false;
 }
