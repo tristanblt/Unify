@@ -34,7 +34,9 @@ void GameInstance::setMap(IBuilder *b)
 
 void GameInstance::setEnemies(IBuilder *b)
 {
-
+    _entities.push_back(new BasicEnemy(_level + 10, b));
+    _entities.push_back(new BasicEnemy(_level + 10, b));
+    _entities.push_back(new BasicEnemy(_level + 10, b));
 }
 
 void GameInstance::drawBackground(IBuilder *b)
@@ -81,9 +83,20 @@ GameState GameInstance::occurs(IBuilder *b)
     drawBackground(b);
     if (_player->draw(b) == false)
         return (GameState::SF_GS_LOOSE);
+    for_each(_entities.begin(), _entities.end(), [this, &b](IEntity *e) {
+        if (e->behave(this, b) == B_END) {
+            b->deleteGameObject(e->getIdx());
+            this->_entities.erase(std::find(this->_entities.begin(), this->_entities.end(), e));
+        }
+    });
     return (GameState::SF_GS_PLAYING);
 }
 
 GameInstance::~GameInstance()
 {
+}
+
+void GameInstance::addEntity(IEntity *e)
+{
+    _entities.push_back(e);
 }

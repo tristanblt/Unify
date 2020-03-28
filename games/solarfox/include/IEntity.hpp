@@ -18,7 +18,8 @@ class IEntity {
     public:
         ~IEntity() = default;
 
-        virtual void behave(GameInstance *game) = 0;
+        virtual BehaveReturn behave(GameInstance *game, IBuilder *b) = 0;
+        virtual const std::string &getIdx() const = 0;
     protected:
     private:
 };
