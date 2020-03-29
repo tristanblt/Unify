@@ -95,10 +95,15 @@ void ArcadeCore::startLaunchCore(Builder *b)
 
 void ArcadeCore::manageMenuAndGame(Builder *b, DLLoader<Start> *&gameLib, Start *&game)
 {
+    static DLLoader<Start> *currentGame = NULL;
+
     if (_coreState == CoreState::CORE_MENU) {
         if ((gameLib = _menu.update(b)) != NULL) {
-            game = gameLib->getInstance();
-            game->start(b);
+            if (gameLib != currentGame) {
+                game = gameLib->getInstance();
+                game->start(b);
+            }
+            currentGame = gameLib;
             _coreState = CoreState::CORE_GAME;
         }
     }
