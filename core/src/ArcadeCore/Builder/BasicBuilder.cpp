@@ -563,7 +563,6 @@ bool Builder::objectExists(const std::string &name)
         return (false);
     return (true);
 }
-
 /* -------------------------- game objects managing ------------------------- */
 
 void Builder::deleteGameObject(const std::string &name)

@@ -11,14 +11,20 @@
 
 class BasicShot: public IEntity {
     public:
-        BasicShot(int level, Orientation way);
+        BasicShot(float speed, Orientation way, Vector2 pos, IBuilder *b);
         ~BasicShot();
 
-        void behave();
+        BehaveReturn behave(GameInstance *game, IBuilder *b);
+        const std::string &getIdx() const;
     protected:
+        void manageMove(float offset, IBuilder *b);
+        BehaveReturn state(IBuilder *b);
     private:
         float _speed;
         Orientation _way;
+        Vector2 _size;
+        Vector2 _pos;
+        Box _frame;
         std::string _objectIdx;
 };
 
