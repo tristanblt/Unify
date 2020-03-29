@@ -47,7 +47,6 @@ void Window::display()
     int colorPair = -1;
     _width = COLS;
     _height = LINES * 2;
-    std::cerr << _height << std::endl;
     for (size_t i = 0; _height > _colorBuffer.size(); i++)
         _colorBuffer.push_back(std::vector<Color> ());
     for (size_t i = 0; i < _colorBuffer.size(); i++)
@@ -110,7 +109,7 @@ int Window::getColorPair(Color fg, Color bg)
 
 void Window::drawBufferPixel(int x, int y, Color color)
 {
-    if (y >= _height || x >= _width)
+    if (y >= _height || x >= _width || x < 0 || y < 0)
         return;
     _colorBuffer[y][x] = color;
 }

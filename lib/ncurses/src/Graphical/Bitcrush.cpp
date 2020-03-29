@@ -15,7 +15,7 @@ Bitcrush::Bitcrush(PngFile *png, Vector2 pos, Box frame, Vector2 wantedSize, IWi
     int tmp;
     Vector2 ratio = {
         frame.w / wantedSize.x,
-        frame.h / wantedSize.y //* NCURSES_RATIO
+        frame.h / wantedSize.y
     };
     //std::vector<std::vector<Color> > crushed;
     //Color sum;
@@ -41,7 +41,6 @@ Bitcrush::Bitcrush(PngFile *png, Vector2 pos, Box frame, Vector2 wantedSize, IWi
                 }
             }
             crushed[b][a] = sum;
-            ////std::cout << b << std::endl;
             b++;
         }
         b = 0;

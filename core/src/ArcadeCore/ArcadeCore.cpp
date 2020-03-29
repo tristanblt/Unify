@@ -31,21 +31,13 @@ void ArcadeCore::loadCoreAssets(IBuilder *builder)
 
 DisplayLibrary *ArcadeCore::importGraphicalLibs(const std::string &firstLib)
 {
-    std::ifstream f("assets/files/displaylibs.config");
-    std::string buffer;
-    std::vector<std::string> file;
+    FileManager fm("assets/files/displaylibs.config");
     DisplayLibrary *ret = NULL;
 
-    if (!f)
-        throw FileException("could not open file 'displaylibs.config'");
-    while (std::getline(f, buffer))
-        if(buffer.size() > 0)
-            file.push_back(buffer);
-    f.close();
-    for (size_t i = 0; i < file.size(); i++) {
-        DLLoader<DisplayLibrary> *loader = new DLLoader<DisplayLibrary>(file[i].c_str());
+    for (size_t i = 0; i < fm._file.size(); i++) {
+        DLLoader<DisplayLibrary> *loader = new DLLoader<DisplayLibrary>(fm._file[i].c_str());
         DisplayLibrary *tmp = loader->getInstance();
-        if (file[i] == firstLib) {
+        if (fm._file[i] == firstLib) {
             ret = tmp;
             _currentLib = i;
         }
