@@ -32,4 +32,6 @@ games:
 	make -C games/
 
 graphicals:
-	make clean -C lib/
+	make -C lib/
+
+.PHONY: core games graphicals

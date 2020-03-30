@@ -66,11 +66,12 @@ void Menu::drawHeader(IBuilder *b)
 
 void Menu::drawCarousel(IBuilder *b)
 {
-    _coversOffset += 0.1f;
+    _coversOffset += b->getEvents().keyboardState[Key::LEFT] == InputState::HOLD ? VW(1) : 0;
+    _coversOffset += b->getEvents().keyboardState[Key::RIGHT] == InputState::HOLD ? -VW(1) : 0;
     if (b->isMouseInBox({0, VH(20), VW(100), VH(55)})) {
         _coversOffset -= b->getEvents().mouseEvents.scrollVelocity * 10;
-        _coversOffset += b->getEvents().joyConEvents.buttons1[JOY_R1] == InputState::HOLD ? -50 : 0;
-        _coversOffset += b->getEvents().joyConEvents.buttons1[JOY_L1] == InputState::HOLD ? 50 : 0;
+        _coversOffset += b->getEvents().joyConEvents.buttons1[JOY_R1] == InputState::HOLD ? -VW(1) : 0;
+        _coversOffset += b->getEvents().joyConEvents.buttons1[JOY_L1] == InputState::HOLD ? VW(1) : 0;
         if (_coversOffset > VW(50) - VW(20))
             _coversOffset = VW(50) - VW(20);
     }
@@ -80,9 +81,7 @@ void Menu::drawCarousel(IBuilder *b)
             continue;
         color -= 0.5f;
         color = color < 0 ? color * -1 : color;
-        std::cerr << "bib" << std::endl;
         if (i < _covers.size()) {
-        std::cerr << "bab" << std::endl;
             color = (255 - (color * 2 * 255));
             b->spriteSetPosition("UnifyMenuCarouselCoverPicture", {(VH(35)) * i + _coversOffset + VH(17), VH(24)});
             b->spriteSetSize("UnifyMenuCarouselCoverPicture", {VH(33), VH(33)});
@@ -104,7 +103,6 @@ void Menu::drawCarousel(IBuilder *b)
                 }
             );
             b->radiusRectDraw("UnifyMenuCarouselCoverEmpty");
-            std::cerr << "bob" << std::endl;
         }
         if (color > 200 && i < _covers.size()) {
             b->textSetText("UnifyMenuCarouselCoverTitle", _covers[i].gameName);
@@ -144,21 +142,13 @@ void Menu::drawSettings(IBuilder *b)
 
 void Menu::start(IBuilder *b)
 {
-    std::ifstream f("assets/files/games.config");
-    std::string buffer;
-    std::vector<std::string> file;
+    FileManager fm("assets/files/games.config");
 
     _covers.clear();
-    if (!f)
-        throw FileException("Could not open file 'games.config'");
-    while (std::getline(f, buffer))
-        if(buffer.size() > 0)
-            file.push_back(buffer);
-    f.close();
-    for (size_t i = 0; i < file.size() / 3 * 3; i += 3) {
-        b->loadAsset(file[i + 1], "UnifyCover" + std::to_string(i), AssetType::SPRITE);
-        DLLoader<Start> *loader = new DLLoader<Start>(file[i + 2].c_str());
-        _covers.push_back({file[i], loader, "UnifyCover" + std::to_string(i)});
+    for (size_t i = 0; i < fm._file.size() / 3 * 3; i += 3) {
+        b->loadAsset(fm._file[i + 1], "UnifyCover" + std::to_string(i), AssetType::SPRITE);
+        DLLoader<Start> *loader = new DLLoader<Start>(fm._file[i + 2].c_str());
+        _covers.push_back({fm._file[i], loader, "UnifyCover" + std::to_string(i)});
     }
     if (_coversOffset == 0)
         _coversOffset = VW(50) - VW(20);

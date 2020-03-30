@@ -10,8 +10,10 @@ NAME	=	../lib_arcade_nibbler.so
 SRCPATH	=	src/
 SRCS_FILES=	Entry.cpp							\
 			StartNibbler.cpp					\
+			NibblerMap.cpp						\
 
-SRC	=	$(addprefix $(SRCPATH), $(SRCS_FILES))
+SRC	=	$(addprefix $(SRCPATH), $(SRCS_FILES))	\
+		../utils/GameClock.cpp
 
 OBJ			= 	$(SRC:%.cpp=%.o)
 
