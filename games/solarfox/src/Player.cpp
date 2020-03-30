@@ -8,7 +8,7 @@
 #include "games/solarfox/include/Player.hpp"
 
 Player::Player(int level, IBuilder *b):
-_objectIdx("Player"), _dir(Orientation::O_RIGHT), _speed(VH(level * 0.5f)), _pos({VW(50), VH(50)}), _size({VH(4), VH(4)})
+_objectIdx("Player"), _dir(Orientation::O_RIGHT), _speed(VH(0.5)), _pos({VW(50), VH(50)}), _size({VH(4), VH(4)})
 {
     b->spriteInit("Player");
     b->spriteSetSprite("Player", "SF_sheet");
@@ -55,7 +55,7 @@ bool Player::draw(IBuilder *b)
 {
     setNewDir(b);
     if (b->getEvents().keyboardState[Key::SPACE] == InputState::HOLD) {
-        if (!updatePos(_speed * 1.5f * b->getEvents().deltaTime, b))
+        if (!updatePos((_speed + 3.0) * b->getEvents().deltaTime, b))
             return (false);
     } else {
         if (!updatePos(_speed* b->getEvents().deltaTime, b))

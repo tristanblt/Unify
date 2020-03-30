@@ -12,6 +12,7 @@ SRCPATH	=	src/
 SRCS_FILES=	main.cpp													\
 			ArcadeCore/CoreException.cpp								\
 			ArcadeCore/ArcadeCore.cpp									\
+			ArcadeCore/FileManager.cpp									\
 			ArcadeCore/Components/Layout.cpp							\
 			ArcadeCore/Components/Menu.cpp								\
 			ArcadeCore/Builder/BasicBuilder.cpp							\

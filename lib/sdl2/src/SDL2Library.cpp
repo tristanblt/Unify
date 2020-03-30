@@ -52,7 +52,7 @@ void SDL2Library::updateKeyboardEvents(Events *e)
         else if (e->keyboardState[static_cast<Key>(i)] == InputState::RELEASED)
             e->keyboardState[static_cast<Key>(i)] = InputState::NONE;
     while (SDL_PollEvent(&event)) {
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 100; i++)
             if (event.key.keysym.sym == keys[i] && event.type == SDL_KEYDOWN)
                 e->keyboardState[static_cast<Key>(i)] = InputState::CLICK;
             else if (event.key.keysym.sym == keys[i] && event.type == SDL_KEYUP)
@@ -93,7 +93,7 @@ void SDL2Library::unloadAsset(const std::string &name, AssetType type)
     if (type == AssetType::FONT)
         TTF_CloseFont(static_cast<TTF_Font *>(_assets[name]));
     else if (type == AssetType::SPRITE) {
-        SDL_DestroyTexture(static_cast<SDL_Texture *>(_assets[name]))
-        SDL_FreeSurface(static_cast<SDL_Surface *>(_assets[name] + "_srfce"))
+        SDL_DestroyTexture(static_cast<SDL_Texture *>(_assets[name]));
+        SDL_FreeSurface(static_cast<SDL_Surface *>(_assets[name + "_srfce"]));
     }
 }

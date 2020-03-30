@@ -5,7 +5,7 @@
 ** PngFile
 */
 
-#include "core/include/ArcadeCore/Utils/PngFile.hpp"
+#include "lib/ncurses/include/PngFile.hpp"
 #include "core/include/ArcadeCore/CoreException.hpp"
 
 PngFile::PngFile(const std::string &path) :

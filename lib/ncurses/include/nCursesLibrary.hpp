@@ -14,7 +14,7 @@
 #include "lib/ncurses/include/Graphical/Circle.hpp"
 #include "lib/ncurses/include/Graphical/Sprite.hpp"
 #include "lib/ncurses/include/Graphical/Text.hpp"
-#include "core/include/ArcadeCore/Utils/PngFile.hpp"
+#include "lib/ncurses/include/PngFile.hpp"
 
 class nCursesLibrary : public DisplayLibrary {
     public:

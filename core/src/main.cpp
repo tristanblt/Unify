@@ -12,22 +12,25 @@
 #include "core/include/ArcadeCore/ArcadeCore.hpp"
 #include <iostream>
 
+#define EPITECH_EXIT_SUCCESS 0
+#define EPITECH_EXIT_FAILURE 84
+
 int main(int argc, char const *argv[])
 {
     ArcadeCore arcadeCore;
     DisplayLibrary *lib;
 
     if (argc < 2)
-        return (84);
+        return (EPITECH_EXIT_FAILURE);
     try {
         lib = arcadeCore.importGraphicalLibs(std::string(argv[1]));
         if (lib == NULL)
-            return (84);
+            return (EPITECH_EXIT_FAILURE);
         while (arcadeCore.launchCore(lib));
     }
     catch (const std::exception &e) {
         std::cerr << e.what() << std::endl;
-        return (84);
+        return (EPITECH_EXIT_FAILURE);
     }
-    return (0);
+    return (EPITECH_EXIT_SUCCESS);
 }

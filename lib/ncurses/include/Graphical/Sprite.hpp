@@ -8,7 +8,7 @@
 #ifndef Sprite_HPP_
 #define Sprite_HPP_
 
-#include "core/include/ArcadeCore/Utils/PngFile.hpp"
+#include "lib/ncurses/include/PngFile.hpp"
 #include "lib/include/Graphical/ISprite.hpp"
 #include "lib/include/Graphical/IWindow.hpp"
 #include "lib/ncurses/include/Graphical/Window.hpp"

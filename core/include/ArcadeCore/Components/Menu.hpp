@@ -11,6 +11,7 @@
 #include "games/include/Start.hpp"
 #include "core/include/DLLoader.hpp"
 #include "core/include/ArcadeCore/Utils/Enums.hpp"
+#include "core/include/ArcadeCore/FileManager.hpp"
 #include <vector>
 #include <fstream>
 

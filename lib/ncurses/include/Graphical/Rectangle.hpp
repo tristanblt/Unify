@@ -33,8 +33,6 @@ class Rectangle : public IRectangle {
         int _width;
         int _height;
         Color _color;
-        // short _nColor;
-        // short _colorPair;
 };
 
 #endif /* !RECTANGLENCURSE_HPP_ */

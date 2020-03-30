@@ -47,27 +47,21 @@ void Window::display()
     int colorPair = -1;
     _width = COLS;
     _height = LINES * 2;
-
-    for (size_t i = 0; _height * 2 > _colorBuffer.size(); i++)
+    for (size_t i = 0; _height > _colorBuffer.size(); i++)
         _colorBuffer.push_back(std::vector<Color> ());
     for (size_t i = 0; i < _colorBuffer.size(); i++)
         for (size_t j = 0; _width > _colorBuffer[i].size(); j++)
             _colorBuffer[i].push_back({0, 0, 0, 255});
-    if (LINES < 80 || LINES > 100 || COLS < 330|| COLS > 350) {
-        mvprintw(LINES/2, COLS/2, "Please resize your terminal to be between 330 cols/80 lines and 350 cols/100 lines.");
-        mvprintw(LINES/2 + 1, COLS/2, "Current size : %i cols x %i lines.", COLS, LINES);
-    } else {
-        for (size_t i = 0; i < _colorBuffer.size(); i+=2, a++) {
-            for (size_t j = 0; j < _colorBuffer[i].size(); j++) {
-                colorPair = getColorPair(_colorBuffer[i][j], _colorBuffer[i+1][j]);
-                attron(COLOR_PAIR(colorPair));
-                #ifndef ARCADE_LINUX
-                mvaddstr(a, j, UPPER_BLOCK);
-                #else
-                mvaddwstr(a, j, UPPER_BLOCK);
-                #endif
-                attroff(COLOR_PAIR(colorPair));
-            }
+    for (size_t i = 0; i < _height; i+=2, a++) {
+        for (size_t j = 0; j < _width; j++) {
+            colorPair = getColorPair(_colorBuffer[i][j], _colorBuffer[i+1][j]);
+            attron(COLOR_PAIR(colorPair));
+            #ifndef ARCADE_LINUX
+            mvaddstr(a, j, UPPER_BLOCK);
+            #else
+            mvaddwstr(a, j, UPPER_BLOCK);
+            #endif
+            attroff(COLOR_PAIR(colorPair));
         }
     }
     refresh();
@@ -115,6 +109,8 @@ int Window::getColorPair(Color fg, Color bg)
 
 void Window::drawBufferPixel(int x, int y, Color color)
 {
+    if (y >= _height || x >= _width || x < 0 || y < 0)
+        return;
     _colorBuffer[y][x] = color;
 }
 

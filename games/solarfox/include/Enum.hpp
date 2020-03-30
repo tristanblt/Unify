@@ -27,4 +27,10 @@ enum Instance {
     SF_GAME
 };
 
+enum BehaveReturn {
+    B_END,
+    B_EVENT,
+    B_OK
+};
+
 #endif /* !ENUM_HPP_ */
