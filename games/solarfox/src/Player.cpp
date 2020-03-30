@@ -8,7 +8,8 @@
 #include "games/solarfox/include/Player.hpp"
 
 Player::Player(int level, IBuilder *b):
-_objectIdx("Player"), _dir(Orientation::O_RIGHT), _speed(VH(0.5)), _pos({VW(50), VH(50)}), _size({VH(4), VH(4)})
+_objectIdx("Player"), _dir(Orientation::O_RIGHT), _speed(VH(0.5)), _pos({VW(50), VH(50)}), _size({VH(4), VH(4)}),
+_shotObjectIdx("PlayerS"), _shotDir(_dir), _shotPos(_pos), _shotInitPos(_pos), _shotSize(_size), _shotActive(false)
 {
     b->spriteInit("Player");
     b->spriteSetSprite("Player", "SF_sheet");
@@ -51,6 +52,49 @@ bool Player::updatePos(float offset, IBuilder *b)
     return (false);
 }
 
+void Player::updateShot(float offset, IBuilder  *b)
+{
+    if (_shotActive == false && b->getEvents().keyboardState[Key::E] == InputState::CLICK) {
+        _shotPos.x = _pos.x;
+        _shotPos.y = _pos.y;
+        _shotInitPos.x = _pos.x;
+        _shotInitPos.y = _pos.y;
+        _shotActive = true;
+        _shotDir = _dir;
+    } else if (_shotActive == true) {
+        if (_shotDir == Orientation::O_UP) {
+            if (_shotInitPos.y - _shotPos.y > VH(12))
+                _shotActive = false;
+            _shotPos.y -= offset;
+        } else if (_shotDir == Orientation::O_DOWN) {
+            if (_shotPos.y - _shotInitPos.y > VH(12))
+                _shotActive = false;
+            _shotPos.y += offset;
+        } else if (_shotDir == Orientation::O_LEFT) {
+            if (_shotInitPos.x - _shotPos.x > VH(12))
+                _shotActive = false;
+            _shotPos.x -= offset;
+        } else if (_shotDir == Orientation::O_RIGHT) {
+            if (_shotPos.x - _shotInitPos.x > VH(12))
+                _shotActive = false;
+            _shotPos.x += offset;
+        }
+        b->spriteSetSize(_shotObjectIdx, _size, {512, 0, 128, 128});
+        b->spriteSetPosition(_shotObjectIdx, _shotPos);
+        b->spriteDraw(_shotObjectIdx);
+    }
+}
+
+bool Player::shotCollide(Box body, IBuilder *b) {
+    if (_shotActive == false)
+        return (false);
+    if (b->GameObjectCollideToBox(_shotObjectIdx, body)) {
+        _shotActive = false;
+        return (true);
+    }
+    return (false);
+}
+
 bool Player::draw(IBuilder *b)
 {
     setNewDir(b);
@@ -61,6 +105,7 @@ bool Player::draw(IBuilder *b)
         if (!updatePos(_speed* b->getEvents().deltaTime, b))
             return (false);
     }
+    updateShot(_speed * 3 * b->getEvents().deltaTime, b);
     b->spriteSetPosition("Player", _pos);
     b->spriteDraw("Player");
     return (true);

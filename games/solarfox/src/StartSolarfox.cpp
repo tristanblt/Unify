@@ -18,21 +18,21 @@ StartSolarfox::~StartSolarfox()
 
 void StartSolarfox::start(IBuilder *b)
 {
-    b->loadAsset("games/solarfox/assets/octuple-max.ttf", "SF_font", AssetType::FONT);
-    b->loadAsset("games/solarfox/assets/imgs/sheet.png", "SF_sheet", AssetType::SPRITE);
-    b->loadAsset("games/solarfox/assets/imgs/space1.png", "Background1", AssetType::SPRITE);
-    b->loadAsset("games/solarfox/assets/imgs/space2.png", "Background2", AssetType::SPRITE);
-    b->loadAsset("games/solarfox/assets/imgs/space3.png", "Background3", AssetType::SPRITE);
-    b->loadAsset("games/solarfox/assets/imgs/space4.png", "Background4", AssetType::SPRITE);
-    b->loadAsset("games/solarfox/assets/imgs/space5.png", "Background5", AssetType::SPRITE);
-    std::srand(std::time(nullptr));
-    _gameInstance = new GameInstance(1, 0, b);
+    // b->loadAsset("games/solarfox/assets/octuple-max.ttf", "SF_font", AssetType::FONT);
+    // b->loadAsset("games/solarfox/assets/imgs/sheet.png", "SF_sheet", AssetType::SPRITE);
+    // b->loadAsset("games/solarfox/assets/imgs/space1.png", "Background1", AssetType::SPRITE);
+    // b->loadAsset("games/solarfox/assets/imgs/space2.png", "Background2", AssetType::SPRITE);
+    // b->loadAsset("games/solarfox/assets/imgs/space3.png", "Background3", AssetType::SPRITE);
+    // b->loadAsset("games/solarfox/assets/imgs/space4.png", "Background4", AssetType::SPRITE);
+    // b->loadAsset("games/solarfox/assets/imgs/space5.png", "Background5", AssetType::SPRITE);
+    // _gameInstance = new GameInstance(1, 0, b);
 }
 
 void StartSolarfox::update(IBuilder *b)
 {
-    if (_solarFoxState == Instance::SF_GAME)
-        _gameInstance->occurs(b);
+    // if (_solarFoxState == Instance::SF_GAME)
+    //     if (_gameInstance->occurs(b) == SF_GS_LOOSE)
+    //         _solarFoxState = Instance::SF_MENU;
 }
 
 void StartSolarfox::finish(IBuilder *b)

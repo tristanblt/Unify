@@ -527,7 +527,7 @@ void Builder::updateEvents()
 
 /* ---------------------------------- time ---------------------------------- */
 
-time_t Builder::getTime() const{
+time_t Builder::getTime() const {
     return (_tick);
 }
 

@@ -9,13 +9,9 @@
 #include "games/solarfox/include/components/GameInstance.hpp"
 
 BasicEnemy::BasicEnemy(int level, IBuilder *b):
-_speed(VH(0.25) + VH(level * 0.05f)), _fireChance((level * 4.0f + 16.0f > 80.0f)? 80.0f : level * 4.0f + 16.0f), _way(O_UP/*static_cast<Orientation>(rand() % 4)*/), _pos({0, 0}), _size({VH(4), VH(4)}), _frame({0, 0, 128, 128})
+_speed(VH(0.25) + VH(level * 0.05f)), _fireChance((level * 4.0f + 16.0f > 80.0f)? 80.0f : level * 4.0f + 16.0f), _way(static_cast<Orientation>(rand() % 4)), _pos({0, 0}), _size({VH(4), VH(4)}), _frame({0, 0, 128, 128})
 {
-    int name_idx = 0;
-
-    while (b->objectExists("BasicE" + std::to_string(name_idx)))
-        name_idx++;
-    _objectIdx = "BasicE" + std::to_string(name_idx);
+    _objectIdx = "BasicE";
     if (_way == Orientation::O_RIGHT) {
         _frame.x += 128;
         _pos.y = rand() % static_cast<int>(VH(93));
@@ -23,7 +19,7 @@ _speed(VH(0.25) + VH(level * 0.05f)), _fireChance((level * 4.0f + 16.0f > 80.0f)
         _mv = (rand() % 2 == 0) ? Orientation::O_DOWN : Orientation::O_UP;
     } else if (_way == Orientation::O_DOWN) {
         _frame.x += 256;
-        _pos.y = VH(1) + _size.y;
+        _pos.y = VH(1);
         _pos.x = rand() % static_cast<int>(VH(93)) + (VW(100) - VH(93)) / 2;
         _mv = (rand() % 2 == 0) ? Orientation::O_LEFT : Orientation::O_RIGHT;
     } else if (_way == Orientation::O_LEFT) {
@@ -37,8 +33,6 @@ _speed(VH(0.25) + VH(level * 0.05f)), _fireChance((level * 4.0f + 16.0f > 80.0f)
         _mv = (rand() % 2 == 0) ? Orientation::O_LEFT : Orientation::O_RIGHT;
     }
     _lastFire = b->getTime();
-    b->spriteInit(_objectIdx);
-    b->spriteSetSprite(_objectIdx, "SF_sheet");
 }
 
 BasicEnemy::~BasicEnemy()
@@ -80,10 +74,12 @@ BehaveReturn BasicEnemy::behave(GameInstance *game, IBuilder *b)
     b->spriteSetSize(_objectIdx, _size, _frame);
     b->spriteSetPosition(_objectIdx, _pos);
     b->spriteDraw(_objectIdx);
-    if (b->getTime() - _lastFire > 1.5) {
-        _lastFire = b->getTime();
-        if (rand() % 101 < _fireChance)
+    if (b->getTime() - _lastFire > 3.5) {
+        std::cout << rand() % 101 << std::endl;
+            _lastFire = b->getTime();
+        if (rand() % 101 < _fireChance) {
             game->addEntity(new BasicShot(_speed - VH(0.20), _way, _pos, b));
+        }
         else std::cout << std::endl;
     }
     return (B_OK);

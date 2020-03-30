@@ -18,15 +18,24 @@ class Player {
         ~Player();
 
         bool draw(IBuilder *b);
+        bool shotCollide(Box body, IBuilder *b);
     protected:
         bool updatePos(float offset, IBuilder *b);
         void setNewDir(IBuilder *b);
+        void updateShot(float offset, IBuilder  *b);
     private:
         std::string _objectIdx;
         Orientation _dir;
         float _speed;
         Vector2 _pos;
         Vector2 _size;
+
+        std::string _shotObjectIdx;
+        Orientation _shotDir;
+        Vector2 _shotPos;
+        Vector2 _shotInitPos;
+        Vector2 _shotSize;
+        bool _shotActive;
 };
 
 #endif /* !PLAYER_HPP_ */

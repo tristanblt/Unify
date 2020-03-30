@@ -90,12 +90,14 @@ class Builder: public IBuilder {
 
 /* ---------------------------------- time ---------------------------------- */
 
-        time_t getTime() const;
+        time_t getTime() const ;
 
 /* --------------------------------- assets --------------------------------- */
 
         void loadAsset(const std::string &path, const std::string &name, AssetType type);
         void unloadAsset(const std::string &name, AssetType type);
+        void lockUnifyGameObjects();
+        void unlockUnifyGameObjects();
 
 /* ---------------------------------- utils --------------------------------- */
 
@@ -105,8 +107,6 @@ class Builder: public IBuilder {
 /* -------------------------- game objects managing ------------------------- */
 
         void deleteGameObject(const std::string &name);
-        void lockUnifyGameObjects();
-        void unlockUnifyGameObjects();
 
 /* -------------------------------------------------------------------------- */
 /*                                     ui                                     */
@@ -129,7 +129,7 @@ class Builder: public IBuilder {
         void spriteButtonSetSprite(const std::string &name, const std::string &idx);
 
         void switchButtonInit(const std::string &name);
-    
+
         bool buttonDraw(const std::string &name);
 
         void sliderInit(const std::string &name);

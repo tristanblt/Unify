@@ -11,6 +11,7 @@
 #include "games/solarfox/include/enemies/BasicEnemy.hpp"
 #include "games/solarfox/include/components/IComponent.hpp"
 #include "games/solarfox/include/Player.hpp"
+#include "games/solarfox/include/Coin.hpp"
 #include <algorithm>
 
 class GameInstance: public IComponent {
@@ -20,14 +21,17 @@ class GameInstance: public IComponent {
 
         GameState occurs(IBuilder *b);
         void addEntity(IEntity *e);
+        Player *getPlayer();
+        void incrementScore();
     protected:
         void setMap(IBuilder *b);
         void setEnemies(IBuilder *b);
-        void drawBackground(IBuilder *b);
+        void drawBackground(IBuilder *b, bool part);
 
     private:
         int _level;
         int _score;
+        int _nbCoins;
         std::string _backgroundIdx;
         std::vector<IEntity *> _entities;
         Player *_player;

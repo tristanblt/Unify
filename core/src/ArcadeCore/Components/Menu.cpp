@@ -230,6 +230,8 @@ DLLoader<Start> *Menu::update(IBuilder *b)
         drawCarousel(b);
     else
         drawSettings(b);
+    std::cout << "a" << std::endl;
+    
     return (tmp);
 }
 
