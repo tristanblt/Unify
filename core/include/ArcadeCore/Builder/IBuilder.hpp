@@ -14,7 +14,7 @@
 #include <cstdlib>
 #include <cmath>
 
-#include "lib/include/DisplayLibrary.hpp"
+#include "lib/include/ADisplayLibrary.hpp"
 #include "core/include/ArcadeCore/Utils/Structs.hpp"
 #include "core/include/ArcadeCore/Utils/Responsive.hpp"
 #include "core/include/ArcadeCore/CoreException.hpp"
@@ -103,6 +103,14 @@ class IBuilder {
 /* -------------------------- game objects managing ------------------------- */
 
         virtual void deleteGameObject(const std::string &name) = 0;
+
+/* ---------------------------------- audio --------------------------------- */
+
+        virtual void playSound(const std::string &name) = 0;
+        virtual void playMusic(const std::string &name) = 0;
+        virtual void stopMusic(const std::string &name) = 0;
+        virtual void setVolume(int volume) = 0;
+        virtual int getVolume() const = 0;
 
 /* -------------------------------------------------------------------------- */
 /*                                     ui                                     */

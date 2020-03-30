@@ -8,7 +8,7 @@
 #ifndef ArcadeCore_HPP_
 #define ArcadeCore_HPP_
 
-#include "lib/include/DisplayLibrary.hpp"
+#include "lib/include/ADisplayLibrary.hpp"
 #include "lib/include/Graphical/IWindow.hpp"
 #include "lib/include/Graphical/IRectangle.hpp"
 #include "games/include/Start.hpp"
@@ -23,12 +23,12 @@ class ArcadeCore {
         ArcadeCore();
         ~ArcadeCore();
 
-        bool launchCore(DisplayLibrary *library);
+        bool launchCore(ADisplayLibrary *library);
         void startLaunchCore(Builder *builder);
         void loadCoreAssets(IBuilder *builder);
         Start *changeGame(std::string libName);
 
-        DisplayLibrary *importGraphicalLibs(const std::string &libName);
+        ADisplayLibrary *importGraphicalLibs(const std::string &libName);
         void switchGraphicalLibrary(Builder *builder, int i);
         void triggerSwitchGraphicalLibrary(Builder *builder);
         void updateJoyConCursors(IBuilder *b);
@@ -38,7 +38,7 @@ class ArcadeCore {
         CoreState _coreState;
         Menu _menu;
         Layout _layout;
-        std::vector<DisplayLibrary *> _libs;
+        std::vector<ADisplayLibrary *> _libs;
         int _currentLib;
 };
 

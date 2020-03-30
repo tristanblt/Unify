@@ -17,6 +17,7 @@ SDL2Library::SDL2Library()
     _circle = new Circle();
     _text = new Text(&_assets);
     _sprite = new Sprite(&_assets);
+    _audio = new Audio(&_assets);
 }
 
 SDL2Library::~SDL2Library()
@@ -64,7 +65,6 @@ void SDL2Library::updateKeyboardEvents(Events *e)
 
 Events SDL2Library::updateEvents(Events *e)
 {
-
     updateMouseEvents(e, NULL);
     updateKeyboardEvents(e);
     return (*e);
@@ -86,6 +86,12 @@ void SDL2Library::loadAsset(const std::string &path, const std::string &name, As
         _assets[name + "_srfce"] = (void *)f;
         _assets[name] = (void *)t;
     }
+    else if (type == AssetType::AUDIO) {
+        Mix_Chunk *f = Mix_LoadWAV(path.c_str());
+        if (f == NULL)
+            throw SDL2AssetException("could not open '"+path+"'");
+        _assets[name] = (void *)f;
+    }
 }
 
 void SDL2Library::unloadAsset(const std::string &name, AssetType type)
@@ -96,4 +102,6 @@ void SDL2Library::unloadAsset(const std::string &name, AssetType type)
         SDL_DestroyTexture(static_cast<SDL_Texture *>(_assets[name]));
         SDL_FreeSurface(static_cast<SDL_Surface *>(_assets[name + "_srfce"]));
     }
+    else if (type == AssetType::AUDIO)
+        Mix_FreeChunk(static_cast<Mix_Chunk *>(_assets[name]));
 }

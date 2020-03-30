@@ -15,6 +15,7 @@ Window::Window()
 void Window::create()
 {
     TTF_Init();
+    Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096);
     IMG_Init(IMG_INIT_PNG);
     SDL_Init(SDL_INIT_EVERYTHING);
     _window = SDL_CreateWindow("Arcade",

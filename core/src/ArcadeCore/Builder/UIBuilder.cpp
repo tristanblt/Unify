@@ -276,6 +276,10 @@ int Builder::selectorDraw(const std::string &name)
     rectDraw(name + "_rect");
     textSetFont(name + "_text", o->fontIdx);
     textSetFontSize(name + "_text", (windowHeight() * ((float)2 / 100)));
+    if (getEvents().keyboardState[Key::DOWN] == InputState::RELEASED && (size_t)o->selected + 1 < o->items.size())
+        o->selected++;
+    if (getEvents().keyboardState[Key::UP] == InputState::RELEASED && (size_t)o->selected > 0)
+        o->selected--;
     for (auto &elem : o->items) {
         bool state = isMouseInBox({o->displayBox.x, o->displayBox.y + i * height, o->displayBox.w, height});
         rectSetPosition(name + "_rect", {o->displayBox.x, o->displayBox.y + i * height});

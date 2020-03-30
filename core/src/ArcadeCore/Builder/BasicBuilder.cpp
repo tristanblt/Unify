@@ -7,7 +7,7 @@
 
 #include "core/include/ArcadeCore/Builder/Builder.hpp"
 
-Builder::Builder(DisplayLibrary *library):
+Builder::Builder(ADisplayLibrary *library):
 _library(library)
 {
     _unifyLock = false;
@@ -17,7 +17,7 @@ _library(library)
     time(&_tick);
     _tickDiff = 0;
     _events.joyConEvents.cursorPos = {-1, -1};
-
+    _volume = 50;
 }
 
 Builder::~Builder()
@@ -26,7 +26,7 @@ Builder::~Builder()
 
 /* ----------------------------- window managing ---------------------------- */
 
-void Builder::reloadLibrary(DisplayLibrary *newLibrary)
+void Builder::reloadLibrary(ADisplayLibrary *newLibrary)
 {
     windowClose();
     _library = newLibrary;
@@ -579,4 +579,32 @@ void Builder::lockUnifyGameObjects()
 void Builder::unlockUnifyGameObjects()
 {
     _unifyLock = false;
+}
+
+/* ---------------------------------- audio --------------------------------- */
+
+void Builder::playSound(const std::string &name)
+{
+    _library->_audio->playSound(name);
+}
+
+void Builder::playMusic(const std::string &name)
+{
+    _library->_audio->playMusic(name);
+}
+
+void Builder::stopMusic(const std::string &name)
+{
+    _library->_audio->stopMusic(name);
+}
+
+void Builder::setVolume(int volume)
+{
+    _library->_audio->setVolume(volume);
+    _volume = volume;
+}
+
+int Builder::getVolume() const
+{
+    return (_volume);
 }

@@ -17,6 +17,7 @@ SFMLLibrary::SFMLLibrary()
     _circle = new Circle();
     _text = new Text(&_assets);
     _sprite = new Sprite(&_assets);
+    _audio = new Audio(&_assets);
 }
 
 SFMLLibrary::~SFMLLibrary()
@@ -183,6 +184,15 @@ void SFMLLibrary::loadAsset(const std::string &path, const std::string &name, As
         if (!f->loadFromFile(path))
             throw SfmlAssetException("could not open '"+path+"'");
         _assets[name] = (void *)f;
+    }
+    else if (type == AssetType::AUDIO) {
+        sf::SoundBuffer *f = new sf::SoundBuffer();
+        sf::Sound *s = new sf::Sound();
+        if (!f->loadFromFile(path))
+            throw SfmlAssetException("could not open '"+path+"'");
+        s->setBuffer(*f);
+        _assets[name + "_buffer"] = (void *)f;
+        _assets[name] = (void *)s;
     }
 }
 

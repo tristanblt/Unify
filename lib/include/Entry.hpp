@@ -8,6 +8,6 @@
 #ifndef ENTRY_HPP_
 #define ENTRY_HPP_
 
-extern "C" DisplayLibrary *entryPoint();
+extern "C" ADisplayLibrary *entryPoint();
 
 #endif /* !ENTRY_HPP_ */

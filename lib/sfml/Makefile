@@ -13,6 +13,7 @@ SRCS_FILES=	Graphical/Rectangle.cpp					\
 			Graphical/Circle.cpp					\
 			Graphical/Text.cpp						\
 			Graphical/Sprite.cpp					\
+			Audio/Audio.cpp							\
 			SFMLLibrary.cpp							\
 			Entry.cpp								\
 			SfmlExceptions.cpp						\
@@ -24,7 +25,7 @@ OBJ			= 	$(SRC:%.cpp=%.o)
 CXXFLAGS	=	-W -Wall -Wextra -Wshadow	\
 			-I../../	-std=c++11 -fpic
 
-LDFLAGS		= -lsfml-system -lsfml-graphics -lsfml-window
+LDFLAGS		= -lsfml-system -lsfml-graphics -lsfml-audio -lsfml-window
 
 CXX		=	g++
 

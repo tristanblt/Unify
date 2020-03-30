@@ -13,7 +13,7 @@
 
 class Builder: public IBuilder {
     public:
-        Builder(DisplayLibrary *);
+        Builder(ADisplayLibrary *);
         ~Builder();
 
 /* -------------------------------------------------------------------------- */
@@ -22,7 +22,7 @@ class Builder: public IBuilder {
 
 /* ----------------------------- window managing ---------------------------- */
 
-        void reloadLibrary(DisplayLibrary *library);
+        void reloadLibrary(ADisplayLibrary *library);
         bool windowIsOpen();
         void windowClear();
         void windowClose();
@@ -30,8 +30,6 @@ class Builder: public IBuilder {
         void windowDisplay();
         float windowHeight();
         float windowWidth();
-
-
 
 /* ------------------------------- basic draw ------------------------------- */
 
@@ -108,6 +106,14 @@ class Builder: public IBuilder {
         void lockUnifyGameObjects();
         void unlockUnifyGameObjects();
 
+/* ---------------------------------- audio --------------------------------- */
+
+        void playSound(const std::string &name);
+        void playMusic(const std::string &name);
+        void stopMusic(const std::string &name);
+        void setVolume(int volume);
+        int getVolume() const;
+
 /* -------------------------------------------------------------------------- */
 /*                                     ui                                     */
 /* -------------------------------------------------------------------------- */
@@ -151,15 +157,15 @@ class Builder: public IBuilder {
         bool spriteButtonDraw(const std::string &name);
         bool switchButtonDraw(const std::string &name);
 
-    public:
-
     private:
         std::map <std::string, GameObject> _gameObjects;
         Events _events;
         time_t _tick;
         time_t _tickDiff;
-        DisplayLibrary *_library;
+        ADisplayLibrary *_library;
         bool _unifyLock;
+    public:
+        int _volume;
 };
 
 #endif /* !BUILDER_HPP_ */

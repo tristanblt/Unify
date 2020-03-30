@@ -9,16 +9,17 @@
 #define SDL2LIBRARY_HPP_
 
 #include <SDL2/SDL_ttf.h>
-#include "lib/include/DisplayLibrary.hpp"
+#include "lib/include/ADisplayLibrary.hpp"
 #include "lib/sdl2/include/Graphical/Window.hpp"
 #include "lib/sdl2/include/Graphical/Rectangle.hpp"
 #include "lib/sdl2/include/Graphical/Circle.hpp"
 #include "lib/sdl2/include/Graphical/Text.hpp"
 #include "lib/sdl2/include/Graphical/Sprite.hpp"
+#include "lib/sdl2/include/Audio/Audio.hpp"
 #include "core/include/ArcadeCore/Utils/Enums.hpp"
 #include <filesystem>
 
-class SDL2Library : public DisplayLibrary {
+class SDL2Library : public ADisplayLibrary {
     public:
         SDL2Library();
         ~SDL2Library();

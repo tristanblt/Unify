@@ -69,7 +69,7 @@ void Layout::start(IBuilder *b)
 
 void Layout::update(IBuilder *b, CoreState &coreState, const std::string &name)
 {
-    static int a = 50;
+    static int tmpVolume = b->getVolume();
 
     if (coreState == CoreState::CORE_PAUSE) {
         b->rectSetPosition("UnifyLayoutPauseBackground", {VW(0), VH(0)});
@@ -96,9 +96,13 @@ void Layout::update(IBuilder *b, CoreState &coreState, const std::string &name)
         if (b->buttonDraw("UnifyReturnGameButton") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
             coreState = CoreState::CORE_GAME;
 
+        if (b->getEvents().keyboardState[Key::RIGHT] == InputState::RELEASED && tmpVolume < 100)
+            tmpVolume += 5;
+        if (b->getEvents().keyboardState[Key::LEFT] == InputState::RELEASED && tmpVolume > 0)
+            tmpVolume -= 5;
         b->sliderSetWidth("UnifyLayoutAudioSlider", VW(30));
         b->sliderSetPosition("UnifyLayoutAudioSlider", {VW(35), VH(43)});
-        b->sliderDraw("UnifyLayoutAudioSlider", a);
+        b->sliderDraw("UnifyLayoutAudioSlider", tmpVolume);
 
         b->textSetFontSize("UnifyLayoutAudioText", VH(2));
         b->textSetPosition("UnifyLayoutAudioText", {VW(35), VH(40)});
@@ -117,14 +121,19 @@ void Layout::update(IBuilder *b, CoreState &coreState, const std::string &name)
     b->textSetText("UnifyLayoutFooterGameName", name);
     b->textDraw("UnifyLayoutFooterGameName");
 
-    b->spriteButtonSetDisplayBox("UnifyPauseButton", {b->windowWidth() * (19.0f / 20.0f), ((b->windowHeight() - b->windowHeight() / 16.0f)), (b->windowHeight() / 18.0f), (b->windowHeight() / 18.0f)});
+    b->spriteButtonSetDisplayBox("UnifyPauseButton", {b->windowWidth() * (19.0f / 20.0f),
+    ((b->windowHeight() - b->windowHeight() / 16.0f)), (b->windowHeight() / 18.0f), (b->windowHeight() / 18.0f)});
     b->spriteButtonSetSpriteBoxes("UnifyPauseButton", {256, 384, 128, 128}, {0, 384, 128, 128}, {128, 384, 128, 128});
 
     if (coreState == CoreState::CORE_PAUSE && b->getEvents().joyConEvents.buttons1[JOY_OP] == InputState::RELEASED)
         coreState = CoreState::CORE_GAME;    
-    else if ((b->buttonDraw("UnifyPauseButton") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED) ||
-    b->getEvents().joyConEvents.buttons1[JOY_OP] == InputState::RELEASED)
+    else if ((b->buttonDraw("UnifyPauseButton") &&
+    b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED) ||
+    b->getEvents().joyConEvents.buttons1[JOY_OP] == InputState::RELEASED ||
+    b->getEvents().keyboardState[Key::P] == InputState::RELEASED)
         coreState = CoreState::CORE_PAUSE;
-    if (b->getEvents().joyConEvents.buttons1[JOY_MENU] == InputState::RELEASED)
+    if (b->getEvents().joyConEvents.buttons1[JOY_MENU] == InputState::RELEASED ||
+    b->getEvents().keyboardState[Key::M] == InputState::RELEASED)
         coreState = CoreState::CORE_MENU;
+    b->setVolume(tmpVolume);
 }
