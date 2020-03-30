@@ -5,7 +5,7 @@
 ** main
 */
 
-#include "lib/include/DisplayLibrary.hpp"
+#include "lib/include/ADisplayLibrary.hpp"
 #include "lib/include/Graphical/IWindow.hpp"
 #include "lib/include/Graphical/IRectangle.hpp"
 #include "core/include/DLLoader.hpp"
@@ -18,7 +18,7 @@
 int main(int argc, char const *argv[])
 {
     ArcadeCore arcadeCore;
-    DisplayLibrary *lib;
+    ADisplayLibrary *lib;
 
     if (argc < 2)
         return (EPITECH_EXIT_FAILURE);

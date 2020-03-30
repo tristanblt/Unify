@@ -9,7 +9,7 @@
 #include "lib/include/Entry.hpp"
 #include <iostream>
 
-extern "C" DisplayLibrary *entryPoint()
+extern "C" ADisplayLibrary *entryPoint()
 {
     return (new SDL2Library());
 }

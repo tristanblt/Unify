@@ -14,6 +14,7 @@ nCursesLibrary::nCursesLibrary()
     _circle = new Circle();
     _text = new Text(&_assets);
     _sprite = new Sprite(&_assets);
+    _audio = new Audio(&_assets);
 }
 
 nCursesLibrary::~nCursesLibrary()

@@ -8,15 +8,16 @@
 #ifndef NCURSESLIBRARY_HPP_
 #define NCURSESLIBRARY_HPP_
 
-#include "lib/include/DisplayLibrary.hpp"
+#include "lib/include/ADisplayLibrary.hpp"
 #include "lib/ncurses/include/Graphical/Window.hpp"
 #include "lib/ncurses/include/Graphical/Rectangle.hpp"
 #include "lib/ncurses/include/Graphical/Circle.hpp"
 #include "lib/ncurses/include/Graphical/Sprite.hpp"
 #include "lib/ncurses/include/Graphical/Text.hpp"
+#include "lib/ncurses/include/Audio/Audio.hpp"
 #include "lib/ncurses/include/PngFile.hpp"
 
-class nCursesLibrary : public DisplayLibrary {
+class nCursesLibrary : public ADisplayLibrary {
     public:
         nCursesLibrary();
         ~nCursesLibrary();

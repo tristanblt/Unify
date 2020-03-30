@@ -27,16 +27,19 @@ void ArcadeCore::loadCoreAssets(IBuilder *builder)
     builder->loadAsset("assets/imgs/logo.png", "UnifyLogo", AssetType::SPRITE);
     builder->loadAsset("assets/fonts/UnifyFontImg.png", "UnifyFontImg", AssetType::SPRITE);
     builder->loadAsset("assets/imgs/wii-cursors.png", "UnifyJoyConsCursors", AssetType::SPRITE);
+    builder->loadAsset("assets/audio/Klick.wav", "UnifyClickSound", AssetType::AUDIO);
+    builder->loadAsset("assets/audio/RunGame.wav", "UnifyRunGameSound", AssetType::AUDIO);
+    builder->loadAsset("assets/audio/Border.wav", "UnifyBorderSound", AssetType::AUDIO);
 }
 
-DisplayLibrary *ArcadeCore::importGraphicalLibs(const std::string &firstLib)
+ADisplayLibrary *ArcadeCore::importGraphicalLibs(const std::string &firstLib)
 {
     FileManager fm("assets/files/displaylibs.config");
-    DisplayLibrary *ret = NULL;
+    ADisplayLibrary *ret = NULL;
 
     for (size_t i = 0; i < fm._file.size(); i++) {
-        DLLoader<DisplayLibrary> *loader = new DLLoader<DisplayLibrary>(fm._file[i].c_str());
-        DisplayLibrary *tmp = loader->getInstance();
+        DLLoader<ADisplayLibrary> *loader = new DLLoader<ADisplayLibrary>(fm._file[i].c_str());
+        ADisplayLibrary *tmp = loader->getInstance();
         if (fm._file[i] == firstLib) {
             ret = tmp;
             _currentLib = i;
@@ -112,9 +115,11 @@ void ArcadeCore::manageMenuAndGame(Builder *b, DLLoader<Start> *&gameLib, Start 
             game->update(b);
         _layout.update(b, _coreState, game->getName());
     }
+    if (b->getEvents().keyboardState[Key::ESCAPE] == InputState::RELEASED)
+        b->windowClose();
 }
 
-bool ArcadeCore::launchCore(DisplayLibrary *library)
+bool ArcadeCore::launchCore(ADisplayLibrary *library)
 {
     Start *game = NULL;
     DLLoader<Start> *gameLib;

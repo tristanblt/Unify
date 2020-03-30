@@ -48,11 +48,17 @@ void Menu::drawHeader(IBuilder *b)
     b->spriteButtonSetDisplayBox("UnifyPowerButton", {b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 15.0f * 12.6f, b->windowWidth() / 30.0f, b->windowWidth() / 30.0f});
     b->spriteButtonSetSpriteBoxes("UnifyPowerButton", {256, 128, 128, 128}, {0, 128, 128, 128}, {128, 128, 128, 128});
     if (_state == MenuState::MENU_CAROUSSEL) {
-        if (b->buttonDraw("UnifySettingsButton") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
+        if ((b->buttonDraw("UnifySettingsButton") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED) ||
+        b->getEvents().keyboardState[Key::L] == InputState::RELEASED) {
             _state = MenuState::MENU_SETTINGS;
+            b->playSound("UnifyBorderSound");
+        }
     } else {
-        if (b->buttonDraw("UnifyBackButton") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
+        if ((b->buttonDraw("UnifyBackButton") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED) ||
+        b->getEvents().keyboardState[Key::L] == InputState::RELEASED) {
             _state = MenuState::MENU_CAROUSSEL;
+            b->playSound("UnifyBorderSound");
+        }
     }
     if (b->buttonDraw("UnifyRestartButton") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED) {
         _interruptType = true;
@@ -66,6 +72,9 @@ void Menu::drawHeader(IBuilder *b)
 
 void Menu::drawCarousel(IBuilder *b)
 {
+    bool oneText = false;
+    static size_t lastIdx = 0;
+
     _coversOffset += b->getEvents().keyboardState[Key::LEFT] == InputState::HOLD ? VW(1) : 0;
     _coversOffset += b->getEvents().keyboardState[Key::RIGHT] == InputState::HOLD ? -VW(1) : 0;
     if (b->isMouseInBox({0, VH(20), VW(100), VH(55)})) {
@@ -104,15 +113,25 @@ void Menu::drawCarousel(IBuilder *b)
             );
             b->radiusRectDraw("UnifyMenuCarouselCoverEmpty");
         }
-        if (color > 200 && i < _covers.size()) {
+        if (color > 200 && !oneText) {
+            if (i != lastIdx) {
+                lastIdx = i;
+                b->playSound("UnifyClickSound");
+            }
+        }
+        if (color > 200 && i < _covers.size() && !oneText) {
             b->textSetText("UnifyMenuCarouselCoverTitle", _covers[i].gameName);
             b->textSetPosition("UnifyMenuCarouselCoverTitle", {(VW(100) - (0.5f * _covers[i].gameName.length() * (VH(3)))) * 0.49f, VH(20) * 3.12f});
             b->textSetFontSize("UnifyMenuCarouselCoverTitle", static_cast<int>(VH(3)));
             b->textDraw("UnifyMenuCarouselCoverTitle");
-            if (b->isMouseInBox({(VH(35)) * i + _coversOffset + VH(17), VH(24), VH(33), VH(33), }) &&
+            if ((b->isMouseInBox({(VH(35)) * i + _coversOffset + VH(17), VH(24), VH(33), VH(33), }) &&
             (b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED ||
-            b->getEvents().joyConEvents.buttons1[JoyConButtons::JOY_A] == InputState::RELEASED))
+            b->getEvents().joyConEvents.buttons1[JoyConButtons::JOY_A] == InputState::RELEASED)) ||
+            b->getEvents().keyboardState[Key::SPACE] == InputState::RELEASED) {
                 _currentGame = _covers[i].gameLib;
+                b->playSound("UnifyRunGameSound");
+            }
+            oneText = true;
         }
     }
 }
@@ -120,14 +139,18 @@ void Menu::drawCarousel(IBuilder *b)
 void Menu::drawSettings(IBuilder *b)
 {
     int result;
-    static int a = 50;
+    static int tmpVolume = b->getVolume();
 
     b->selectorSetDisplayBox("UnifySettingsSelector", {0, VH(20), VW(30), VH(55)});
     result = b->selectorDraw("UnifySettingsSelector");
     if (result == 0) {
+        if (b->getEvents().keyboardState[Key::RIGHT] == InputState::RELEASED && tmpVolume < 100)
+            tmpVolume += 5;
+        if (b->getEvents().keyboardState[Key::LEFT] == InputState::RELEASED && tmpVolume > 0)
+            tmpVolume -= 5;
         b->sliderSetWidth("UnifySettingsAudioSlider", VW(30));
         b->sliderSetPosition("UnifySettingsAudioSlider", {VW(35), VH(30)});
-        b->sliderDraw("UnifySettingsAudioSlider", a);
+        b->sliderDraw("UnifySettingsAudioSlider", tmpVolume);
         b->textSetFontSize("UnifySettingsAudioText", VH(2));
         b->textSetPosition("UnifySettingsAudioText", {VW(35), VH(25)});
         b->textDraw("UnifySettingsAudioText");
@@ -138,6 +161,7 @@ void Menu::drawSettings(IBuilder *b)
         b->textSetFontSize("UnifySettingsCredits", VH(2));
         b->textDraw("UnifySettingsCredits");
     }
+    b->setVolume(tmpVolume);
 }
 
 void Menu::start(IBuilder *b)

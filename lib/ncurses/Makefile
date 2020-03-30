@@ -15,6 +15,7 @@ SRCS_FILES=	Graphical/Rectangle.cpp							\
 			Graphical/Text.cpp								\
 			Graphical/Sprite.cpp							\
 			Graphical/Bitcrush.cpp							\
+			Audio/Audio.cpp									\
 			nCursesLibrary.cpp								\
 			Entry.cpp										\
 			PngFile.cpp										\

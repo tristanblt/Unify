@@ -2,11 +2,11 @@
 ** EPITECH PROJECT, 2020
 ** OOP_arcade_2019
 ** File description:
-** DisplayLibrary
+** ADisplayLibrary
 */
 
-#ifndef DisplayLibrary_HPP_
-#define DisplayLibrary_HPP_
+#ifndef ADisplayLibrary_HPP_
+#define ADisplayLibrary_HPP_
 
 #include <memory>
 #include <map>
@@ -17,17 +17,19 @@
 #include "Graphical/ICircle.hpp"
 #include "Graphical/IText.hpp"
 #include "Graphical/ISprite.hpp"
+#include "Audio/IAudio.hpp"
 #include "core/include/ArcadeCore/Utils/Enums.hpp"
 
-class DisplayLibrary {
+class ADisplayLibrary {
     public:
-        ~DisplayLibrary() = default;
+        ~ADisplayLibrary() = default;
 
         IRectangle *_rect;
         ICircle *_circle;
         IWindow *_window;
         IText *_text;
         ISprite *_sprite;
+        IAudio *_audio;
 
         virtual void loadAsset(const std::string &path, const std::string &name, AssetType type) = 0;
         virtual void unloadAsset(const std::string &name, AssetType type) = 0;
@@ -37,4 +39,4 @@ class DisplayLibrary {
     private:
 };
 
-#endif /* !DisplayLibrary_HPP_ */
+#endif /* !ADisplayLibrary_HPP_ */

@@ -8,15 +8,16 @@
 #ifndef SFMLLIBRARY_HPP_
 #define SFMLLIBRARY_HPP_
 
-#include "lib/include/DisplayLibrary.hpp"
+#include "lib/include/ADisplayLibrary.hpp"
 #include "lib/sfml/include/Graphical/Window.hpp"
 #include "lib/sfml/include/Graphical/Rectangle.hpp"
 #include "lib/sfml/include/Graphical/Circle.hpp"
 #include "lib/sfml/include/Graphical/Text.hpp"
 #include "lib/sfml/include/Graphical/Sprite.hpp"
+#include "lib/sfml/include/Audio/Audio.hpp"
 #include "core/include/ArcadeCore/Utils/Enums.hpp"
 
-class SFMLLibrary : public DisplayLibrary {
+class SFMLLibrary : public ADisplayLibrary {
     public:
         SFMLLibrary();
         ~SFMLLibrary();
