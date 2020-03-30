@@ -10,7 +10,7 @@
 
 #include "games/include/Start.hpp"
 #include "games/include/GameClock.hpp"
-// #include <chrono>
+#include "games/nibbler/include/NibblerMap.hpp"
 
 #define MW(n) (_map.w * n / 100)
 #define MH(n) (_map.h * n / 100)
@@ -28,19 +28,27 @@ class StartNibbler : public Start {
         void setMap(const Vector2 &, const Vector2 &);
         void setDirection(IBuilder *);
         void setSpeed(const Vector2 &);
-        void setPosition(/*const Vector2 &*/);
+        void setPosition();
         void setFoodPosition(void);
         void hasEaten(void);
         void checkDeath(bool isDead = false);
+
+        void drawSnake(IBuilder *);
+        void drawBody (IBuilder *, Vector2, Vector2, Vector2);
     private:
         Box _map;
         float _scale;
         size_t _foodCount;
         Box _head;
         Box _food;
+        bool _bonus;
+        bool _hasBonus;
+        float _im;
         Vector2 _speed;
         std::vector<Vector2> _tail;
         GameClock _clock;
+        GameClock _bonusClock;
+        NibblerMap _mapTiles;
 };
 
 #endif /* !StartNibbler_HPP_ */
