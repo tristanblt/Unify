@@ -26,7 +26,7 @@ StartNibbler::~StartNibbler()
 void StartNibbler::start(IBuilder *b)
 {
     srand(time(NULL));
-    setMap({VW(10), VH(10)}, {VW(80), VW(40)});
+    setMap({VW(10), VH(10)}, {VH(140), VH(70)});
     _scale = MW(2);
     int cols  = MW(100) / _scale;
     int lines = MH(100) / _scale;
@@ -61,7 +61,7 @@ void StartNibbler::start(IBuilder *b)
     b->spriteSetSprite("block", "SnakeSpritesheet");
     b->spriteSetSize("block", {_scale, _scale}, {0, 80, 16, 16});
     b->spriteSetPosition("block", {_map.x, _map.y});
-    
+
     b->spriteInit("border");
     b->spriteSetSprite("border", "SnakeSpritesheet");
     b->spriteSetSize("border", {_scale, _scale}, {16, 64, 16, 16});

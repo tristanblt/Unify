@@ -21,8 +21,10 @@ class Coin: public IEntity {
     protected:
     private:
         Vector2 _pos;
+        float _posF;
         Vector2 _size;
         std::string _objectIdx;
+        time_t _time;
 };
 
 #endif /* !COIN_HPP_ */

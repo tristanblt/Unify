@@ -9,7 +9,7 @@
 #include "games/solarfox/include/components/GameInstance.hpp"
 
 Coin::Coin(Vector2 pos, IBuilder *b):
-_pos(pos), _size({VH(3), VH(3)}), _objectIdx("Coin")
+_pos(pos), _posF(0), _size({VH(3), VH(3)}), _objectIdx("Coin"), _time(b->getTime())
 {
 }
 
@@ -23,8 +23,17 @@ BehaveReturn Coin::behave(GameInstance *game, IBuilder *b)
         game->incrementScore();
         return (B_END);
     }
-    b->spriteSetSize(_objectIdx, _size, {0, 512, 128, 128});
+    if (b->getTime() - _time > 0.001) {
+        _posF = (_posF > 512) ? 0 : _posF + 128;
+        _time = b->getTime();
+    }
+    b->spriteSetSize(_objectIdx, _size, {_posF, 512, 128, 128});
     b->spriteSetPosition(_objectIdx, _pos);
     b->spriteDraw(_objectIdx);
     return (B_OK);
+}
+
+const std::string &Coin::getIdx() const
+{
+    return (_objectIdx);
 }

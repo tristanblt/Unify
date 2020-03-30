@@ -22,13 +22,13 @@ Player::~Player()
 
 void Player::setNewDir(IBuilder *b)
 {
-    if (_dir != Orientation::O_DOWN && b->getEvents().keyboardState[Key::Z] == InputState::CLICK)
+    if (_dir != Orientation::O_DOWN && b->getEvents().keyboardState[Key::UP] == InputState::CLICK)
         _dir = Orientation::O_UP;
-    else if (_dir != Orientation::O_UP && b->getEvents().keyboardState[Key::S] == InputState::CLICK)
+    else if (_dir != Orientation::O_UP && b->getEvents().keyboardState[Key::DOWN] == InputState::CLICK)
         _dir = Orientation::O_DOWN;
-    else if (_dir != Orientation::O_RIGHT && b->getEvents().keyboardState[Key::Q] == InputState::CLICK)
+    else if (_dir != Orientation::O_RIGHT && b->getEvents().keyboardState[Key::LEFT] == InputState::CLICK)
         _dir = Orientation::O_LEFT;
-    else if (_dir != Orientation::O_LEFT && b->getEvents().keyboardState[Key::D] == InputState::CLICK)
+    else if (_dir != Orientation::O_LEFT && b->getEvents().keyboardState[Key::RIGHT] == InputState::CLICK)
         _dir = Orientation::O_RIGHT;
 }
 
@@ -98,7 +98,7 @@ bool Player::shotCollide(Box body, IBuilder *b) {
 bool Player::draw(IBuilder *b)
 {
     setNewDir(b);
-    if (b->getEvents().keyboardState[Key::SPACE] == InputState::HOLD) {
+    if (b->getEvents().keyboardState[Key::A] == InputState::HOLD) {
         if (!updatePos((_speed + 3.0) * b->getEvents().deltaTime, b))
             return (false);
     } else {

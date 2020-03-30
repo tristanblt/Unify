@@ -8,7 +8,7 @@
 #include "games/solarfox/include/components/GameInstance.hpp"
 
 GameInstance::GameInstance(int level, int score, IBuilder *b):
-_level(level), _score(score), _player(new Player(level, b))
+_level(level), _score(score), _nbCoins(0), _player(new Player(level, b))
 {
     if (!b->objectExists("BasicE")) {
         b->spriteInit("BasicE");
@@ -45,27 +45,20 @@ void GameInstance::setMap(IBuilder *b)
     b->textSetFont("Level", "SF_font");
     b->textSetColor("Level", b->hexToColor(0xFFFFFFFF));
 
-
+    for (int y = 0; y < 9; y++) {
+        for (int x = 0; x < 9; x++) {
+            if (rand() % 101 < (_level * 5 + 15 > 90? 90 : _level * 5 + 15)) {
+                _entities.push_back(new Coin({(VW(100) - VH(93)) / 2 + VH(15) + VH(7.5) * x, VH(15) + VH(7.5) * y}, b));
+                _nbCoins++;
+            }
+        }
+    }
 }
 
 void GameInstance::setEnemies(IBuilder *b)
 {
-    _entities.push_back(new BasicEnemy(_level, b));
-    _entities.push_back(new BasicEnemy(_level, b));
-    _entities.push_back(new BasicEnemy(_level, b));
-    _entities.push_back(new BasicEnemy(_level, b));
-    _entities.push_back(new BasicEnemy(_level, b));
-    _entities.push_back(new BasicEnemy(_level, b));
-    _entities.push_back(new BasicEnemy(_level, b));
-    _entities.push_back(new BasicEnemy(_level, b));
-    _entities.push_back(new BasicEnemy(_level, b));
-    _entities.push_back(new BasicEnemy(_level, b));
-    _entities.push_back(new BasicEnemy(_level, b));
-    _entities.push_back(new BasicEnemy(_level, b));
-    _entities.push_back(new BasicEnemy(_level, b));
-    _entities.push_back(new BasicEnemy(_level, b));
-    _entities.push_back(new BasicEnemy(_level, b));
-    _entities.push_back(new Coin({VH(50), VH(50)}, b));
+    for (int i = 1 + _level; i > 0; i--)
+        _entities.push_back(new BasicEnemy(_level, b));
 }
 
 void GameInstance::drawBackground(IBuilder *b, bool part)
@@ -113,9 +106,9 @@ GameState GameInstance::occurs(IBuilder *b)
 {
     BehaveReturn ret;
 
+    if (_nbCoins == 0)
+        return (GameState::SF_GS_WIN);
     drawBackground(b, true);
-    if (_player->draw(b) == false)
-        return (GameState::SF_GS_LOOSE);
     for (int i = 0; _entities.begin() + i != _entities.end(); i++) {
         if ((ret = _entities[i]->behave(this, b)) == B_END) {
             this->_entities.erase(this->_entities.begin() + i);
@@ -124,12 +117,16 @@ GameState GameInstance::occurs(IBuilder *b)
         else if (ret == B_EVENT)
             return(GameState::SF_GS_LOOSE);
     };
+    if (_player->draw(b) == false)
+        return (GameState::SF_GS_LOOSE);
     drawBackground(b, false);
     return (GameState::SF_GS_PLAYING);
 }
 
 GameInstance::~GameInstance()
 {
+    _entities.clear();
+    delete (_player);
 }
 
 void GameInstance::addEntity(IEntity *e)
@@ -144,6 +141,16 @@ Player *GameInstance::getPlayer()
 
 void GameInstance::incrementScore()
 {
-    _score += _level * 100 + (144 - _nbCoins) * 10;
+    _score += _level * 10 + (81 - _nbCoins);
     _nbCoins--;
+}
+
+int GameInstance::getLevel() const
+{
+    return (_level);
+}
+
+int GameInstance::getScore() const
+{
+    return (_score);
 }

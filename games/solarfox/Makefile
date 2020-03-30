@@ -11,10 +11,10 @@ SRCPATH	=	src/
 SRCS_FILES=	Entry.cpp							\
 			StartSolarfox.cpp					\
 			Player.cpp							\
-			Coin.cpp							\
 			enemies/BasicEnemy.cpp				\
 			shots/BasicShot.cpp					\
 			components/GameInstance.cpp			\
+			Coin.cpp							\
 
 SRC	=	$(addprefix $(SRCPATH), $(SRCS_FILES))
 

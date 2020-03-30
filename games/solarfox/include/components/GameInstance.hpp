@@ -23,6 +23,8 @@ class GameInstance: public IComponent {
         void addEntity(IEntity *e);
         Player *getPlayer();
         void incrementScore();
+        int getLevel() const;
+        int getScore() const;
     protected:
         void setMap(IBuilder *b);
         void setEnemies(IBuilder *b);
