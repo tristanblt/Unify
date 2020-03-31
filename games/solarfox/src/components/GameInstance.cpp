@@ -8,7 +8,7 @@
 #include "games/solarfox/include/components/GameInstance.hpp"
 
 GameInstance::GameInstance(int level, int score, IBuilder *b):
-_level(level), _score(score), _nbCoins(0), _player(new Player(level, b))
+_level(level), _score(score), _nbCoins(0), _player(new Player(b))
 {
     if (!b->objectExists("BasicE")) {
         b->spriteInit("BasicE");
@@ -102,12 +102,12 @@ void GameInstance::drawBackground(IBuilder *b, bool part)
     }
 }
 
-GameState GameInstance::occurs(IBuilder *b)
+SFGameState GameInstance::occurs(IBuilder *b)
 {
     BehaveReturn ret;
 
     if (_nbCoins == 0)
-        return (GameState::SF_GS_WIN);
+        return (SFGameState::SF_GS_WIN);
     drawBackground(b, true);
     for (int i = 0; _entities.begin() + i != _entities.end(); i++) {
         if ((ret = _entities[i]->behave(this, b)) == B_END) {
@@ -115,12 +115,12 @@ GameState GameInstance::occurs(IBuilder *b)
             i--;
         }
         else if (ret == B_EVENT)
-            return(GameState::SF_GS_LOOSE);
+            return(SFGameState::SF_GS_LOOSE);
     };
     if (_player->draw(b) == false)
-        return (GameState::SF_GS_LOOSE);
+        return (SFGameState::SF_GS_LOOSE);
     drawBackground(b, false);
-    return (GameState::SF_GS_PLAYING);
+    return (SFGameState::SF_GS_PLAYING);
 }
 
 GameInstance::~GameInstance()

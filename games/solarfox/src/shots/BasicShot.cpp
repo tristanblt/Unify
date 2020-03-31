@@ -34,7 +34,7 @@ BasicShot::~BasicShot()
 {
 }
 
-void BasicShot::manageMove(float offset, IBuilder *b)
+void BasicShot::manageMove(float offset)
 {
     if (_way == Orientation::O_UP || _way == Orientation::O_DOWN) {
         _pos.y += offset;
@@ -56,7 +56,7 @@ BehaveReturn BasicShot::state(GameInstance *game, IBuilder *b)
 
 BehaveReturn BasicShot::behave(GameInstance *game, IBuilder *b)
 {
-    manageMove(_speed * b->getEvents().deltaTime, b);
+    manageMove(_speed * b->getEvents().deltaTime);
     b->spriteSetSize(_objectIdx, _size, _frame);
     b->spriteSetPosition(_objectIdx, _pos);
     b->spriteDraw(_objectIdx);

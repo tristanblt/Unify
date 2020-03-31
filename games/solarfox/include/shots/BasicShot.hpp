@@ -17,7 +17,7 @@ class BasicShot: public IEntity {
         BehaveReturn behave(GameInstance *game, IBuilder *b);
         const std::string &getIdx() const;
     protected:
-        void manageMove(float offset, IBuilder *b);
+        void manageMove(float offset);
         BehaveReturn state(GameInstance *game, IBuilder *b);
     private:
         float _speed;
