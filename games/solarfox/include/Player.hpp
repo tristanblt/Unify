@@ -14,7 +14,7 @@
 
 class Player {
     public:
-        Player(int level, IBuilder *b);
+        Player(IBuilder *b);
         ~Player();
 
         bool draw(IBuilder *b);

@@ -19,7 +19,7 @@ class GameInstance: public IComponent {
         GameInstance(int level, int score, IBuilder *b);
         ~GameInstance();
 
-        GameState occurs(IBuilder *b);
+        SFGameState occurs(IBuilder *b);
         void addEntity(IEntity *e);
         Player *getPlayer();
         void incrementScore();

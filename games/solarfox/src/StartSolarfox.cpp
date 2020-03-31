@@ -30,17 +30,17 @@ void StartSolarfox::start(IBuilder *b)
 
 void StartSolarfox::update(IBuilder *b)
 {
-    GameState ret;
+    SFGameState ret;
     GameInstance *tmp;
 
-    if (_solarFoxState == Instance::SF_GAME)
-        if ((ret = _gameInstance->occurs(b)) == SF_GS_LOOSE)
+    if (_solarFoxState == Instance::SF_GAME) {
+        if ((ret = _gameInstance->occurs(b)) == SF_GS_LOOSE) {
             _solarFoxState = Instance::SF_MENU;
-        else if (ret == SF_GS_WIN) {
+        } else if (ret == SF_GS_WIN) {
             tmp = new GameInstance(_gameInstance->getLevel() + 1, _gameInstance->getScore(), b);
-            delete (_gameInstance);
             _gameInstance = tmp;
         }
+    }
 }
 
 void StartSolarfox::finish(IBuilder *b)

@@ -7,7 +7,7 @@
 
 #include "games/solarfox/include/Player.hpp"
 
-Player::Player(int level, IBuilder *b):
+Player::Player(IBuilder *b):
 _objectIdx("Player"), _dir(Orientation::O_RIGHT), _speed(VH(0.5)), _pos({VW(50), VH(50)}), _size({VH(4), VH(4)}),
 _shotObjectIdx("PlayerS"), _shotDir(_dir), _shotPos(_pos), _shotInitPos(_pos), _shotSize(_size), _shotActive(false)
 {

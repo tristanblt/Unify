@@ -15,7 +15,7 @@ class IComponent {
     public:
         ~IComponent() = default;
 
-        virtual GameState occurs(IBuilder *b) = 0;
+        virtual SFGameState occurs(IBuilder *b) = 0;
         virtual int getLevel() const = 0;
         virtual int getScore() const = 0;
     protected:

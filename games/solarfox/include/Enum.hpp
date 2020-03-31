@@ -15,7 +15,7 @@ enum Orientation {
     O_RIGHT
 };
 
-enum GameState {
+enum SFGameState {
     SF_GS_PLAYING,
     SF_GS_LOOSE,
     SF_GS_WIN,
