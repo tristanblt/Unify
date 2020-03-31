@@ -20,7 +20,7 @@ class StartNibbler : public Start {
         ~StartNibbler();
 
         void start(IBuilder *builder);
-        void update(IBuilder *builder);
+        GameState update(IBuilder *builder);
         void finish(IBuilder *builder);
         std::string getName() const;
 

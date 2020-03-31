@@ -43,7 +43,7 @@ void Text::draw(IWindow *w)
     for (size_t i = 0; i < _text.size(); i++) {
         _frame.x = getCharPosX(_text[i]);
         _frame.y = getCharPosY(_text[i]);
-        Bitcrush(_font, {_x, _y}, _frame, _wantedSize, w);
+        _bitcrush.drawSprite(_font, {_x, _y}, _frame, _wantedSize, w);
         _x += _wantedSize.x;
     }
 }

@@ -75,12 +75,13 @@ class IBuilder {
         virtual void spriteDraw(const std::string &name) = 0;
 
         virtual bool objectExists(const std::string &name) = 0;
+
 /* -------------------------------- collider -------------------------------- */
 
         virtual bool isMouseInBox(Box box) = 0;
-        virtual bool GameObjectCollide(const std::string &obj1, const std::string &obj2) = 0;
-        virtual bool GameObjectCollideToBox(const std::string &obj, Box b) = 0;
-        virtual bool GameObjectCollideToRadius(const std::string &obj, Vector2 pos, float r) = 0;
+        virtual bool gameObjectCollide(const std::string &obj1, const std::string &obj2) = 0;
+        virtual bool gameObjectCollideToBox(const std::string &obj, Box b) = 0;
+        virtual bool gameObjectCollideToRadius(const std::string &obj, Vector2 pos, float r) = 0;
 
 /* --------------------------------- events --------------------------------- */
 

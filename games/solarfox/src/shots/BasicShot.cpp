@@ -45,9 +45,9 @@ void BasicShot::manageMove(float offset, IBuilder *b)
 
 BehaveReturn BasicShot::state(GameInstance *game, IBuilder *b)
 {
-    if (b->GameObjectCollide("Player", _objectIdx))
+    if (b->gameObjectCollide("Player", _objectIdx))
         return (B_EVENT);
-    if (!b->GameObjectCollideToBox(_objectIdx, {(VW(100) - VH(93)) / 2, 0, VH(93), VH(93)}))
+    if (!b->gameObjectCollideToBox(_objectIdx, {(VW(100) - VH(93)) / 2, 0, VH(93), VH(93)}))
         return (B_END);
     if (game->getPlayer()->shotCollide({_pos.x, _pos.y, _size.x, _size.y}, b))
         return (B_END);

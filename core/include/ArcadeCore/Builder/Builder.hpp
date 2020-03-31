@@ -71,9 +71,9 @@ class Builder: public IBuilder {
 /* -------------------------------- collider -------------------------------- */
 
         bool isMouseInBox(Box box);
-        bool GameObjectCollide(const std::string &obj1, const std::string &obj2);
-        bool GameObjectCollideToBox(const std::string &obj, Box b);
-        bool GameObjectCollideToRadius(const std::string &obj, Vector2 pos, float r);
+        bool gameObjectCollide(const std::string &obj1, const std::string &obj2);
+        bool gameObjectCollideToBox(const std::string &obj, Box b);
+        bool gameObjectCollideToRadius(const std::string &obj, Vector2 pos, float r);
         bool circleToCircleCollide(Box b1, Box b2);
         bool circleToRectCollide(Box b1, Box b2);
         bool rectToRectCollide(Box b1, Box b2);

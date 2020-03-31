@@ -463,7 +463,7 @@ bool Builder::rectToRectCollide(Box b1, Box b2)
     return (true);
 }
 
-bool Builder::GameObjectCollide(const std::string &obj1, const std::string &obj2)
+bool Builder::gameObjectCollide(const std::string &obj1, const std::string &obj2)
 {
     Box b1;
     Box b2;
@@ -482,7 +482,7 @@ bool Builder::GameObjectCollide(const std::string &obj1, const std::string &obj2
     return (rectToRectCollide(b1, b2));
 }
 
-bool Builder::GameObjectCollideToBox(const std::string &obj, Box b)
+bool Builder::gameObjectCollideToBox(const std::string &obj, Box b)
 {
     Box objBox;
     if (_gameObjects.find(obj) == _gameObjects.end() ||
@@ -494,7 +494,7 @@ bool Builder::GameObjectCollideToBox(const std::string &obj, Box b)
     return (circleToRectCollide(objBox, b));
 }
 
-bool Builder::GameObjectCollideToRadius(const std::string &obj, Vector2 pos, float r)
+bool Builder::gameObjectCollideToRadius(const std::string &obj, Vector2 pos, float r)
 {
     Box objBox;
 

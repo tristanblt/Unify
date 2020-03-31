@@ -110,10 +110,15 @@ void ArcadeCore::manageMenuAndGame(Builder *b, DLLoader<Start> *&gameLib, Start 
             _coreState = CoreState::CORE_GAME;
         }
     }
+    else if (_coreState == CoreState::CORE_SCORE) {
+
+    }
     else {
         if (_coreState != CoreState::CORE_PAUSE)
-            game->update(b);
+            _gameState = game->update(b);
         _layout.update(b, _coreState, game->getName());
+        if (_gameState.state == State::STATE_SCORE)
+            _coreState = CoreState::CORE_SCORE;
     }
     if (b->getEvents().keyboardState[Key::ESCAPE] == InputState::RELEASED)
         b->windowClose();

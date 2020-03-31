@@ -47,7 +47,7 @@ bool Player::updatePos(float offset, IBuilder *b)
         _pos.x += offset;
         b->spriteSetSize("Player", _size, {128, 384, 128, 128});
     }
-    if (b->GameObjectCollideToBox("Player", {(VW(100) - VH(93)) / 2  + VH(5) + _size.x, VH(5) + _size.y, VH(83) - _size.x * 2, VH(83) - _size.y * 2}))
+    if (b->gameObjectCollideToBox("Player", {(VW(100) - VH(93)) / 2  + VH(5) + _size.x, VH(5) + _size.y, VH(83) - _size.x * 2, VH(83) - _size.y * 2}))
         return (true);
     return (false);
 }
@@ -88,7 +88,7 @@ void Player::updateShot(float offset, IBuilder  *b)
 bool Player::shotCollide(Box body, IBuilder *b) {
     if (_shotActive == false)
         return (false);
-    if (b->GameObjectCollideToBox(_shotObjectIdx, body)) {
+    if (b->gameObjectCollideToBox(_shotObjectIdx, body)) {
         _shotActive = false;
         return (true);
     }

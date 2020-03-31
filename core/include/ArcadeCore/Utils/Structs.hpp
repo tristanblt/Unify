@@ -133,4 +133,9 @@ struct GameObject {
     void *item;
 };
 
+struct GameState {
+    State state;
+    int score;
+};
+
 #endif /* !STRUCTS_HPP_ */

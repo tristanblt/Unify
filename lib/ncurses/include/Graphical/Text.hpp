@@ -39,6 +39,7 @@ class Text : public IText {
         Color _color;
         Box _frame;
         Vector2 _wantedSize;
+        Bitcrush _bitcrush;
 };
 
 #endif /* !Text_HPP_ */

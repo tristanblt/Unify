@@ -7,20 +7,60 @@
 
 #include "lib/ncurses/include/Graphical/Bitcrush.hpp"
 
-Bitcrush::Bitcrush(PngFile *png, Vector2 pos, Box frame, Vector2 wantedSize, IWindow *w)
+bool operator==(Box const &box, Box const &box2) {
+    return (box.x == box2.x && box.y == box2.y && box.w == box2.w && box.h == box2.h);
+}
+
+bool operator!=(Box const &box, Box const &box2) {
+    return (!(box == box2));
+}
+
+bool operator<(Box const &box, Box const &box2) {
+    return (box.w < box2.w && box.h < box2.h);
+}
+
+bool operator==(Vector2 const &v, Vector2 const &v2) {
+    return (v.x == v2.x && v.y == v2.y);
+}
+
+bool operator!=(Vector2 const &v, Vector2 const &v2) {
+    return (!(v == v2));
+}
+
+bool operator<(Vector2 const &v, Vector2 const &v2) {
+    return (v.x < v2.x && v.y < v2.y);
+}
+
+Bitcrush::Bitcrush()
 {
-    png_bytep *pixels = png->getPixels();
+}
+
+std::vector<std::vector<Color> > Bitcrush::bitcrushPng(PngFile *png, Vector2 pos, Box frame, Vector2 wantedSize)
+{
+    std::vector<std::vector<Color> > crushed;
+
+    return (crushed);
+}
+
+void Bitcrush::drawSprite(PngFile *png, Vector2 pos, Box frame, Vector2 wantedSize, IWindow *w)
+{
+    /*png_bytep *pixels = png->getPixels();
     png_bytep px;
     Color color;
     int tmp;
     Vector2 ratio = {
         frame.w / wantedSize.x,
         frame.h / wantedSize.y
-    };
+    };*/
     //std::vector<std::vector<Color> > crushed;
     //Color sum;
     //int coef;
     //int a = 0, b = 0;
+
+    //if (!(_crushed.find(png) != _crushed.end() &&
+    //_crushed[png].find(frame) != _crushed[png].end() &&
+    //_crushed[png][frame].find(wantedSize) != _crushed[png][frame].end()))
+    //    _crushed[png][frame][wantedSize] = bitcrushPng(png, pos, frame, wantedSize);
 
     /*crushed.resize(static_cast<int>(frame.w / ratio.x) + 1, std::vector<Color>(static_cast<int>(frame.h / ratio.y) + 1));
     for(int y = frame.y; y < (frame.h + frame.y) - ratio.y && y < png->getHeight(); y+=ratio.y) {
@@ -66,7 +106,7 @@ Bitcrush::Bitcrush(PngFile *png, Vector2 pos, Box frame, Vector2 wantedSize, IWi
         }
     }*/
     
-    for(int y = frame.y; y < frame.h + frame.y && y < png->getHeight(); y+=ratio.y) {
+    /*for(int y = frame.y; y < frame.h + frame.y && y < png->getHeight(); y+=ratio.y) {
         png_bytep row = pixels[y];
         for(int x = frame.x; x < frame.w + frame.x && x < png->getWidth(); x+=ratio.x) {
             px = &(row[x * 4]);
@@ -75,7 +115,16 @@ Bitcrush::Bitcrush(PngFile *png, Vector2 pos, Box frame, Vector2 wantedSize, IWi
             color = {px[0], px[1], px[2], px[3]};
             dynamic_cast<Window *>(w)->drawBufferPixel(pos.x + (x - frame.x) / ratio.x, pos.y + (y - frame.y) / ratio.y, color);
         }
-    }
+    }*/
+    int i = 0, j = 0;
+    //for (auto &line : _crushed[png][frame][wantedSize]) {
+    //    for (auto &px : line) {
+    //        //dynamic_cast<Window *>(w)->drawBufferPixel(pos.x + i, pos.y + j, px);
+    //        j++;
+    //    }
+    //    j = 0;
+    //    i++;
+    //}
 }
 
 Bitcrush::~Bitcrush()

@@ -13,15 +13,19 @@
 #include "core/include/ArcadeCore/Utils/Structs.hpp"
 #include <ncurses.h>
 #include <vector>
+#include <map>
 #include <iostream>
 
 class Bitcrush {
     public:
-        Bitcrush(PngFile *png, Vector2 pos, Box frame, Vector2 wantedSize, IWindow *w);
+        Bitcrush();
         ~Bitcrush();
 
+        void drawSprite(PngFile *png, Vector2 pos, Box frame, Vector2 wantedSize, IWindow *w);
+        std::vector<std::vector<Color> > bitcrushPng(PngFile *png, Vector2 pos, Box frame, Vector2 wantedSize);
     protected:
     private:
+        //std::map<PngFile *, std::map<Box, std::map<Vector2, std::vector<std::vector<Color> > > > > _crushed;
 };
 
 #endif /* !BITCRUSH_HPP_ */

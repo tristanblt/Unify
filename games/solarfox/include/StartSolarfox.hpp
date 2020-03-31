@@ -17,7 +17,6 @@
 #include "games/solarfox/include/components/IComponent.hpp"
 
 #include "games/solarfox/include/components/GameInstance.hpp"
-// #include "games/solarfox/include/components/Menu.hpp"
 
 class StartSolarfox : public Start {
     public:
@@ -25,7 +24,7 @@ class StartSolarfox : public Start {
         ~StartSolarfox();
 
         void start(IBuilder *builder);
-        void update(IBuilder *builder);
+        GameState update(IBuilder *builder);
         void finish(IBuilder *builder);
         std::string getName() const;
     protected:

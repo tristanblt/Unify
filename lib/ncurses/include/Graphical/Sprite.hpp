@@ -30,6 +30,7 @@ class Sprite : public ISprite {
     protected:
     private:
         std::map<std::string, void *> *_assets;
+        Bitcrush _bitcrush;
         PngFile *_sprite;
         float _x;
         float _y;

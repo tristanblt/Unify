@@ -155,7 +155,8 @@ enum CoreState {
     CORE_MENU,
     CORE_GAME,
     CORE_PAUSE,
-    CORE_END
+    CORE_SCORE,
+    CORE_END,
 };
 
 enum MenuState {
@@ -174,6 +175,12 @@ enum ObjectType {
     TYPE_SWITCH_BUTTON,
     TYPE_SLIDER,
     TYPE_SELECTOR,
+};
+
+enum State {
+    STATE_NONE,
+    STATE_QUIT,
+    STATE_SCORE,
 };
 
 #endif /* !ENUMS_HPP_ */

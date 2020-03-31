@@ -84,7 +84,7 @@ void StartNibbler::start(IBuilder *b)
     b->rectSetColor("background", b->hexToColor(0x212121FF));
 }
 
-void StartNibbler::update(IBuilder *b)
+GameState StartNibbler::update(IBuilder *b)
 {
     b->rectDraw("background");
     b->spriteDraw("logo");

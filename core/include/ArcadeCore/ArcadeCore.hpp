@@ -14,6 +14,7 @@
 #include "games/include/Start.hpp"
 #include "core/include/ArcadeCore/Builder/Builder.hpp"
 #include "core/include/ArcadeCore/Components/Menu.hpp"
+#include "core/include/ArcadeCore/Components/Score.hpp"
 #include "core/include/ArcadeCore/Components/Layout.hpp"
 #include "core/include/ArcadeCore/Utils/Enums.hpp"
 
@@ -38,6 +39,8 @@ class ArcadeCore {
         CoreState _coreState;
         Menu _menu;
         Layout _layout;
+        Score _score;
+        GameState _gameState;
         std::vector<ADisplayLibrary *> _libs;
         int _currentLib;
 };

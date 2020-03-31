@@ -28,7 +28,7 @@ void StartSolarfox::start(IBuilder *b)
     _gameInstance = new GameInstance(1, 0, b);
 }
 
-void StartSolarfox::update(IBuilder *b)
+GameState StartSolarfox::update(IBuilder *b)
 {
     GameState ret;
     GameInstance *tmp;
