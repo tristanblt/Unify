@@ -23,10 +23,10 @@ void Circle::draw(IWindow *w)
 {
     (void)w;
     float xpos, ypos, radsqr, xsqr;
-    int x = _x + _radius;
-    int y = _y + _radius;
+    int x = _y + _radius;
+    int y = _x + _radius;
 
-    for (xpos = x - _radius; xpos <= x + _radius; xpos += 1/*0.1*/) {
+    for (xpos = x - _radius; xpos <= x + _radius; xpos += 1) {
         radsqr = pow(_radius, 2);
         xsqr = pow(xpos - x, 2);
         ypos = sqrt(abs(radsqr - xsqr));
