@@ -16,6 +16,7 @@
 #include <map>
 #include <iostream>
 #include <cmath>
+#include <future>
 
 class Bitcrush {
     public:
@@ -27,7 +28,7 @@ class Bitcrush {
         Color clusterCrush(PngFile *png, Box frame);
     protected:
     private:
-        std::map<PngFile *, std::map<Box, std::map<Vector2, std::vector<std::vector<Color> > > > > _crushed;
+        std::map<PngFile *, std::map<Box, std::map<Vector2, std::pair<std::future<std::vector<std::vector<Color> > >, std::vector<std::vector<Color> > > > > > _crushed;
 };
 
 #endif /* !BITCRUSH_HPP_ */

@@ -55,13 +55,13 @@ void Window::display()
     for (size_t i = 0; i < _height; i+=2, a++) {
         for (size_t j = 0; j < _width; j++) {
             colorPair = getColorPair(_colorBuffer[i][j], _colorBuffer[i+1][j]);
-            attron(COLOR_PAIR(colorPair));
+            attron(MY_COLOR_PAIR(colorPair));
             #ifndef ARCADE_LINUX
             mvaddstr(a, j, UPPER_BLOCK);
             #else
             mvaddwstr(a, j, UPPER_BLOCK);
             #endif
-            attroff(COLOR_PAIR(colorPair));
+            attroff(MY_COLOR_PAIR(colorPair));
         }
     }
     refresh();
@@ -104,6 +104,7 @@ int Window::getColorPair(Color fg, Color bg)
     }
     _colorPairs.insert(std::pair<int, ColorPair>(idx, {fg, bg}));
     init_pair(idx, getColor(fg), getColor(bg));
+    std::cerr << idx << std::endl;
     return (idx++);
 }
 
@@ -116,21 +117,22 @@ void Window::drawBufferPixel(int x, int y, Color color)
 
 void Window::close()
 {
-    //endwin();
-    //nocbreak();
+    nocbreak();
+    endwin();
+    _isOpen = false;
 }
 
 void Window::create()
 {
     if (!_first)
         return;
+    _isOpen = true;
     setlocale(LC_ALL, "");
     initscr();
     noecho();
     cbreak();
     _width = COLS;
     _height = LINES;
-    _isOpen = true;
     curs_set(0);
     halfdelay(1);
     mousemask(ALL_MOUSE_EVENTS | REPORT_MOUSE_POSITION, NULL);

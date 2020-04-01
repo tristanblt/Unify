@@ -56,7 +56,6 @@ Color Bitcrush::clusterCrush(PngFile *png, Box frame)
                 }
             }
             if (isFound) {
-            std::cerr << "kjhkjh" << std::endl;
                 values[{(float)x, (float)y}] = 1; //
                 isFound = false;
             }
@@ -94,19 +93,30 @@ std::vector<std::vector<Color> > Bitcrush::bitcrushPng(PngFile *png, Box frame, 
 
 void Bitcrush::drawSprite(PngFile *png, Vector2 pos, Box frame, Vector2 wantedSize, IWindow *w)
 {
-    int i = 0, j = 0;
+    int x = 0, y = 0;
 
     if (!(_crushed.find(png) != _crushed.end() &&
     _crushed[png].find(frame) != _crushed[png].end() &&
     _crushed[png][frame].find(wantedSize) != _crushed[png][frame].end()))
-        _crushed[png][frame][wantedSize] = bitcrushPng(png, frame, wantedSize);
-    for (auto &line : _crushed[png][frame][wantedSize]) {
-        for (auto &px : line) {
-            dynamic_cast<Window *>(w)->drawBufferPixel(pos.x + i, pos.y + j, px);
-            j++;
+        _crushed[png][frame][wantedSize].first = std::async(&Bitcrush::bitcrushPng, this, png, frame, wantedSize);
+    if (!_crushed[png][frame][wantedSize].first.valid() || _crushed[png][frame][wantedSize].first.wait_for(std::chrono::nanoseconds(1)) == std::future_status::ready) {
+        if (_crushed[png][frame][wantedSize].first.valid())
+            _crushed[png][frame][wantedSize].second = _crushed[png][frame][wantedSize].first.get();
+        for (auto &line : _crushed[png][frame][wantedSize].second) {
+            for (auto &px : line) {
+                dynamic_cast<Window *>(w)->drawBufferPixel(pos.x + x, pos.y + y, px);
+                y++;
+            }
+            y = 0;
+            x++;
         }
-        j = 0;
-        i++;
+    }
+    else {
+        for (int i = 0; i < wantedSize.x; i++) {
+            for (int j = 0; j < wantedSize.x; j++) {
+                dynamic_cast<Window *>(w)->drawBufferPixel(pos.x + i, pos.y + j, {255, 255, 255, 255});
+            }
+        }
     }
 }
 

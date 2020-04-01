@@ -8,9 +8,13 @@
 #ifndef WINDOWNCURSE_HPP_
 #define WINDOWNCURSE_HPP_
 
-#include <ncurses.h>
+#include <curses.h>
 #include <vector>
 #include "lib/include/Graphical/IWindow.hpp"
+
+
+#define MY_A_COLOR NCURSES_BITS(((1U) << 16) - 1U, 0)
+#define MY_COLOR_PAIR(n) (NCURSES_BITS((n), 0) & MY_A_COLOR)
 
 #ifndef ARCADE_LINUX
 #define UPPER_BLOCK "\u2580"
