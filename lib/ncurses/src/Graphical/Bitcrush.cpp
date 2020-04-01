@@ -16,7 +16,7 @@ bool operator!=(Box const &box, Box const &box2) {
 }
 
 bool operator<(Box const &box, Box const &box2) {
-    return (box.w < box2.w && box.h < box2.h);
+    return ((box.w < box2.w && box.h < box2.h) || (box.x < box2.x || box.y < box2.y));
 }
 
 bool operator==(Vector2 const &v, Vector2 const &v2) {
@@ -68,7 +68,6 @@ Color Bitcrush::clusterCrush(PngFile *png, Box frame)
     );
     png_bytep tmp_row = pixels[(int)best->first.y];
     png_bytep tmp_px = &(tmp_row[(int)best->first.x * 4]);
-    //std::cerr << tmp_px[0] << " " << tmp_px[1] << " " << tmp_px[2] << " " << tmp_px[3] << std::endl;
     return ((Color){tmp_px[0], tmp_px[1], tmp_px[2], tmp_px[3]});
 }
 
@@ -83,8 +82,8 @@ std::vector<std::vector<Color> > Bitcrush::bitcrushPng(PngFile *png, Box frame, 
     crushed.resize(static_cast<int>(wantedSize.x) + 1, std::vector<Color>(static_cast<int>(wantedSize.y) + 1));
     int x = 0, y = 0;
     for (float i = 0; i < frame.w; i+=ratio.x) {
-        for (float j = 0; j < frame.w; j+=ratio.y) {
-            crushed[x][y] = clusterCrush(png, {x * ratio.x, y * ratio.y, ratio.x, ratio.y});
+        for (float j = 0; j < frame.h; j+=ratio.y) {
+            crushed[x][y] = clusterCrush(png, {x * ratio.x + frame.x, y * ratio.y + frame.y, ratio.x, ratio.y});
             y++;
         }
         y = 0;
@@ -95,79 +94,12 @@ std::vector<std::vector<Color> > Bitcrush::bitcrushPng(PngFile *png, Box frame, 
 
 void Bitcrush::drawSprite(PngFile *png, Vector2 pos, Box frame, Vector2 wantedSize, IWindow *w)
 {
-    /*png_bytep *pixels = png->getPixels();
-    png_bytep px;
-    Color color;
-    int tmp;
-    Vector2 ratio = {
-        frame.w / wantedSize.x,
-        frame.h / wantedSize.y
-    };*/
-    //std::vector<std::vector<Color> > crushed;
-    //Color sum;
-    //int coef;
-    //int a = 0, b = 0
+    int i = 0, j = 0;
 
     if (!(_crushed.find(png) != _crushed.end() &&
     _crushed[png].find(frame) != _crushed[png].end() &&
     _crushed[png][frame].find(wantedSize) != _crushed[png][frame].end()))
         _crushed[png][frame][wantedSize] = bitcrushPng(png, frame, wantedSize);
-
-    /*crushed.resize(static_cast<int>(frame.w / ratio.x) + 1, std::vector<Color>(static_cast<int>(frame.h / ratio.y) + 1));
-    for(int y = frame.y; y < (frame.h + frame.y) - ratio.y && y < png->getHeight(); y+=ratio.y) {
-        for(int x = frame.x; x < (frame.w + frame.x) - ratio.y && x < png->getWidth(); x+=ratio.x) {
-            sum = {0, 0, 0, 0};
-            coef = 0;
-            for (int i = y; i < ratio.y + y; i++) {
-                png_bytep row = pixels[i];
-                for (int j = x; j < ratio.x + x; j++) {
-                    px = &(row[j * 4]);
-                    sum = {
-                        static_cast<unsigned char>((sum.r * coef + px[0]) / (coef + 1)),
-                        static_cast<unsigned char>((sum.g * coef + px[1]) / (coef + 1)),
-                        static_cast<unsigned char>((sum.b * coef + px[2]) / (coef + 1)),
-                        255
-                    };
-                    coef++;
-                }
-            }
-            crushed[b][a] = sum;
-            b++;
-        }
-        b = 0;
-        a++;
-    }
-    for (int i = 0; i < crushed.size(); i++) {
-        for (int j = 0; j < crushed[i].size(); j++) {
-            color = crushed[i][j];
-            color.r = color.r > 250 ? 250 : color.r < 0 ? 0 : color.r;
-            color.g = color.g > 250 ? 250 : color.g < 0 ? 0 : color.g;
-            color.b = color.b > 250 ? 250 : color.b < 0 ? 0 : color.b;
-            tmp = nCursesColors::colorExists(color);
-            if (tmp != -1) {
-                colorPair = tmp;
-                nColor = tmp;
-            } else {
-                colorPair = nCursesColors::addColor(color);
-                nColor = colorPair;
-                init_color(nColor, color.r * 4, color.g * 4, color.b * 4);
-                init_pair(colorPair, COLOR_WHITE, nColor);
-            }
-            mvaddch(pos.y + j, pos.x + i, ' ' | COLOR_PAIR(colorPair));
-        }
-    }*/
-    
-    /*for(int y = frame.y; y < frame.h + frame.y && y < png->getHeight(); y+=ratio.y) {
-        png_bytep row = pixels[y];
-        for(int x = frame.x; x < frame.w + frame.x && x < png->getWidth(); x+=ratio.x) {
-            px = &(row[x * 4]);
-            if (px[3] == 0)
-                continue;
-            color = {px[0], px[1], px[2], px[3]};
-            dynamic_cast<Window *>(w)->drawBufferPixel(pos.x + (x - frame.x) / ratio.x, pos.y + (y - frame.y) / ratio.y, color);
-        }
-    }*/
-    int i = 0, j = 0;
     for (auto &line : _crushed[png][frame][wantedSize]) {
         for (auto &px : line) {
             dynamic_cast<Window *>(w)->drawBufferPixel(pos.x + i, pos.y + j, px);
