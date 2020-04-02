@@ -25,6 +25,9 @@ void StartSolarfox::start(IBuilder *b)
     b->loadAsset("games/solarfox/assets/imgs/space3.png", "Background3", AssetType::SPRITE);
     b->loadAsset("games/solarfox/assets/imgs/space4.png", "Background4", AssetType::SPRITE);
     b->loadAsset("games/solarfox/assets/imgs/space5.png", "Background5", AssetType::SPRITE);
+    b->loadAsset("games/solarfox/assets/sounds/theme.ogg", "BackTheme", AssetType::AUDIO);
+    b->loadAsset("games/solarfox/assets/sounds/Pew1.ogg", "PlayerPew", AssetType::AUDIO);
+    b->loadAsset("games/solarfox/assets/sounds/Pew2.ogg", "EnnemyPew", AssetType::AUDIO);
     _gameInstance = new GameInstance(1, 0, b);
 }
 
@@ -33,15 +36,18 @@ GameState StartSolarfox::update(IBuilder *b)
     SFGameState ret;
     GameInstance *tmp;
 
+    b->playMusic("BackTheme");
     if (_solarFoxState == Instance::SF_GAME) {
         if ((ret = _gameInstance->occurs(b)) == SF_GS_LOOSE) {
-            _solarFoxState = Instance::SF_MENU;
+            tmp = new GameInstance(1, 0, b);
+            _gameInstance = tmp;
+            b->stopMusic("BackTheme");
         } else if (ret == SF_GS_WIN) {
             tmp = new GameInstance(_gameInstance->getLevel() + 1, _gameInstance->getScore(), b);
             _gameInstance = tmp;
         }
     }
-    return (_gameState);
+    return ((ret == SFGameState::SF_GS_LOOSE) ? GameState{State::STATE_SCORE, _gameInstance->getScore()} : GameState{State::STATE_NONE, _gameInstance->getScore()});
 }
 
 void StartSolarfox::finish(IBuilder *b)

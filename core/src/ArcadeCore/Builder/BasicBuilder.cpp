@@ -590,11 +590,15 @@ void Builder::playSound(const std::string &name)
 
 void Builder::playMusic(const std::string &name)
 {
-    _library->_audio->playMusic(name);
+    if (std::find(_musicsPlaying.begin(), _musicsPlaying.end(), name) == _musicsPlaying.end()) {
+        _musicsPlaying.push_back(name);
+        _library->_audio->playMusic(name);
+    }
 }
 
 void Builder::stopMusic(const std::string &name)
 {
+    _musicsPlaying.erase(std::remove(_musicsPlaying.begin(), _musicsPlaying.end(), name), _musicsPlaying.end());
     _library->_audio->stopMusic(name);
 }
 

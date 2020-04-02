@@ -159,6 +159,7 @@ class Builder: public IBuilder {
 
     private:
         std::map <std::string, GameObject> _gameObjects;
+        std::vector<std::string> _musicsPlaying;
         Events _events;
         time_t _tick;
         time_t _tickDiff;

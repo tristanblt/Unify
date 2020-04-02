@@ -77,6 +77,7 @@ BehaveReturn BasicEnemy::behave(GameInstance *game, IBuilder *b)
     if (b->getTime() - _lastFire > 3.5) {
             _lastFire = b->getTime();
         if (rand() % 101 < _fireChance) {
+            b->playSound("EnnemyPew");
             game->addEntity(new BasicShot(_speed - VH(0.20), _way, _pos, b));
         }
     }
