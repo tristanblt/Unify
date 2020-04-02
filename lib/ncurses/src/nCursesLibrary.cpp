@@ -86,6 +86,8 @@ void nCursesLibrary::updateKeyboardEvents(Events *e, int chr, bool firstIteratio
                 e->keyboardState[static_cast<Key>(i)] = InputState::HOLD;
             else if (e->keyboardState[static_cast<Key>(i)] == InputState::RELEASED)
                 e->keyboardState[static_cast<Key>(i)] = InputState::NONE;
+            else if (e->keyboardState[static_cast<Key>(i)] == InputState::HOLD)
+                e->keyboardState[static_cast<Key>(i)] = InputState::RELEASED;
         return;
     }
     if (chr == KEY_MOUSE)
