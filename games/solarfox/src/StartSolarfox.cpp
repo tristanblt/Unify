@@ -35,13 +35,14 @@ GameState StartSolarfox::update(IBuilder *b)
 
     if (_solarFoxState == Instance::SF_GAME) {
         if ((ret = _gameInstance->occurs(b)) == SF_GS_LOOSE) {
-            _solarFoxState = Instance::SF_MENU;
+            tmp = new GameInstance(1, 0, b);
+            _gameInstance = tmp;
         } else if (ret == SF_GS_WIN) {
             tmp = new GameInstance(_gameInstance->getLevel() + 1, _gameInstance->getScore(), b);
             _gameInstance = tmp;
         }
     }
-    return (_gameState);
+    return ((ret == SFGameState::SF_GS_LOOSE) ? GameState{State::STATE_SCORE, _gameInstance->getScore()} : GameState{State::STATE_NONE, _gameInstance->getScore()});
 }
 
 void StartSolarfox::finish(IBuilder *b)
