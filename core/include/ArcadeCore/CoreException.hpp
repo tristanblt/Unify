@@ -39,4 +39,11 @@ class PngLibException : public CoreException
         PngLibException(const std::string &);
 };
 
+class DLLoaderException : public CoreException
+{
+    public:
+        DLLoaderException(const std::string &);
+};
+
+
 #endif /* !COREEXCEPTION_HPP_ */
