@@ -51,12 +51,12 @@ Color Bitcrush::clusterCrush(PngFile *png, Box frame)
                 png_bytep tmp_px = &(tmp_row[(int)elem.first.x * 4]);
                 float a = sqrt(pow(px[0] - tmp_px[0], 2) + pow(px[1] - tmp_px[1], 2) + pow(px[2] - tmp_px[2], 2));
                 if (a < 50) {
-                    values[elem.first] += 1; //
+                    values[elem.first] += 1;
                     isFound = true;
                 }
             }
             if (isFound) {
-                values[{(float)x, (float)y}] = 1; //
+                values[{(float)x, (float)y}] = 1;
                 isFound = false;
             }
         }
@@ -114,7 +114,10 @@ void Bitcrush::drawSprite(PngFile *png, Vector2 pos, Box frame, Vector2 wantedSi
     else {
         for (int i = 0; i < wantedSize.x; i++) {
             for (int j = 0; j < wantedSize.x; j++) {
-                dynamic_cast<Window *>(w)->drawBufferPixel(pos.x + i, pos.y + j, {255, 255, 255, 255});
+                if ((j + (i % 2)) % 2)
+                    dynamic_cast<Window *>(w)->drawBufferPixel(pos.x + i, pos.y + j, {255, 0, 255, 255});
+                else
+                    dynamic_cast<Window *>(w)->drawBufferPixel(pos.x + i, pos.y + j, {0, 0, 0, 255});
             }
         }
     }

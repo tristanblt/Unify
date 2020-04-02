@@ -41,6 +41,7 @@ GameState StartSolarfox::update(IBuilder *b)
             _gameInstance = tmp;
         }
     }
+    return (_gameState);
 }
 
 void StartSolarfox::finish(IBuilder *b)

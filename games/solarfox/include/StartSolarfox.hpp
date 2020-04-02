@@ -31,6 +31,7 @@ class StartSolarfox : public Start {
     private:
         Instance _solarFoxState;
         IComponent *_gameInstance;
+        GameState _gameState;
 
 };
 

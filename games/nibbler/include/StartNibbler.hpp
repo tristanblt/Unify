@@ -49,6 +49,7 @@ class StartNibbler : public Start {
         GameClock _clock;
         GameClock _bonusClock;
         NibblerMap _mapTiles;
+        GameState _gameState;
 };
 
 #endif /* !StartNibbler_HPP_ */

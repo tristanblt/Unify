@@ -33,7 +33,6 @@ NibblerMap::NibblerMap(Vector2 size, float scale)
             type = floor(rand() % 30);
             if (type > 4 || blockTypes[type] <= 0)
                 continue;
-            // while (blockTypes[type] <= 0) type = floor(rand() % 5);
             _map[i][j] = type + 1;
             blockTypes[type] -= 1;
         }

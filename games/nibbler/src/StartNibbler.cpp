@@ -124,6 +124,7 @@ GameState StartNibbler::update(IBuilder *b)
         b->spriteDraw("border");
     }
     updateGame(b);
+    return (_gameState);
 }
 
 void StartNibbler::finish(IBuilder *b)

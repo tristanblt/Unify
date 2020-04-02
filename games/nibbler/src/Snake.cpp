@@ -36,15 +36,14 @@ void Snake::setPosition(const Vector2 & pos)
     _pos.y = pos.y;
 }
 
-bool Snake::isDead(void) const //TMP
+bool Snake::isDead(void) const
 {
     return (true);
 }
 
-bool Snake::hasEaten(void) //TMP
+bool Snake::hasEaten(void)
 {
     _foodCount++;
-    // _tail.push_back({xx, yy});
     return (false);
 }
 
