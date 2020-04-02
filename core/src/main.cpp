@@ -34,12 +34,3 @@ int main(int argc, char const *argv[])
     }
     return (EPITECH_EXIT_SUCCESS);
 }
-
-
-/*
-Enlever CXXFLAGS du linkage makefile
-
-DLLoader exections
-
-
-*/
