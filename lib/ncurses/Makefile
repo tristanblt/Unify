@@ -28,7 +28,7 @@ OBJ			= 	$(SRC:%.cpp=%.o)
 CXXFLAGS	=	-W -Wall -Wextra -Wshadow	\
 			-I../../	-std=c++11 -fpic
 
-LDFLAGS		= -lpng
+LDFLAGS		= -lpng -lpthread
 
 UNAME_S	= $(shell uname -s)
 ifeq ($(UNAME_S),Linux)

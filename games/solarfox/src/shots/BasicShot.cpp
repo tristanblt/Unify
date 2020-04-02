@@ -60,7 +60,6 @@ BehaveReturn BasicShot::behave(GameInstance *game, IBuilder *b)
     b->spriteSetSize(_objectIdx, _size, _frame);
     b->spriteSetPosition(_objectIdx, _pos);
     b->spriteDraw(_objectIdx);
-    std::cout << _objectIdx << std::endl;
     return (state(game, b));
 }
 
