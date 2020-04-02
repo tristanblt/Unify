@@ -26,6 +26,8 @@ void StartSolarfox::start(IBuilder *b)
     b->loadAsset("games/solarfox/assets/imgs/space4.png", "Background4", AssetType::SPRITE);
     b->loadAsset("games/solarfox/assets/imgs/space5.png", "Background5", AssetType::SPRITE);
     b->loadAsset("games/solarfox/assets/sounds/theme.ogg", "BackTheme", AssetType::AUDIO);
+    b->loadAsset("games/solarfox/assets/sounds/Pew1.ogg", "PlayerPew", AssetType::AUDIO);
+    b->loadAsset("games/solarfox/assets/sounds/Pew2.ogg", "EnnemyPew", AssetType::AUDIO);
     _gameInstance = new GameInstance(1, 0, b);
 }
 
