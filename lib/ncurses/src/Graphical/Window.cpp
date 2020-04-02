@@ -93,6 +93,8 @@ int Window::getColorPair(Color fg, Color bg)
 {
     static int idx = 32;
 
+    fg = _knownColors[getColor(fg)];
+    bg = _knownColors[getColor(bg)];
     for (auto &elem: _colorPairs) {
         if ((fg.r == elem.second.fg.r &&
              fg.g == elem.second.fg.g &&
@@ -104,7 +106,6 @@ int Window::getColorPair(Color fg, Color bg)
     }
     _colorPairs.insert(std::pair<int, ColorPair>(idx, {fg, bg}));
     init_pair(idx, getColor(fg), getColor(bg));
-    std::cerr << idx << std::endl;
     return (idx++);
 }
 
@@ -155,14 +156,14 @@ void Window::initColors(void)
     _knownColors.insert(std::pair<int, Color>(5, {128, 0, 128, 255}));
     _knownColors.insert(std::pair<int, Color>(6, {0, 128, 128, 255}));
     _knownColors.insert(std::pair<int, Color>(7, {192, 192, 192, 255}));
-    _knownColors.insert(std::pair<int, Color>(8, {128, 128, 128, 255}));
-    _knownColors.insert(std::pair<int, Color>(9, {255, 0, 0, 255}));
-    _knownColors.insert(std::pair<int, Color>(10, {0, 255, 0, 255}));
-    _knownColors.insert(std::pair<int, Color>(11, {255, 255, 0, 255}));
-    _knownColors.insert(std::pair<int, Color>(12, {0, 0, 255, 255}));
-    _knownColors.insert(std::pair<int, Color>(13, {255, 0, 255, 255}));
-    _knownColors.insert(std::pair<int, Color>(14, {0, 255, 255, 255}));
-    _knownColors.insert(std::pair<int, Color>(15, {255, 255, 255, 255}));
+    //_knownColors.insert(std::pair<int, Color>(8, {128, 128, 128, 255}));
+    //_knownColors.insert(std::pair<int, Color>(9, {255, 0, 0, 255}));
+    //_knownColors.insert(std::pair<int, Color>(10, {0, 255, 0, 255}));
+    //_knownColors.insert(std::pair<int, Color>(11, {255, 255, 0, 255}));
+    //_knownColors.insert(std::pair<int, Color>(12, {0, 0, 255, 255}));
+    //_knownColors.insert(std::pair<int, Color>(13, {255, 0, 255, 255}));
+    //_knownColors.insert(std::pair<int, Color>(14, {0, 255, 255, 255}));
+    /*_knownColors.insert(std::pair<int, Color>(15, {255, 255, 255, 255}));
     _knownColors.insert(std::pair<int, Color>(16, {0, 0, 0, 255}));
     _knownColors.insert(std::pair<int, Color>(17, {0, 0, 95, 255}));
     _knownColors.insert(std::pair<int, Color>(18, {0, 0, 135, 255}));
@@ -402,5 +403,5 @@ void Window::initColors(void)
     _knownColors.insert(std::pair<int, Color>(252, {208, 208, 208, 255}));
     _knownColors.insert(std::pair<int, Color>(253, {218, 218, 218, 255}));
     _knownColors.insert(std::pair<int, Color>(254, {228, 228, 228, 255}));
-    _knownColors.insert(std::pair<int, Color>(255, {238, 238, 238, 255}));
+    _knownColors.insert(std::pair<int, Color>(255, {238, 238, 238, 255}));*/
 }

@@ -11,7 +11,6 @@
 #include "core/include/DLLoader.hpp"
 #include "core/include/ArcadeCore/ArcadeCore.hpp"
 #include <iostream>
-
 #define EPITECH_EXIT_SUCCESS 0
 #define EPITECH_EXIT_FAILURE 84
 

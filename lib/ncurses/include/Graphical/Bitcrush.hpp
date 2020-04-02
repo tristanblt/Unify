@@ -17,6 +17,8 @@
 #include <iostream>
 #include <cmath>
 #include <future>
+#include <algorithm>
+#include <numeric>
 
 class Bitcrush {
     public:

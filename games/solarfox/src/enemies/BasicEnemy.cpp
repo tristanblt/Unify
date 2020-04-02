@@ -75,12 +75,10 @@ BehaveReturn BasicEnemy::behave(GameInstance *game, IBuilder *b)
     b->spriteSetPosition(_objectIdx, _pos);
     b->spriteDraw(_objectIdx);
     if (b->getTime() - _lastFire > 3.5) {
-        std::cout << rand() % 101 << std::endl;
             _lastFire = b->getTime();
         if (rand() % 101 < _fireChance) {
             game->addEntity(new BasicShot(_speed - VH(0.20), _way, _pos, b));
         }
-        else std::cout << std::endl;
     }
     return (B_OK);
 }
