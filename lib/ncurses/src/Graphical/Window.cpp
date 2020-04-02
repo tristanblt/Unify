@@ -113,7 +113,7 @@ int Window::getColorPair(Color fg, Color bg)
 
 void Window::drawBufferPixel(int x, int y, Color color)
 {
-    if (y >= _height || x >= _width || x < 0 || y < 0)
+    if (y >= _height || x >= _width || x < 0 || y < 0 || color.a == 0)
         return;
     _colorBuffer[y][x] = color;
 }
