@@ -18,17 +18,17 @@ Audio::~Audio()
 
 void Audio::playSound(const std::string &name)
 {
-
+    (std::string)name;
 }
 
 void Audio::playMusic(const std::string &name)
 {
-
+    (std::string)name;
 }
 
 void Audio::stopMusic(const std::string &name)
 {
-
+    (std::string)name;
 }
 
 void Audio::setVolume(int volume)

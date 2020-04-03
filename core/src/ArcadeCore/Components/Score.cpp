@@ -19,10 +19,8 @@ Score::~Score()
 
 void Score::start(IBuilder *builder)
 {
-
 }
 
 void Score::update(IBuilder *builder)
 {
-
 }
