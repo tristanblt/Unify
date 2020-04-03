@@ -12,6 +12,8 @@
 ArcadeCore::ArcadeCore()
 {
     _coreState = CoreState::CORE_MENU;
+    _gameState.score = 0;
+    _gameState.state = State::STATE_NONE;
 }
 
 ArcadeCore::~ArcadeCore()
@@ -60,6 +62,7 @@ void ArcadeCore::switchGraphicalLibrary(Builder *b, int i)
     loadCoreAssets(b);
     _menu.start(b);
     _layout.start(b);
+    _score.start(b);
     b->lockUnifyGameObjects();
     _currentLib = i;
 }
@@ -90,6 +93,7 @@ void ArcadeCore::startLaunchCore(Builder *b)
     loadCoreAssets(b);
     _menu.start(b);
     _layout.start(b);
+    _score.start(b);
     b->spriteInit("UnifyJoyConCursor");
     b->spriteSetSprite("UnifyJoyConCursor", "UnifyJoyConsCursors");
     b->spriteSetSize("UnifyJoyConCursor", {176, 120}, {481, 3, 44, 30});
@@ -111,11 +115,13 @@ void ArcadeCore::manageMenuAndGame(Builder *b, DLLoader<Start> *&gameLib, Start 
         }
     }
     else if (_coreState == CoreState::CORE_SCORE) {
-
+        std::cout << "ddd" << std::endl;
+        _score.update(b);
     }
     else {
-        if (_coreState != CoreState::CORE_PAUSE)
+        if (_coreState != CoreState::CORE_PAUSE) {
             _gameState = game->update(b);
+        }
         _layout.update(b, _coreState, game->getName());
         if (_gameState.state == State::STATE_SCORE)
             _coreState = CoreState::CORE_SCORE;
