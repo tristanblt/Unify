@@ -23,8 +23,6 @@ Rectangle::~Rectangle()
 
 void Rectangle::draw(IWindow *w)
 {
-    Color tmp = _color;
-
     _height -= 1;
     for (int y = _y; y < _y + _height; y++) {
         for (int x = _x; x < _x + _width; x++) {

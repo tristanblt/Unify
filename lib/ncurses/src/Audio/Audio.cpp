@@ -18,21 +18,24 @@ Audio::~Audio()
 
 void Audio::playSound(const std::string &name)
 {
-
+    (void)name;
+    beep();
 }
 
 void Audio::playMusic(const std::string &name)
 {
-
+    (void)name;
+    beep();
 }
 
 void Audio::stopMusic(const std::string &name)
 {
-
+    (void)name;
+    beep();
 }
 
 void Audio::setVolume(int volume)
 {
-
+    (void)volume;
 }
 

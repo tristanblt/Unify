@@ -111,7 +111,7 @@ int Window::getColorPair(Color fg, Color bg)
     return (idx++);
 }
 
-void Window::drawBufferPixel(int x, int y, Color color)
+void Window::drawBufferPixel(size_t x, size_t y, Color color)
 {
     if (y >= _height || x >= _width || x < 0 || y < 0 || color.a == 0)
         return;
