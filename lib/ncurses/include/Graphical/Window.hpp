@@ -43,7 +43,7 @@ class Window : public IWindow {
         void  initColors(void);
         short getColor(Color);
         int   getColorPair(Color, Color);
-        void  drawBufferPixel(int, int, Color);
+        void  drawBufferPixel(size_t, size_t, Color);
         std::vector<std::vector<Color>> getBuffer(void);
 
     protected:

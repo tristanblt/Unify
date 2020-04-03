@@ -14,17 +14,27 @@
 #define EPITECH_EXIT_SUCCESS 0
 #define EPITECH_EXIT_FAILURE 84
 
+static const std::string USAGE = \
+"USAGE:\n"\
+"\t./arcade [path]\n"\
+"\n\tpath: Path to the graphic library you want to launch your arcade with,"\
+" it must be a shared object library (.so)";
+
 int main(int argc, char const *argv[])
 {
     ArcadeCore arcadeCore;
     ADisplayLibrary *lib;
 
-    if (argc < 2)
+    if (argc != 2) {
+        std::cerr << USAGE << std::endl;
         return (EPITECH_EXIT_FAILURE);
+    }
     try {
         lib = arcadeCore.importGraphicalLibs(std::string(argv[1]));
-        if (lib == NULL)
+        if (lib == NULL) {
+            std::cerr << "error: Could not open '"+std::string(argv[1])+"' graphical library." << std::endl;
             return (EPITECH_EXIT_FAILURE);
+        }
         while (arcadeCore.launchCore(lib));
     }
     catch (const std::exception &e) {

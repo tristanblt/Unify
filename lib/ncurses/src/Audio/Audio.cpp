@@ -36,6 +36,6 @@ void Audio::stopMusic(const std::string &name)
 
 void Audio::setVolume(int volume)
 {
-
+    (void)volume;
 }
 

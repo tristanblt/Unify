@@ -142,6 +142,7 @@ std::string StartNibbler::getName() const
 
 void StartNibbler::updateGame(IBuilder *b)
 {
+    static int appleOff = 0;
     static bool dir = true;
 
     setDirection(b);
@@ -157,8 +158,9 @@ void StartNibbler::updateGame(IBuilder *b)
         _gameState.score = (_foodCount - 3) * 100;
         if (_bonus) b->spriteSetSize("apple", {_scale, _scale}, {80, 64, 16, 16});
         else b->spriteSetSize("apple", {_scale, _scale}, {64, 64, 16, 16});
-        b->spriteSetPosition("apple", {_food.x, _food.y + (dir ? 5 : -5)});
-        dir = !dir;
+        b->spriteSetPosition("apple", {_food.x, _food.y + appleOff/*(dir ? 3 : -3)*/});
+        dir = appleOff == 0 ? true : appleOff == 5 ? false : dir;
+        appleOff += dir ? 1 : -1;
         _clock.restart();
     }
     b->spriteDraw("apple");

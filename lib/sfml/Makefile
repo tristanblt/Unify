@@ -23,7 +23,7 @@ SRC	=	$(addprefix $(SRCPATH), $(SRCS_FILES))
 OBJ			= 	$(SRC:%.cpp=%.o)
 
 CXXFLAGS	=	-W -Wall -Wextra -Wshadow	\
-			-I../../	-std=c++11 -fpic
+			-I../../	-std=c++17 -fpic
 
 LDFLAGS		= -lsfml-system -lsfml-graphics -lsfml-audio -lsfml-window
 
@@ -32,12 +32,12 @@ CXX		=	g++
 RM		=	rm -f
 
 $(NAME):$(OBJ)
-		$(CXX) -o $(NAME) $(OBJ) $(CXXFLAGS) $(LDFLAGS) -shared
+		$(CXX) -o $(NAME) $(OBJ) $(LDFLAGS) -shared
 
 all:	$(NAME)
 
 clean:
-		$(RM) $(OBJ) $(OBJ_FLOGIC) *.gc*
+		$(RM) $(OBJ) *.gc*
 
 fclean: clean
 		$(RM) $(NAME)
