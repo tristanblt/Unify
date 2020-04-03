@@ -11,6 +11,7 @@
 #include "lib/include/Audio/IAudio.hpp"
 #include "core/include/ArcadeCore/Builder/IBuilder.hpp"
 #include "core/include/ArcadeCore/Utils/Structs.hpp"
+#include <ncurses.h>
 
 class Audio : public IAudio {
     public:
