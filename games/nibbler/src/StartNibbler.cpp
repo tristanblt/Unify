@@ -27,7 +27,7 @@ StartNibbler::~StartNibbler()
 void StartNibbler::start(IBuilder *b)
 {
     srand(time(NULL));
-    setMap({VW(10), VH(10)}, {VH(140), VH(70)});
+    setMap({(VW(100) - VH(140)) / 2, VH(10)}, {VH(140), VH(70)});
     _scale = MW(2);
     int cols  = MW(100) / _scale;
     int lines = MH(100) / _scale;
