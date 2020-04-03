@@ -18,6 +18,8 @@ _food({0, 0, 0, 0}),
 _speed({0, -1}),
 _gameState({State::STATE_NONE, 0})
 {
+    _gameState.state = State::STATE_NONE;
+    _gameState.score = 0;
 }
 
 StartNibbler::~StartNibbler()
