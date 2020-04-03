@@ -10,6 +10,8 @@
 StartSolarfox::StartSolarfox()
 {
     _solarFoxState = Instance::SF_GAME;
+    _gameState.state = State::STATE_NONE;
+    _gameState.score = 0;
 }
 
 StartSolarfox::~StartSolarfox()
@@ -30,7 +32,7 @@ void StartSolarfox::start(IBuilder *b)
 
 GameState StartSolarfox::update(IBuilder *b)
 {
-    SFGameState ret;
+    SFGameState ret = SFGameState::SF_GS_PLAYING;
     GameInstance *tmp;
 
     if (_solarFoxState == Instance::SF_GAME) {

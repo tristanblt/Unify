@@ -17,6 +17,8 @@ _head({0, 0, 0, 0}),
 _food({0, 0, 0, 0}),
 _speed({0, -1})
 {
+    _gameState.state = State::STATE_NONE;
+    _gameState.score = 0;
 }
 
 StartNibbler::~StartNibbler()
