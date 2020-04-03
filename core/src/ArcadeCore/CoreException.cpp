@@ -20,13 +20,19 @@ CoreException("File error: "+msg)
 }
 
 BuilderException::BuilderException(const std::string &msg):
-CoreException(" uilder error: "+msg)
+CoreException("Builder error: "+msg)
 {
 
 }
 
 PngLibException::PngLibException(const std::string &msg):
 CoreException("PNG error: "+msg)
+{
+
+}
+
+DLLoaderException::DLLoaderException(const std::string &msg):
+CoreException("Dynamic library loader error: "+msg)
 {
 
 }

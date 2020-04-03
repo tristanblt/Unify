@@ -15,7 +15,8 @@ _scale(0),
 _foodCount(3),
 _head({0, 0, 0, 0}),
 _food({0, 0, 0, 0}),
-_speed({0, -1})
+_speed({0, -1}),
+_gameState({State::STATE_NONE, 0})
 {
     _gameState.state = State::STATE_NONE;
     _gameState.score = 0;
@@ -153,11 +154,12 @@ void StartNibbler::updateGame(IBuilder *b)
     if (_clock.getElapsedTimeMs() > 100) {
         hasEaten();
         setPosition();
-        _clock.restart();
+        _gameState.score = (_foodCount - 3) * 100;
         if (_bonus) b->spriteSetSize("apple", {_scale, _scale}, {80, 64, 16, 16});
         else b->spriteSetSize("apple", {_scale, _scale}, {64, 64, 16, 16});
         b->spriteSetPosition("apple", {_food.x, _food.y + (dir ? 5 : -5)});
         dir = !dir;
+        _clock.restart();
     }
     b->spriteDraw("apple");
     drawSnake(b);
@@ -225,6 +227,7 @@ void StartNibbler::setFoodPosition(void)
 
 void StartNibbler::checkDeath(bool isDead)
 {
+    static int firstTime = 0;
     int cols  = MW(100) / _scale;
     int lines = MH(100) / _scale;
 
@@ -234,11 +237,13 @@ void StartNibbler::checkDeath(bool isDead)
         if (sqrt(pow(_head.x - _tail[i].x, 2) + pow(_head.y - _tail[i].y, 2)) < 1)
             isDead = true;
     if (isDead) {
+        firstTime++;
+        _gameState.state = firstTime < 7 ? State::STATE_NONE : State::STATE_SCORE;
         _foodCount = 3;
         _head.x = floor(cols  / 2) * _scale + _map.x;
         _head.y = floor(lines / 2) * _scale + _map.y;
         _tail.clear();
-        while (_tail.size() < _foodCount)
+        for (int i = 0; _tail.size() < _foodCount; i++)
             _tail.push_back({_head.x, _head.y});
         setSpeed({0, -1});
     }

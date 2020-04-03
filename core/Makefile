@@ -11,12 +11,16 @@ SRCPATH	=	src/
 
 SRCS_FILES=	main.cpp													\
 			ArcadeCore/CoreException.cpp								\
+			DLLoader.cpp												\
 			ArcadeCore/ArcadeCore.cpp									\
 			ArcadeCore/FileManager.cpp									\
 			ArcadeCore/Components/Layout.cpp							\
-			ArcadeCore/Components/Score.cpp							\
+			ArcadeCore/Components/Score.cpp								\
 			ArcadeCore/Components/Menu.cpp								\
 			ArcadeCore/Builder/BasicBuilder.cpp							\
+			ArcadeCore/Builder/DrawBuilder.cpp							\
+			ArcadeCore/Builder/CollideBuilder.cpp						\
+			ArcadeCore/Builder/AudioBuilder.cpp							\
 			ArcadeCore/Builder/UIBuilder.cpp							\
 
 SRC	=	$(addprefix $(SRCPATH), $(SRCS_FILES))

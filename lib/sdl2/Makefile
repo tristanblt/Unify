@@ -25,7 +25,7 @@ OBJ			= 	$(SRC:%.cpp=%.o)
 CXXFLAGS	=	-W -Wall -Wextra -Wshadow	\
 			-I../../	-std=c++11 -fpic
 
-LDFLAGS		= -lsdl2 -lsdl2_ttf -lsdl2_image -lsdl2_gfx -lsdl2_mixer
+LDFLAGS		= -lSDL2 -lSDL2_ttf -lSDL2_image -lSDL2_mixer
 
 CXX		=	g++
 

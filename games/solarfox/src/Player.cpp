@@ -55,6 +55,7 @@ bool Player::updatePos(float offset, IBuilder *b)
 void Player::updateShot(float offset, IBuilder  *b)
 {
     if (_shotActive == false && b->getEvents().keyboardState[Key::E] == InputState::CLICK) {
+        b->playSound("PlayerPew");
         _shotPos.x = _pos.x;
         _shotPos.y = _pos.y;
         _shotInitPos.x = _pos.x;
