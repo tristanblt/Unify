@@ -24,7 +24,7 @@ void Text::draw(IWindow *w)
 {
     if (_fontSize == 0)
         return;
-    SDL_Surface* textSurface = TTF_RenderText_Solid(_font, _text.c_str(), {_color.a, _color.r, _color.g, _color.b});
+    SDL_Surface* textSurface = TTF_RenderText_Solid(_font, _text.c_str(), {_color.r, _color.g, _color.b, _color.a});
     SDL_Texture* text = SDL_CreateTextureFromSurface(dynamic_cast<Window *>(w)->getRenderer(), textSurface);
     int text_width = textSurface->w;
     int text_height = textSurface->h;

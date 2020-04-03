@@ -71,9 +71,9 @@ void Window::close()
     SDL_DestroyRenderer(_renderer);
     SDL_DestroyWindow(_window);
     _isWindowOpen = false;
-    //TTF_Quit();
-    //IMG_Quit();
-    //SDL_Quit();
+    TTF_Quit();
+    IMG_Quit();
+    SDL_Quit();
 }
 
 SDL_Renderer *Window::getRenderer() const

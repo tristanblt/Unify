@@ -30,8 +30,8 @@ class ArcadeCore {
         Start *changeGame(std::string libName);
 
         ADisplayLibrary *importGraphicalLibs(const std::string &libName);
-        void switchGraphicalLibrary(Builder *builder, int i);
-        void triggerSwitchGraphicalLibrary(Builder *builder);
+        void switchGraphicalLibrary(Builder *builder, int i, Start *&game);
+        void triggerSwitchGraphicalLibrary(Builder *builder, Start *&game);
         void updateJoyConCursors(IBuilder *b);
         void manageMenuAndGame(Builder *b, DLLoader<Start> *&gameLib, Start *&game);
     protected:
