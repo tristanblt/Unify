@@ -48,3 +48,25 @@ void ScoreManager::saveScores()
     });
     db.close();
 }
+
+std::map<std::string, int> ScoreManager::getBestScores(const std::string &game)
+{
+    std::map<std::string, int> board;
+    std::string tmpName;
+    int tmpScore = -1;
+
+    for (int i = 0; i < 5; i++) {
+        for_each(_profiles.begin(), _profiles.end(), [&game, &board, &tmpName, &tmpScore](std::pair<std::string, std::map<std::string, int>> player) {
+            if (player.second.find(game) != player.second.end() && (tmpScore == -1 || (player.second[game] >= tmpScore && board.find(player.first) == board.end()))) {
+                tmpName = player.first;
+                tmpScore = player.second[game];
+            }
+        });
+        if (tmpScore != -1) {
+            board[tmpName] = tmpScore;
+            tmpName.clear();
+            tmpScore = -1;
+        }
+    }
+    return (board);
+}

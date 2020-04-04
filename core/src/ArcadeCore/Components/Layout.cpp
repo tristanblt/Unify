@@ -64,7 +64,6 @@ void Layout::start(IBuilder *b)
     b->textSetColor("UnifyLayoutAudioText", b->hexToColor(0xFFFFFFFF));
     b->textSetFont("UnifyLayoutAudioText", "UnifyLightFont");
     b->textSetText("UnifyLayoutAudioText", "Audio level");
-    
 }
 
 void Layout::update(IBuilder *b, CoreState &coreState, const std::string &name)

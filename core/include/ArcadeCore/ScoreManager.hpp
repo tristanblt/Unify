@@ -18,6 +18,7 @@ class ScoreManager {
         ~ScoreManager();
 
         void saveScores();
+        std::map<std::string, int> getBestScores(const std::string &game);
 
         std::map<std::string, std::map<std::string, int>> _profiles;
     protected:

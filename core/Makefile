@@ -11,6 +11,7 @@ SRCPATH	=	src/
 
 SRCS_FILES=	main.cpp													\
 			ArcadeCore/CoreException.cpp								\
+			ArcadeCore/ScoreManager.cpp								\
 			DLLoader.cpp												\
 			ArcadeCore/ArcadeCore.cpp									\
 			ArcadeCore/FileManager.cpp									\
@@ -21,7 +22,6 @@ SRCS_FILES=	main.cpp													\
 			ArcadeCore/Builder/DrawBuilder.cpp							\
 			ArcadeCore/Builder/CollideBuilder.cpp						\
 			ArcadeCore/Builder/AudioBuilder.cpp							\
-			ArcadeCore/Builder/UIBuilder.cpp							\
 			ArcadeCore/Builder/UIButtonsBuilder.cpp						\
 			ArcadeCore/Builder/UISliderBuilder.cpp						\
 			ArcadeCore/Builder/UISelectorBuilder.cpp					\

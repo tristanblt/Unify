@@ -20,8 +20,14 @@ class Score {
         void update(IBuilder *builder);
         void start(IBuilder *builder);
     protected:
+    void manageInputs(IBuilder *b);
+    void drawBackground(IBuilder *b);
+    void drawSelector(IBuilder *b);
+
     private:
         ScoreManager *_sm;
+        std::string _nickname;
+        int _selectOffset;
 };
 
 #endif /* !SCORE_HPP_ */

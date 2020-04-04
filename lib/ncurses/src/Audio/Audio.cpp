@@ -24,22 +24,14 @@ void Audio::playSound(const std::string &name)
 
 void Audio::playMusic(const std::string &name)
 {
-<<<<<<< HEAD
-    (std::string)name;
-=======
     (void)name;
     beep();
->>>>>>> 789a97b56e817749ac673fd040c9521510d3dc29
 }
 
 void Audio::stopMusic(const std::string &name)
 {
-<<<<<<< HEAD
-    (std::string)name;
-=======
     (void)name;
     beep();
->>>>>>> 789a97b56e817749ac673fd040c9521510d3dc29
 }
 
 void Audio::setVolume(int volume)
