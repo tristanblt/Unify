@@ -44,6 +44,7 @@ class ArcadeCore {
         GameState _gameState;
         std::vector<ADisplayLibrary *> _libs;
         int _currentLib;
+        LibraryControl _libCtrl;
 };
 
 #endif /* !ArcadeCore_HPP_ */

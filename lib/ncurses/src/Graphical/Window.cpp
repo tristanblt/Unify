@@ -120,7 +120,6 @@ void Window::drawBufferPixel(size_t x, size_t y, Color color)
 
 void Window::close()
 {
-    //nocbreak();
     endwin();
     _isOpen = false;
 }

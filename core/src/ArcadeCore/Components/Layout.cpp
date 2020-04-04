@@ -64,10 +64,23 @@ void Layout::start(IBuilder *b)
     b->textSetColor("UnifyLayoutAudioText", b->hexToColor(0xFFFFFFFF));
     b->textSetFont("UnifyLayoutAudioText", "UnifyLightFont");
     b->textSetText("UnifyLayoutAudioText", "Audio level");
+
+
+    b->basicButtonInit("UnifyLayoutNextLib");
+    b->basicButtonSetBackgroundColors("UnifyLayoutNextLib", b->hexToColor(0x505050FF), b->hexToColor(0x505050FF), b->hexToColor(0x505050FF));
+    b->basicButtonSetTextColors("UnifyLayoutNextLib", b->hexToColor(0x1B79E6FF), b->hexToColor(0xDEDEDEFF), b->hexToColor(0xFFFFFFFF));
+    b->basicButtonSetFont("UnifyLayoutNextLib", "UnifyBoldFont");
+    b->basicButtonSetText("UnifyLayoutNextLib", "Next library");
+
+    b->basicButtonInit("UnifyLayoutPreviousLib");
+    b->basicButtonSetBackgroundColors("UnifyLayoutPreviousLib", b->hexToColor(0x505050FF), b->hexToColor(0x505050FF), b->hexToColor(0x505050FF));
+    b->basicButtonSetTextColors("UnifyLayoutPreviousLib", b->hexToColor(0x1B79E6FF), b->hexToColor(0xDEDEDEFF), b->hexToColor(0xFFFFFFFF));
+    b->basicButtonSetFont("UnifyLayoutPreviousLib", "UnifyBoldFont");
+    b->basicButtonSetText("UnifyLayoutPreviousLib", "Previous library");
     
 }
 
-void Layout::update(IBuilder *b, CoreState &coreState, const std::string &name)
+void Layout::update(IBuilder *b, CoreState &coreState, const std::string &name, LibraryControl &libCtrl)
 {
     static int tmpVolume = b->getVolume();
 
@@ -100,6 +113,10 @@ void Layout::update(IBuilder *b, CoreState &coreState, const std::string &name)
             tmpVolume += 5;
         if (b->getEvents().keyboardState[Key::LEFT] == InputState::RELEASED && tmpVolume > 0)
             tmpVolume -= 5;
+        if (b->getEvents().keyboardState[Key::ESCAPE] == InputState::RELEASED) {
+            coreState = CoreState::CORE_MENU;
+            return;
+        }
         b->sliderSetWidth("UnifyLayoutAudioSlider", VW(30));
         b->sliderSetPosition("UnifyLayoutAudioSlider", {VW(35), VH(43)});
         b->sliderDraw("UnifyLayoutAudioSlider", tmpVolume);
@@ -107,6 +124,19 @@ void Layout::update(IBuilder *b, CoreState &coreState, const std::string &name)
         b->textSetFontSize("UnifyLayoutAudioText", VH(2));
         b->textSetPosition("UnifyLayoutAudioText", {VW(35), VH(40)});
         b->textDraw("UnifyLayoutAudioText");
+
+        b->basicButtonSetDisplayBox("UnifyLayoutPreviousLib", {VW(34), VH(48), VW(15), VH(5)});
+        b->basicButtonSetFontSize("UnifyLayoutPreviousLib", VH(2));
+        b->basicButtonSetRadius("UnifyLayoutPreviousLib", VH(2.5));
+        b->buttonDraw("UnifyLayoutPreviousLib");
+        if (b->buttonDraw("UnifyLayoutPreviousLib") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
+            libCtrl = LibraryControl::LIB_CTRL_PREV;
+        b->basicButtonSetDisplayBox("UnifyLayoutNextLib", {VW(51), VH(48), VW(15), VH(5)});
+        b->basicButtonSetFontSize("UnifyLayoutNextLib", VH(2));
+        b->basicButtonSetRadius("UnifyLayoutNextLib", VH(2.5));
+        b->buttonDraw("UnifyLayoutNextLib");
+        if (b->buttonDraw("UnifyLayoutNextLib") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
+            libCtrl = LibraryControl::LIB_CTRL_NEXT;
     }
     b->rectSetPosition("UnifyLayoutFooter", {0, VH(100) - VH(7)});
     b->rectSetSize("UnifyLayoutFooter", {VW(100), VH(7)});
@@ -130,10 +160,10 @@ void Layout::update(IBuilder *b, CoreState &coreState, const std::string &name)
     else if ((b->buttonDraw("UnifyPauseButton") &&
     b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED) ||
     b->getEvents().joyConEvents.buttons1[JOY_OP] == InputState::RELEASED ||
-    b->getEvents().keyboardState[Key::P] == InputState::RELEASED)
+    b->getEvents().keyboardState[Key::ESCAPE] == InputState::RELEASED)
         coreState = CoreState::CORE_PAUSE;
     if (b->getEvents().joyConEvents.buttons1[JOY_MENU] == InputState::RELEASED ||
-    b->getEvents().keyboardState[Key::M] == InputState::RELEASED)
+    b->getEvents().keyboardState[Key::F6] == InputState::RELEASED)
         coreState = CoreState::CORE_MENU;
     b->setVolume(tmpVolume);
 }
