@@ -64,6 +64,9 @@ void Window::display()
             attroff(MY_COLOR_PAIR(colorPair));
         }
     }
+    for (auto &elem : _smallTexts) {
+        mvprintw(elem.second.y, elem.second.x, elem.first.c_str());
+    }
     refresh();
 }
 
