@@ -68,5 +68,10 @@ std::map<std::string, int> ScoreManager::getBestScores(const std::string &game)
             tmpScore = -1;
         }
     }
+    for (auto &elem : board)
+    {
+        std::cout << elem.first << std::endl;
+    }
+    
     return (board);
 }
