@@ -40,34 +40,48 @@ void Score::start(IBuilder *b)
     b->textInit("UnifyNicknameLetter");
     b->textSetColor("UnifyNicknameLetter", b->hexToColor(0xFFFFFFFF));
     b->textSetFont("UnifyNicknameLetter", "UnifyBoldFont");
+
+    b->basicButtonInit("UnifySaveScore");
+    b->basicButtonSetBackgroundColors("UnifySaveScore", b->hexToColor(0x505050FF), b->hexToColor(0x505050FF), b->hexToColor(0x505050FF));
+    b->basicButtonSetTextColors("UnifySaveScore", b->hexToColor(0x1B79E6FF), b->hexToColor(0xDEDEDEFF), b->hexToColor(0xFFFFFFFF));
+    b->basicButtonSetFont("UnifySaveScore", "UnifyBoldFont");
+    b->basicButtonSetText("UnifySaveScore", "Save score");
+
+    b->basicButtonInit("UnifyScoreBackToMenu");
+    b->basicButtonSetBackgroundColors("UnifyScoreBackToMenu", b->hexToColor(0x505050FF), b->hexToColor(0x505050FF), b->hexToColor(0x505050FF));
+    b->basicButtonSetTextColors("UnifyScoreBackToMenu", b->hexToColor(0x1B79E6FF), b->hexToColor(0xDEDEDEFF), b->hexToColor(0xFFFFFFFF));
+    b->basicButtonSetFont("UnifyScoreBackToMenu", "UnifyBoldFont");
+    b->basicButtonSetText("UnifyScoreBackToMenu", "Back to menu");
 }
 
 void Score::drawSelector(IBuilder *b)
 {
+    Vector2 offset = {VW(42.5), VH(35)};
+
     b->radiusRectSetRadius("UnifyNicknameEntry", VH(1));
-    b->radiusRectSetPosition("UnifyNicknameEntry", {VW(50), VH(50)});
+    b->radiusRectSetPosition("UnifyNicknameEntry", offset);
     b->radiusRectSetSize("UnifyNicknameEntry", {VW(12), VW(4)});
     b->radiusRectDraw("UnifyNicknameEntry");
 
     b->radiusRectSetRadius("UnifyNicknameSelector", VH(1));
-    b->radiusRectSetPosition("UnifyNicknameSelector", {VW(50) + VW(4 * _selectOffset), VH(50)});
+    b->radiusRectSetPosition("UnifyNicknameSelector", {offset.x + VW(4 * _selectOffset), offset.y});
     b->radiusRectSetSize("UnifyNicknameSelector", {VW(4), VW(4)});
     b->radiusRectDraw("UnifyNicknameSelector");
 
     b->radiusRectSetRadius("UnifyNicknameSelector2", VH(1));
-    b->radiusRectSetPosition("UnifyNicknameSelector2", {VW(50.21875) + VW(4 * _selectOffset), VH(50) + VW(0.21875)});
+    b->radiusRectSetPosition("UnifyNicknameSelector2", {offset.x + VW(0.21875) + VW(4 * _selectOffset), offset.y + VW(0.21875)});
     b->radiusRectSetSize("UnifyNicknameSelector2", {VW(3.563), VW(3.563)});
     b->radiusRectDraw("UnifyNicknameSelector2");
 
     b->textSetFontSize("UnifyNicknameLetter", (int)VW(2));
     b->textSetText("UnifyNicknameLetter", std::string(1, _nickname[0]));
-    b->textSetPosition("UnifyNicknameLetter", {VW(50.875), VH(50) + VW(0.75)});
+    b->textSetPosition("UnifyNicknameLetter", {offset.x + VW(0.875), offset.y + VW(0.75)});
     b->textDraw("UnifyNicknameLetter");
     b->textSetText("UnifyNicknameLetter", std::string(1, _nickname[1]));
-    b->textSetPosition("UnifyNicknameLetter", {VW(54.875), VH(50) + VW(0.75)});
+    b->textSetPosition("UnifyNicknameLetter", {offset.x + VW(4.875), offset.y + VW(0.75)});
     b->textDraw("UnifyNicknameLetter");
     b->textSetText("UnifyNicknameLetter", std::string(1, _nickname[2]));
-    b->textSetPosition("UnifyNicknameLetter", {VW(58.875), VH(50) + VW(0.75)});
+    b->textSetPosition("UnifyNicknameLetter", {offset.x + VW(8.875), offset.y + VW(0.75)});
     b->textDraw("UnifyNicknameLetter");
 }
 
@@ -101,9 +115,26 @@ void Score::manageInputs(IBuilder *b)
         _selectOffset++;
 }
 
-void Score::update(IBuilder *b)
+void Score::update(IBuilder *b, int score, std::string gameName, CoreState &coreState)
 {
     manageInputs(b);
     drawBackground(b);
     drawSelector(b);
+
+    b->basicButtonSetDisplayBox("UnifySaveScore", {VW(43), VH(83), VW(14), VH(5)});
+    b->basicButtonSetFontSize("UnifySaveScore", VH(2));
+    b->basicButtonSetRadius("UnifySaveScore", VH(2.5));
+    b->buttonDraw("UnifySaveScore");
+    if (b->buttonDraw("UnifySaveScore") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED) {
+        std::replace(gameName.begin(), gameName.end(), ' ', '_');
+        _sm->_profiles[_nickname][gameName] = score;
+        _sm->saveScores();
+        coreState = CoreState::CORE_GAME;
+    }
+    b->basicButtonSetDisplayBox("UnifyScoreBackToMenu", {VW(43), VH(90), VW(14), VH(5)});
+    b->basicButtonSetFontSize("UnifyScoreBackToMenu", VH(2));
+    b->basicButtonSetRadius("UnifyScoreBackToMenu", VH(2.5));
+    b->buttonDraw("UnifyScoreBackToMenu");
+    if (b->buttonDraw("UnifyScoreBackToMenu") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
+        coreState = CoreState::CORE_MENU;
 }

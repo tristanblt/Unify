@@ -124,7 +124,7 @@ void ArcadeCore::manageMenuAndGame(Builder *b, DLLoader<Start> *&gameLib, Start 
         updateJoyConCursors(b);
     }
     else if (_coreState == CoreState::CORE_SCORE) {
-        _score.update(b);
+        _score.update(b, _gameState.score, game->getName(), _coreState);
         updateJoyConCursors(b);
     }
     else {
@@ -133,8 +133,10 @@ void ArcadeCore::manageMenuAndGame(Builder *b, DLLoader<Start> *&gameLib, Start 
         else
             updateJoyConCursors(b);
         _layout.update(b, _coreState, game->getName(), _libCtrl);
-        if (_gameState.state == State::STATE_SCORE)
+        if (_gameState.state == State::STATE_SCORE) {
             _coreState = CoreState::CORE_SCORE;
+            _gameState.state = State::STATE_NONE;
+        }
     }
 }
 

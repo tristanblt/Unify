@@ -64,10 +64,8 @@ void Window::display()
             attroff(MY_COLOR_PAIR(colorPair));
         }
     }
-    for (auto &elem : _smallTexts) {
+    for (auto &elem : _smallTexts)
         mvprintw(elem.second.y, elem.second.x, elem.first.c_str());
-        std::cerr << elem.second.x << " " << elem.second.y << std::endl;
-    }
     _smallTexts.clear();
     refresh();
 }

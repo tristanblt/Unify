@@ -17,7 +17,7 @@ class Score {
         Score(ScoreManager *sm);
         ~Score();
 
-        void update(IBuilder *builder);
+        void update(IBuilder *builder, int score, std::string gameName, CoreState &coreState);
         void start(IBuilder *builder);
     protected:
     void manageInputs(IBuilder *b);
