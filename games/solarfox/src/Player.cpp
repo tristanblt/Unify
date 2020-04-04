@@ -22,7 +22,7 @@ Player::~Player()
 
 void Player::setNewDir(IBuilder *b)
 {
-    if (_dir != Orientation::O_DOWN && (b->getEvents().keyboardState[Key::UP] == InputState::CLICK || b->getEvents().joyConEvents.mainAxe1.y == JoyConState::JOY_CLICK_L))
+    if (_dir != Orientation::O_DOWN && (b->getEvents().keyboardState[Key::UP] == InputState::CLICK) || b->getEvents().joyConEvents.mainAxe1.y == JoyConState::JOY_CLICK_L))
         _dir = Orientation::O_UP;
     else if (_dir != Orientation::O_UP && (b->getEvents().keyboardState[Key::DOWN] == InputState::CLICK || b->getEvents().joyConEvents.mainAxe1.y == JoyConState::JOY_CLICK_R))
         _dir = Orientation::O_DOWN;

@@ -68,5 +68,8 @@ std::map<std::string, int> ScoreManager::getBestScores(const std::string &game)
             tmpScore = -1;
         }
     }
+    for_each(board.begin(), board.end(), [](std::pair<std::string, int> b) {
+        std::cout << b.first << " " << b.second << std::endl;
+    });
     return (board);
 }
