@@ -9,7 +9,8 @@
 #include "core/include/DLLoader.hpp"
 #include "core/include/ArcadeCore/CoreException.hpp"
 
-ArcadeCore::ArcadeCore()
+ArcadeCore::ArcadeCore():
+_sm(ScoreManager(FileManager("assets/files/profiles.config"))), _score(Score(&_sm))
 {
     _coreState = CoreState::CORE_MENU;
     _gameState.score = 0;
@@ -145,5 +146,7 @@ bool ArcadeCore::launchCore(ADisplayLibrary *library)
         builder.windowDisplay();
         triggerSwitchGraphicalLibrary(&builder);
     }
+    _sm._profiles["oui"]["SolarFox"] = 2;
+    _sm.saveScores();
     return (_menu.getInterruptType());
 }

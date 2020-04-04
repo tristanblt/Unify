@@ -22,6 +22,7 @@ SRCS_FILES=	main.cpp													\
 			ArcadeCore/Builder/CollideBuilder.cpp						\
 			ArcadeCore/Builder/AudioBuilder.cpp							\
 			ArcadeCore/Builder/UIBuilder.cpp							\
+			ArcadeCore/ScoreManager.cpp									\
 
 SRC	=	$(addprefix $(SRCPATH), $(SRCS_FILES))
 

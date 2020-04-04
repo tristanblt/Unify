@@ -11,6 +11,7 @@ FileManager::FileManager(const std::string &filepath)
 {
     std::ifstream f(filepath);
     std::string buffer;
+    std::string name;
 
     if (!f)
         throw FileException("Could not open file '"+std::string(filepath)+"'");

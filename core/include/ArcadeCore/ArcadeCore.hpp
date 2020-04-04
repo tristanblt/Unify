@@ -36,6 +36,7 @@ class ArcadeCore {
         void manageMenuAndGame(Builder *b, DLLoader<Start> *&gameLib, Start *&game);
     protected:
     private:
+        ScoreManager _sm;
         CoreState _coreState;
         Menu _menu;
         Layout _layout;
