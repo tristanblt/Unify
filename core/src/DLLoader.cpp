@@ -12,9 +12,12 @@
 template <typename T>
 DLLoader<T>::DLLoader(const char *path)
 {
+    char *strerr = NULL;
     _path = std::string(path);
+    dlerror();
     _handler = dlopen(path, RTLD_LAZY);
-    if (!_handler)
+    strerr = dlerror();
+    if (!_handler || strerr)
         throw DLLoaderException("could not open '"+std::string(path)+"' dynamic library.");
 }
 
