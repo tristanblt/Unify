@@ -30,12 +30,13 @@ class ArcadeCore {
         Start *changeGame(std::string libName);
 
         ADisplayLibrary *importGraphicalLibs(const std::string &libName);
-        void switchGraphicalLibrary(Builder *builder, int i);
-        void triggerSwitchGraphicalLibrary(Builder *builder);
+        void switchGraphicalLibrary(Builder *builder, int i, Start *&game);
+        void triggerSwitchGraphicalLibrary(Builder *builder, Start *&game);
         void updateJoyConCursors(IBuilder *b);
         void manageMenuAndGame(Builder *b, DLLoader<Start> *&gameLib, Start *&game);
     protected:
     private:
+        ScoreManager _sm;
         CoreState _coreState;
         Menu _menu;
         Layout _layout;
@@ -43,6 +44,7 @@ class ArcadeCore {
         GameState _gameState;
         std::vector<ADisplayLibrary *> _libs;
         int _currentLib;
+        LibraryControl _libCtrl;
 };
 
 #endif /* !ArcadeCore_HPP_ */

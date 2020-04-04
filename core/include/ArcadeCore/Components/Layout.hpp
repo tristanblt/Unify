@@ -17,7 +17,7 @@ class Layout {
         Layout();
         ~Layout();
 
-        void update(IBuilder *builder, CoreState &coreState, const std::string &gameName);
+        void update(IBuilder *builder, CoreState &coreState, const std::string &gameName, LibraryControl &libCtrl);
         void start(IBuilder *builder);
     protected:
     private:

@@ -26,12 +26,12 @@ class Menu {
             std::string spriteIdx;
         };
 
-        DLLoader<Start> *update(IBuilder *builder);
+        DLLoader<Start> *update(IBuilder *builder, LibraryControl &libCtrl);
         void start(IBuilder *builder);
         void drawBackgrounds(IBuilder *builder);
         void drawHeader(IBuilder *builder);
         void drawCarousel(IBuilder *builder);
-        void drawSettings(IBuilder *builder);
+        void drawSettings(IBuilder *builder, LibraryControl &libCtrl);
 
         bool getInterruptType() const;
     protected:

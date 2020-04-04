@@ -67,13 +67,13 @@ void SFMLLibrary::updateCursorJoyCon(Events *e)
     if (e->joyConEvents.cursorPos.x == -1 && e->joyConEvents.cursorPos.y == -1)
         e->joyConEvents.cursorPos = {_window->width() / 2, _window->height() / 2};
     if (e->joyConEvents.mainAxe1.x == JoyConState::JOY_HOLD_L)
-        e->joyConEvents.cursorPos.x -= 30;
+        e->joyConEvents.cursorPos.x -= 10;
     if (e->joyConEvents.mainAxe1.x == JoyConState::JOY_HOLD_R)
-        e->joyConEvents.cursorPos.x += 30;
+        e->joyConEvents.cursorPos.x += 10;
     if (e->joyConEvents.mainAxe1.y == JoyConState::JOY_HOLD_L)
-        e->joyConEvents.cursorPos.y -= 30;
+        e->joyConEvents.cursorPos.y -= 10;
     if (e->joyConEvents.mainAxe1.y == JoyConState::JOY_HOLD_R)
-        e->joyConEvents.cursorPos.y += 30;
+        e->joyConEvents.cursorPos.y += 10;
     if (e->joyConEvents.cursorPos.x < 0)
         e->joyConEvents.cursorPos.x = 0;
     if (e->joyConEvents.cursorPos.x > _window->width())

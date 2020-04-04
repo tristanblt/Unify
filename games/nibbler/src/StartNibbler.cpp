@@ -183,13 +183,13 @@ void StartNibbler::setMap(const Vector2 &pos, const Vector2 &size)
 
 void StartNibbler::setDirection(IBuilder *b)
 {
-    if (b->getEvents().keyboardState[Key::LEFT] == InputState::CLICK)
+    if (b->getEvents().keyboardState[Key::LEFT] == InputState::CLICK || b->getEvents().joyConEvents.mainAxe1.x == JoyConState::JOY_CLICK_L)
         setSpeed({-1, 0});
-    if (b->getEvents().keyboardState[Key::RIGHT] == InputState::CLICK)
+    if (b->getEvents().keyboardState[Key::RIGHT] == InputState::CLICK || b->getEvents().joyConEvents.mainAxe1.x == JoyConState::JOY_CLICK_R)
         setSpeed({1, 0});
-    if (b->getEvents().keyboardState[Key::UP] == InputState::CLICK)
+    if (b->getEvents().keyboardState[Key::UP] == InputState::CLICK || b->getEvents().joyConEvents.mainAxe1.y == JoyConState::JOY_CLICK_L)
         setSpeed({0, -1});
-    if (b->getEvents().keyboardState[Key::DOWN] == InputState::CLICK)
+    if (b->getEvents().keyboardState[Key::DOWN] == InputState::CLICK || b->getEvents().joyConEvents.mainAxe1.y == JoyConState::JOY_CLICK_R)
         setSpeed({0, 1});
 }
 

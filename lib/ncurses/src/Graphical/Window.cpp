@@ -64,6 +64,11 @@ void Window::display()
             attroff(MY_COLOR_PAIR(colorPair));
         }
     }
+    for (auto &elem : _smallTexts) {
+        mvprintw(elem.second.y, elem.second.x, elem.first.c_str());
+        std::cerr << elem.second.x << " " << elem.second.y << std::endl;
+    }
+    _smallTexts.clear();
     refresh();
 }
 
@@ -113,23 +118,22 @@ int Window::getColorPair(Color fg, Color bg)
 
 void Window::drawBufferPixel(size_t x, size_t y, Color color)
 {
-    if (y >= _height || x >= _width || x < 0 || y < 0 || color.a == 0)
+    if ((size_t)y >= _height || (size_t)x >= _width || (size_t)x < 0 || (size_t)y < 0 || color.a == 0)
         return;
     _colorBuffer[y][x] = color;
 }
 
 void Window::close()
 {
-    nocbreak();
     endwin();
     _isOpen = false;
 }
 
 void Window::create()
 {
+    _isOpen = true;
     if (!_first)
         return;
-    _isOpen = true;
     setlocale(LC_ALL, "");
     initscr();
     noecho();

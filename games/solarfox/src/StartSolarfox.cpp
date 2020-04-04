@@ -12,6 +12,7 @@ StartSolarfox::StartSolarfox()
     _solarFoxState = Instance::SF_GAME;
     _gameState.state = State::STATE_NONE;
     _gameState.score = 0;
+    _gameInstance = nullptr;
 }
 
 StartSolarfox::~StartSolarfox()
@@ -30,7 +31,8 @@ void StartSolarfox::start(IBuilder *b)
     b->loadAsset("games/solarfox/assets/sounds/theme.ogg", "BackTheme", AssetType::AUDIO);
     b->loadAsset("games/solarfox/assets/sounds/Pew1.ogg", "PlayerPew", AssetType::AUDIO);
     b->loadAsset("games/solarfox/assets/sounds/Pew2.ogg", "EnnemyPew", AssetType::AUDIO);
-    _gameInstance = new GameInstance(1, 0, b);
+    if (!_gameInstance)
+        _gameInstance = new GameInstance(1, 0, b);
 }
 
 GameState StartSolarfox::update(IBuilder *b)
