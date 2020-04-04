@@ -29,7 +29,7 @@ class Score {
         ScoreManager *_sm;
         std::string _nickname;
         int _selectOffset;
-        std::map<std::string, int> _bestScore;
+        std::vector<std::pair<std::string, int>> _bestScore;
 };
 
 #endif /* !SCORE_HPP_ */
