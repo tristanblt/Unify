@@ -49,13 +49,13 @@ void Menu::drawHeader(IBuilder *b)
     b->spriteButtonSetSpriteBoxes("UnifyPowerButton", {256, 128, 128, 128}, {0, 128, 128, 128}, {128, 128, 128, 128});
     if (_state == MenuState::MENU_CAROUSSEL) {
         if ((b->buttonDraw("UnifySettingsButton") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED) ||
-        b->getEvents().keyboardState[Key::L] == InputState::RELEASED) {
+        b->getEvents().keyboardState[Key::F5] == InputState::RELEASED) {
             _state = MenuState::MENU_SETTINGS;
             b->playSound("UnifyBorderSound");
         }
     } else {
         if ((b->buttonDraw("UnifyBackButton") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED) ||
-        b->getEvents().keyboardState[Key::L] == InputState::RELEASED) {
+        b->getEvents().keyboardState[Key::F5] == InputState::RELEASED) {
             _state = MenuState::MENU_CAROUSSEL;
             b->playSound("UnifyBorderSound");
         }
@@ -136,7 +136,7 @@ void Menu::drawCarousel(IBuilder *b)
     }
 }
 
-void Menu::drawSettings(IBuilder *b)
+void Menu::drawSettings(IBuilder *b, LibraryControl &libCtrl)
 {
     int result;
     static int tmpVolume = b->getVolume();
@@ -155,7 +155,18 @@ void Menu::drawSettings(IBuilder *b)
         b->textSetPosition("UnifySettingsAudioText", {VW(35), VH(25)});
         b->textDraw("UnifySettingsAudioText");
     } else if (result == 1) {
-        // deux boutons
+        b->basicButtonSetDisplayBox("UnifyMenuPreviousLib", {VW(33), VH(25), VW(15), VH(5)});
+        b->basicButtonSetFontSize("UnifyMenuPreviousLib", VH(2));
+        b->basicButtonSetRadius("UnifyMenuPreviousLib", VH(2.5));
+        b->buttonDraw("UnifyMenuPreviousLib");
+        if (b->buttonDraw("UnifyMenuPreviousLib") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
+            libCtrl = LibraryControl::LIB_CTRL_PREV;
+        b->basicButtonSetDisplayBox("UnifyMenuNextLib", {VW(33), VH(33), VW(15), VH(5)});
+        b->basicButtonSetFontSize("UnifyMenuNextLib", VH(2));
+        b->basicButtonSetRadius("UnifyMenuNextLib", VH(2.5));
+        b->buttonDraw("UnifyMenuNextLib");
+        if (b->buttonDraw("UnifyMenuNextLib") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
+            libCtrl = LibraryControl::LIB_CTRL_NEXT;
     } else if (result == 2) {
         b->textSetPosition("UnifySettingsCredits", {VW(35), VH(25)});
         b->textSetFontSize("UnifySettingsCredits", VH(2));
@@ -229,9 +240,21 @@ void Menu::start(IBuilder *b)
     b->textSetColor("UnifySettingsAudioText", b->hexToColor(0xFFFFFFFF));
     b->textSetFont("UnifySettingsAudioText", "UnifyLightFont");
     b->textSetText("UnifySettingsAudioText", "Audio level");
+
+    b->basicButtonInit("UnifyMenuNextLib");
+    b->basicButtonSetBackgroundColors("UnifyMenuNextLib", b->hexToColor(0x505050FF), b->hexToColor(0x505050FF), b->hexToColor(0x505050FF));
+    b->basicButtonSetTextColors("UnifyMenuNextLib", b->hexToColor(0x1B79E6FF), b->hexToColor(0xDEDEDEFF), b->hexToColor(0xFFFFFFFF));
+    b->basicButtonSetFont("UnifyMenuNextLib", "UnifyBoldFont");
+    b->basicButtonSetText("UnifyMenuNextLib", "Next library");
+
+    b->basicButtonInit("UnifyMenuPreviousLib");
+    b->basicButtonSetBackgroundColors("UnifyMenuPreviousLib", b->hexToColor(0x505050FF), b->hexToColor(0x505050FF), b->hexToColor(0x505050FF));
+    b->basicButtonSetTextColors("UnifyMenuPreviousLib", b->hexToColor(0x1B79E6FF), b->hexToColor(0xDEDEDEFF), b->hexToColor(0xFFFFFFFF));
+    b->basicButtonSetFont("UnifyMenuPreviousLib", "UnifyBoldFont");
+    b->basicButtonSetText("UnifyMenuPreviousLib", "Previous library");
 }
 
-DLLoader<Start> *Menu::update(IBuilder *b)
+DLLoader<Start> *Menu::update(IBuilder *b, LibraryControl &libCtrl)
 {
     DLLoader<Start> *tmp = _currentGame;
 
@@ -243,7 +266,7 @@ DLLoader<Start> *Menu::update(IBuilder *b)
     if (_state == MenuState::MENU_CAROUSSEL)
         drawCarousel(b);
     else
-        drawSettings(b);
+        drawSettings(b, libCtrl);
     return (tmp);
 }
 

@@ -46,6 +46,8 @@ class Window : public IWindow {
         void  drawBufferPixel(size_t, size_t, Color);
         std::vector<std::vector<Color>> getBuffer(void);
 
+        std::map<std::string, Vector2> _smallTexts;
+
     protected:
     private:
         size_t _width;

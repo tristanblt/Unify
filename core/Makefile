@@ -15,6 +15,7 @@ SRCS_FILES=	main.cpp													\
 			DLLoader.cpp												\
 			ArcadeCore/ArcadeCore.cpp									\
 			ArcadeCore/FileManager.cpp									\
+			ArcadeCore/ScoreManager.cpp									\
 			ArcadeCore/Components/Layout.cpp							\
 			ArcadeCore/Components/Score.cpp								\
 			ArcadeCore/Components/Menu.cpp								\

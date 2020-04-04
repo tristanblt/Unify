@@ -64,6 +64,11 @@ void Window::display()
             attroff(MY_COLOR_PAIR(colorPair));
         }
     }
+    for (auto &elem : _smallTexts) {
+        mvprintw(elem.second.y, elem.second.x, elem.first.c_str());
+        std::cerr << elem.second.x << " " << elem.second.y << std::endl;
+    }
+    _smallTexts.clear();
     refresh();
 }
 
@@ -120,16 +125,15 @@ void Window::drawBufferPixel(size_t x, size_t y, Color color)
 
 void Window::close()
 {
-    nocbreak();
     endwin();
     _isOpen = false;
 }
 
 void Window::create()
 {
+    _isOpen = true;
     if (!_first)
         return;
-    _isOpen = true;
     setlocale(LC_ALL, "");
     initscr();
     noecho();

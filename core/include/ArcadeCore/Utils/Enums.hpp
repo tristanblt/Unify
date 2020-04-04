@@ -183,4 +183,10 @@ enum State {
     STATE_SCORE,
 };
 
+enum LibraryControl {
+    LIB_CTRL_NONE,
+    LIB_CTRL_PREV,
+    LIB_CTRL_NEXT
+};
+
 #endif /* !ENUMS_HPP_ */
