@@ -22,14 +22,16 @@ SRCS_FILES=	main.cpp													\
 			ArcadeCore/Builder/CollideBuilder.cpp						\
 			ArcadeCore/Builder/AudioBuilder.cpp							\
 			ArcadeCore/Builder/UIBuilder.cpp							\
-			ArcadeCore/ScoreManager.cpp									\
+			ArcadeCore/Builder/UIButtonsBuilder.cpp						\
+			ArcadeCore/Builder/UISliderBuilder.cpp						\
+			ArcadeCore/Builder/UISelectorBuilder.cpp					\
 
 SRC	=	$(addprefix $(SRCPATH), $(SRCS_FILES))
 
 OBJ			= 	$(SRC:%.cpp=%.o)
 
 CXXFLAGS	=	-W -Wall -Wextra -Wshadow	\
-			-I../	-std=c++11
+			-I../	-std=c++17
 
 LDFLAGS		=	-ldl -lpthread
 
@@ -38,11 +40,11 @@ CXX		=	g++
 RM		=	rm -f
 
 $(NAME):$(OBJ)
-		$(CXX) -o $(NAME) $(OBJ) $(CXXFLAGS) $(LDFLAGS)
+		$(CXX) -o $(NAME) $(OBJ) $(LDFLAGS)
 all:	$(NAME)
 
 clean:
-		$(RM) $(OBJ) $(OBJ_FLOGIC) *.gc*
+		$(RM) $(OBJ) *.gc*
 
 fclean: clean
 		$(RM) $(NAME)

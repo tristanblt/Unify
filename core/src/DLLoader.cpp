@@ -14,8 +14,6 @@ DLLoader<T>::DLLoader(const char *path)
 {
     _path = std::string(path);
     _handler = dlopen(path, RTLD_LAZY);
-    if (_handler == NULL)
-        std::cout << path << std::endl;
     if (!_handler)
         throw DLLoaderException("could not open '"+std::string(path)+"' dynamic library.");
 }

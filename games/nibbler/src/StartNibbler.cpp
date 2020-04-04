@@ -29,7 +29,7 @@ StartNibbler::~StartNibbler()
 void StartNibbler::start(IBuilder *b)
 {
     srand(time(NULL));
-    setMap({VW(10), VH(10)}, {VH(140), VH(70)});
+    setMap({(VW(100) - VH(140)) / 2, VH(10)}, {VH(140), VH(70)});
     _scale = MW(2);
     int cols  = MW(100) / _scale;
     int lines = MH(100) / _scale;
@@ -142,6 +142,7 @@ std::string StartNibbler::getName() const
 
 void StartNibbler::updateGame(IBuilder *b)
 {
+    static int appleOff = 0;
     static bool dir = true;
 
     setDirection(b);
@@ -157,8 +158,9 @@ void StartNibbler::updateGame(IBuilder *b)
         _gameState.score = (_foodCount - 3) * 100;
         if (_bonus) b->spriteSetSize("apple", {_scale, _scale}, {80, 64, 16, 16});
         else b->spriteSetSize("apple", {_scale, _scale}, {64, 64, 16, 16});
-        b->spriteSetPosition("apple", {_food.x, _food.y + (dir ? 5 : -5)});
-        dir = !dir;
+        b->spriteSetPosition("apple", {_food.x, _food.y + appleOff/*(dir ? 3 : -3)*/});
+        dir = appleOff == 0 ? true : appleOff == 5 ? false : dir;
+        appleOff += dir ? 1 : -1;
         _clock.restart();
     }
     b->spriteDraw("apple");

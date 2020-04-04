@@ -52,7 +52,7 @@ ADisplayLibrary *ArcadeCore::importGraphicalLibs(const std::string &firstLib)
     return (ret);
 }
 
-void ArcadeCore::switchGraphicalLibrary(Builder *b, int i)
+void ArcadeCore::switchGraphicalLibrary(Builder *b, int i, Start *&game)
 {
     if (static_cast<size_t>(i) > _libs.size() - 1)
         i = 0;
@@ -64,18 +64,20 @@ void ArcadeCore::switchGraphicalLibrary(Builder *b, int i)
     _menu.start(b);
     _layout.start(b);
     _score.start(b);
+    if (game)
+        game->start(b);
     b->lockUnifyGameObjects();
     _currentLib = i;
 }
 
-void ArcadeCore::triggerSwitchGraphicalLibrary(Builder *b)
+void ArcadeCore::triggerSwitchGraphicalLibrary(Builder *b, Start *&game)
 {
     if (b->getEvents().keyboardState[Key::N] == InputState::RELEASED) {
-        switchGraphicalLibrary(b, _currentLib + 1);
+        switchGraphicalLibrary(b, _currentLib + 1, game);
         b->getEvents().keyboardState[Key::N] = InputState::NONE;
     }
     if (b->getEvents().keyboardState[Key::B] == InputState::RELEASED) {
-        switchGraphicalLibrary(b, _currentLib - 1);
+        switchGraphicalLibrary(b, _currentLib - 1, game);
         b->getEvents().keyboardState[Key::B] = InputState::NONE;
     }
 }
@@ -116,7 +118,6 @@ void ArcadeCore::manageMenuAndGame(Builder *b, DLLoader<Start> *&gameLib, Start 
         }
     }
     else if (_coreState == CoreState::CORE_SCORE) {
-        std::cout << "ddd" << std::endl;
         _score.update(b);
     }
     else {
@@ -144,7 +145,7 @@ bool ArcadeCore::launchCore(ADisplayLibrary *library)
         manageMenuAndGame(&builder, gameLib, game);
         updateJoyConCursors(&builder);
         builder.windowDisplay();
-        triggerSwitchGraphicalLibrary(&builder);
+        triggerSwitchGraphicalLibrary(&builder, game);
     }
     _sm._profiles["oui"]["SolarFox"] = 2;
     _sm.saveScores();
