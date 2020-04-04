@@ -102,7 +102,7 @@ void ArcadeCore::startLaunchCore(Builder *b)
     _score.start(b);
     b->spriteInit("UnifyJoyConCursor");
     b->spriteSetSprite("UnifyJoyConCursor", "UnifyJoyConsCursors");
-    b->spriteSetSize("UnifyJoyConCursor", {176, 120}, {481, 3, 44, 30});
+    b->spriteSetSize("UnifyJoyConCursor", {VW(5), VW(4.2f)}, {481, 3, 44, 30});
     b->lockUnifyGameObjects();
 }
 
@@ -121,14 +121,18 @@ void ArcadeCore::manageMenuAndGame(Builder *b, DLLoader<Start> *&gameLib, Start 
         }
         if (b->getEvents().keyboardState[Key::ESCAPE] == InputState::RELEASED)
             b->windowClose();
+        updateJoyConCursors(b);
     }
     else if (_coreState == CoreState::CORE_SCORE) {
         _score.update(b);
+        updateJoyConCursors(b);
+        _coreState = CoreState::CORE_MENU;
     }
     else {
-        if (_coreState != CoreState::CORE_PAUSE) {
+        if (_coreState != CoreState::CORE_PAUSE)
             _gameState = game->update(b);
-        }
+        else
+            updateJoyConCursors(b);
         _layout.update(b, _coreState, game->getName(), _libCtrl);
         if (_gameState.state == State::STATE_SCORE)
             _coreState = CoreState::CORE_SCORE;
@@ -146,7 +150,6 @@ bool ArcadeCore::launchCore(ADisplayLibrary *library)
         builder.updateEvents();
         builder.windowClear();
         manageMenuAndGame(&builder, gameLib, game);
-        updateJoyConCursors(&builder);
         builder.windowDisplay();
         triggerSwitchGraphicalLibrary(&builder, game);
     }
