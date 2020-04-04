@@ -126,7 +126,6 @@ void ArcadeCore::manageMenuAndGame(Builder *b, DLLoader<Start> *&gameLib, Start 
     else if (_coreState == CoreState::CORE_SCORE) {
         _score.update(b);
         updateJoyConCursors(b);
-        _coreState = CoreState::CORE_MENU;
     }
     else {
         if (_coreState != CoreState::CORE_PAUSE)

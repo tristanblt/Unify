@@ -11,7 +11,6 @@ SRCPATH	=	src/
 
 SRCS_FILES=	main.cpp													\
 			ArcadeCore/CoreException.cpp								\
-			ArcadeCore/ScoreManager.cpp								\
 			DLLoader.cpp												\
 			ArcadeCore/ArcadeCore.cpp									\
 			ArcadeCore/FileManager.cpp									\
