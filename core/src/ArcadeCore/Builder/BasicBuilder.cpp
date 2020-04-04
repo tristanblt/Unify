@@ -10,6 +10,8 @@
 Builder::Builder(ADisplayLibrary *library):
 _library(library)
 {
+    Vector2State tmp = {JOY_NONE, JOY_NONE};
+
     _unifyLock = false;
     windowCreate();
     _events.mouseEvents.scrollVelocity = 0;
@@ -17,6 +19,8 @@ _library(library)
     time(&_tick);
     _tickDiff = 0;
     _events.joyConEvents.cursorPos = {-1, -1};
+    _events.joyConEvents.mainAxe1 = tmp;
+    _events.joyConEvents.mainAxe2 = tmp;
     _volume = 50;
 }
 
