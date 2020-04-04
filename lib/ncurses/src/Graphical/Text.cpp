@@ -51,10 +51,9 @@ void Text::draw(IWindow *w)
             _bitcrush.drawSprite(_font, {_x, _y}, _frame, _wantedSize, w);
             _x += _wantedSize.x;
         }
-        static_cast<Window *>(w)->_smallTexts.clear();
     }
     else
-        static_cast<Window *>(w)->_smallTexts[_text] = (Vector2){_x, _y - _wantedSize.y / 2};
+        static_cast<Window *>(w)->_smallTexts[_text] = (Vector2){_x, _y / 2 - _wantedSize.y / 2};
 }
 
 void Text::setPosition(Vector2 position)
