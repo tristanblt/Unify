@@ -28,6 +28,14 @@ void Builder::stopMusic(const std::string &name)
     _library->_audio->stopMusic(name);
 }
 
+void Builder::stopEveryMusics()
+{
+    for_each(_musicsPlaying.begin(), _musicsPlaying.end(), [this](std::string name) {
+        _library->_audio->stopMusic(name);
+    });
+    _musicsPlaying.clear();
+}
+
 void Builder::setVolume(int volume)
 {
     _library->_audio->setVolume(volume);

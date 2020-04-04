@@ -111,6 +111,7 @@ class Builder: public IBuilder {
         void playSound(const std::string &name);
         void playMusic(const std::string &name);
         void stopMusic(const std::string &name);
+        void stopEveryMusics();
         void setVolume(int volume);
         int getVolume() const;
 

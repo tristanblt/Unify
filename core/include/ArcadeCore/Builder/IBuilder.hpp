@@ -110,6 +110,7 @@ class IBuilder {
         virtual void playSound(const std::string &name) = 0;
         virtual void playMusic(const std::string &name) = 0;
         virtual void stopMusic(const std::string &name) = 0;
+        virtual void stopEveryMusics() = 0;
         virtual void setVolume(int volume) = 0;
         virtual int getVolume() const = 0;
 

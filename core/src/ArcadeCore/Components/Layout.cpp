@@ -85,6 +85,7 @@ void Layout::update(IBuilder *b, CoreState &coreState, const std::string &name, 
     static int tmpVolume = b->getVolume();
 
     if (coreState == CoreState::CORE_PAUSE) {
+        b->stopEveryMusics();
         b->rectSetPosition("UnifyLayoutPauseBackground", {VW(0), VH(0)});
         b->rectSetSize("UnifyLayoutPauseBackground", {VW(100), VH(100)});
         b->rectDraw("UnifyLayoutPauseBackground");

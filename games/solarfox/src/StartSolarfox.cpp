@@ -39,10 +39,12 @@ GameState StartSolarfox::update(IBuilder *b)
 {
     SFGameState ret = SFGameState::SF_GS_PLAYING;
     GameInstance *tmp;
+    int score = 0;
 
     b->playMusic("BackTheme");
     if (_solarFoxState == Instance::SF_GAME) {
         if ((ret = _gameInstance->occurs(b)) == SF_GS_LOOSE) {
+            score = _gameInstance->getScore();
             tmp = new GameInstance(1, 0, b);
             _gameInstance = tmp;
             b->stopMusic("BackTheme");
@@ -51,7 +53,7 @@ GameState StartSolarfox::update(IBuilder *b)
             _gameInstance = tmp;
         }
     }
-    return ((ret == SFGameState::SF_GS_LOOSE) ? GameState{State::STATE_SCORE, _gameInstance->getScore()} : GameState{State::STATE_NONE, _gameInstance->getScore()});
+    return ((ret == SFGameState::SF_GS_LOOSE) ? GameState{State::STATE_SCORE, score} : GameState{State::STATE_NONE, score});
 }
 
 void StartSolarfox::finish(IBuilder *b)
