@@ -28,7 +28,7 @@ void Audio::playMusic(const std::string &name)
 
 void Audio::stopMusic(const std::string &name)
 {
-    (void)name;
+    (std::string)name;
     Mix_Pause(-1);
 }
 

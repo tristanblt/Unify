@@ -7,7 +7,7 @@
 
 #include "core/include/ArcadeCore/Components/Score.hpp"
 
-Score::Score()
+Score::Score(ScoreManager *sm): _sm(sm)
 {
 
 }
