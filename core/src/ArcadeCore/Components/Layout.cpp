@@ -101,13 +101,13 @@ void Layout::update(IBuilder *b, CoreState &coreState, const std::string &name, 
         b->basicButtonSetDisplayBox("UnifyReturnHomeButton", {VW(37), VH(55), VW(12), VH(5)});
         b->basicButtonSetFontSize("UnifyReturnHomeButton", VH(2));
         b->basicButtonSetRadius("UnifyReturnHomeButton", VH(2.5));
-        if (b->buttonDraw("UnifyReturnHomeButton") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
+        if (b->buttonDraw("UnifyReturnHomeButton"))
             coreState = CoreState::CORE_MENU;
-        
+
         b->basicButtonSetDisplayBox("UnifyReturnGameButton", {VW(51), VH(55), VW(12), VH(5)});
         b->basicButtonSetFontSize("UnifyReturnGameButton", VH(2));
         b->basicButtonSetRadius("UnifyReturnGameButton", VH(2.5));
-        if (b->buttonDraw("UnifyReturnGameButton") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
+        if (b->buttonDraw("UnifyReturnGameButton"))
             coreState = CoreState::CORE_GAME;
 
         if (b->getEvents().keyboardState[Key::RIGHT] == InputState::RELEASED && tmpVolume < 100)
@@ -129,14 +129,12 @@ void Layout::update(IBuilder *b, CoreState &coreState, const std::string &name, 
         b->basicButtonSetDisplayBox("UnifyLayoutPreviousLib", {VW(34), VH(48), VW(15), VH(5)});
         b->basicButtonSetFontSize("UnifyLayoutPreviousLib", VH(2));
         b->basicButtonSetRadius("UnifyLayoutPreviousLib", VH(2.5));
-        b->buttonDraw("UnifyLayoutPreviousLib");
-        if (b->buttonDraw("UnifyLayoutPreviousLib") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
+        if (b->buttonDraw("UnifyLayoutPreviousLib"))
             libCtrl = LibraryControl::LIB_CTRL_PREV;
         b->basicButtonSetDisplayBox("UnifyLayoutNextLib", {VW(51), VH(48), VW(15), VH(5)});
         b->basicButtonSetFontSize("UnifyLayoutNextLib", VH(2));
         b->basicButtonSetRadius("UnifyLayoutNextLib", VH(2.5));
-        b->buttonDraw("UnifyLayoutNextLib");
-        if (b->buttonDraw("UnifyLayoutNextLib") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
+        if (b->buttonDraw("UnifyLayoutNextLib"))
             libCtrl = LibraryControl::LIB_CTRL_NEXT;
     }
     b->rectSetPosition("UnifyLayoutFooter", {0, VH(100) - VH(7)});
@@ -157,11 +155,8 @@ void Layout::update(IBuilder *b, CoreState &coreState, const std::string &name, 
     b->spriteButtonSetSpriteBoxes("UnifyPauseButton", {256, 384, 128, 128}, {0, 384, 128, 128}, {128, 384, 128, 128});
 
     if (coreState == CoreState::CORE_PAUSE && b->getEvents().joyConEvents.buttons1[JOY_OP] == InputState::RELEASED)
-        coreState = CoreState::CORE_GAME;    
-    else if ((b->buttonDraw("UnifyPauseButton") &&
-    b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED) ||
-    b->getEvents().joyConEvents.buttons1[JOY_OP] == InputState::RELEASED ||
-    b->getEvents().keyboardState[Key::ESCAPE] == InputState::RELEASED)
+        coreState = CoreState::CORE_GAME;
+    else if (b->buttonDraw("UnifyPauseButton") || b->getEvents().keyboardState[Key::ESCAPE] == InputState::RELEASED)
         coreState = CoreState::CORE_PAUSE;
     if (b->getEvents().joyConEvents.buttons1[JOY_MENU] == InputState::RELEASED ||
     b->getEvents().keyboardState[Key::F6] == InputState::RELEASED)

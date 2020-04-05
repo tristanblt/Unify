@@ -175,8 +175,7 @@ void Score::update(IBuilder *b, int score, std::string gameName, CoreState &core
     b->basicButtonSetDisplayBox("UnifySaveScore", {VW(43), VH(83), VW(14), VH(5)});
     b->basicButtonSetFontSize("UnifySaveScore", VH(2));
     b->basicButtonSetRadius("UnifySaveScore", VH(2.5));
-    b->buttonDraw("UnifySaveScore");
-    if (b->buttonDraw("UnifySaveScore") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED) {
+    if (b->buttonDraw("UnifySaveScore")) {
         std::replace(gameName.begin(), gameName.end(), ' ', '_');
         if (_sm->_profiles[_nickname].find(gameName) == _sm->_profiles[_nickname].end() || _sm->_profiles[_nickname][gameName] <= score)
            _sm->_profiles[_nickname][gameName] = score;
@@ -186,8 +185,7 @@ void Score::update(IBuilder *b, int score, std::string gameName, CoreState &core
     b->basicButtonSetDisplayBox("UnifyScoreBackToMenu", {VW(43), VH(90), VW(14), VH(5)});
     b->basicButtonSetFontSize("UnifyScoreBackToMenu", VH(2));
     b->basicButtonSetRadius("UnifyScoreBackToMenu", VH(2.5));
-    b->buttonDraw("UnifyScoreBackToMenu");
-    if (b->buttonDraw("UnifyScoreBackToMenu") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
+    if (b->buttonDraw("UnifyScoreBackToMenu"))
         coreState = CoreState::CORE_MENU;
     if (coreState != CoreState::CORE_SCORE)
        _bestScore.clear();

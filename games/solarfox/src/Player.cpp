@@ -80,7 +80,7 @@ void Player::updateShot(float offset, IBuilder  *b)
                 _shotActive = false;
             _shotPos.x += offset;
         }
-        b->spriteSetSize(_shotObjectIdx, _size, {512, 0, 128, 128});
+        b->spriteSetSize(_shotObjectIdx, _shotSize, {512, 0, 128, 128});
         b->spriteSetPosition(_shotObjectIdx, _shotPos);
         b->spriteDraw(_shotObjectIdx);
     }
