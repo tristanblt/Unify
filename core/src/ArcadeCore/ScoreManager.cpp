@@ -37,9 +37,9 @@ void ScoreManager::saveScores()
     db.open("assets/files/profiles.config");
     if (!db.is_open())
         throw FileException("Could not open database file 'profiles.config'");
-    for_each(_profiles.begin(), _profiles.end(), [this, &db, &table](std::pair<std::string, std::map<std::string, int>> player) {
+    for_each(_profiles.begin(), _profiles.end(), [&db, &table](std::pair<std::string, std::map<std::string, int>> player) {
         table.append(player.first);
-        for_each(player.second.begin() ,player.second.end(), [this, &db, &table](std::pair<std::string, int> game) {
+        for_each(player.second.begin() ,player.second.end(), [&table](std::pair<std::string, int> game) {
             table.append(" " + game.first + " " + std::to_string(game.second));
         });
         table.append("\n");
@@ -57,7 +57,7 @@ std::vector<std::pair<std::string, int>> ScoreManager::getBestScores(const std::
     int tmpScore = -1;
 
     for (int i = 0; i < 5; i++) {
-        for_each(_profiles.begin(), _profiles.end(), [&game, &board, &tmpName, &tmpScore, &found](std::pair<std::string, std::map<std::string, int>> player) {
+        for_each(_profiles.begin(), _profiles.end(), [&game, &tmpName, &tmpScore, &found](std::pair<std::string, std::map<std::string, int>> player) {
             if (player.second.find(game) != player.second.end() && ((player.second[game] >= tmpScore && std::find(found.begin(), found.end(), player.first) == found.end()))) {
                 tmpName = player.first;
                 tmpScore = player.second[game];
