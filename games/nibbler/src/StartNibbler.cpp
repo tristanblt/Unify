@@ -135,6 +135,11 @@ void StartNibbler::finish(IBuilder *b)
     (void) b;
 }
 
+void StartNibbler::restart(IBuilder *b)
+{
+
+}
+
 std::string StartNibbler::getName() const
 {
     return ("Nibbler");

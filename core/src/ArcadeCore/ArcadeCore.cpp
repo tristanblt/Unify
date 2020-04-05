@@ -128,8 +128,12 @@ void ArcadeCore::manageMenuAndGame(Builder *b, DLLoader<Start> *&gameLib, Start 
         updateJoyConCursors(b);
     }
     else {
-        if (_coreState != CoreState::CORE_PAUSE)
+        if (_coreState != CoreState::CORE_PAUSE) {
+            if (b->getEvents().keyboardState[Key::F3] == InputState::RELEASED) {
+                game->restart(b);
+            }
             _gameState = game->update(b);
+        }
         else
             updateJoyConCursors(b);
         _layout.update(b, _coreState, game->getName(), _libCtrl);

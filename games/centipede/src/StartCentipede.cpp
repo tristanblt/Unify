@@ -32,6 +32,11 @@ void StartCentipede::finish(IBuilder *b)
     (void) b;
 }
 
+void StartCentipede::restart(IBuilder *b)
+{
+
+}
+
 std::string StartCentipede::getName() const
 {
     return ("Centipede");
