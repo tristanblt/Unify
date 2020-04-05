@@ -34,7 +34,7 @@ void StartCentipede::finish(IBuilder *b)
 
 void StartCentipede::restart(IBuilder *b)
 {
-
+    (void) b;
 }
 
 std::string StartCentipede::getName() const

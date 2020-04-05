@@ -23,7 +23,7 @@ void StartPacman::start(IBuilder *b)
 
 void StartPacman::restart(IBuilder *b)
 {
-    
+    (void) b;
 }
 
 GameState StartPacman::update(IBuilder *b)
