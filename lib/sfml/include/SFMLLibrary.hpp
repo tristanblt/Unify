@@ -8,6 +8,12 @@
 #ifndef SFMLLIBRARY_HPP_
 #define SFMLLIBRARY_HPP_
 
+#ifndef ARCADE_LINUX
+#define DELTA_RATIO 10
+#else
+#define DELTA_RATIO 1
+#endif
+
 #include "lib/include/ADisplayLibrary.hpp"
 #include "lib/sfml/include/Graphical/Window.hpp"
 #include "lib/sfml/include/Graphical/Rectangle.hpp"

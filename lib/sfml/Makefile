@@ -27,6 +27,13 @@ CXXFLAGS	=	-W -Wall -Wextra -Wshadow	\
 
 LDFLAGS		= -lsfml-system -lsfml-graphics -lsfml-audio -lsfml-window
 
+UNAME_S	= $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+	CXXFLAGS +=	-DARCADE_LINUX
+else
+	CXXFLAGS += -DARCADE_MAC
+endif
+
 CXX		=	g++
 
 RM		=	rm -f
