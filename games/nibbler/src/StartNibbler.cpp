@@ -139,7 +139,15 @@ void StartNibbler::finish(IBuilder *b)
 
 void StartNibbler::restart(IBuilder *b)
 {
-
+    int cols  = MW(100) / _scale;
+    int lines = MH(100) / _scale;
+    _foodCount = 3;
+    _head.x = floor(cols  / 2) * _scale + _map.x;
+    _head.y = floor(lines / 2) * _scale + _map.y;
+    _tail.clear();
+    for (int i = 1; _tail.size() < _foodCount; i++)
+        _tail.insert(_tail.begin(), {_head.x, _head.y + i * _scale});
+    setSpeed({0, -1});
 }
 
 std::string StartNibbler::getName() const
@@ -251,7 +259,6 @@ void StartNibbler::checkDeath()
                 // std::cout << "body ";
             }
     if (isDead) {
-        std::cout << "ded " << tmp++ << std::endl;
         _gameState.state = State::STATE_SCORE;
         _foodCount = 3;
         _head.x = floor(cols  / 2) * _scale + _map.x;
