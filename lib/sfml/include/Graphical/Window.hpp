@@ -28,6 +28,7 @@ class Window : public IWindow {
     protected:
     private:
         sf::RenderWindow *_window;
+        sf::Image _icon;
 };
 
 #endif /* !WINDOW_HPP_ */

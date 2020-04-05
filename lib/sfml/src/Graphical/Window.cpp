@@ -15,7 +15,10 @@ Window::Window()
 void Window::create()
 {
     sf::VideoMode m = sf::VideoMode::getFullscreenModes()[0];
+ 
     _window = new sf::RenderWindow(sf::VideoMode(m.width, m.height), "test", sf::Style::Fullscreen | sf::Style::Close);
+    if(_icon.loadFromFile("assets/imgs/logo.png"))
+        _window->setIcon(1000, 1000, _icon.getPixelsPtr());
     _window->setFramerateLimit(FRAMERATE_LIMIT);
 }
 

@@ -36,6 +36,7 @@ class Window : public IWindow {
         bool _isWindowOpen;
         int frameRate;
         Uint32 frameStart;
+        SDL_Surface *_icon;
 };
 
 #endif /* !WINDOW_HPP_ */
