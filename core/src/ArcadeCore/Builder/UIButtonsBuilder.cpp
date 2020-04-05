@@ -151,10 +151,10 @@ bool Builder::buttonDraw(const std::string &name)
     if (_gameObjects.find(name) == _gameObjects.end())
         throw BuilderException("could not find button");
     if (_gameObjects[name].type == ObjectType::TYPE_BASIC_BUTTON)
-        return (basicButtonDraw(name) && _events.mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED);
+        return (basicButtonDraw(name) && (_events.mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED || _events.joyConEvents.buttons1[JOY_OP] == InputState::RELEASED));
     if (_gameObjects[name].type == ObjectType::TYPE_SPRITE_BUTTON)
-        return (spriteButtonDraw(name) && _events.mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED);
-    return (switchButtonDraw(name) && _events.mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED);
+        return (spriteButtonDraw(name) && (_events.mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED || _events.joyConEvents.buttons1[JOY_OP] == InputState::RELEASED));
+    return (switchButtonDraw(name) && (_events.mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED || _events.joyConEvents.buttons1[JOY_OP] == InputState::RELEASED));
 }
 
 

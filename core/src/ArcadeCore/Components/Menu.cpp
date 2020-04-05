@@ -48,23 +48,23 @@ void Menu::drawHeader(IBuilder *b)
     b->spriteButtonSetDisplayBox("UnifyPowerButton", {b->windowWidth() * (18.2f / 20.0f), b->windowHeight() / 15.0f * 12.6f, b->windowWidth() / 30.0f, b->windowWidth() / 30.0f});
     b->spriteButtonSetSpriteBoxes("UnifyPowerButton", {256, 128, 128, 128}, {0, 128, 128, 128}, {128, 128, 128, 128});
     if (_state == MenuState::MENU_CAROUSSEL) {
-        if ((b->buttonDraw("UnifySettingsButton") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED) ||
+        if (b->buttonDraw("UnifySettingsButton") ||
         b->getEvents().keyboardState[Key::F5] == InputState::RELEASED) {
             _state = MenuState::MENU_SETTINGS;
             b->playSound("UnifyBorderSound");
         }
     } else {
-        if ((b->buttonDraw("UnifyBackButton") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED) ||
+        if (b->buttonDraw("UnifyBackButton") ||
         b->getEvents().keyboardState[Key::F5] == InputState::RELEASED) {
             _state = MenuState::MENU_CAROUSSEL;
             b->playSound("UnifyBorderSound");
         }
     }
-    if (b->buttonDraw("UnifyRestartButton") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED) {
+    if (b->buttonDraw("UnifyRestartButton")) {
         _interruptType = true;
         b->windowClose();
     }
-    if (b->buttonDraw("UnifyPowerButton") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED) {
+    if (b->buttonDraw("UnifyPowerButton")) {
         _interruptType = false;
         b->windowClose();
     }
@@ -158,14 +158,12 @@ void Menu::drawSettings(IBuilder *b, LibraryControl &libCtrl)
         b->basicButtonSetDisplayBox("UnifyMenuPreviousLib", {VW(33), VH(25), VW(15), VH(5)});
         b->basicButtonSetFontSize("UnifyMenuPreviousLib", VH(2));
         b->basicButtonSetRadius("UnifyMenuPreviousLib", VH(2.5));
-        b->buttonDraw("UnifyMenuPreviousLib");
-        if (b->buttonDraw("UnifyMenuPreviousLib") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
+        if (b->buttonDraw("UnifyMenuPreviousLib"))
             libCtrl = LibraryControl::LIB_CTRL_PREV;
         b->basicButtonSetDisplayBox("UnifyMenuNextLib", {VW(33), VH(33), VW(15), VH(5)});
         b->basicButtonSetFontSize("UnifyMenuNextLib", VH(2));
         b->basicButtonSetRadius("UnifyMenuNextLib", VH(2.5));
-        b->buttonDraw("UnifyMenuNextLib");
-        if (b->buttonDraw("UnifyMenuNextLib") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
+        if (b->buttonDraw("UnifyMenuNextLib"))
             libCtrl = LibraryControl::LIB_CTRL_NEXT;
     } else if (result == 2) {
         b->textSetPosition("UnifySettingsCredits", {VW(35), VH(25)});

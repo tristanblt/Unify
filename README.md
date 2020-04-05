@@ -14,7 +14,7 @@ Make sure all default graphics libraries are installed:
 - Ncurses->https://www.ostechnix.com/how-to-install-ncurses-library-in-linux 
 
 ```
-make re
+make
 
 ./arcade <graphical_library.so>
 ```
