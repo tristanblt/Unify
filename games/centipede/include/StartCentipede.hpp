@@ -18,6 +18,7 @@ class StartCentipede : public Start {
         void start(IBuilder *builder);
         GameState update(IBuilder *builder);
         void finish(IBuilder *builder);
+        void restart(IBuilder *b);
         std::string getName() const;
     protected:
     private:

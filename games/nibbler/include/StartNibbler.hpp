@@ -31,8 +31,8 @@ class StartNibbler : public Start {
         void setPosition();
         void setFoodPosition(void);
         void hasEaten(void);
+        void restart(IBuilder *b);
         void checkDeath();
-
         void drawSnake(IBuilder *);
         void drawBody (IBuilder *, Vector2, Vector2, Vector2);
     private:

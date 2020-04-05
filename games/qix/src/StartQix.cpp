@@ -21,6 +21,11 @@ void StartQix::start(IBuilder *b)
     (void) b;
 }
 
+void StartQix::restart(IBuilder *b)
+{
+    
+}
+
 GameState StartQix::update(IBuilder *b)
 {
     (void) b;
