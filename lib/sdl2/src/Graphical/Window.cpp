@@ -24,6 +24,9 @@ void Window::create()
         1600,
         900,
         SDL_WINDOW_FULLSCREEN_DESKTOP);
+    _icon = IMG_Load("assets/imgs/logo.png");
+    if (_icon != NULL)
+        SDL_SetWindowIcon(_window, _icon);
     _renderer = SDL_CreateRenderer(_window, -1, SDL_RENDERER_PRESENTVSYNC);
     _isWindowOpen = true;
 }
@@ -71,6 +74,8 @@ void Window::close()
     SDL_DestroyRenderer(_renderer);
     SDL_DestroyWindow(_window);
     _isWindowOpen = false;
+    if (_icon)
+        SDL_FreeSurface(_icon);
     TTF_Quit();
     IMG_Quit();
     SDL_Quit();

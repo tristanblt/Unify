@@ -23,11 +23,13 @@ class Score {
     void manageInputs(IBuilder *b);
     void drawBackground(IBuilder *b);
     void drawSelector(IBuilder *b);
+    void drawBestScores(IBuilder *b);
 
     private:
         ScoreManager *_sm;
         std::string _nickname;
         int _selectOffset;
+        std::vector<std::pair<std::string, int>> _bestScore;
 };
 
 #endif /* !SCORE_HPP_ */

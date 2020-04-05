@@ -41,6 +41,18 @@ void Score::start(IBuilder *b)
     b->textSetColor("UnifyNicknameLetter", b->hexToColor(0xFFFFFFFF));
     b->textSetFont("UnifyNicknameLetter", "UnifyBoldFont");
 
+    b->textInit("UnifyScoreText");
+    b->textSetColor("UnifyScoreText", b->hexToColor(0xFFFFFFFF));
+    b->textSetFont("UnifyScoreText", "UnifyLightFont");
+
+    b->textInit("UnifyScoreCountText");
+    b->textSetColor("UnifyScoreCountText", b->hexToColor(0xFFFFFFFF));
+    b->textSetFont("UnifyScoreCountText", "UnifyBoldFont");
+
+    b->textInit("UnifyBestScoreText");
+    b->textSetColor("UnifyBestScoreText", b->hexToColor(0xFFFFFFFF));
+    b->textSetFont("UnifyBestScoreText", "UnifyBoldFont");
+
     b->basicButtonInit("UnifySaveScore");
     b->basicButtonSetBackgroundColors("UnifySaveScore", b->hexToColor(0x505050FF), b->hexToColor(0x505050FF), b->hexToColor(0x505050FF));
     b->basicButtonSetTextColors("UnifySaveScore", b->hexToColor(0x1B79E6FF), b->hexToColor(0xDEDEDEFF), b->hexToColor(0xFFFFFFFF));
@@ -56,7 +68,7 @@ void Score::start(IBuilder *b)
 
 void Score::drawSelector(IBuilder *b)
 {
-    Vector2 offset = {VW(42.5), VH(35)};
+    Vector2 offset = {VW(44), VH(45)};
 
     b->radiusRectSetRadius("UnifyNicknameEntry", VH(1));
     b->radiusRectSetPosition("UnifyNicknameEntry", offset);
@@ -91,9 +103,40 @@ void Score::drawBackground(IBuilder *b)
     b->rectSetSize("UnifyScoreBackground", {VW(100), VH(100)});
     b->rectDraw("UnifyScoreBackground");
 
-    b->textSetPosition("UnifyScoreLogoName", {VW(50) - 5 * VH(2), VH(6.5)});
+    b->textSetPosition("UnifyScoreLogoName", {VW(50) - 5 * VH(1.5), VH(6.5)});
     b->textSetFontSize("UnifyScoreLogoName", (int)VH(5));
     b->textDraw("UnifyScoreLogoName");
+
+    b->textSetText("UnifyScoreText", "Your score :");
+    b->textSetPosition("UnifyScoreText", {VW(45), VH(15)});
+    b->textSetFontSize("UnifyScoreText", VH(3));
+    b->textDraw("UnifyScoreText");
+
+    b->textSetText("UnifyScoreText", "Your nickname :");
+    b->textSetPosition("UnifyScoreText", {VW(43.4), VH(39)});
+    b->textSetFontSize("UnifyScoreText", VH(3));
+    b->textDraw("UnifyScoreText");
+}
+
+void Score::drawBestScores(IBuilder *b)
+{
+    int i = 0;
+    b->textSetText("UnifyScoreCountText", "Leaderboard :");
+    b->textSetPosition("UnifyScoreCountText", {VW(10), VH(27)});
+    b->textSetFontSize("UnifyScoreCountText", VH(4));
+    b->textDraw("UnifyScoreCountText");
+
+    for_each(_bestScore.begin(), _bestScore.end(), [&b, &i](std::pair<std::string, int> elem) {
+        b->textSetText("UnifyScoreText", elem.first);
+        b->textSetPosition("UnifyScoreText", {VW(10), VH(35) + i * VH(5)});
+        b->textSetFontSize("UnifyScoreText", VH(3));
+        b->textDraw("UnifyScoreText");
+        b->textSetText("UnifyScoreText", std::to_string(elem.second));
+        b->textSetPosition("UnifyScoreText", {VW(26), VH(35) + i * VH(5)});
+        b->textSetFontSize("UnifyScoreText", VH(3));
+        b->textDraw("UnifyScoreText");
+        i++;
+    });
 }
 
 void Score::manageInputs(IBuilder *b)
@@ -117,17 +160,26 @@ void Score::manageInputs(IBuilder *b)
 
 void Score::update(IBuilder *b, int score, std::string gameName, CoreState &coreState)
 {
+    if (_bestScore.size() == 0) {
+        std::replace(gameName.begin(), gameName.end(), ' ', '_');
+        _bestScore = _sm->getBestScores(gameName);
+    }
     manageInputs(b);
     drawBackground(b);
     drawSelector(b);
-
+    drawBestScores(b);
+    b->textSetText("UnifyScoreCountText", std::to_string(score));
+    b->textSetPosition("UnifyScoreCountText", {VW(50) - VH(2) * std::to_string(score).size(), VH(25)});
+    b->textSetFontSize("UnifyScoreCountText", VH(7));
+    b->textDraw("UnifyScoreCountText");
     b->basicButtonSetDisplayBox("UnifySaveScore", {VW(43), VH(83), VW(14), VH(5)});
     b->basicButtonSetFontSize("UnifySaveScore", VH(2));
     b->basicButtonSetRadius("UnifySaveScore", VH(2.5));
     b->buttonDraw("UnifySaveScore");
     if (b->buttonDraw("UnifySaveScore") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED) {
         std::replace(gameName.begin(), gameName.end(), ' ', '_');
-        _sm->_profiles[_nickname][gameName] = score;
+        if (_sm->_profiles[_nickname].find(gameName) == _sm->_profiles[_nickname].end() || _sm->_profiles[_nickname][gameName] <= score)
+           _sm->_profiles[_nickname][gameName] = score;
         _sm->saveScores();
         coreState = CoreState::CORE_GAME;
     }
@@ -137,4 +189,6 @@ void Score::update(IBuilder *b, int score, std::string gameName, CoreState &core
     b->buttonDraw("UnifyScoreBackToMenu");
     if (b->buttonDraw("UnifyScoreBackToMenu") && b->getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
         coreState = CoreState::CORE_MENU;
+    if (coreState != CoreState::CORE_SCORE)
+       _bestScore.clear();
 }

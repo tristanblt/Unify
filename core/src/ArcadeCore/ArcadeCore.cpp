@@ -154,7 +154,6 @@ bool ArcadeCore::launchCore(ADisplayLibrary *library)
         builder.windowDisplay();
         triggerSwitchGraphicalLibrary(&builder, game);
     }
-    _sm._profiles["oui"]["SolarFox"] = 2;
     _sm.saveScores();
     return (_menu.getInterruptType());
 }
