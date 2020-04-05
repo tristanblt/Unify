@@ -6,3 +6,4 @@ core/arcade
 arcade
 .DS_Store
 test
+unit_tests
