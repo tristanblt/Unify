@@ -18,6 +18,7 @@ class Start {
         virtual GameState update(IBuilder *builder) = 0;
         virtual void finish(IBuilder *builder) = 0;
         virtual std::string getName() const = 0;
+        virtual void restart(IBuilder *b) = 0;
     protected:
     private:
 };

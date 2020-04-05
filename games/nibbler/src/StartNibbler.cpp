@@ -39,8 +39,8 @@ void StartNibbler::start(IBuilder *b)
     _head.w = _head.h = _scale;
     _food = {0, 0, _scale, _scale};
     setFoodPosition();
-    while (_tail.size() < _foodCount)
-        _tail.push_back({_head.x, _head.y});
+    for (int i = 1; _tail.size() < _foodCount; i++)
+        _tail.insert(_tail.begin(), {_head.x, _head.y + i * _scale});
 
     b->loadAsset("assets/imgs/Nibbler/snakeSpritesheet.png", "SnakeSpritesheet", SPRITE);
     b->loadAsset("assets/imgs/Nibbler/logo.png", "NibblerLogo", SPRITE);
@@ -127,12 +127,27 @@ GameState StartNibbler::update(IBuilder *b)
         b->spriteDraw("border");
     }
     updateGame(b);
+    // if (_gameState.state == State::STATE_SCORE)
+        
     return (_gameState);
 }
 
 void StartNibbler::finish(IBuilder *b)
 {
     (void) b;
+}
+
+void StartNibbler::restart(IBuilder *b)
+{
+    int cols  = MW(100) / _scale;
+    int lines = MH(100) / _scale;
+    _foodCount = 3;
+    _head.x = floor(cols  / 2) * _scale + _map.x;
+    _head.y = floor(lines / 2) * _scale + _map.y;
+    _tail.clear();
+    for (int i = 1; _tail.size() < _foodCount; i++)
+        _tail.insert(_tail.begin(), {_head.x, _head.y + i * _scale});
+    setSpeed({0, -1});
 }
 
 std::string StartNibbler::getName() const
@@ -158,7 +173,7 @@ void StartNibbler::updateGame(IBuilder *b)
         _gameState.score = (_foodCount - 3) * 100;
         if (_bonus) b->spriteSetSize("apple", {_scale, _scale}, {80, 64, 16, 16});
         else b->spriteSetSize("apple", {_scale, _scale}, {64, 64, 16, 16});
-        b->spriteSetPosition("apple", {_food.x, _food.y + appleOff/*(dir ? 3 : -3)*/});
+        b->spriteSetPosition("apple", {_food.x, _food.y + appleOff});
         dir = appleOff == 0 ? true : appleOff == 5 ? false : dir;
         appleOff += dir ? 1 : -1;
         _clock.restart();
@@ -183,13 +198,13 @@ void StartNibbler::setMap(const Vector2 &pos, const Vector2 &size)
 
 void StartNibbler::setDirection(IBuilder *b)
 {
-    if (b->getEvents().keyboardState[Key::LEFT] == InputState::CLICK || b->getEvents().joyConEvents.mainAxe1.x == JoyConState::JOY_CLICK_L)
+    if (_speed.x != 1 && (b->getEvents().keyboardState[Key::LEFT] == InputState::CLICK || b->getEvents().joyConEvents.mainAxe1.x == JoyConState::JOY_CLICK_L))
         setSpeed({-1, 0});
-    if (b->getEvents().keyboardState[Key::RIGHT] == InputState::CLICK || b->getEvents().joyConEvents.mainAxe1.x == JoyConState::JOY_CLICK_R)
+    if (_speed.x != -1 && (b->getEvents().keyboardState[Key::RIGHT] == InputState::CLICK || b->getEvents().joyConEvents.mainAxe1.x == JoyConState::JOY_CLICK_R))
         setSpeed({1, 0});
-    if (b->getEvents().keyboardState[Key::UP] == InputState::CLICK || b->getEvents().joyConEvents.mainAxe1.y == JoyConState::JOY_CLICK_L)
+    if (_speed.y != 1 && (b->getEvents().keyboardState[Key::UP] == InputState::CLICK || b->getEvents().joyConEvents.mainAxe1.y == JoyConState::JOY_CLICK_L))
         setSpeed({0, -1});
-    if (b->getEvents().keyboardState[Key::DOWN] == InputState::CLICK || b->getEvents().joyConEvents.mainAxe1.y == JoyConState::JOY_CLICK_R)
+    if (_speed.y != -1 && (b->getEvents().keyboardState[Key::DOWN] == InputState::CLICK || b->getEvents().joyConEvents.mainAxe1.y == JoyConState::JOY_CLICK_R))
         setSpeed({0, 1});
 }
 
@@ -227,28 +242,31 @@ void StartNibbler::setFoodPosition(void)
     _bonus = bonus == 1 ? true : false;
 }
 
-void StartNibbler::checkDeath(bool isDead)
+void StartNibbler::checkDeath()
 {
-    static int firstTime = 0;
+    bool isDead = false;
     int cols  = MW(100) / _scale;
     int lines = MH(100) / _scale;
 
-    if (_speed.x == 0 && _speed.y == 0)
+    if (_speed.x == 0 && _speed.y == 0) {
         isDead = true;
-    for (size_t i = 0; i < _tail.size(); i++)
-        if (sqrt(pow(_head.x - _tail[i].x, 2) + pow(_head.y - _tail[i].y, 2)) < 1)
-            isDead = true;
+    } else
+        for (size_t i = 0; i < _tail.size(); i++)
+            if (sqrt(pow(_head.x - _tail[i].x, 2) + pow(_head.y - _tail[i].y, 2)) < 1) {
+                isDead = true;
+                break;
+            }
     if (isDead) {
-        firstTime++;
-        _gameState.state = firstTime < 7 ? State::STATE_NONE : State::STATE_SCORE;
+        _gameState.state = State::STATE_SCORE;
         _foodCount = 3;
         _head.x = floor(cols  / 2) * _scale + _map.x;
         _head.y = floor(lines / 2) * _scale + _map.y;
         _tail.clear();
-        for (int i = 0; _tail.size() < _foodCount; i++)
-            _tail.push_back({_head.x, _head.y});
+        for (int i = 1; _tail.size() < _foodCount; i++)
+            _tail.insert(_tail.begin(), {_head.x, _head.y + i * _scale});
         setSpeed({0, -1});
-    }
+    } else 
+        _gameState.state = State::STATE_NONE;
 }
 
 void StartNibbler::hasEaten(void)
