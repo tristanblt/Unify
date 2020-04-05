@@ -1,4 +1,4 @@
-# Arcade
+# Unify - Epitech Arcade 2020
 
 ## What is Unify ?
 
@@ -13,8 +13,39 @@ Make sure all default graphics libraries are installed:
 - SFML->https://www.sfml-dev.org/download-fr.php
 - Ncurses->https://www.ostechnix.com/how-to-install-ncurses-library-in-linux 
 
-```
+
+```bash
 make
 
-./arcade <graphical_library.so>
+./arcade [graphical_library.so]
 ```
+
+## Unify SDK
+
+If you want to develop your own games for Unify or even add a new graphic library of your choice, please refer to the documentation given in the  `doc/` folder
+
+## Controls
+### Solar Fox
+   * #### With the keyboard
+     * **Changing directions** - keyboard arrows
+
+     * **Shoot** - E
+
+   * #### With the switch joycon
+
+     * **Changing directions** - joystick
+
+     * **Shoot** - 'a' button
+
+### Nibbler
+   * #### With the keyboard
+     * **Changing directions** - keyboard arrows
+
+   * #### With the switch controller
+     * **Changing directions** - joystick
+
+For this project, we shared our main interface (IBuilder) with :
+
+baptiste.lopez@epitech.eu
+
+emile.lepetit@epitech.eu
