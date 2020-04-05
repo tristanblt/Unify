@@ -1,9 +1,0 @@
-make -C core/
-g++ -W -Wall -Wextra -Wshadow -I../	-std=c++11   -c -o src/ArcadeCore/CoreException.o src/ArcadeCore/CoreException.cpp
-g++ -o ../arcade src/main.o src/ArcadeCore/CoreException.o src/ArcadeCore/ArcadeCore.o src/ArcadeCore/Components/Layout.o src/ArcadeCore/Components/Menu.o src/ArcadeCore/Builder/BasicBuilder.o src/ArcadeCore/Builder/UIBuilder.o -W -Wall -Wextra -Wshadow -I../	-std=c++11 -ldl
-make -C lib/
-make -C sfml/
-g++ -W -Wall -Wextra -Wshadow -I../../	-std=c++11 -fpic   -c -o src/Graphical/Rectangle.o src/Graphical/Rectangle.cpp
-g++ -W -Wall -Wextra -Wshadow -I../../	-std=c++11 -fpic   -c -o src/Graphical/Window.o src/Graphical/Window.cpp
-g++ -W -Wall -Wextra -Wshadow -I../../	-std=c++11 -fpic   -c -o src/Graphical/Circle.o src/Graphical/Circle.cpp
-g++ -W -Wall -Wextra -Wshadow -I../../	-std=c++11 -fpic   -c -o src/Graphical/Text.o src/Graphical/Text.cpp
