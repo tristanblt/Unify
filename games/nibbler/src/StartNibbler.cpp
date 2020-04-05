@@ -185,13 +185,13 @@ void StartNibbler::setMap(const Vector2 &pos, const Vector2 &size)
 
 void StartNibbler::setDirection(IBuilder *b)
 {
-    if (b->getEvents().keyboardState[Key::LEFT] == InputState::CLICK || b->getEvents().joyConEvents.mainAxe1.x == JoyConState::JOY_CLICK_L)
+    if (_speed.x != 1 && (b->getEvents().keyboardState[Key::LEFT] == InputState::CLICK || b->getEvents().joyConEvents.mainAxe1.x == JoyConState::JOY_CLICK_L))
         setSpeed({-1, 0});
-    if (b->getEvents().keyboardState[Key::RIGHT] == InputState::CLICK || b->getEvents().joyConEvents.mainAxe1.x == JoyConState::JOY_CLICK_R)
+    if (_speed.x != -1 && (b->getEvents().keyboardState[Key::RIGHT] == InputState::CLICK || b->getEvents().joyConEvents.mainAxe1.x == JoyConState::JOY_CLICK_R))
         setSpeed({1, 0});
-    if (b->getEvents().keyboardState[Key::UP] == InputState::CLICK || b->getEvents().joyConEvents.mainAxe1.y == JoyConState::JOY_CLICK_L)
+    if (_speed.y != 1 && (b->getEvents().keyboardState[Key::UP] == InputState::CLICK || b->getEvents().joyConEvents.mainAxe1.y == JoyConState::JOY_CLICK_L))
         setSpeed({0, -1});
-    if (b->getEvents().keyboardState[Key::DOWN] == InputState::CLICK || b->getEvents().joyConEvents.mainAxe1.y == JoyConState::JOY_CLICK_R)
+    if (_speed.y != -1 && (b->getEvents().keyboardState[Key::DOWN] == InputState::CLICK || b->getEvents().joyConEvents.mainAxe1.y == JoyConState::JOY_CLICK_R))
         setSpeed({0, 1});
 }
 
@@ -232,7 +232,6 @@ void StartNibbler::setFoodPosition(void)
 void StartNibbler::checkDeath()
 {
     bool isDead = false;
-    static int tmp = 1;
     int cols  = MW(100) / _scale;
     int lines = MH(100) / _scale;
 
@@ -243,10 +242,8 @@ void StartNibbler::checkDeath()
             if (sqrt(pow(_head.x - _tail[i].x, 2) + pow(_head.y - _tail[i].y, 2)) < 1) {
                 isDead = true;
                 break;
-                // std::cout << "body ";
             }
     if (isDead) {
-        std::cout << "ded " << tmp++ << std::endl;
         _gameState.state = State::STATE_SCORE;
         _foodCount = 3;
         _head.x = floor(cols  / 2) * _scale + _map.x;
