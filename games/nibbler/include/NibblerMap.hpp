@@ -16,6 +16,8 @@ class NibblerMap {
         NibblerMap(Vector2 size, float scale);
         ~NibblerMap();
 
+        void drawMap(IBuilder *, Box);
+
         enum blockType {
             STONE,
             DIAMOND,
@@ -25,8 +27,9 @@ class NibblerMap {
             COAL,
         };
 
-        std::vector<std::vector<int>> _map;
     private:
+        std::vector<std::vector<int>> _map;
+        float _scale;
 };
 
 #endif /* !NIBBLERMAP_HPP_ */

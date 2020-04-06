@@ -11,6 +11,7 @@
 #include "games/include/Start.hpp"
 #include "games/include/GameClock.hpp"
 #include "games/nibbler/include/NibblerMap.hpp"
+#include "games/nibbler/include/Snake.hpp"
 
 #define MW(n) (_map.w * n / 100)
 #define MH(n) (_map.h * n / 100)
@@ -21,35 +22,17 @@ class StartNibbler : public Start {
 
         void start(IBuilder *builder);
         GameState update(IBuilder *builder);
+        void restart(IBuilder *b);
         void finish(IBuilder *builder);
         std::string getName() const;
 
-        void updateGame(IBuilder *b);
-        void setMap(const Vector2 &, const Vector2 &);
-        void setDirection(IBuilder *);
-        void setSpeed(const Vector2 &);
-        void setPosition();
-        void setFoodPosition(void);
-        void hasEaten(void);
-        void restart(IBuilder *b);
-        void checkDeath();
-        void drawSnake(IBuilder *);
-        void drawBody (IBuilder *, Vector2, Vector2, Vector2);
+        void initMap(const Vector2 &, const Vector2 &);
     private:
         Box _map;
         float _scale;
-        size_t _foodCount;
-        Box _head;
-        Box _food;
-        bool _bonus;
-        bool _hasBonus;
-        float _im;
-        Vector2 _speed;
-        std::vector<Vector2> _tail;
-        GameClock _clock;
-        GameClock _bonusClock;
-        NibblerMap _mapTiles;
+        NibblerMap _mapDrawer;
         GameState _gameState;
+        Snake _snake;
 };
 
 #endif /* !StartNibbler_HPP_ */
