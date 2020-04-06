@@ -83,7 +83,7 @@ int Builder::selectorDraw(const std::string &name)
         bool state = isMouseInBox({o->displayBox.x, o->displayBox.y + i * height, o->displayBox.w, height});
         rectSetPosition(name + "_rect", {o->displayBox.x, o->displayBox.y + i * height});
         rectSetSize(name + "_rect", {o->displayBox.w, height});
-        if (state && getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED)
+        if (state && (getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::RELEASED || _events.joyConEvents.buttons1[JOY_A] == InputState::RELEASED))
             o->selected = i;
         else if (state)
             rectSetColor(name + "_rect", o->boxColors[2]);
@@ -93,7 +93,7 @@ int Builder::selectorDraw(const std::string &name)
             rectSetColor(name + "_rect", o->boxColors[0]);
         rectDraw(name + "_rect");
         textSetText(name + "_text", elem);
-        textSetPosition(name + "_text", {o->displayBox.x + 60, o->displayBox.y + i * height + (windowHeight() * ((float)3 / 100))});
+        textSetPosition(name + "_text", {o->displayBox.x + (windowWidth() * ((float)5 / 100)), o->displayBox.y + i * height + (windowHeight() * ((float)3 / 100))});
         textDraw(name + "_text");
         i++;
     }

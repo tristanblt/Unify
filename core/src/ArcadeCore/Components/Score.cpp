@@ -141,20 +141,20 @@ void Score::drawBestScores(IBuilder *b)
 
 void Score::manageInputs(IBuilder *b)
 {
-    if (b->getEvents().keyboardState[Key::UP] == InputState::RELEASED) {
+    if (b->getEvents().keyboardState[Key::UP] == InputState::RELEASED || b->getEvents().joyConEvents.buttons1[JOY_X] == InputState::RELEASED) {
         if (_nickname[_selectOffset] == 'A')
         _nickname[_selectOffset] = 'Z';
         else
         _nickname[_selectOffset]--;
-    } else if (b->getEvents().keyboardState[Key::DOWN] == InputState::RELEASED) {
+    } else if (b->getEvents().keyboardState[Key::DOWN] == InputState::RELEASED || b->getEvents().joyConEvents.buttons1[JOY_Y] == InputState::RELEASED) {
         if (_nickname[_selectOffset] == 'Z')
         _nickname[_selectOffset] = 'A';
         else
         _nickname[_selectOffset]++;
     }
-    if (b->getEvents().keyboardState[Key::LEFT] == InputState::RELEASED && _selectOffset != 0)
+    if ((b->getEvents().keyboardState[Key::LEFT] == InputState::RELEASED || b->getEvents().joyConEvents.buttons1[JOY_L1] == InputState::RELEASED) && _selectOffset != 0)
         _selectOffset--;
-    else if (b->getEvents().keyboardState[Key::RIGHT] == InputState::RELEASED && _selectOffset != 2)
+    else if ((b->getEvents().keyboardState[Key::RIGHT] == InputState::RELEASED || b->getEvents().joyConEvents.buttons1[JOY_R1] == InputState::RELEASED) && _selectOffset != 2)
         _selectOffset++;
 }
 
