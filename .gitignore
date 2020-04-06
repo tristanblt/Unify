@@ -7,3 +7,4 @@ arcade
 .DS_Store
 test
 unit_tests
+..bfg-report/*
