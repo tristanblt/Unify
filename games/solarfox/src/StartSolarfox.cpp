@@ -37,7 +37,6 @@ void StartSolarfox::start(IBuilder *b)
 
 void StartSolarfox::restart(IBuilder *b)
 {
-    delete _gameInstance;
     _gameInstance = new GameInstance(1, 0, b);
 }
 

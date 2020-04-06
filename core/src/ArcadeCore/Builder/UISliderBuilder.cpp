@@ -73,7 +73,7 @@ void Builder::sliderDraw(const std::string &name, int &value)
     radiusRectSetColor(name + "_radiusRect", o->backgroundColor);
     radiusRectDraw(name + "_radiusRect");
     if (isMouseInBox({o->pos.x, o->pos.y, o->width, windowHeight() * ((float)2 / 100)}) &&
-        getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::HOLD)
+        (getEvents().mouseEvents.mouseStates[MouseButton::LEFT_CLICK] == InputState::HOLD || _events.joyConEvents.buttons1[JOY_A] == InputState::HOLD))
         value = (mouseX - o->pos.x) * 100 / o->width;
     circleSetRadius(name + "_circle", windowHeight() * (1.5f / 100));
     circleSetColor(name + "_circle", o->slideColor);
